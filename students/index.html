@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="heading">
+        <div class="heading-det">
+            <img src="images/ju_logo.png">
+            <div class="heading-det-name">
+
+                <div class="heading-det-name-empty"></div>
+                <div class="heading-det-name-eng">
+                    JADAVPUR UNIVERSITY
+                </div>
+                <div class="heading-det-name-ban">
+                    যাদবপুর বিশ্ববিদ্যালয়
+                </div>
+                <div class="heading-det-name-empty"></div>
+            </div>
+        </div>
+        <div class="heading-empty">
+
+        </div>
+        <div class="heading-log">
+            <select name="login_type" id="login">
+                <option value="Student">Student</option>
+                <option value="RAC">Research Advisory Committee</option>
+                <option value="PRC">Postgraduate Research Committee</option>
+                <option value="DC">Doctorate Committe</option>
+            </select>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-details">
+            <div class="main-details-about">
+
+                <h1>Provisions relating to Doctorate Degree</h1>
+                <h2>PREAMBLE</h2>
+                <p>The University will award the following Doctorate Degrees:
+                    <ul>
+                        <li>D.Litt. in Arts; D.Sc. in Science, Engineering & Technology / Pharmacy </li>
+                        <li>Ph.D. (Arts); Ph.D. (Science); Ph.D. (Engg. / Pharm.) in Arts, Science and Engineering & Technology / Pharmacy </li>
+                    </ul>
+                </p>
+                <p>Of the above two categories, the degree of D.Litt. & D.Sc. are to be considered as Doctorate Degrees of higher level and no supervisory guidance will be necessary.
+                </p>
+                <h2>ELIGIBILITY FOR ADMISSION</h2>
+                <ol type="A">
+                    <li>The application for admission to the Doctor of Philosophy (Ph.D.) programme is to be made to the Registrar in the prescribed form </li>
+                    <li>A person who has obtained the Master’s degree in any discipline from any University or other Institution recognized by this University or such other degree as may be considered sufficient for this purpose by the University will be
+                        eligible to apply for admission to the Doctor of Philosophy (Ph.D.) programme.</li>
+                    <li>A person who has obtained a Post-graduate Diploma/Degree of less than two years’ duration from any University or Institution recognized by this University is eligible to apply for admission to the Doctor of Philosophy (Ph.D.) programme
+                        provided that such candidate has 2 completed at least a total of five years’ of graduate and postgraduate study in a recognized university or Institution. </li>
+                    <li>A person who has obtained the Bachelor’s degree in Engineering/Technology/Pharmacy/MCA of this university or from any other university or Institutions recognized as equivalent thereto by the university may apply for admission to the
+                        Doctor of Philosophy (Ph.D.) programme. </li>
+                    <li>A candidate shall submit a statement that s/he is not currently enrolled as a student in any course of studies or registered for the doctorate degree in any University and shall undertake not to be thus enrolled or registered so long
+                        as he is registered for Ph.D. degree at this University. </li>
+                    <li>Candidates who have an M.Phil./M.E./M.Tech./M.Arch./M.Pharm. or a degree deemed equivalent by the respective Doctorate Committee, or in case of candidates who have qualified in the NET/SET/GATE/Teacher Fellow or any other examination
+                        that may be deemed equivalent by the Doctorate Committee will have to be successful in the interview on the subject to be conducted by the committee constituted as per clause 21 (iii) to qualify for admission. In all other cases
+                        the candidate will have to be successful in the admission test to be conducted by the office of the Controller of Examinations of the University and if qualified, will have to be successful in the interview on the subject to be
+                        conducted by the committee constituted as per clause 21 (iii) to qualify for admission. The admission test procedure will be decided by the Dean of the concerned faculty in consultation with the Head of the Department / Director
+                        of the School. 3 Following the admission procedure, a list of qualified candidates (preferably mentioning their area(s) of research interest(s)) will be published and displayed by the University through respective faculty office.
+                    </li>
+                    <li>Each Doctorate Committee shall predetermine the number of students to be admitted in the Ph.D. programme in each session (normally July and January). </li>
+                </ol>
+                <p>Admission test schedule shall be notified at least once in every year. The reservation policy of the State Government will be applicable. </p>
+                <h4><a href="http://www.jaduniv.edu.in/upload_files/phd_file/1272261553-2.%20D" target="_blank">Click Here</a> for more Information!</h4>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="main-login">
+            <form id="login-form" method="POST" action="/login">
+                <input type="text" name="username" placeholder="Username" class="text-ip">
+                <input type="password" name="password" placeholder="Password" class="text-ip">
+                <input type="hidden" name="login_type" id="login-ip">
+                <div class="login-form-btn">
+                    <input type="submit" name="login" value="Log In" class="btn-ip">
+                    <input type="submit" name="signup" value="Sign Up" class="btn-ip">
+                </div>
+
+                <div class="login-error {%error-type%}">{%Login Error%}</div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    var x = document.getElementById("login").value;
+    document.getElementById("login-ip").value = x;
+</script>
+
+</html>
