@@ -27,8 +27,9 @@
 
         </div>
         <div class="heading-log">
-            <select name="login_type" id="login">
+            <select name="login_type" id="login" onclick="changeLog()">
                 <option value="Student">Student</option>
+                <option value="Faculty">Faculty</option>
                 <option value="RAC">Research Advisory Committee</option>
                 <option value="PRC">Postgraduate Research Committee</option>
                 <option value="DC">Doctorate Committe</option>
@@ -72,19 +73,17 @@
                 <h4><a href="http://www.jaduniv.edu.in/upload_files/phd_file/1272261553-2.%20D" target="_blank">Click Here</a> for more Information!</h4>
                 <br>
                 <br>
-                <br>
-                <br>
-                <br>
             </div>
         </div>
         <div class="main-login">
             <form id="login-form" method="POST" action="/login">
                 <input type="text" name="username" placeholder="Username" class="text-ip">
                 <input type="password" name="password" placeholder="Password" class="text-ip">
-                <input type="hidden" name="login_type" id="login-ip">
+                <input type="hidden" name="logintype" id="login-ip">
                 <div class="login-form-btn">
                     <input type="submit" name="login" value="Log In" class="btn-ip">
-                    <input type="submit" name="signup" value="Sign Up" class="btn-ip">
+                    <div class="reg-ip"><a href="http://www.jaduniv.edu.in/" target="_blank">Register</a></div>
+                    <!-- <input type="submit" name="signup" value="Sign Up" class="btn-ip"> -->
                 </div>
 
                 <div class="login-error {%error-type%}">{%Login Error%}</div>
@@ -93,8 +92,15 @@
     </div>
 </body>
 <script>
-    var x = document.getElementById("login").value;
-    document.getElementById("login-ip").value = x;
+    function change() {
+        var x = document.getElementById("login").value;
+        document.getElementById("login-ip").value = x;
+    }
+    var x = change();
+
+    function changeLog() {
+        change();
+    }
 </script>
 
 </html>

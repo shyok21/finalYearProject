@@ -1,0 +1,4 @@
+shyok.m,shyokju,Shyok Mutsuddi,CE
+shubham.g,shubhamju,Shubham Goel,ME
+abhishek.d,abhishekju,Abhishek De,CSE
+roopkatha.s,roopkathaju,Roopkatha Samanta,EE

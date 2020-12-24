@@ -21,7 +21,7 @@ body {
     background-color: #fefefe;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .heading {
@@ -195,9 +195,18 @@ li {
 
 .login-form-btn {
     display: flex;
-    flex-direction: row;
-    height: 15%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
     margin: 3px;
+}
+
+.reg-ip {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: underline;
 }
 
 .btn-ip {
