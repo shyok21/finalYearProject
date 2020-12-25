@@ -15,12 +15,16 @@ const con = mysql.createConnection({
 console.log('Connection Established');
 app.use(express.static(__dirname + '/public'));
 var htmlFile = fs.readFileSync("./index.html", "utf-8");
+var htmlRegisterFile = fs.readFileSync("./register.html", "utf-8");
 var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
 con.connect(function(err) {
     if (!(err))
         console.log("Connected to Database");
     app.get("/", (req, res) => {
         res.send(htmlFileSend);
+    });
+    app.get("/newUser", (req, res) => {
+        res.send(htmlRegisterFile);
     });
     app.post("/login", urlencodedParser, (req, res) => {
         console.log(req.body);
@@ -83,6 +87,12 @@ con.connect(function(err) {
 
         }
 
+    });
+    app.post("/register", urlencodedParser, (req, res) => {
+
+        // Insert DB code here
+
+        res.send("Waiting for approval!");
     });
     var port = 8000;
     app.listen(port, () => {

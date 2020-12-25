@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="heading">
+        <div class="heading-det">
+            <img src="images/ju_logo.png">
+            <div class="heading-det-name">
+
+                <div class="heading-det-name-empty"></div>
+                <div class="heading-det-name-eng">
+                    JADAVPUR UNIVERSITY
+                </div>
+                <div class="heading-det-name-ban">
+                    যাদবপুর বিশ্ববিদ্যালয়
+                </div>
+                <div class="heading-det-name-empty"></div>
+            </div>
+        </div>
+        <div class="heading-empty">
+
+        </div>
+        <div class="heading-log">
+            <select name="login_type" id="login" onclick="changeLog()">
+                <option value="STUD">Student</option>
+                <option value="SUP">Faculty</option>
+                <option value="RAC">Research Advisory Committee</option>
+                <option value="PRC">Postgraduate Research Committee</option>
+                <option value="DC">Doctorate Committe</option>
+            </select>
+        </div>
+    </div>
+    <div class="main">
+            <form method="POST" action="/register" class="registration-form">
+                <table class="registration-table">
+                    <tr class="header-row">
+                        <td colspan="4">
+                            <h2>Research scholar's details</h2>
+                        </td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="student-name">Name</label></td>
+                        <td class="col-evn"><input type="text" name="student-name" class="text-ip"></td>
+                        <td class="col-odd"><label for="enrolment-number">Enrolment number</label></td>
+                        <td class="col-evn"><input type="text" name="enrolment-number" class="text-ip"></td>
+                    </tr>
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="email">Email</label></td>
+                        <td class="col-evn"><input type="email" name="email" class="text-ip"></td>
+                        <td class="col-odd"><label for="mobile-number">Mobile number</label></td>
+                        <td class="col-evn"><input type="text" name="mobile-number" class="text-ip"></td>
+                    </tr>
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="date">Date of initial registration</label></td>
+                        <td class="col-evn"><input type="text" name="date" class="text-ip"></td>
+                        <td class="col-odd"><label for="extension-period">Period of extension(if any)</label></td>
+                        <td class="col-evn"><input type="text" name="extension-period" class="text-ip"></td>
+                    </tr>
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="valid-upto">Registration valid upto</label></td>
+                        <td class="col-evn"><input type="text" name="valid-upto" class="text-ip"></td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr>                    
+                    <tr class="header-row">
+                        <td colspan="4">
+                            <h2>Supervisor's details</h2>
+                        </td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="supervisor-name">Name</label></td>
+                        <td class="col-evn"><input type="text" name="supervisor-name" class="text-ip"></td>
+                        <td class="col-odd"><label for="supervisor-address">Address</label></td>
+                        <td class="col-evn"><input type="text" name="supervisor-address" class="text-ip"></td>
+                    </tr>
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="supervisor-email">Email</label></td>
+                        <td class="col-evn"><input type="email" name="supervisor-email" class="text-ip"></td>
+                        <td class="col-odd"><label for="supervisor-mobile-number">Mobile number</label></td>
+                        <td class="col-evn"><input type="text" name="supervisor-mobile-number" class="text-ip"></td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                    <tr class="header-row">
+                        <td colspan="4">
+                            <h2>Co-supervisor's details(if any)</h2>
+                        </td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="cosupervisor-name">Name</label></td>
+                        <td class="col-evn"><input type="text" name="cosupervisor-name" class="text-ip"></td>
+                        <td class="col-odd"><label for="cosupervisor-address">Address</label></td>
+                        <td class="col-evn"><input type="text" name="cosupervisor-address" class="text-ip"></td>
+                    </tr>
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="cosupervisor-email">Email</label></td>
+                        <td class="col-evn"><input type="email" name="cosupervisor-email" class="text-ip"></td>
+                        <td class="col-odd"><label for="cosupervisor-mobile-number">Mobile number</label></td>
+                        <td class="col-evn"><input type="text" name="cosupervisor-mobile-number" class="text-ip"></td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                    <tr class="header-row">
+                        <td colspan="4">
+                            <h2>Thesis details</h2>
+                        </td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                    <tr class="ip-row">
+                        <td class="col-odd"><label for="title">Title of the thesis</label></td>
+                        <td class="col-evn" colspan="3"><input type="text" name="title" class="text-ip"></td>
+                    </tr>
+                    <tr class="blank-row">
+                        <td colspan="4"></td>
+                    </tr> 
+                </table>
+                <button class="submit-btn" type="submit"><h3>Submit</h3></button>
+            </form>
+    </div>
+</body>
+<script>
+    function change() {
+        var x = document.getElementById("login").value;
+        document.getElementById("login-ip").value = x;
+    }
+    var x = change();
+
+    function changeLog() {
+        change();
+    }
+</script>
+
+</html>
