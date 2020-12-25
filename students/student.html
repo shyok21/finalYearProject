@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/student.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="heading">
+        <img src="images/ju_logo.png">
+        <div class="heading-det">
+            <div class="heading-det-empty"></div>
+            <div class="heading-det-eng">
+                JADAVPUR UNIVERSITY
+            </div>
+            <div class="heading-det-ban">
+                যাদবপুর বিশ্ববিদ্যালয়
+            </div>
+            <div class="heading-det-empty"></div>
+        </div>
+        <div class="heading-empty">
+
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-message">
+            Hello {%StudentName%}, {%studentMessage%}
+            <!-- your registration is in Under Process. We will notify you once your Registration gets Complete. You can track your Registration Phase here. -->
+        </div>
+        <div class="main-track">
+            <!--
+                main-track-accepted
+                main-track-process
+                main-track-rejected
+            -->
+            <div class="main-track-accepted">
+                <div class="main-track-text">Form Submit</div>
+            </div>
+            <div class="{%trackClass%}">
+                <div class="main-track-text">Processing</div>
+            </div>
+            <div class="{%trackClass%}">
+                <div class="main-track-text">PRC Approval</div>
+            </div>
+            <div class="{%trackClass%}">
+                <div class="main-track-text">DC Approval</div>
+            </div>
+            <div class="{%trackClass%}">
+                <div class="main-track-text">Final Approval</div>
+            </div>
+            <div class="{%trackClass%}">
+                <div class="main-track-text">Registration Complete</div>
+            </div>
+        </div>
+        <div class="main-empty"></div>
+    </div>
+</body>
+
+</html>
