@@ -9,4 +9,4 @@
 3. To run admin portal
     - Go to the admin directory cd finalYearProject/admin
     - Start the server
-    - Go to http://localhost:8020
+    - Go to http://localhost:8020`
