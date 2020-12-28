@@ -6,3 +6,7 @@
     - Install the dependencies `npm install`
     - Start the server `npm start`
     - Go to `http://localhost:8000`
+3. To run admin portal
+    - Go to the admin directory cd finalYearProject/admin
+    - Start the server
+    - Go to http://localhost:8020
