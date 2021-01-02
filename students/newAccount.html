@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/newAccount.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@700&family=Gloria+Hallelujah&family=Lobster+Two&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <form class="signup" method="POST" action="/validate">
+        <h1>Create Account</h1>
+        <div class="inputs">
+            <div class="input">
+                <label for="email_id">Email:</label>
+                <input id="email_id" type="email" name="email_id" required>
+            </div>
+            <div class="input">
+                <label for="set_pass">Password:</label>
+                <input id="set_pass" type="password" name="set_pass" required>
+            </div>
+            <div class="input">
+                <label for="conf_pass">Confirm Password:</label>
+                <input id="confirm_pass" type="password" name="conf_pass" required>
+            </div>
+            <div class="input">
+                <label for="captcha">Verify Captcha:</label>
+                <input id="captcha" type="text" name="captcha" required>
+                <div class="captcha-main">
+                    <div class="captcha-letter">{%captcha%}</div>
+                    <div class="captcha-letter">{%captcha%}</div>
+                    <div class="captcha-letter">{%captcha%}</div>
+                    <div class="captcha-letter">{%captcha%}</div>
+                    <div class="captcha-letter">{%captcha%}</div>
+                    <div class="captcha-letter">{%captcha%}</div>
+                </div>
+            </div>
+            <input type="submit" value="Sign Up" name="Submit" id="submit">
+        </div>
+    </form>
+</body>
+
+</html>
