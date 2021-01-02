@@ -6,10 +6,10 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const con = mysql.createConnection({
-    host: "sql12.freemysqlhosting.net",
-    user: "sql12383722",
-    password: "KB3LCenv9V",
-    database: "sql12383722"
+     host: "sql12.freemysqlhosting.net",
+    user: "sql12384616",
+    password: "yWJQsReUSE",
+    database: "sql12384616"
 });
 app.use(express.static(__dirname + '/public'));
 var port = 8020;
