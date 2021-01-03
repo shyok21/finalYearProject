@@ -5,37 +5,18 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script> 
+        $(function(){
+            $("#header").load("header.html"); 
+            console.log("Header added");
+        });
+    </script>
+    
 </head>
 
 <body>
-    <div class="heading">
-        <div class="heading-det">
-            <img src="images/ju_logo.png">
-            <div class="heading-det-name">
-
-                <div class="heading-det-name-empty"></div>
-                <div class="heading-det-name-eng">
-                    JADAVPUR UNIVERSITY
-                </div>
-                <div class="heading-det-name-ban">
-                    যাদবপুর বিশ্ববিদ্যালয়
-                </div>
-                <div class="heading-det-name-empty"></div>
-            </div>
-        </div>
-        <div class="heading-empty">
-
-        </div>
-        <div class="heading-log">
-            <select name="login_type" id="login" onclick="changeLog()">
-                <option value="STUD">Student</option>
-                <option value="SUP">Faculty</option>
-                <option value="RAC">Research Advisory Committee</option>
-                <option value="PRC">Postgraduate Research Committee</option>
-                <option value="DC">Doctorate Committe</option>
-            </select>
-        </div>
-    </div>
+    <div id="header"></div> 
     <div class="main">
         <div class="main-details">
             <div class="main-details-about">
@@ -91,16 +72,5 @@
         </div>
     </div>
 </body>
-<script>
-    function change() {
-        var x = document.getElementById("login").value;
-        document.getElementById("login-ip").value = x;
-    }
-    var x = change();
-
-    function changeLog() {
-        change();
-    }
-</script>
 
 </html>

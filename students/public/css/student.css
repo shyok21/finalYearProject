@@ -1,6 +1,4 @@
 * {
-    height: 100%;
-    width: 100%;
     margin: 0;
     padding: 0;
     font-family: 'Roboto Slab', serif;
@@ -12,47 +10,6 @@ body {
     background-color: #fefefe;
     display: flex;
     flex-direction: column;
-}
-
-.heading {
-    flex: 1;
-    background-color: #f3aa92;
-    display: flex;
-    flex-direction: row;
-}
-
-img {
-    flex: 1;
-    width: 90px;
-    height: 90px;
-}
-
-.heading-det {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-}
-
-.heading-det-eng {
-    flex: 4;
-    font-size: 1.6em;
-    font-weight: bold;
-    color: #5c616e;
-}
-
-.heading-det-ban {
-    flex: 3;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #5c616e;
-}
-
-.heading-det-empty {
-    flex: 2.2;
-}
-
-.heading-empty {
-    flex: 7;
 }
 
 .main {
@@ -99,6 +56,7 @@ img {
 .main-track-process {
     flex: 1;
     margin: 10px;
+    height: 100px;
     background-color: #a5a5a5;
     color: white;
     border-radius: 50%;
