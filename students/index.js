@@ -108,13 +108,18 @@ con.connect(function(err) {
         if (verify_code === req.body.ver_code) {
             var qrys = "select count(*) as count from login where type='STUD';";
             con.query(qrys, (err, result, field) => {
-                var count = result[0].count;
+                var count = result[0].count + 1;
                 var s_id = "stud" + count;
                 // var qry = "insert into login values(s_id + , m_email, m_pass, 'stud')";
-                var qry = util.format("insert into values('%s','%s','%s','stud');", s_id, m_email, m_pass);
+                var qry = util.format("insert into login values('%s','%s','%s','stud');", s_id, m_email, m_pass);
+                //console.log(qry);
                 con.query(qry, (err, results, fields) => {
                     console.log("Student Added to Login Database");
-                    res.send("<h1>Thank You! Your Account has Been Created!</h1>")
+                    console.log(results);
+                    res.send("<h1>Thank You! Your Account has Been Created!</h1>");
+                    con.query("select* from login where type='stud'", (err, res, fil) => {
+                        console.log(res);
+                    });
                 });
             });
 
