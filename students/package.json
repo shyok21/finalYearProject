@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.4.17",
     "random": "^2.2.0",
     "randomstring": "^1.1.5"
   }

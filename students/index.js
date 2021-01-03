@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const util = require('util');
 const mysql = require('mysql');
 var randomstring = require("randomstring");
+var nodemailer = require('nodemailer');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const con = mysql.createConnection({
     host: "sql12.freemysqlhosting.net",
@@ -28,19 +29,98 @@ con.connect(function(err) {
         res.send(htmlRegisterFile);
     });
     var captcha;
+    var newAccFile = fs.readFileSync("./newAccount.html", "utf-8");
     app.get("/newAccount", (req, res) => {
-        var htmlFile = fs.readFileSync("./newAccount.html", "utf-8");
         var captchaStr = randomstring.generate(6);
         captcha = captchaStr;
-        var newHtmlFile = htmlFile;
+
+        var newHtmlFile = newAccFile.replace("{%error%}", "");
         for (var i = 0; i < captchaStr.length; i++) {
             newHtmlFile = newHtmlFile.replace("{%captcha%}", captchaStr[i]);
         }
-        // console.log(newHtmlFile);
+
         res.send(newHtmlFile);
     });
-    app.post("/validate", (req, res) => {
-        res.send(captcha);
+    var m_pass, c_pass, m_cap, m_email;
+    var verify_code;
+    app.post("/validate", urlencodedParser, (req, res) => {
+        // console.log(req.body);
+        console.log(captcha);
+        m_pass = req.body.set_pass;
+        c_pass = req.body.conf_pass;
+        m_cap = req.body.captcha;
+        m_email = req.body.email_id;
+        var qry = "select count(*) as count from login where email='" + m_email + "';";
+        con.query(qry, (err, results, fields) => {
+            console.log(results[0].count);
+            if (results[0].count == 0) {
+                if (m_pass != c_pass) {
+                    var sendAccFile = newAccFile.replace("{%error%}", "&#9746; Password Mismatched");
+                    captcha = randomstring.generate(6);
+                    for (var i = 0; i < captcha.length; i++) {
+                        sendAccFile = sendAccFile.replace("{%captcha%}", captcha[i]);
+                    }
+                    res.send(sendAccFile);
+                } else if (m_cap != captcha) {
+                    var sendAccFile = newAccFile.replace("{%error%}", "&#9746; Captcha Verification Failed");
+                    captcha = randomstring.generate(6);
+                    for (var i = 0; i < captcha.length; i++) {
+                        sendAccFile = sendAccFile.replace("{%captcha%}", captcha[i]);
+                    }
+                    res.send(sendAccFile);
+                } else {
+                    verify_code = randomstring.generate(8);
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        port: 587,
+                        secure: false,
+                        requireTLS: true,
+                        auth: {
+                            user: 'notifyserver123@gmail.com',
+                            pass: 'categorized123'
+                        }
+                    });
+                    var mailOptions = {
+                        from: 'notifyserver123@gmail.com',
+                        to: m_email,
+                        subject: 'Verification Code: Admins Of Jadavpur University',
+                        html: '<p>Hello,</p><p>Your Verification Code is:<h3>' + verify_code + '</h3></p><p>Please Dont send this to anyone</p>'
+                    };
+
+                    transporter.sendMail(mailOptions, function(error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                        }
+                    });
+                    res.send("<form method='post' action='/verify' style='background-color:#fefefe;'><h2 style='color:#5375e2;margin:10px;'>A verification code has been send to your Email Id.</h2><label for='ver_code' style='color:#7791a1;font-size:1.2em;margin:5px;'>Verification Code:</label><input type='text' name='ver_code' style='width:140px;height:40px;background-color:#dcdcdc;font-size:1.5em;border-style:none;border-radius:8px;margin:5px'><input type='submit' style='width:80px;height:35px;background-color:#f3aa92;border-style:none;border-radius:8px;margin:5px;' value='Verify'></form>");
+                }
+            } else {
+                res.send("<h1>Email Id is Already Registered.</h1>")
+            }
+        });
+
+    });
+    app.post("/verify", urlencodedParser, (req, res) => {
+        console.log(req.body.ver_code);
+        console.log(verify_code);
+        if (verify_code === req.body.ver_code) {
+            var qrys = "select count(*) as count from login where type='STUD';";
+            con.query(qrys, (err, result, field) => {
+                var count = result[0].count;
+                var s_id = "stud" + count;
+                // var qry = "insert into login values(s_id + , m_email, m_pass, 'stud')";
+                var qry = util.format("insert into values('%s','%s','%s','stud');", s_id, m_email, m_pass);
+                con.query(qry, (err, results, fields) => {
+                    console.log("Student Added to Login Database");
+                    res.send("<h1>Thank You! Your Account has Been Created!</h1>")
+                });
+            });
+
+        } else {
+            res.send("<h1>Sorry, Your Account Could Not been Verified</h1>");
+        }
     });
     app.post("/login", urlencodedParser, (req, res) => {
         console.log(req.body);

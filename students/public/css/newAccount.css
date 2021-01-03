@@ -17,7 +17,7 @@ body {
 
 .signup {
     width: 40%;
-    height: 50%;
+    height: 55%;
     background-color: #f3aa92;
     border-radius: 25px;
 }
@@ -125,6 +125,11 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Gloria Hallelujah', cursive;
     opacity: 0.7;
+}
+
+.error {
+    font-size: 0.8em;
+    text-align: center;
+    color: red;
 }
