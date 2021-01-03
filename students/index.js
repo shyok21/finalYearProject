@@ -108,7 +108,7 @@ con.connect(function(err) {
         if (verify_code === req.body.ver_code) {
             var qrys = "select count(*) as count from login where type='STUD';";
             con.query(qrys, (err, result, field) => {
-                var count = result[0].count + 1;
+                var count = result[0].count + 2;
                 var s_id = "stud" + count;
                 // var qry = "insert into login values(s_id + , m_email, m_pass, 'stud')";
                 var qry = util.format("insert into login values('%s','%s','%s','stud');", s_id, m_email, m_pass);
