@@ -1,10 +1,19 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
-var htmlFile = fs.readFileSync("views/applicationForm.html", "utf-8");
 
 const applicationFormPage = (req, res) => {
-    res.send(htmlFile);
+    var htmlFile = fs.readFileSync("views/applicationForm.html", "utf-8");
+    var sess = req.session;
+    if(sess.email) {
+        htmlFile = htmlFile.replace("{%enrolment_no%}", sess.userid);
+        htmlFile = htmlFile.replace("{%email%}", sess.email);
+        res.send(htmlFile);
+    }
+    else {
+        res.redirect('/');
+    }
+        
 }
 
 const applicationFormSubmit = (req, res) => { 
@@ -39,7 +48,7 @@ const applicationFormSubmit = (req, res) => {
         else {
             console.log("Student Added to Student Database");
             console.log(results);
-            res.send("<h1>Waiting for approval<h1>");
+            res.redirect("/studentPage");
         }
         
     });

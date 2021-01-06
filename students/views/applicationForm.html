@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/applicationForm.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -15,6 +15,9 @@
 
 <body>
     <div id="header"></div>
+    <div class="logout">
+        <a href="./logout">Logout</a>
+    </div>
     <div class="main">
             <form method="POST" action="/applicationFormSubmit" class="registration-form">
                 <table class="registration-table">
@@ -30,11 +33,11 @@
                         <td class="col-odd"><label for="student_name">Name</label></td>
                         <td class="col-evn"><input type="text" name="student_name" class="text-ip" required></td>
                         <td class="col-odd"><label for="enrolment_number">Enrolment number</label></td>
-                        <td class="col-evn"><input type="text" name="enrolment_number" class="text-ip"></td>
+                        <td class="col-evn"><input type="text" name="enrolment_number" class="text-ip" value="{%enrolment_no%}" readonly></td>
                     </tr>
-                    <tr class="ip-row">
+                    <tr class="ip-row"></tr>
                         <td class="col-odd"><label for="student_email">Email</label></td>
-                        <td class="col-evn"><input type="email" name="student_email" class="text-ip" required></td>
+                        <td class="col-evn"><input type="email" name="student_email" class="text-ip" value="{%email%}" readonly></td>
                         <td class="col-odd"><label for="dep_id">Department ID</label></td>
                         <td class="col-evn"><input type="text" name="dep_id" class="text-ip" required></td>
                     </tr>
