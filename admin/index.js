@@ -1,4 +1,5 @@
 const fs = require('fs');
+const util = require('util');
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -6,10 +7,11 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const con = mysql.createConnection({
-     host: "sql12.freemysqlhosting.net",
-    user: "sql12384616",
-    password: "yWJQsReUSE",
-    database: "sql12384616"
+     host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
+    user: "admin",
+    password: "A987yuBU",
+	database: "phd_management",
+	multipleStatements: true
 });
 app.use(express.static(__dirname + '/public'));
 var port = 8020;
@@ -44,6 +46,233 @@ con.connect(function(err){
 	app.get('/', function (req, res) {
 		res.send(htmlFile);
 	}); 
+	var addAccountFile = fs.readFileSync("./admin_add.html", "utf-8");
+	var supFile = fs.readFileSync("./add_supervisor.html", "utf-8");
+	var racFile = fs.readFileSync("./add_rac.html", "utf-8");
+	var prcFile = fs.readFileSync("./add_prc.html", "utf-8");
+	var dcFile = fs.readFileSync("./add_dc.html", "utf-8");
+	var successFile = fs.readFileSync("./successPage.html", "utf-8");
+	app.get('/addAccount', (req, res) => {
+		res.send(addAccountFile);
+	});
+	app.post('/addSelectedType',urlencodedParser, (req, res) => {
+		//res.send(req.body.type)
+		var type = req.body.type;
+		var email = req.body.email;
+		if(type == "supervisor")
+		{
+			var supFileTemp = supFile.replace("{%error%}","");
+			res.send(supFileTemp);
+		}
+		else if(type == "rac")
+		{
+			var racFileTemp = racFile.replace("{%error%}","");
+			res.send(racFileTemp);
+		}
+		else if(type == "prc")
+		{
+			var prcFileTemp = prcFile.replace("{%error%}","");
+			res.send(prcFileTemp);
+		}
+		else if(type == "dc")
+		{
+			var dcFileTemp = dcFile.replace("{%error%}","");
+			res.send(dcFileTemp);
+		}
+	});
+
+	app.post('/addSupervisor',urlencodedParser, (req, res) => {
+		var email = req.body.email;
+		var psw = req.body.psw;
+		var repeat_psw = req.body.repeat_psw;
+		var name  = req.body.name;
+		var dept_id = req.body.dept_id;
+		var id;
+		var cnt;
+		var q = `select count(*) as cnt from login where email = "${email}"`;
+		con.query(q,(err,result,fields)=>{
+			if(err){
+				throw err;
+			}
+			count = result[0].cnt;
+			if(count == 0)
+			{
+				var q1 = "Select count(*) as cnt from login;"
+				con.query(q1,(err,result,fields)=> {
+					if (err){
+						throw err;
+					}
+					id="sup"+(result[0].cnt+1);
+					var type = 'sup'
+					if(psw == repeat_psw)
+					{
+						var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+						var stmt2 = `INSERT INTO professor(prof_id,prof_name,prof_dept) VALUES("${id}","${name}","${dept_id}");`;
+						var stmt = stmt1+stmt2;
+						con.query(stmt,(err,result,fields)=> {
+							if (err) 
+								throw err;
+							res.send(successFile);
+						});
+					}
+					else
+					{
+						var supFileEmail = supFile.replace("{%error%}","Password and Repeat Password does not match");
+						res.send(supFileEmail);
+					}
+				});
+			}
+			else
+			{
+				var supFileEmail = supFile.replace("{%error%}","Email Already Registered")
+				res.send(supFileEmail);
+			}
+		});
+	});
+	
+	app.post('/addRAC',urlencodedParser, (req, res) => {
+		var email = req.body.email;
+		var psw = req.body.psw;
+		var repeat_psw = req.body.repeat_psw;
+		var stud_id = req.body.stud_id;
+		var id;
+		var q = `select count(*) as cnt from login where email = "${email}"`;
+		con.query(q,(err,result,fields)=>{
+			if(err){
+				throw err;
+			}
+			count = result[0].cnt;
+			if(count == 0)
+			{
+				var q1 = "Select count(*) as cnt from rac;"
+				con.query(q1,(err,result,fields)=> {
+					if (err){
+						throw err;
+					}
+					id="rac"+(result[0].cnt+1);
+					var type = 'rac';
+					if(psw == repeat_psw)
+					{
+						var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+						var stmt2 = `INSERT INTO rac(rac_id,stud_id) VALUES("${id}","${stud_id}");`;
+						var stmt = stmt1+stmt2;
+						con.query(stmt,(err,result,fields)=> {
+							if (err) 
+								throw err;
+							res.send(successFile);
+						});
+					}
+					else
+					{
+						var racFileEmail = racFile.replace("{%error%}","Password and Repeat Password does not match");
+						res.send(racFileEmail);
+					}
+				});
+			}
+			else
+			{
+				var racFileEmail = racFile.replace("{%error%}","Email Already Registered")
+				res.send(racFileEmail);
+			}
+		});
+	});
+
+	app.post('/addPRC',urlencodedParser, (req, res) => {
+		var email = req.body.email;
+		var psw = req.body.psw;
+		var repeat_psw = req.body.repeat_psw;
+		var dept_id = req.body.dept_id;
+		var id ;
+		var cnt;
+		var q = `select count(*) as cnt from login where email = "${email}"`;
+		con.query(q,(err,result,fields)=>{
+			if(err){
+				throw err;
+			}
+			count = result[0].cnt;
+			if(count == 0)
+			{
+				var q1 = "Select count(*) as cnt from prc;"
+				con.query(q1,(err,result,fields)=> {
+					if (err){
+						throw err;
+					}
+					id="prc"+(result[0].cnt+1);
+					var type = 'prc';
+					if(psw == repeat_psw)
+					{
+						var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+						var stmt2 = `INSERT INTO prc(prc_id,dept_id) VALUES("${id}","${dept_id}");`;
+						var stmt = stmt1+stmt2;
+						con.query(stmt,(err,result,fields)=> {
+							if (err)
+								throw err;
+							res.send(successFile);
+						});
+					}
+					else
+					{
+						var prcFileEmail = prcFile.replace("{%error%}","Password and Repeat Password does not match");
+						res.send(prcFileEmail);
+					}
+				});
+			}
+			else
+			{
+				var prcFileEmail = prcFile.replace("{%error%}","Email Already Registered")
+				res.send(prcFileEmail);
+			}
+		});
+	});
+
+	app.post('/addDC',urlencodedParser, (req, res) => {
+		var email = req.body.email;
+		var psw = req.body.psw;
+		var repeat_psw = req.body.repeat_psw;
+		var fac_id = req.body.fac_id;
+		var id;
+		var type = 'dc';
+		var cnt;
+		var q = `select count(*) as cnt from login where email = "${email}"`;
+		con.query(q,(err,result,fields)=>{
+			if(err){
+				throw err;
+			}
+			count = result[0].cnt;
+			if(count == 0)
+			{
+				var q1 = "Select count(*) as cnt from doctorate_committe;"
+				con.query(q1,(err,result,fields)=> {
+					if (err){
+						throw err;
+					}
+					id="dc"+(result[0].cnt+1);
+					if(psw == repeat_psw)
+					{
+						var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+						var stmt2 = `INSERT INTO doctorate_committe(dc_id,fac_id) VALUES("${id}","${fac_id}");`;
+						var stmt = stmt1+stmt2;
+						con.query(stmt,(err,result,fields)=> {
+							if (err)
+								throw err;
+							res.send(successFile);
+						});
+					}
+					else
+					{
+						var dcFileEmail = dcFile.replace("{%error%}","Password and Repeat Password does not match");
+						res.send(dcFileEmail);
+					}
+				});
+			}
+			else
+			{
+				var dcFileEmail = dcFile.replace("{%error%}","Email Already Registered")
+				res.send(dcFileEmail);
+			}
+		});
+	});
+
 	app.listen(port, () => {
 		console.log("Server Created!");
 		console.log("https://localhost:" + port + "/" );

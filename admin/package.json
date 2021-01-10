@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js -e ejs,js,css,html,jpg,png,scss"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,8 @@
     "node-json2html": "^1.4.0",
     "puppeteer": "^5.5.0",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

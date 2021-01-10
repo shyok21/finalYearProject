@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/admin_add.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Account</title>
+</head>
+<body>
+  <form action="addSelectedType" method="post">
+    <div class="container">
+      <div class="heading">
+        <div id="julogo">
+          <img src="images/ju_logo.png">
+        </div>
+        <div class="headname">
+          <h1 id="headnameeng">Jadavpur University</h1>
+          <h1 id="headnamebeng">যাদবপুর বিশ্ববিদ্যালয়</h1>
+        </div>
+      </div>
+      <div class="formbody">
+        <div class="formhead">
+          <h1>Welcome to Add page!</h1>
+        </div>
+        <div class="formdesc">
+          <h3>Click submit to add selected entity</h3>
+        </div>
+        <div class="dropdown1">
+          <select name="type" id="type">
+            <option value="supervisor">Supervisor</option>
+            <option value="rac">Research Advisory Committee</option>
+            <option value="prc">Postgraduate Research Committee</option>
+            <option value="dc">Doctorate Committe</option>
+          </select>
+        </div>
+        <div class="formbtn">
+          <input type="submit" class="btn">
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+</html>
