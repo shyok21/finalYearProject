@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+var nodemailer = require('nodemailer');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const con = mysql.createConnection({
      host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
@@ -52,6 +53,35 @@ con.connect(function(err){
 	var prcFile = fs.readFileSync("./add_prc.html", "utf-8");
 	var dcFile = fs.readFileSync("./add_dc.html", "utf-8");
 	var successFile = fs.readFileSync("./successPage.html", "utf-8");
+
+
+	var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		
+		auth: {
+			user: 'ju.phdms2021@gmail.com',
+			pass: 'Ju.phdms2021@'
+		}
+	});
+
+	function sendEmail(email,id,password,type)
+	{
+		var mailOptions = {
+			from: 'ju.phdms2021@gmail.com',
+			to: email,
+			subject: 'Account Details from ju phdms',
+			text: `Hello ${email}, Your Account ID is "${id}", Password is "${password}" and Access type is "${type}". Please dont share the password with anyone.`   
+		  };
+		  
+		  transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+			  console.log(error);
+			} else {
+			  console.log('Email sent: ' + info.response);
+			}
+		  });
+	}
+
 	app.get('/addAccount', (req, res) => {
 		res.send(addAccountFile);
 	});
@@ -112,6 +142,7 @@ con.connect(function(err){
 						con.query(stmt,(err,result,fields)=> {
 							if (err) 
 								throw err;
+							sendEmail(email,id,psw,"Supervisor");
 							res.send(successFile);
 						});
 					}
@@ -159,6 +190,7 @@ con.connect(function(err){
 						con.query(stmt,(err,result,fields)=> {
 							if (err) 
 								throw err;
+							sendEmail(email,id,psw,"RAC");
 							res.send(successFile);
 						});
 					}
@@ -207,6 +239,7 @@ con.connect(function(err){
 						con.query(stmt,(err,result,fields)=> {
 							if (err)
 								throw err;
+							sendEmail(email,id,psw,"PRC");
 							res.send(successFile);
 						});
 					}
@@ -255,6 +288,7 @@ con.connect(function(err){
 						con.query(stmt,(err,result,fields)=> {
 							if (err)
 								throw err;
+							sendEmail(email,id,psw,"Doctorate Committe");
 							res.send(successFile);
 						});
 					}
