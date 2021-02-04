@@ -20,6 +20,7 @@ const supervisorPage = (req, res) => {
                 var listString = listString + "<div class='det1'>" + results[i].sex + "</div>";
                 var listString = listString + "<div class='det1'>" + results[i].category + "</div>";
                 var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
+                //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
                 var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
 
             }

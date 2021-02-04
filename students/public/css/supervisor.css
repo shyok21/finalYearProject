@@ -69,3 +69,7 @@ body {
     color: lightcoral;
     background-color: darkred;
 }
+
+.hide {
+    flex: 0;
+}
