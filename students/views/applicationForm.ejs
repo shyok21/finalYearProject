@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="css/applicationForm.css">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -90,7 +91,8 @@
                     </li>
                     <li>
                         <label for="nationality">NATIONALITY</label>
-                        <input type="text" name="nationality" class="text-ip type-1" required>
+                        <select id="nationality" name="nationality" class="text-ip type-1" required>
+                        </select>
                     </li>
                     <li>
                         <label for="address1">PERMANENT ADDRESS</label><br>
@@ -255,7 +257,7 @@
     </div>
 </body>
 
-<script>
+<script type="text/javascript">
     var currentTab = 0;
     showTab(currentTab);
 
@@ -313,5 +315,24 @@
        
         x[n].className += " active";
     }
+
+    // AJAX calls for populating select lists
+    $(document).ready(function() 
+    { 
+        console.log("Doc ready");
+        $.ajax({
+            type: "GET",
+            url:"https://restcountries.eu/rest/v2/all",
+            dataType: "json",
+            success: function (data) {
+                $.each(data,function(i,data) {
+                    if(data.demonym) {
+                        var options = "<option value='"+data.demonym+"'>"+data.demonym+"</option>";
+                        $(options).appendTo('#nationality');
+                    }     
+                });  
+            }
+        });
+    });
 </script>
 </html>
