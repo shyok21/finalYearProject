@@ -15,33 +15,8 @@
 
 <body>
     <div class="intro">Hello, {%name%}. Here are the list of students.</div>
-    <form class="list" name="lists" action="/supervisorApproval" method="POST">
-        <!-- <div class="list1">
-            <div class="det1"></div>
-            <div class="det1"></div>
-            <div class="det1"></div>
-            <div class="det1"></div>
-            <div class="det1"></div>
-            <div class="det1"></div>
-            <div class="det2">
-                <input type="submit" name="stud1_accept" value="Approve" class="approve">
-                <input type="submit" name="stud1_reject" value="Discard" class="discard">
-            </div>
-        </div> -->
-
+    <form class="list" name="lists" action="/supervisorApproval" method="GET">
         {%list%}
-        <!-- <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-        <div class="list1"></div>
-
-        <div class="list1"></div> -->
     </form>
 </body>
 

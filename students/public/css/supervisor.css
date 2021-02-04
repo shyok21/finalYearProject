@@ -44,6 +44,9 @@ body {
 .det1 {
     flex: 1;
     margin: 2px;
+    height: auto;
+    align-self: center;
+    text-align: center;
 }
 
 .det2 {

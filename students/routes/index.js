@@ -5,6 +5,7 @@ const { registerPage, validate, verify } = require('./controllers/registerContro
 const { applicationFormPage, applicationFormSubmit } = require('./controllers/applicationFormController');
 const { studentPage } = require('./controllers/studentController');
 const { supervisorPage } = require('./controllers/supervisorController');
+const { supervisorApproval } = require('./controllers/supervisorApprovalController');
 
 router.get("/", homePage);
 router.post("/login", login);
@@ -16,5 +17,6 @@ router.get("/applicationFormPage", applicationFormPage);
 router.post("/applicationFormSubmit", applicationFormSubmit);
 router.get("/studentPage", studentPage);
 router.get("/supervisorPage", supervisorPage);
+router.get("/supervisorApproval", supervisorApproval);
 
 module.exports = router;
