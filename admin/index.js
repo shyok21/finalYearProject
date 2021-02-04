@@ -22,6 +22,7 @@ var port = 8020;
 var htmlFile = fs.readFileSync("./index.html", "utf-8");
 var html = fs.readFileSync("./studentList.html", "utf-8");
 var htmlStudentDetails = fs.readFileSync("./studentDetails.html", "utf-8");
+
 con.connect(function(err){
 	if (err) 
 		throw err;
