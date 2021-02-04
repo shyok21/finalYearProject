@@ -6,7 +6,7 @@
 
 .heading {
     flex: 1;
-    background-color: #f3aa92;
+    background-color: #daded7;
     display: flex;
     flex-direction: row;
 }
@@ -30,14 +30,14 @@
     flex: 4;
     font-size: 1.6em;
     font-weight: bold;
-    color: #5c616e;
+    color: #ad2a00;
 }
 
 .heading-det-name-ban {
     flex: 2;
     font-size: 1.5em;
     font-weight: bold;
-    color: #5c616e;
+    color: #ad2a00;
 }
 
 .heading-det-name-empty {

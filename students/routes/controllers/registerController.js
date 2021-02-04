@@ -1,6 +1,7 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
+const {encrypt} = require('./../../services/encrypt.js');
 var randomstring = require("randomstring");
 var nodemailer = require('nodemailer');
 var m_pass, c_pass, m_cap, m_email;
@@ -90,8 +91,10 @@ const verify = (req, res) => {
         con.query(qrys, (err, result, field) => {
             var count = result[0].count + 2;
             var s_id = "stud" + count;
+            const enc_pass = encrypt(m_pass);
+            console.log("encrypted password" + enc_pass);
             // var qry = "insert into login values(s_id + , m_email, m_pass, 'stud')";
-            var qry = util.format("insert into login values('%s','%s','%s','stud');", s_id, m_email, m_pass);
+            var qry = util.format("insert into login values('%s','%s','%s','stud');", s_id, m_email, enc_pass);
             //console.log(qry);
             con.query(qry, (err, results, fields) => {
                 console.log("Student Added to Login Database");

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/applicationForm.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('components/header'); %>
+    <div class="logout">
+        <a href="./logout">Logout</a>
+    </div>
+    <div class="main">
+            <form method="POST" action="/applicationFormSubmit" class="registration-form" id="registration-form">
+                <div style="text-align:center;margin-bottom:20px;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </div>
+                <!-- Page 1 of the form -->
+                <div class="tab">
+                    <p>I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
+                    PHILOSOPHY IN <span><input type="text" name="faculty" class="text-ip" required></span>
+                    OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF <span><input type="text" name="dep_id" class="text-ip" required></span>
+                    AND SUBMIT BELOW THE REQUISITE DETAILS, IF ACCEPTED I SHALL ABIDE 
+                    BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
+                    </p><br>
+                    <label for="student_photo">UPLOAD PASSPORT SIZE PHOTO</label>
+                    <input type="file" name="student_photo" class="text-ip" required>   
+                    
+                    <br><br>
+                    <ol start="1">
+                    <li>
+                        <label for="student_name">NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE)</label>
+                        <input type="text" name="student_name" class="text-ip" required>   
+                    </li>
+                    <li>
+                        <label for="dob">DATE OF BIRTH</label>
+                        <input type="date" name="dob" class="text-ip" required> 
+                        <label for="sex">SEX</label>
+                        <select name="sex" class="text-ip">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <td class="col-odd"><label for="marital_status">MARITAL STATUS</label></td>
+                        <td class="col-evn">
+                            <select name="marital_status" class="text-ip">
+                                <option value="unmarried">Unmarried</option>
+                                <option value="married">Married</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </td>
+                    </li>
+                    <li>
+                        <label for="parent_name">FATHER'S NAME/MOTHER'S NAME</label>
+                        <input type="text" name="parent_name" class="text-ip" required>
+                    </li>
+                    <li>
+                        <label for="category">CATEGORY</label>
+                        <select name="category" class="text-ip">
+                            <option value="general">General</option>
+                            <option value="sc">SC</option>
+                            <option value="st">ST</option>
+                            <option value="obc">OBC</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="nationality">NATIONALITY</label>
+                        <input type="text" name="nationality" class="text-ip" required>
+                    </li>
+                    <li>
+                        <label for="address1">PERMANENT ADDRESS</label><br>
+                        <input type="text" name="address1" class="text-ip" required>
+                    </li>
+                    <li>
+                        <label for="address2">ADDRESS FOR COMMUNICATION</label><br>
+                        <input type="text" name="address2" class="text-ip" required><br>
+                        <label for="mobile_no">MOBILE NUMBER</label>
+                        <input type="text" name="mobile_no" class="text-ip" required><br>
+                        <label for="phone_no">PHONE NUMBER</label>
+                        <input type="text" name="phone_no" class="text-ip"><br>
+                        <label for="student_email">EMAIL</label>
+                        <input type="email" name="student_email" class="text-ip" value="<%= email %>" readonly>
+                    </li>
+                    </ol>
+                </div>
+                <!-- Page 2 of the form -->
+                <div class="tab">
+                    <ol start="8">
+                    <li>
+                        <p>PARTICULARS OF ACADEMIC CAREER</p>
+                        <table>
+                            <tr>
+                                <th>Name of the Examination</th>
+                                <th>Examination passed</th>
+                                <th>Name of Institution/University</th>
+                                <th>Major discipline</th>
+                                <th>Year of passing</th>
+                                <th>Total marks obtained</th>
+                                <th>%(Marks/CGPA)</th>
+                                <th>Upload marksheet/certificate</th>
+                            </tr>
+                            <tr>
+                                <td><label>Madhyamik or Equivalent</label></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="file" class="text-ip-table"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Higher secondary or Equivalent</label></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="file" class="text-ip-table"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Bachelor degree</label></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="text" class="text-ip-table" required></td>
+                                <td><input type="file" class="text-ip-table"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Master degree</label></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="file" class="text-ip-table"></td>
+                            </tr>
+                            <tr>
+                                <td><label>Post master degree</label></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="file" class="text-ip-table"></td>
+                            </tr>
+                            <tr>
+                                <td><label>M.Phil(Two year regular course)</label></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="text" class="text-ip-table"></td>
+                                <td><input type="file" class="text-ip-table"></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION</label>
+                        <input type="text" name="qualified" class="text-ip"><br>
+                        <label for="qualified">RELEVANT DOCUMENTS</label>
+                        <input type="file" name="qualified-docs" class="text-ip" multiple>   
+                    </li>
+                    <li>
+                        <p>PRESENT EMPLOYMENT</p>
+                        <label for="org_name">(A) NAME OF ORGANISATION:</label></br>
+                        <input type="text" name="org_name" class="text-ip"><br>
+                        <label for="nature_of_work">(B) NATURE OF WORK:</label></br>
+                        <input type="text" name="nature_of_work" class="text-ip"><br>
+                    </li>
+                    </ol>
+                </div>
+
+                <!-- Page 3 of the form -->
+                <div class="tab">
+                    <ol start="11">
+                    <li>
+                        <p>PROPOSED RESEARCH WORK</p>
+                        <label for="title">(A) PROPOSED AREA/THEME OF RESEARCH:</label></br>
+                        <input type="text" name="title" class="text-ip" required><br>
+                        <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS):</label></br>
+                        <input type="file" name="sop" class="text-ip" required><br>
+                        <label for="proposed_institute">(C) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS</label></br>
+                        <input type="text" name="proposed_institute" class="text-ip" required><br>
+                    </li>
+                    </ol>
+                </div>
+
+                <!-- Page 4 of the form -->
+                <div class="tab">
+                    <ol start="12">
+                    <li>
+                        <p>NAME OF SUPERVISORS(RECOMMENDED BY PHD RESEACRH COMMITTEE)</p>
+                        <label for="supervisor_id">(1)</label>
+                        <input type="text" name="supervisor_id" class="text-ip" required><br>
+                        <label for="supervisor_designation">DESIGNATION</label>
+                        <input type="text" name="supervisor_designation" class="text-ip"><br>
+                        <label for="co_supervisor_id">(2)</label>
+                        <input type="text" name="co_supervisor_id" class="text-ip"><br>
+                        <label for="co_supervisor_designation">DESIGNATION</label>
+                        <input type="text" name="co_supervisor_designation" class="text-ip"><br>
+                    </li>
+                    </ol>
+                </div>
+
+                <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button class="submit-btn" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button class="submit-btn" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    </div>
+                </div>
+            </form>
+    </div>
+</body>
+
+<script>
+    var currentTab = 0;
+    showTab(currentTab);
+
+    function showTab(n) {
+
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        fixStepIndicator(n);
+    }
+
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("tab");
+        if (n == 1 && !validateForm()) return false;
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+        if (currentTab >= x.length) {
+            document.getElementById("registration-form").submit();
+            return false;
+        }
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].querySelectorAll('input[required]');
+        for (i = 0; i < y.length; i++) {
+            if (y[i].value == "") {
+                y[i].className += " invalid";
+                valid = false;
+            }
+        }
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid;
+    }
+
+    function fixStepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+       
+        x[n].className += " active";
+    }
+</script>
+</html>

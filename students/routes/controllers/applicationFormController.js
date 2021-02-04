@@ -3,12 +3,9 @@ const con = require('./../../db.js');
 const util = require('util');
 
 const applicationFormPage = (req, res) => {
-    var htmlFile = fs.readFileSync("views/applicationForm.html", "utf-8");
     var sess = req.session;
     if(sess.email) {
-        htmlFile = htmlFile.replace("{%enrolment_no%}", sess.userid);
-        htmlFile = htmlFile.replace("{%email%}", sess.email);
-        res.send(htmlFile);
+        res.render('applicationForm', { email: sess.email });
     }
     else {
         res.redirect('/');
@@ -17,9 +14,9 @@ const applicationFormPage = (req, res) => {
 }
 
 const applicationFormSubmit = (req, res) => { 
+    var sess = req.session;
     const { 
         student_name,
-        enrolment_number,
         nationality,
         dob,
         sex,
@@ -42,7 +39,7 @@ const applicationFormSubmit = (req, res) => {
         `insert into student 
         (stud_id, name, nationality, dob, sex, marritial_status, parent_name, perm_address, addr_for_communication, mobile_no, category, present_emp_org, present_org_work, proposed_theme, proposed_statement_of_purpose, registration_phase, supervisor_id, dept_id )
         values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%d','%s','%s');`, 
-        enrolment_number,
+        sess.userid,
         student_name,
         nationality,
         dob,

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
+const {compare} = require('./../../services/encrypt.js');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 
 // Renders the homepage from where user can log in
@@ -23,10 +24,12 @@ const login = (req, res) => {
         var log = req.body.logintype;
         var usr = req.body.username;
         var psw = req.body.password;
-        var qry = util.format("select* from login where email='%s' and password='%s' and type='%s'", usr, psw, log);
+        var qry = util.format("select password from login where email='%s' and type='%s'", usr, log);
         con.query(qry, (err, result, fields) => {
             if (err) throw err;
-            if (result.length == 0) {
+            console.log(result[0].password);
+            console.log(psw);
+            if (result.length == 0 || !compare(psw, result[0].password)) {
                 var htmlNewFile = htmlFile.replace("{%Login Error%}", "&#9746; Invalid Username or Password!");
                 var htmlNewFile = htmlNewFile.replace("{%error-type%}", "login-cross");
                 res.send(htmlNewFile);
