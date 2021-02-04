@@ -35,7 +35,7 @@ const login = (req, res) => {
                 res.send(htmlNewFile);
             } else {
                 if (log === 'STUD') {
-                    
+
                     var stud_id = result[0].id;
             
                     // Storing student ID and email as session objects
@@ -44,9 +44,14 @@ const login = (req, res) => {
                     sess.email = usr;
                     sess.userid = stud_id;
                     res.redirect('/studentPage');
-                    
+
                 } else if (log === 'SUP') {
-                    res.send("Hello Supervisor " + result.name);
+                    var sup_id = result[0].id;
+
+                    var sess = req.session;
+                    sess.email = usr;
+                    sess.userid = sup_id;
+                    res.redirect('/supervisorPage');
                 } else if (log === 'RAC') {
                     res.send("Hello RAC " + result.name);
                 } else if (log === 'DC') {
@@ -66,15 +71,14 @@ const logout = (req, res) => {
     sess.destroy(err => {
         if (err) {
             console.log(err);
-        }
-        else {
+        } else {
             res.redirect('/');
-        }    
+        }
     });
 }
 
 module.exports = {
-    homePage, 
+    homePage,
     login,
     logout
 }
