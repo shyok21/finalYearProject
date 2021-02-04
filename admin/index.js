@@ -6,6 +6,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var nodemailer = require('nodemailer');
+var location = require('location-href');
+const url = require('url');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const con = mysql.createConnection({
      host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
@@ -19,12 +21,13 @@ var port = 8020;
 
 var htmlFile = fs.readFileSync("./index.html", "utf-8");
 var html = fs.readFileSync("./studentList.html", "utf-8");
+var htmlStudentDetails = fs.readFileSync("./studentDetails.html", "utf-8");
 con.connect(function(err){
 	if (err) 
 		throw err;
 	console.log("Connected to Database");
 	app.post("/studentList", urlencodedParser, function(req, res) {
-		con.query("SELECT * FROM student WHERE registration_phase='4'", function (err, result, fields){
+		con.query("SELECT * FROM student WHERE registration_phase='1'", function (err, result, fields){
 			if (err) 
 				throw err;
 			var sendRes = "";
@@ -34,16 +37,43 @@ con.connect(function(err){
 				sendRes += "<tr>";
 				sendRes += "<td>" + (result[i].stud_id).toUpperCase() + "</td>";
 				sendRes += "<td>" + result[i].name.toUpperCase() + "</td>";
-				sendRes += "<td>" + result[i].email + "</td>";
-				sendRes += "<td>" + result[i].address.toUpperCase() + "</td>";
-				sendRes += "<td>" + result[i].thesis_title.toUpperCase() + "</td>";
-				sendRes += "<td><button class='btn-ipAccept'>OK</button><button class='btn-ipReject'>X</button></td>";
+				//sendRes += "<td>" + result[i].email + "</td>";
+				sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
+				sendRes += "<td>" + "result[i].thesis_title.toUpperCase()" + "</td>";
+				sendRes += "<td><a href='studentDetails.html?stud_id=" + result[i].stud_id + "'>View Details</a></td>";				
 				sendRes += "</tr>";
 			}
 			var newHtml = html.replace("{%sqlContent%}", sendRes);
 			res.send(newHtml);
 		});
 	});
+
+	app.get("/studentDetails.html", function(req, res) {
+		//res.send(htmlStudentDetails);
+		var urlString = location();
+		//console.log(urlString);
+		var url = new URL(urlString);
+		var id = url.searchParams.get("stud_id");
+		con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function (err, result, fields){
+			if (err) 
+				throw err;
+			var sendRes = "";
+			//console.log(result);
+			for(var i=0; i<result.length; i++)
+			{
+				sendRes += "<tr>";
+				sendRes += "<td>" + (result[i].stud_id).toUpperCase() + "</td>";
+				sendRes += "<td>" + result[i].name.toUpperCase() + "</td>";
+				//sendRes += "<td>" + result[i].email + "</td>";
+				sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
+				sendRes += "<td>" + "result[i].thesis_title.toUpperCase()" + "</td>";				
+				sendRes += "</tr>";
+			}
+			var newHtml = htmlStudentDetails.replace("{%listContent%}", sendRes);
+			res.send(newHtml);
+		});
+	});
+
 	app.get('/', function (req, res) {
 		res.send(htmlFile);
 	}); 
