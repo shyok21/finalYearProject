@@ -24,7 +24,7 @@ const login = (req, res) => {
         var log = req.body.logintype;
         var usr = req.body.username;
         var psw = req.body.password;
-        var qry = util.format("select password from login where email='%s' and type='%s'", usr, log);
+        var qry = util.format("select * from login where email='%s' and type='%s'", usr, log);
         con.query(qry, (err, result, fields) => {
             if (err) throw err;
             console.log(result[0].password);
@@ -37,8 +37,9 @@ const login = (req, res) => {
                 if (log === 'STUD') {
                     
                     var stud_id = result[0].id;
-
+            
                     // Storing student ID and email as session objects
+                    
                     var sess = req.session;
                     sess.email = usr;
                     sess.userid = stud_id;
