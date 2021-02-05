@@ -32,7 +32,6 @@ con.connect(function(err){
 			if (err) 
 				throw err;
 			var sendRes = "";
-			//console.log(result);
 			for(var i=0; i<result.length; i++)
 			{
 				sendRes += "<tr>";
@@ -50,28 +49,55 @@ con.connect(function(err){
 	});
 
 	app.get("/studentDetails.html", function(req, res) {
-		//res.send(htmlStudentDetails);
-		var urlString = location();
-		//console.log(urlString);
-		var url = new URL(urlString);
-		var id = url.searchParams.get("stud_id");
+		var id = req.query.stud_id;
 		con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function (err, result, fields){
 			if (err) 
 				throw err;
 			var sendRes = "";
-			//console.log(result);
 			for(var i=0; i<result.length; i++)
 			{
-				sendRes += "<tr>";
-				sendRes += "<td>" + (result[i].stud_id).toUpperCase() + "</td>";
-				sendRes += "<td>" + result[i].name.toUpperCase() + "</td>";
+				sendRes += "<br>";
+				sendRes += "Student ID: " + (result[i].stud_id).toUpperCase();
+				sendRes += "<br>Name: " + result[i].name.toUpperCase();
+				sendRes += "<br>Sex: " + result[i].sex.toUpperCase();
+				sendRes += "<br>Category: " + result[i].category;
+				sendRes += "<br>DOB: " + result[i].dob;
+				sendRes += "<br>Mobile No.: " + result[i].mobile_no;
 				//sendRes += "<td>" + result[i].email + "</td>";
-				sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
-				sendRes += "<td>" + "result[i].thesis_title.toUpperCase()" + "</td>";				
-				sendRes += "</tr>";
+				sendRes += "<br>Address: " + result[i].perm_address.toUpperCase();
+				sendRes += "<br>Thesis title: " + "result[i].thesis_title.toUpperCase()";				
+				sendRes += "<br>Proposed Theme: " + result[i].proposed_theme.toUpperCase();
 			}
 			var newHtml = htmlStudentDetails.replace("{%listContent%}", sendRes);
 			res.send(newHtml);
+		});
+	});
+
+	app.get('/approve', function(req, res) {
+		var id = req.query.stud_id;
+		con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function (err, result, fields){
+			if (err) 
+				throw err;
+			var regUpdate = `UPDATE student SET registration_phase='5' WHERE stud_id="${id}";`;
+			con.query(regUpdate, (err,result,fields)=> {
+				if (err) 
+					throw err;
+				res.send("Approved Successfully");
+			});
+		});
+	});
+
+	app.get('/reject', function(req, res) {
+		var id = req.query.stud_id;
+		con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function (err, result, fields){
+			if (err) 
+				throw err;
+			var regUpdate = `UPDATE student SET registration_phase='0' WHERE stud_id="${id}";`;
+			con.query(regUpdate, (err,result,fields)=> {
+				if (err) 
+					throw err;
+				res.send("Application Rejected");
+			});
 		});
 	});
 
@@ -102,15 +128,15 @@ con.connect(function(err){
 			to: email,
 			subject: 'Account Details from ju phdms',
 			text: `Hello ${email}, Your Account ID is "${id}", Password is "${password}" and Access type is "${type}". Please dont share the password with anyone.`   
-		  };
+		};
 		  
-		  transporter.sendMail(mailOptions, function(error, info){
+		transporter.sendMail(mailOptions, function(error, info){
 			if (error) {
 			  console.log(error);
 			} else {
 			  console.log('Email sent: ' + info.response);
 			}
-		  });
+		});
 	}
 
 	app.get('/addAccount', (req, res) => {
@@ -151,7 +177,7 @@ con.connect(function(err){
 		var id;
 		var cnt;
 		var q = `select count(*) as cnt from login where email = "${email}"`;
-		con.query(q,(err,result,fields)=>{
+		con.query(q,(err,result,fields)=> {
 			if(err){
 				throw err;
 			}

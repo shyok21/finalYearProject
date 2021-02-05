@@ -1,5 +1,15 @@
 <html>
-    <body>
+<head>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background-color: darkseagreen;">
+    <p>
         {%listContent%}
-    </body>
+    </p>   
+    <br> <br>     
+    <form id="approval-form">
+        <input type="submit" name="Approve" value="Approve" class="btn-ipAccept" formaction="/approve">
+        <input type="submit" name="Reject" value="Reject" class="btn-ipReject" formaction="/reject">
+    </form>
+</body>
 </html>

@@ -161,6 +161,8 @@ a:hover {
 }
 
 p {
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
     height: auto;
     text-align: justify;
     color: #313744;
@@ -248,7 +250,8 @@ input {
 .btn-ipAccept {
     margin-left: 8px;
     margin-right: 8px;
-    border-radius: 50%;
+    height: 8%;
+    width: 30%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -260,7 +263,8 @@ input {
 .btn-ipReject {
     margin-left: 8px;
     margin-right: 8px;
-    border-radius: 50%;
+    height: 8%;
+    width: 30%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
