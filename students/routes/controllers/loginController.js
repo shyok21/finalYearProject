@@ -1,16 +1,14 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
-const {compare} = require('./../../services/encrypt.js');
+const { compare } = require('./../../services/encrypt.js');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 
 // Renders the homepage from where user can log in
 const homePage = (req, res) => {
-    /*
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
-    res.send(htmlFileSend);  
-    */
-    res.render('applicationForm', {email: 'xyz@gmail.com'});
+    res.send(htmlFileSend);
+    // res.render('applicationForm', {email: 'xyz@gmail.com'});
 }
 
 // Handles the event when user logs in
@@ -40,9 +38,9 @@ const login = (req, res) => {
                 if (log === 'STUD') {
 
                     var stud_id = result[0].id;
-            
+
                     // Storing student ID and email as session objects
-                    
+
                     var sess = req.session;
                     sess.email = usr;
                     sess.userid = stud_id;

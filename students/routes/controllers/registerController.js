@@ -1,7 +1,7 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
-const {encrypt} = require('./../../services/encrypt.js');
+const { encrypt } = require('./../../services/encrypt.js');
 var randomstring = require("randomstring");
 var nodemailer = require('nodemailer');
 var m_pass, c_pass, m_cap, m_email;
@@ -81,16 +81,36 @@ const validate = (req, res) => {
     });
 
 }
-
-// Handles the event when student submits the verification code
+const format_str = (x) => {
+        if (x < 10)
+            return "00000" + x;
+        else if (x >= 10 && x < 100)
+            return "0000" + x;
+        else if (x >= 100 && x < 1000)
+            return "000" + x;
+        else if (x >= 1000 && x < 10000)
+            return "00" + x;
+        else if (x >= 10000 && x < 100000)
+            return "0" + x;
+        else
+            return "" + x;
+    }
+    // Handles the event when student submits the verification code
 const verify = (req, res) => {
     console.log(req.body.ver_code);
     console.log(verify_code);
     if (verify_code === req.body.ver_code) {
-        var qrys = "select count(*) as count from login where type='STUD';";
+        var qrys = "select id from login where type='STUD' order by id desc;";
         con.query(qrys, (err, result, field) => {
-            var count = result[0].count + 2;
-            var s_id = "stud" + count;
+            var s_id = "";
+            try {
+                var id = result[0].id;
+                var last_cnt = id.replace("Stud", "");
+                var int_last_cnt = parseInt(last_cnt);
+                s_id = "Stud" + format_str(int_last_cnt + 1);
+            } catch (e) {
+                s_id = "Stud000000";
+            }
             const enc_pass = encrypt(m_pass);
             console.log("encrypted password" + enc_pass);
             // var qry = "insert into login values(s_id + , m_email, m_pass, 'stud')";
