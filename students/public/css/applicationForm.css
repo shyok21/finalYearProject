@@ -22,7 +22,7 @@
     padding: 2%;
 }
 
-input.invalid {
+.text-ip.invalid {
     background-color: #ffdddd;
 }
 

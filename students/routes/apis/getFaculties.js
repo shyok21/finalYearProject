@@ -1,18 +1,20 @@
 const con = require('./../../db.js');
 const util = require('util');
 
-const getProfessors = (req, res) => {
-    const dept_id = req.query.dept_id;
-    var qry = util.format("select * from professor where prof_dept='%s'", dept_id);
+const getFaculties = (req, res) => {
+
+    console.log("Faculties API called");
+    var qry = util.format("select * from faculty");
     return con.query(qry, (err, result, fields) => {
         if(err) {
             console.log(err);
             res.json(null);
         }
         else {
-            res.json(result);    
+            console.log(result);
+            res.json(result);   
         }
     });
 };
 
-module.exports = getProfessors;
+module.exports = getFaculties;

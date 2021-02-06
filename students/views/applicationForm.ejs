@@ -36,8 +36,18 @@
                 <!-- Page 1 of the form -->
                 <div class="tab">
                     <p>I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
-                    PHILOSOPHY IN <span><input type="text" name="faculty" class="text-ip" required></span>
-                    OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF <span><input type="text" name="dep_id" class="text-ip" required></span>
+                    PHILOSOPHY IN 
+                    <span>
+                        <select id="faculty" name="faculty" class="text-ip" required>
+                            <option value="">---Select----</option>
+                        </select>
+                    </span>
+                    OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF 
+                    <span>
+                        <select id="department" name="dep_id" class="text-ip" required>
+                            <option></option>
+                        </select>
+                    </span>
                     AND SUBMIT BELOW THE REQUISITE DETAILS, IF ACCEPTED I SHALL ABIDE 
                     BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
                     </p><br>
@@ -92,6 +102,7 @@
                     <li>
                         <label for="nationality">NATIONALITY</label>
                         <select id="nationality" name="nationality" class="text-ip type-1" required>
+                            <option value="">---Select----</option>
                         </select>
                     </li>
                     <li>
@@ -236,7 +247,9 @@
                     <li>
                         <p>NAME OF SUPERVISORS(RECOMMENDED BY PHD RESEARCH COMMITTEE)</p>
                         <label for="supervisor_id">(1)NAME:</label>
-                        <input type="text" name="supervisor_id" class="text-ip type-1" required><br>
+                        <select id="supervisor" name="supervisor_id" class="text-ip type-1" required>
+                        </select>
+                        <br>
                         <label for="supervisor_designation">DESIGNATION:</label>
                         <input type="text" name="supervisor_designation" class="text-ip type-1"><br>
                         <label for="co_supervisor_id">(2)NAME:</label>
@@ -293,7 +306,7 @@
     function validateForm() {
         var x, y, i, valid = true;
         x = document.getElementsByClassName("tab");
-        y = x[currentTab].querySelectorAll('input[required]');
+        y = x[currentTab].querySelectorAll('[required]');
         for (i = 0; i < y.length; i++) {
             if (y[i].value == "") {
                 y[i].className += " invalid";
@@ -319,7 +332,6 @@
     // AJAX calls for populating select lists
     $(document).ready(function() 
     { 
-        console.log("Doc ready");
         $.ajax({
             type: "GET",
             url:"https://restcountries.eu/rest/v2/all",
@@ -333,6 +345,59 @@
                 });  
             }
         });
+        $.ajax({
+            type: "GET",
+            url:"http://localhost:8000/api/faculties",
+            dataType: "json",
+            success: function (data) {
+                $.each(data,function(i,data) {
+                    var options = "<option value='"+data.fac_id+"'>"+data.fac_name+"</option>";
+                    $(options).appendTo('#faculty');
+                        
+                });  
+            }
+        });
+        $('#faculty').on('change', function(){
+            const fac_id = this.value;
+            $.ajax({
+                type: "GET",
+                url:"http://localhost:8000/api/departments?fac_id=" + fac_id,
+                dataType: "json",
+                success: function (data) {
+                    var options = "<option value=''>---Select----</option>";;
+                    $.each(data,function(i,data) {
+                        options += "<option value='"+data.dept_id+"'>"+data.dept_name+"</option>";    
+                    });  
+                    $('#department').html(options);
+                }
+            });
+        })
+        $('#department').on('change', function(){
+            const dept_id = this.value;
+            $.ajax({
+                type: "GET",
+                url:"http://localhost:8000/api/professors?dept_id=" + dept_id,
+                dataType: "json",
+                success: function (data) {
+                    var options = "<option value=''>---Select----</option>";
+                    $.each(data,function(i,data) {
+                        options += "<option value='"+data.prof_id+"'>"+data.prof_name+"</option>";    
+                    });  
+                    $('#supervisor').html(options);
+                }
+            });
+        })
+        $('#supervisor').on('change', function(){
+            const prof_id = this.value;
+            $.ajax({
+                type: "GET",
+                url:"http://localhost:8000/api/designation?prof_id=" + prof_id,
+                dataType: "json",
+                success: function (data) {
+                    $('input[name=supervisor_designation]').val(data.Designation);
+                }
+            });
+        })
     });
 </script>
 </html>

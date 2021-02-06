@@ -6,8 +6,11 @@ var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 
 // Renders the homepage from where user can log in
 const homePage = (req, res) => {
+    /*
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
     res.send(htmlFileSend);  
+    */
+    res.render('applicationForm', {email: 'xyz@gmail.com'});
 }
 
 // Handles the event when user logs in

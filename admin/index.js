@@ -9,6 +9,7 @@ var nodemailer = require('nodemailer');
 var location = require('location-href');
 const url = require('url');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
+const {encrypt} =  require('./services/encrypt')
 const con = mysql.createConnection({
     host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
     user: "admin",
@@ -184,7 +185,7 @@ con.connect(function(err) {
                     id = "sup" + (result[0].cnt + 1);
                     var type = 'sup'
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
                         var stmt2 = `INSERT INTO professor(prof_id,prof_name,prof_dept) VALUES("${id}","${name}","${dept_id}");`;
                         var stmt = stmt1 + stmt2;
                         con.query(stmt, (err, result, fields) => {
@@ -226,7 +227,7 @@ con.connect(function(err) {
                     id = "rac" + (result[0].cnt + 1);
                     var type = 'rac';
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
                         var stmt2 = `INSERT INTO rac(rac_id,stud_id) VALUES("${id}","${stud_id}");`;
                         var stmt = stmt1 + stmt2;
                         con.query(stmt, (err, result, fields) => {
@@ -269,7 +270,7 @@ con.connect(function(err) {
                     id = "prc" + (result[0].cnt + 1);
                     var type = 'prc';
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
                         var stmt2 = `INSERT INTO prc(prc_id,dept_id) VALUES("${id}","${dept_id}");`;
                         var stmt = stmt1 + stmt2;
                         con.query(stmt, (err, result, fields) => {
@@ -312,7 +313,7 @@ con.connect(function(err) {
                     }
                     id = "dc" + (result[0].cnt + 1);
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${psw}","${type}");`;
+                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
                         var stmt2 = `INSERT INTO doctorate_committe(dc_id,fac_id) VALUES("${id}","${fac_id}");`;
                         var stmt = stmt1 + stmt2;
                         con.query(stmt, (err, result, fields) => {
@@ -335,6 +336,6 @@ con.connect(function(err) {
 
     app.listen(port, () => {
         console.log("Server Created!");
-        console.log("https://localhost:" + port + "/");
+        console.log("http://localhost:" + port + "/");
     });
 });

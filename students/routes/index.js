@@ -6,6 +6,10 @@ const { applicationFormPage, applicationFormSubmit } = require('./controllers/ap
 const { studentPage } = require('./controllers/studentController');
 const { supervisorPage } = require('./controllers/supervisorController');
 const { supervisorApprovalController } = require('./controllers/supervisorApprovalController');
+const getFaculties = require('./apis/getFaculties.js');
+const getDepartments = require('./apis/getDepartments.js');
+const getProfessors = require('./apis/getProfessors.js');
+const getProfessorDesignation = require('./apis/getProfessorDesignation.js');
 
 router.get("/", homePage);
 router.post("/login", login);
@@ -18,5 +22,10 @@ router.post("/applicationFormSubmit", applicationFormSubmit);
 router.get("/studentPage", studentPage);
 router.get("/supervisorPage", supervisorPage);
 router.post("/supervisorApproval", supervisorApprovalController);
+
+router.get("/api/faculties", getFaculties);
+router.get("/api/departments", getDepartments);
+router.get("/api/professors", getProfessors);
+router.get("/api/designation", getProfessorDesignation);
 
 module.exports = router;
