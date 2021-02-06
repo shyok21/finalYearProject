@@ -7,7 +7,7 @@ const studentPage = (req, res) => {
     if (sess.email) {
         const userid = sess.userid;
         var studentFile = fs.readFileSync("views/student.html", "utf-8");
-        var qrys = util.format("select name,registration_phase from student where stud_id='%s'", userid);
+        var qrys = util.format("select name,registration_phase,enrollment_id from student where stud_id='%s'", userid);
         con.query(qrys, (err, results, fields) => {
             try {
                 var studentName = results[0].name;
@@ -18,6 +18,8 @@ const studentPage = (req, res) => {
                     for (var i = 1; i <= 5; i++)
                         htmlNewFile = htmlNewFile.replace("{%trackClass%}", "main-track-rejected")
                     res.send(htmlNewFile);
+                } else if (studentPhase == 5) {
+                    res.send("<h1>Congratulations, your registration is completed</h1><h2>Your Enrollment ID:" + results[0].enrollment_id + "</h2>");
                 } else {
                     var htmlNewFile = studentFile.replace("{%StudentName%}", studentName);
                     var htmlNewFile = htmlNewFile.replace("{%studentMessage%}", "your registration is in Under Process. We will notify you once your Registration gets Complete. You can track your Registration Phase here.");

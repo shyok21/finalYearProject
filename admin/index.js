@@ -9,7 +9,7 @@ var nodemailer = require('nodemailer');
 var location = require('location-href');
 const url = require('url');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const {encrypt} =  require('./services/encrypt')
+const { encrypt } = require('./services/encrypt')
 const con = mysql.createConnection({
     host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
     user: "admin",
@@ -29,7 +29,7 @@ con.connect(function(err) {
         throw err;
     console.log("Connected to Database");
     app.post("/studentList", urlencodedParser, function(req, res) {
-        con.query("SELECT * FROM student WHERE registration_phase='1'", function(err, result, fields) {
+        con.query("SELECT * FROM student WHERE registration_phase='4'", function(err, result, fields) {
             if (err)
                 throw err;
             var sendRes = "";
@@ -39,7 +39,7 @@ con.connect(function(err) {
                 sendRes += "<td>" + result[i].name.toUpperCase() + "</td>";
                 //sendRes += "<td>" + result[i].email + "</td>";
                 sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
-                sendRes += "<td>" + "result[i].thesis_title.toUpperCase()" + "</td>";
+                sendRes += "<td>" + result[i].thesis_title + "</td>";
                 sendRes += "<td><a href='studentDetails.html?stud_id=" + result[i].stud_id + "'>View Details</a></td>";
                 sendRes += "</tr>";
             }
@@ -65,17 +65,18 @@ con.connect(function(err) {
                 sendRes += "<br>Mobile No.: " + result[i].mobile_no;
                 //sendRes += "<td>" + result[i].email + "</td>";
                 sendRes += "<br>Address: " + result[i].perm_address.toUpperCase();
-                sendRes += "<br>Thesis title: " + "result[i].thesis_title.toUpperCase()";
+                sendRes += "<br>Thesis title: " + result[i].thesis_title;
                 sendRes += "<br>Proposed Theme: " + result[i].proposed_theme.toUpperCase();
             }
             var newHtml = htmlStudentDetails.replace("{%listContent%}", sendRes);
+            newHtml = newHtml.replace("{%student_value%}", id);
             res.send(newHtml);
         });
     });
 
-    app.get('/approve', function(req, res) {
-        var id = req.query.stud_id;
-        console.log(id);
+    app.post('/approve', urlencodedParser, function(req, res) {
+        var id = req.body.stud_id;
+        console.log(req.body);
         con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function(err, result, fields) {
             if (err)
                 throw err;
@@ -83,14 +84,17 @@ con.connect(function(err) {
             con.query(regUpdate, (err, result, fields) => {
                 if (err)
                     throw err;
-                res.send("Approved Successfully");
+                var enrAdd = `UPDATE student set enrollment_id = "${req.body.enroll_id}" where stud_id="${id}";`;
+                con.query(enrAdd, (err, results, field) => {
+                    res.send("<h1><a href='/studentList' method='post'>Approved Successfully</a><h1>");
+                });
             });
         });
     });
 
-    app.get('/reject', function(req, res) {
-        var id = req.query.stud_id;
-        console.log(id);
+    app.post('/reject', urlencodedParser, function(req, res) {
+        var id = req.body.stud_id;
+        console.log(req.body);
         con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function(err, result, fields) {
             if (err)
                 throw err;
@@ -98,7 +102,7 @@ con.connect(function(err) {
             con.query(regUpdate, (err, result, fields) => {
                 if (err)
                     throw err;
-                res.send("Application Rejected");
+                res.send("<h1><a href='/studentList' method='post'>Rejected Successfully</a><h1>");
             });
         });
     });

@@ -1,15 +1,20 @@
 <html>
+
 <head>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body style="background-color: darkseagreen;">
     <p>
         {%listContent%}
-    </p>   
-    <br> <br>     
-    <form id="approval-form">
+    </p>
+    <br> <br>
+    <form id="approval-form" method="post">
+        <input type="hidden" name="stud_id" value="{%student_value%}">
+        <input type="text" name="enroll_id" class="enroll-class" placeholder="Enter Enrollment Id">
         <input type="submit" name="Approve" value="Approve" class="btn-ipAccept" formaction="/approve">
         <input type="submit" name="Reject" value="Reject" class="btn-ipReject" formaction="/reject">
     </form>
 </body>
+
 </html>

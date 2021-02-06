@@ -16,7 +16,7 @@
 }
 
 table {
-    height:fit-content;
+    height: fit-content;
     background-color: darkseagreen;
 }
 
@@ -274,8 +274,17 @@ input {
     color: #fefefe;
 }
 
-.list{
+.list {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.enroll-class {
+    width: 30%;
+    height: 8%;
+    border-radius: 10px;
+    font-size: 1.5em;
+    margin: 3px;
+    border: none;
 }
