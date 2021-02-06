@@ -17,6 +17,13 @@ body {
 
 .intro {
     flex: 2;
+    flex-wrap: wrap;
+    margin-top: 1%;
+    font-size: 1.3em;
+    width: auto;
+    display: flex;
+    align-self: center;
+    justify-self: center;
 }
 
 .list {

@@ -8,6 +8,7 @@ const supervisorPage = (req, res) => {
     var qrys = "select prof_name from professor where prof_id = '" + sess.userid + "';";
     con.query(qrys, (err, ress, field) => {
         htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
+        htmlFile = htmlFile.replace("{%action%}", "supervisorApproval");
         var qry = "select * from student where supervisor_id = '" + sess.userid + "' and registration_phase = 1";
         con.query(qry, (err, results, fields) => {
             if (results.length == 0)

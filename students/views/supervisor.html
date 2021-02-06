@@ -14,8 +14,9 @@
 </head>
 
 <body>
-    <div class="intro">Hello, {%name%}. Here are the list of students.</div>
-    <form class="list" name="lists" action="/supervisorApproval" method="POST">
+    <div class="intro">Hello {%name%}. Here are the list of students.</div>
+    <!-- <form class="list" name="lists" action="/supervisorApproval" method="POST"> -->
+    <form class="list" name="lists" action="/{%action%}" method="POST">
         {%list%}
     </form>
 </body>

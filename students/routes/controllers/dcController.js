@@ -2,12 +2,12 @@ const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
 
-const prcPage = (req, res) => {
+const dcPage = (req, res) => {
     var htmlFile = fs.readFileSync("views/supervisor.html", "utf-8");
     var sess = req.session;
     htmlFile = htmlFile.replace("{%name%}", sess.userid);
-    htmlFile = htmlFile.replace("{%action%}", "prcApproval");
-    var qry = "select * from student s left join prc p on s.dept_id = p.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
+    htmlFile = htmlFile.replace("{%action%}", "dcApproval");
+    var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and registration_phase = 3";
     con.query(qry, (err, results, fields) => {
         if (results.length == 0)
             htmlFile = htmlFile.replace("{%list%}", "No Approval List");
@@ -30,7 +30,7 @@ const prcPage = (req, res) => {
         res.send(htmlFile);
     });
 };
-const prcApprovalController = (req, res) => {
+const dcApprovalController = (req, res) => {
     var str = Object.keys(req.body)[0];
     var n = str.indexOf("_");
     var stud_id = str.substring(0, n);
@@ -45,7 +45,7 @@ const prcApprovalController = (req, res) => {
         qry = "UPDATE student SET registration_phase = 0 WHERE stud_id = '" + stud_id + "';";
         status_id = "Successfully Discared";
     } else {
-        qry = "UPDATE student SET registration_phase = 3 WHERE stud_id = '" + stud_id + "';";
+        qry = "UPDATE student SET registration_phase = 4 WHERE stud_id = '" + stud_id + "';";
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
@@ -53,6 +53,6 @@ const prcApprovalController = (req, res) => {
     });
 };
 module.exports = {
-    prcPage,
-    prcApprovalController
+    dcPage,
+    dcApprovalController
 }
