@@ -6,6 +6,7 @@ const { applicationFormPage, applicationFormSubmit } = require('./controllers/ap
 const { studentPage } = require('./controllers/studentController');
 const { supervisorPage } = require('./controllers/supervisorController');
 const { supervisorApprovalController } = require('./controllers/supervisorApprovalController');
+const { prcPage } = require('./controllers/prcController');
 const getFaculties = require('./apis/getFaculties.js');
 const getDepartments = require('./apis/getDepartments.js');
 const getProfessors = require('./apis/getProfessors.js');
@@ -22,7 +23,7 @@ router.post("/applicationFormSubmit", applicationFormSubmit);
 router.get("/studentPage", studentPage);
 router.get("/supervisorPage", supervisorPage);
 router.post("/supervisorApproval", supervisorApprovalController);
-
+router.get("/prcPage", prcPage);
 router.get("/api/faculties", getFaculties);
 router.get("/api/departments", getDepartments);
 router.get("/api/professors", getProfessors);

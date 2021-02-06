@@ -58,7 +58,11 @@ const login = (req, res) => {
                 } else if (log === 'DC') {
                     res.send('Doctorate Committie ' + result.name);
                 } else {
-                    res.send('Hello PRC ' + result.name);
+                    var prc_id = result[0].id;
+                    var sess = req.session;
+                    sess.email = usr;
+                    sess.userid = stud_id;
+                    res.redirect('/prcPage');
                 }
             }
         });
