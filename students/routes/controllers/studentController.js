@@ -12,6 +12,7 @@ const studentPage = (req, res) => {
             try {
                 var studentName = results[0].name;
                 var studentPhase = results[0].registration_phase;
+
                 if (studentPhase == 0) {
                     var htmlNewFile = studentFile.replace("{%StudentName%}", studentName);
                     var htmlNewFile = htmlNewFile.replace("{%studentMessage%}", "your Application Gets Rejected.");
