@@ -21,9 +21,8 @@
       <form action="addRAC" method="POST">
         <h1>Register RAC</h1>
         <p>Please fill in this form to create an account.</p>
-        <div class="error"><h6>{%error%}</h6></div>
+      <div id="error" class="error"><h6></h6></div>
         <hr>
-
         <label for="email"><b>Email</b></label>
         <input type="email" placeholder="Enter Email" name="email" id="email" required>
 
@@ -35,10 +34,26 @@
     
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="repeat_psw" id="psw-repeat" required>
+
+        <script>
+          var password = document.getElementById('psw');
+          var confirm_password = document.getElementById('psw-repeat');
+          console.log(password);
+          function validatePassword() {
+            if ((confirm_password.value!='') && (password.value != confirm_password.value)) {
+              document.getElementById('error').innerHTML='Passwords Don\'t Match';
+            } 
+            else {
+              document.getElementById('error').innerHTML='';
+            }
+          }
+          password.onchange = validatePassword;
+          confirm_password.onkeyup = validatePassword;
+        </script>
         <hr>
-        <button type="submit" class="registerbtn">Register</button>
-        </form>
-      </div>
+        <button type="submit" class="registerbtn" onclick="validatePassword">Register</button>
+      </form>
     </div>
+  </div>
 </body>
 </html>

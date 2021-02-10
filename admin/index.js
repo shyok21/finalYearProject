@@ -23,6 +23,12 @@ var port = 8020;
 var htmlFile = fs.readFileSync("./index.html", "utf-8");
 var html = fs.readFileSync("./studentList.html", "utf-8");
 var htmlStudentDetails = fs.readFileSync("./studentDetails.html", "utf-8");
+var addAccountFile = fs.readFileSync("./admin_add.html", "utf-8");
+var supFile = fs.readFileSync("./add_supervisor.html", "utf-8");
+var racFile = fs.readFileSync("./add_rac.html", "utf-8");
+var prcFile = fs.readFileSync("./add_prc.html", "utf-8");
+var dcFile = fs.readFileSync("./add_dc.html", "utf-8");
+var successFile = fs.readFileSync("./successPage.html", "utf-8");
 
 con.connect(function(err) {
     if (err)
@@ -86,7 +92,8 @@ con.connect(function(err) {
                     throw err;
                 var enrAdd = `UPDATE student set enrollment_id = "${req.body.enroll_id}" where stud_id="${id}";`;
                 con.query(enrAdd, (err, results, field) => {
-                    res.send("<h1><a href='/studentList' method='post'>Approved Successfully</a><h1>");
+                    //res.send("<h1><a href='/studentList' method='post'>Approved Successfully</a><h1>");
+                    res.send(racFile);
                 });
             });
         });
@@ -110,14 +117,7 @@ con.connect(function(err) {
     app.get('/', function(req, res) {
         res.send(htmlFile);
     });
-    var addAccountFile = fs.readFileSync("./admin_add.html", "utf-8");
-    var supFile = fs.readFileSync("./add_supervisor.html", "utf-8");
-    var racFile = fs.readFileSync("./add_rac.html", "utf-8");
-    var prcFile = fs.readFileSync("./add_prc.html", "utf-8");
-    var dcFile = fs.readFileSync("./add_dc.html", "utf-8");
-    var successFile = fs.readFileSync("./successPage.html", "utf-8");
-
-
+    
     var transporter = nodemailer.createTransport({
         service: 'gmail',
 
@@ -240,12 +240,14 @@ con.connect(function(err) {
                             sendEmail(email, id, psw, "RAC");
                             res.send(successFile);
                         });
-                    } else {
+                    } 
+                    else {
                         var racFileEmail = racFile.replace("{%error%}", "Password and Repeat Password does not match");
                         res.send(racFileEmail);
                     }
                 });
-            } else {
+            } 
+            else {
                 var racFileEmail = racFile.replace("{%error%}", "Email Already Registered")
                 res.send(racFileEmail);
             }
@@ -283,12 +285,14 @@ con.connect(function(err) {
                             sendEmail(email, id, psw, "PRC");
                             res.send(successFile);
                         });
-                    } else {
+                    } 
+                    else {
                         var prcFileEmail = prcFile.replace("{%error%}", "Password and Repeat Password does not match");
                         res.send(prcFileEmail);
                     }
                 });
-            } else {
+            } 
+            else {
                 var prcFileEmail = prcFile.replace("{%error%}", "Email Already Registered")
                 res.send(prcFileEmail);
             }
@@ -326,12 +330,14 @@ con.connect(function(err) {
                             sendEmail(email, id, psw, "Doctorate Committe");
                             res.send(successFile);
                         });
-                    } else {
+                    } 
+                    else {
                         var dcFileEmail = dcFile.replace("{%error%}", "Password and Repeat Password does not match");
                         res.send(dcFileEmail);
                     }
                 });
-            } else {
+            } 
+            else {
                 var dcFileEmail = dcFile.replace("{%error%}", "Email Already Registered")
                 res.send(dcFileEmail);
             }
