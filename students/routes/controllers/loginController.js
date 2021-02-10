@@ -2,13 +2,14 @@ const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
 const { compare } = require('./../../services/encrypt.js');
+const createPDF = require('./../../services/createPDF');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
+
 
 // Renders the homepage from where user can log in
 const homePage = (req, res) => {
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
-    res.send(htmlFileSend);
-    // res.render('applicationForm', {email: 'xyz@gmail.com'});
+    res.send(htmlFileSend);    
 }
 
 // Handles the event when user logs in
@@ -27,9 +28,9 @@ const login = (req, res) => {
         var psw = req.body.password;
         var qry = util.format("select * from login where email='%s' and type='%s'", usr, log);
         con.query(qry, (err, result, fields) => {
-            if (err) throw err;
-            console.log(result[0].password);
-            console.log(psw);
+            if (err) {
+                throw err;
+            }
             if (result.length == 0 || !compare(psw, result[0].password)) {
                 var htmlNewFile = htmlFile.replace("{%Login Error%}", "&#9746; Invalid Username or Password!");
                 var htmlNewFile = htmlNewFile.replace("{%error-type%}", "login-cross");

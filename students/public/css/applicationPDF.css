@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Slab', serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    padding: 2%;
+}
+
+li {
+    padding-top: 1%;
+}
+
+.header-row {
+    background-color: #9fa6a1;
+}
+
+.table-row {
+    background-color: #bdc7c0;
+}
+
+table {
+    font-size: 0.8em;
+}
+
+span {
+    color: blue;
+}
+
+.topDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.declaration {
+    flex: 3;
+}
+
+.student_photo {
+    width: 70px;
+    height: 100px;
+}

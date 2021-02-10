@@ -15,8 +15,12 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "html-pdf": "^2.2.0",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.17",
+    "pdf-creator-node": "^1.4.2",
+    "phantomjs-prebuilt": "^2.1.16",
     "random": "^2.2.0",
     "randomstring": "^1.1.5"
   },
