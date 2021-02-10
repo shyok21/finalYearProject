@@ -2,23 +2,131 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../public/css/dbshow.css">
+    <link rel="stylesheet" href="css/dbshow.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="#" class="active">Students</a>
-        <a href="#">Supervisors</a>
-        <a href="#">RAC</a>
-        <a href="#">PRC</a>
-        <a href="#">Doctorate Committe</a>
-    </div>
-    <div class="display">
+    <form class="form-class" action="/searchDB" method="POST">
+        <div class="form-fac">
+            <select name="faculty" id="fac" onclick="myfunc()">
+                <option value="">Faculty</option>
+                <option value="arts">Faculty of Arts</option>
+                <option value="engg">Faculty of Engineering & Technology</option>
+                <option value="science">Faculty of Science</option>
+            </select>
+        </div>
+        <div class="form-dep">
+            <select name="department" id="dep">
+                <option value="">Department</option>
+            </select>
+        </div>
+        <div class="form-sub">
+            <input type="submit" name="submit" value="Search!">
+        </div>
+    </form>
+    <div class="display-class">
+        <div class="det2">
+            <div class="dets">Enrollment ID</div>
+            <div class="dets">Name</div>
+            <div class="dets">Supervisor Name</div>
 
+            <div class="dets">Department</div>
+        </div>
+        <!-- <div class="det1">
+            <div class="dets">001710501027</div>
+            <div class="dets">Abhishek De</div>
+            <div class="dets">Chintal Kumar Mondal</div>
+            <div class="dets">Mahantapas Kundu</div>
+        </div>
+        <div class="det1"></div>
+        <div class="det1"></div>
+        <div class="det1"></div> -->
+        {%studentlist%}
     </div>
 </body>
+<script>
+    const getval = (x) => {
+        if (x < 10)
+            return "0" + x;
+        return "" + x;
+    }
+    var arts = [
+        'Bengali',
+        'Comparative Literature',
+        'Economics',
+        'Education',
+        'English',
+        'Film Studies',
+        'History',
+        'International Relations',
+        'Library & Information Science',
+        'Philosophy',
+        'Physical Education',
+        'Sanskrit',
+        'Sociology',
+    ];
+    var engg = [
+        'Architecture',
+        'Chemical Engineering',
+        'Civil Engineering',
+        'Computer Science & Engineering',
+        'Construction Engineering',
+        'Electrical Engineering',
+        'Electronics & Telecommunication Engineering',
+        'Food Technology & Bio-Chemical Engineering',
+        'Information Technology',
+        'Instrumentation & Electronics Engineering',
+        'Mechanical Engineering',
+        'Metallurgical & Material Engineering',
+        'Pharmaceutical Technology',
+        'Power Engineering',
+        'Printing Engineering',
+        'Production Engineering'
+    ];
+    var scie = [
+        'Chemistry',
+        'Geography',
+        'Geological sciences',
+        'Instrumentation Science',
+        'Life science & Bio-technology',
+        'Mathematics',
+        'Physics',
+    ];
+    const myfunc = () => {
+        var faculty = document.getElementById("fac").value;
+
+        var department = document.getElementById("dep");
+        department.innerHTML = "";
+        var orop = document.createElement("option");
+        orop.setAttribute("value", "");
+        orop.innerHTML = "Department";
+        department.appendChild(orop);
+        if (faculty == 'arts') {
+            for (var i = 0; i < arts.length; i++) {
+                var opt = document.createElement("option");
+                opt.setAttribute("value", "ARTS" + getval(i + 1));
+                opt.innerHTML = arts[i];
+                department.appendChild(opt);
+            }
+        } else if (faculty == "engg") {
+            for (var i = 0; i < engg.length; i++) {
+                var opt = document.createElement("option");
+                opt.setAttribute("value", "ENGG" + getval(i + 1));
+                opt.innerHTML = engg[i];
+                department.appendChild(opt);
+            }
+        } else if (faculty == "science") {
+            for (var i = 0; i < scie.length; i++) {
+                var opt = document.createElement("option");
+                opt.setAttribute("value", "SCIENCE" + getval(i + 1));
+                opt.innerHTML = scie[i];
+                department.appendChild(opt);
+            }
+        }
+    }
+</script>
 
 </html>

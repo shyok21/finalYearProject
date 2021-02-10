@@ -9,6 +9,13 @@ const supervisorPage = (req, res) => {
     con.query(qrys, (err, ress, field) => {
         htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
         htmlFile = htmlFile.replace("{%action%}", "supervisorApproval");
+        if (sess.special == 'Y') {
+            htmlFile += "<form class='special' action='/specialDB' method='post'>";
+            htmlFile += "<b>Note:</b>You have the Special Access. Check status of all students."
+            htmlFile += `<input type='hidden' name='check' value='Y'>`;
+            htmlFile += `<input type='submit' value='Check!'>`;
+            htmlFile += `</form>`;
+        }
         var qry = "select * from student where supervisor_id = '" + sess.userid + "' and registration_phase = 1";
         con.query(qry, (err, results, fields) => {
             if (results.length == 0)
@@ -21,8 +28,9 @@ const supervisorPage = (req, res) => {
                     var listString = listString + "<div class='det1'>" + results[i].nationality + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].dob + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].sex + "</div>";
-                    var listString = listString + "<div class='det1'>" + results[i].category + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
+                    // var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
+                    var listString = listString + `<div class="det1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
                     //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
                     var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
 

@@ -80,3 +80,12 @@ body {
 .hide {
     flex: 0;
 }
+
+input {
+    height: 70%;
+    width: 10%;
+}
+
+.special {
+    flex: 1.3;
+}

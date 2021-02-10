@@ -9,7 +9,7 @@ var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 // Renders the homepage from where user can log in
 const homePage = (req, res) => {
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
-    res.send(htmlFileSend);    
+    res.send(htmlFileSend);
 }
 
 // Handles the event when user logs in
@@ -53,6 +53,7 @@ const login = (req, res) => {
                     var sess = req.session;
                     sess.email = usr;
                     sess.userid = sup_id;
+                    sess.special = result[0].special_user;
                     res.redirect('/supervisorPage');
                 } else if (log === 'RAC') {
                     res.send("Hello RAC " + result.name);
