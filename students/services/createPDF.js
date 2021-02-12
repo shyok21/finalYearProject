@@ -1,30 +1,33 @@
 var pdf = require("html-pdf");
 let ejs = require("ejs");
 
-const createPDF = (html, data, path) => {
+const createPDF = (html, data, path, callback) => {
     
     ejs.renderFile(html, { data }, (err, data) => {
         if (err) {
             console.log(err); 
         } else {
             let options = {
-                "format": "A4",
+                "format": "A3",
                 "orientation": "portrait",
-                "header": {
-                    "height": "20mm"
+                "border": {
+                    "top": "0.5in",
+                    "right": "0.5in",
+                    "bottom": "0.5in",
+                    "left": "0.5in"
                 },
-                "footer": {
-                    "height": "20mm",
-                },
-                base: 'file://' + __dirname + './../uploads/student_photo/'
+                base: 'file://' + __dirname + './../'
             };
 
             pdf.create(data, options).toFile(path, function (err, data) {
-                if (err) {
-                    console.log(err); 
+                if (err) { 
+                    if (typeof callback == "function") 
+                        callback(err, path); 
                 } else {
                     console.log("PDF created successfully");
                     console.log(data);
+                    if (typeof callback == "function") 
+                        callback(null, path); 
                 }
             });
         }

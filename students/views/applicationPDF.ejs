@@ -8,52 +8,53 @@
     </head>
     <body>
         <div class="main">
+            <div class="student_photo">
+                <img src="<%=data.photoPath%>">
+            </div>
             <div class="registration-form">
-                    <img src="<%=data.stud_id%>" class="student_photo">
-                    <p >I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
-                        PHILOSOPHY IN 
-                        <span>
-                            <%=data.fac_name%>
-                        </span>
-                        OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF 
-                        <span>
-                            <%=data.dep_name%>
-                        </span>
-                        AND SUBMIT BELOW THE REQUISITE DETAILS, IF ACCEPTED I SHALL ABIDE 
-                        BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
-                    </p>
-                    
-                    <br>
-                    <ol>
+                <p>I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
+                    PHILOSOPHY IN 
+                    <span>
+                        <%=data.fac_name || 'NIL'%>
+                    </span>
+                    OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF 
+                    <span>
+                        <%=data.dep_name || 'NIL'%>
+                    </span>
+                    AND SUBMIT BELOW THE REQUISITE DETAILS, IF ACCEPTED I SHALL ABIDE 
+                    BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
+                </p>
+                <br><br>
+                <ol>
                     <li>
-                        NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE): <span><%=data.student_name%></span> 
+                        NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE): <span><%=data.student_name || 'NIL'%></span> 
                     </li>
                     <li>
-                        DATE OF BIRTH: <span><%=data.dob%></span><br>
-                        SEX: <span><%=data.sex%></span><br>
-                        MARITAL STATUS: <span><%=data.marital_status%></span>
+                        DATE OF BIRTH: <span><%=data.dob || 'NIL'%></span><br>
+                        SEX: <span><%=data.sex || 'NIL'%></span><br>
+                        MARITAL STATUS: <span><%=data.marital_status || 'NIL'%></span>
                     </li>
                     <li>
-                        FATHER'S NAME/MOTHER'S NAME: <span><%=data.parent_name%></span>
+                        FATHER'S NAME/MOTHER'S NAME: <span><%=data.parent_name || 'NIL'%></span>
                     </li>
                     <li>
-                        CATEGORY: <span><%=data.category%></span>
+                        CATEGORY: <span><%=data.category || 'NIL'%></span>
                     </li>
                     <li>
-                        NATIONALITY: <span><%=data.nationality%></span>
+                        NATIONALITY: <span><%=data.nationality || 'NIL'%></span>
                     </li>
                     <li>
                         PERMANENT ADDRESS:<br>
-                        <span><%=data.address1%></span>
+                        <span><%=data.address1 || 'NIL'%></span>
                     </li>
                     <li>
                         ADDRESS FOR COMMUNICATION:<br>
-                        <span><%=data.address2%></span> <br>
-                        MOBILE NUMBER: <span><%=data.mobile_no%></span><br>
-                        PHONE NUMBER: <span><%=data.phone_no%></span><br>
-                        EMAIL: <span><%=data.student_email%></span>
+                        <span><%=data.address2 || 'NIL'%></span> <br>
+                        MOBILE NUMBER: <span><%=data.mobile_no || 'NIL'%></span><br>
+                        PHONE NUMBER: <span><%=data.phone_no || 'NIL'%></span><br>
+                        EMAIL: <span><%=data.student_email || 'NIL'%></span>
                     </li>
-                    
+                    <br><br>
                     <li>
                         <p>PARTICULARS OF ACADEMIC CAREER</p>
                         <table>
@@ -69,88 +70,92 @@
                             
                             <tr class="table-row">
                                 <td><label>Madhyamik or Equivalent</label></td>
-                                <td><%=data.acad00%></td>
-                                <td><%=data.acad01%></td>
-                                <td><%=data.acad02%></td>
-                                <td><%=data.acad03%></td>
-                                <td><%=data.acad04%></td>
-                                <td><%=data.acad05%></td>
+                                <td><span><%=data.acad00%></span></td>
+                                <td><span><%=data.acad01%></span></td>
+                                <td><span><%=data.acad02%></span></td>
+                                <td><span><%=data.acad03%></span></td>
+                                <td><span><%=data.acad04%></span></td>
+                                <td><span><%=data.acad05%></span></td>
                             </tr>
                             
                             <tr class="table-row">
                                 <td><label>Higher secondary or Equivalent</label></td>
-                                <td><%=data.acad10%></td>
-                                <td><%=data.acad11%></td>
-                                <td><%=data.acad12%></td>
-                                <td><%=data.acad13%></td>
-                                <td><%=data.acad14%></td>
-                                <td><%=data.acad15%></td>
+                                <td><span><%=data.acad10%></span></td>
+                                <td><span><%=data.acad11%></span></td>
+                                <td><span><%=data.acad12%></span></td>
+                                <td><span><%=data.acad13%></span></td>
+                                <td><span><%=data.acad14%></span></td>
+                                <td><span><%=data.acad15%></span></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>Bachelor degree</label></td>
-                                <td><%=data.acad20%></td>
-                                <td><%=data.acad21%></td>
-                                <td><%=data.acad22%></td>
-                                <td><%=data.acad23%></td>
-                                <td><%=data.acad24%></td>
-                                <td><%=data.acad25%></td>
+                                <td><span><%=data.acad20%></span></td>
+                                <td><span><%=data.acad21%></span></td>
+                                <td><span><%=data.acad22%></span></td>
+                                <td><span><%=data.acad23%></span></td>
+                                <td><span><%=data.acad24%></span></td>
+                                <td><span><%=data.acad25%></span></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>Master degree</label></td>
-                                <td><%=data.acad30%></td>
-                                <td><%=data.acad31%></td>
-                                <td><%=data.acad32%></td>
-                                <td><%=data.acad33%></td>
-                                <td><%=data.acad34%></td>
-                                <td><%=data.acad35%></td>
+                                <td><span><%=data.acad30%></span></td>
+                                <td><span><%=data.acad31%></span></td>
+                                <td><span><%=data.acad32%></span></td>
+                                <td><span><%=data.acad33%></span></td>
+                                <td><span><%=data.acad34%></span></td>
+                                <td><span><%=data.acad35%></span></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>Post master degree</label></td>
-                                <td><%=data.acad40%></td>
-                                <td><%=data.acad41%></td>
-                                <td><%=data.acad42%></td>
-                                <td><%=data.acad43%></td>
-                                <td><%=data.acad44%></td>
-                                <td><%=data.acad45%></td>
+                                <td><span><%=data.acad40%></span></td>
+                                <td><span><%=data.acad41%></span></td>
+                                <td><span><%=data.acad42%></span></td>
+                                <td><span><%=data.acad43%></span></td>
+                                <td><span><%=data.acad44%></span></td>
+                                <td><span><%=data.acad45%></span></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>M.Phil(Two year regular course)</label></td>
-                                <td><%=data.acad50%></td>
-                                <td><%=data.acad51%></td>
-                                <td><%=data.acad52%></td>
-                                <td><%=data.acad53%></td>
-                                <td><%=data.acad54%></td>
-                                <td><%=data.acad55%></td>
+                                <td><span><%=data.acad50%></span></td>
+                                <td><span><%=data.acad51%></span></td>
+                                <td><span><%=data.acad52%></span></td>
+                                <td><span><%=data.acad53%></span></td>
+                                <td><span><%=data.acad54%></span></td>
+                                <td><span><%=data.acad55%></span></td>
                             </tr>
                             
                         </table>
                     </li>
+                    <br><br>
                     <li>
-                        WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION: <span><%=data.qualified%></span>   
+                        WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION: <span><%=data.qualified || 'NIL'%></span>   
                     </li>
                     <li>
                         PRESENT EMPLOYMENT<br>
                         (A) NAME OF ORGANISATION:</br>
-                        <span><%=data.org_name%></span><br>
+                        <span><%=data.org_name || 'NIL'%></span><br>
                         (B) NATURE OF WORK:</br>
-                        <span><%=data.nature_of_work%></span>
+                        <span><%=data.nature_of_work || 'NIL'%></span>
                     </li>
                     <li>
                         PROPOSED RESEARCH WORK<br>
                         (A) PROPOSED AREA/THEME OF RESEARCH:</br>
-                        <span><%=data.title%></span><br>
+                        <span><%=data.title || 'NIL'%></span><br>
                         (B) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS:</br>
-                        <span><%=data.proposed_institute%></span>
+                        <span><%=data.proposed_institute || 'NIL'%></span>
                     </li>
                     <li>
                         NAME OF SUPERVISORS(RECOMMENDED BY PHD RESEARCH COMMITTEE)<br>
-                        (1)NAME: <span><%=data.supervisor_name%></span><br>
-                        DESIGNATION: <span><%=data.supervisor_designation%></span><br>
-                        (2)NAME: <span><%=data.co_supervisor_id%></span><br>
-                        DESIGNATION: <span><%=data.co_supervisor_designation%></span>
+                        (1)NAME: <span><%=data.supervisor_name || 'NIL'%></span><br>
+                        DESIGNATION: <span><%=data.supervisor_designation || 'NIL'%></span><br>
+                        (2)NAME: <span><%=data.co_supervisor_id || 'NIL'%></span><br>
+                        DESIGNATION: <span><%=data.co_supervisor_designation || 'NIL'%></span>
                     </li>
-                    </ol>
-            </form>
+                </ol>
+                <br><br>
+                <h4>Statement of Purpose, marksheets and qualifying certificate are attached below</h4>
+            </div>
+            
         </div>
     </body>
 </html>

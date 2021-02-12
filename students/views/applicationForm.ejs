@@ -143,7 +143,6 @@
                                 <th>Year of passing</th>
                                 <th>Total marks obtained</th>
                                 <th>%(Marks/CGPA)</th>
-                                <th>Upload marksheet/certificate</th>
                             </tr>
                             
                             <tr class="table-row">
@@ -154,7 +153,6 @@
                                 <td><input type="text" class="text-ip type-1" name="acad03" required></td>
                                 <td><input type="text" class="text-ip type-1" name="acad04" required></td>
                                 <td><input type="text" class="text-ip type-1" name="acad05" required></td>
-                                <td><input type="file" class="text-ip type-1"></td>
                             </tr>
                             
                             <tr class="table-row">
@@ -165,7 +163,6 @@
                                 <td><input type="text" class="text-ip type-1" name="acad13" required></td>
                                 <td><input type="text" class="text-ip type-1" name="acad14" required></td>
                                 <td><input type="text" class="text-ip type-1" name="acad15" required></td>
-                                <td><input type="file" class="text-ip type-1"></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>Bachelor degree</label></td>
@@ -175,7 +172,6 @@
                                 <td><input type="text" class="text-ip type-1" name="acad23" required></td>
                                 <td><input type="text" class="text-ip type-1" name="acad24" required></td>
                                 <td><input type="text" class="text-ip type-1" name="acad25" required></td>
-                                <td><input type="file" class="text-ip type-1"></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>Master degree</label></td>
@@ -185,7 +181,6 @@
                                 <td><input type="text" class="text-ip type-1" name="acad33"></td>
                                 <td><input type="text" class="text-ip type-1" name="acad34"></td>
                                 <td><input type="text" class="text-ip type-1" name="acad35"></td>
-                                <td><input type="file" class="text-ip type-1"></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>Post master degree</label></td>
@@ -195,7 +190,6 @@
                                 <td><input type="text" class="text-ip type-1" name="acad43"></td>
                                 <td><input type="text" class="text-ip type-1" name="acad44"></td>
                                 <td><input type="text" class="text-ip type-1" name="acad45"></td>
-                                <td><input type="file" class="text-ip type-1"></td>
                             </tr>
                             <tr class="table-row">
                                 <td><label>M.Phil(Two year regular course)</label></td>
@@ -205,10 +199,10 @@
                                 <td><input type="text" class="text-ip type-1" name="acad53"></td>
                                 <td><input type="text" class="text-ip type-1" name="acad54"></td>
                                 <td><input type="text" class="text-ip type-1" name="acad55"></td>
-                                <td><input type="file" class="text-ip type-1"></td>
-                            </tr>
-                            
+                            </tr>    
                         </table>
+                        <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES</label>
+                        <input type="file" name="marksheets" class="text-ip type-1" multiple>
                     </li>
                     <li>
                         <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION</label>
@@ -297,12 +291,12 @@
     async function nextPrev(n) {
         var x = document.getElementsByClassName("tab");
         if (n == 1 && !validateForm()) return false;
-        x[currentTab].style.display = "none";
-        currentTab = currentTab + n;
-        if (currentTab >= x.length) {
+        if (currentTab + n >= x.length) {
             await document.getElementById("registration-form").submit();
             return false;
         }
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
         showTab(currentTab);
     }
 

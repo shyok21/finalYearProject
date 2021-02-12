@@ -9,12 +9,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2%;
+    padding-left: 4%;
 }
 
 .registration-form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 95%;
     padding: 2%;
@@ -37,20 +38,13 @@ table {
 }
 
 span {
-    color: blue;
-}
-
-.topDiv {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.declaration {
-    flex: 3;
+    color: #417382;
 }
 
 .student_photo {
-    width: 70px;
-    height: 100px;
+    float: right
+}
+.student_photo img {
+    height: 140px;
+    width: 100px;
 }
