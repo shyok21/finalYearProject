@@ -82,11 +82,17 @@ con.connect(function(err) {
 
     app.post('/approve', urlencodedParser, function(req, res) {
         var id = req.body.stud_id;
+        var fees = req.body.fees_status;
+        var f_status;
+        if (fees === "Yes")
+            f_status = "Y";
+        else
+            f_status = "N";
         console.log(req.body);
         con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function(err, result, fields) {
             if (err)
                 throw err;
-            var regUpdate = `UPDATE student SET registration_phase='5' WHERE stud_id="${id}";`;
+            var regUpdate = `UPDATE student SET registration_phase='5',payment_received='${f_status}' WHERE stud_id="${id}";`;
             con.query(regUpdate, (err, result, fields) => {
                 if (err)
                     throw err;
@@ -117,7 +123,7 @@ con.connect(function(err) {
     app.get('/', function(req, res) {
         res.send(htmlFile);
     });
-    
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
 
@@ -240,14 +246,12 @@ con.connect(function(err) {
                             sendEmail(email, id, psw, "RAC");
                             res.send(successFile);
                         });
-                    } 
-                    else {
+                    } else {
                         var racFileEmail = racFile.replace("{%error%}", "Password and Repeat Password does not match");
                         res.send(racFileEmail);
                     }
                 });
-            } 
-            else {
+            } else {
                 var racFileEmail = racFile.replace("{%error%}", "Email Already Registered")
                 res.send(racFileEmail);
             }
@@ -285,14 +289,12 @@ con.connect(function(err) {
                             sendEmail(email, id, psw, "PRC");
                             res.send(successFile);
                         });
-                    } 
-                    else {
+                    } else {
                         var prcFileEmail = prcFile.replace("{%error%}", "Password and Repeat Password does not match");
                         res.send(prcFileEmail);
                     }
                 });
-            } 
-            else {
+            } else {
                 var prcFileEmail = prcFile.replace("{%error%}", "Email Already Registered")
                 res.send(prcFileEmail);
             }
@@ -330,14 +332,12 @@ con.connect(function(err) {
                             sendEmail(email, id, psw, "Doctorate Committe");
                             res.send(successFile);
                         });
-                    } 
-                    else {
+                    } else {
                         var dcFileEmail = dcFile.replace("{%error%}", "Password and Repeat Password does not match");
                         res.send(dcFileEmail);
                     }
                 });
-            } 
-            else {
+            } else {
                 var dcFileEmail = dcFile.replace("{%error%}", "Email Already Registered")
                 res.send(dcFileEmail);
             }

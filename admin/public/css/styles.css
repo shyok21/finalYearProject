@@ -288,3 +288,17 @@ input {
     margin: 3px;
     border: none;
 }
+
+#Fees_yes {
+    width: 20px;
+    height: 20px;
+}
+
+#Fees_no {
+    width: 20px;
+    height: 20px;
+}
+
+#approval-form>label {
+    font-size: 1.5em;
+}
