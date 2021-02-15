@@ -71,18 +71,16 @@ const assignRAC = (req, res) => {
 
 const racSubmit = (req, res) => {
     var racMembers = req.body.prof_name;
-    var stud_id = req.body.stud_id;
-    var prof_arr = racMembers.split(",");
-    var text = "";
-    for (var i = 0; i < prof_arr.length - 1; i++) {
-        // var qry = `INSERT INTO rac_members (rac_id, prof_id) VALUES (${stud_id}, ${racMembers[i]})`;
-        // con.query(qry, (err, results, field) => {
-        //     res.send("Successful");
-        // });
-        text += prof_arr[i] + "<br>";
+    var studentID = req.body.stud_id;
+    var profArray = racMembers.split(",");
+    //var successPage = "<a href='assignRAC.html?stud_id=" + studentID + "'>Successful</a>";
+    for (var i = 0; i < profArray.length - 1; i++) {
+        var qry = `INSERT INTO rac_members (rac_id, member_id) VALUES ('${studentID}', '${profArray[i]}')`;
+        con.query(qry, (err, results, field) => {
+            console.log(profArray[i]);
+        });
     }
-
-    res.send(prof_arr);
+    res.send("<h1><a href='/supervisorPage'>Assigned successfully</a><h1>");
 }
 
 module.exports = {

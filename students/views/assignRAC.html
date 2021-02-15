@@ -53,19 +53,28 @@
 
         function showCheckedBoxes() {
             console.log("hi");
-            document.getElementById("checkedBox").innerHTML = "Profs selected for RAC: " + getCheckedBoxes("checkboxes");
+            var checkedBoxes = getCheckedBoxes("checkboxes");
+            document.getElementById("checkedBox").innerHTML = "Profs selected for RAC: " + "<br>";
+            for(var i=0; i<checkedBoxes.length; i++) {
+                document.getElementById("checkedBox").innerHTML += checkedBoxes[i] + "<br>";    
+            }
             document.getElementById("prof_name").value = document.getElementById("prof_name").value + getProfID("checkboxes") + ",";
         }
     </script>
 </head>
 
 <body>
-    <div class="intro">Hello {%name%}.</div>
+    <div class="intro">
+        Hello {%name%}.
+        <br>Student ID: {%student_id%}
+    </div>
     <div class="container">
-        <div class="det3" style="margin-left: auto;">
+        <div class="det3" style="margin-left: 2px;">
             <form>
                 <div class="multiselect">
-                    Select professors as member of RAC for {%student_id%}:
+                    <br>
+                    Select professors for RAC:
+                    <br>
                     <div class="selectBox" onclick="showCheckboxes()">
                         <select id="checkboxList">
                             <option>Choose professors</option>
@@ -87,13 +96,10 @@
                 <input type="hidden" name="prof_name" id="prof_name" value="">
                 <input type="hidden" name="stud_id" value={%student_id%}>
 
-                <input type="submit" value="Approve" class="Approve" style="width: fit-content;">
+                <input type="submit" value="Approve" class="racApprove">
             </form>
         </div>
     </div>
-    <!-- <form class="list" name="lists" action="/supervisorApproval" method="POST"> 
-    <form class="list" name="lists" action="/{%action%}" method="POST">
-    </form>-->
 </body>
 
 </html>
