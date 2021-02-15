@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         var expanded = false;
+
         function showCheckboxes() {
             var checkboxes = document.getElementById("checkboxes");
             if (!expanded) {
@@ -29,7 +30,7 @@
                 if (checkboxes[i].type === 'checkbox' && checkboxes[i].checked) {
                     checkboxesChecked.push(checkboxes[i].name);
                 }
-            } 
+            }
             console.log(checkboxesChecked);
             // Return the array if it is non-empty, or null
             return checkboxesChecked.length > 0 ? checkboxesChecked : null;
@@ -44,7 +45,7 @@
                 if (checkboxes[i].type === 'checkbox' && checkboxes[i].checked) {
                     checkboxesChecked.push(checkboxes[i].id);
                 }
-            } 
+            }
             //console.log(checkboxesChecked);
             // Return the array if it is non-empty, or null
             return checkboxesChecked.length > 0 ? checkboxesChecked : null;
@@ -53,14 +54,8 @@
         function showCheckedBoxes() {
             console.log("hi");
             document.getElementById("checkedBox").innerHTML = "Profs selected for RAC: " + getCheckedBoxes("checkboxes");
+            document.getElementById("prof_name").value = document.getElementById("prof_name").value + getProfID("checkboxes") + ",";
         }
-
-        function myFunction() {
-            var racProf = getProfID("checkboxes");
-            document.getElementsByName("racProf").value = racProf;
-            console.log(document.getElementsByName("racProf").value);
-        }
-
     </script>
 </head>
 
@@ -86,11 +81,13 @@
         <div class="det3" style="margin-top: 25px;">
             <br>
             <button type="button" id="checkedList" onclick='showCheckedBoxes()'>Selected Profs</button>
-            <form action="/racSubmit" style="align-items: center;" onsubmit="myFunction()" method="POST">
+            <form action="/racSubmit" style="align-items: center;" method="POST">
                 <p name="racmembers" id="checkedBox"></p>
-                <input type="submit" value="Approve" class="Approve" style="width: fit-content;">
-                <input type="hidden" name="racProf">
+
+                <input type="hidden" name="prof_name" id="prof_name" value="">
                 <input type="hidden" name="stud_id" value={%student_id%}>
+
+                <input type="submit" value="Approve" class="Approve" style="width: fit-content;">
             </form>
         </div>
     </div>

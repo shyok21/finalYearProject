@@ -51,15 +51,16 @@ const assignRAC = (req, res) => {
     con.query(qrys, (err, ress, field) => {
         htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
         htmlFile = htmlFile.replace("{%student_id%}", studentID);
+        htmlFile = htmlFile.replace("{%student_id%}", studentID);
         var deptqry = `SELECT dept_id FROM student WHERE stud_id='${studentID}'`;
         con.query(deptqry, (err, result, field) => {
             var qry = `SELECT * FROM professor WHERE prof_dept='${result[0].dept_id}'`;
             con.query(qry, (err, results, field) => {
                 var listString = "";
                 console.log(results.length);
-                for(var i=0; i<results.length; i++) {
+                for (var i = 0; i < results.length; i++) {
                     listString += "<label for='" + i + "'>";
-                    listString += "<input type='checkbox' id='" + results[i].prof_id +"' name='" + results[i].prof_name +"'/>" + results[i].prof_name + "</label>";
+                    listString += "<input type='checkbox' id='" + results[i].prof_id + "' name='" + results[i].prof_name + "'/>" + results[i].prof_name + "</label>";
                 }
                 htmlFile = htmlFile.replace("{%list%}", listString);
                 res.send(htmlFile);
@@ -69,14 +70,19 @@ const assignRAC = (req, res) => {
 }
 
 const racSubmit = (req, res) => {
-    var racMembers = req.body.racProf;
+    var racMembers = req.body.prof_name;
     var stud_id = req.body.stud_id;
-    for(var i=0; i<racMembers.length; i++) {
-        var qry = `INSERT INTO rac_members (rac_id, prof_id) VALUES (${stud_id}, ${racMembers[i]})`;
-        con.query(qry, (err, results, field) => {
-            res.send("Successful");
-        });
+    var prof_arr = racMembers.split(",");
+    var text = "";
+    for (var i = 0; i < prof_arr.length - 1; i++) {
+        // var qry = `INSERT INTO rac_members (rac_id, prof_id) VALUES (${stud_id}, ${racMembers[i]})`;
+        // con.query(qry, (err, results, field) => {
+        //     res.send("Successful");
+        // });
+        text += prof_arr[i] + "<br>";
     }
+
+    res.send(prof_arr);
 }
 
 module.exports = {
