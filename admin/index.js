@@ -10,32 +10,35 @@ var location = require('location-href');
 const url = require('url');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const { encrypt } = require('./services/encrypt')
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
+
 const con = mysql.createConnection({
     host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
     user: "admin",
     password: "A987yuBU",
-    database: "phd_management",
-    multipleStatements: true
+	database: "phd_management"
 });
-app.use(express.static(__dirname + '/public'));
+
 var port = 8020;
 
-var htmlFile = fs.readFileSync("./index.html", "utf-8");
-var html = fs.readFileSync("./studentList.html", "utf-8");
-var htmlStudentDetails = fs.readFileSync("./studentDetails.html", "utf-8");
-var addAccountFile = fs.readFileSync("./admin_add.html", "utf-8");
-var supFile = fs.readFileSync("./add_supervisor.html", "utf-8");
-var racFile = fs.readFileSync("./add_rac.html", "utf-8");
-var prcFile = fs.readFileSync("./add_prc.html", "utf-8");
-var dcFile = fs.readFileSync("./add_dc.html", "utf-8");
-var successFile = fs.readFileSync("./successPage.html", "utf-8");
+var htmlFile = fs.readFileSync("views/index.html", "utf-8");
+var html = fs.readFileSync("views/studentList.html", "utf-8");
+var htmlStudentDetails = fs.readFileSync("views/studentDetails.html", "utf-8");
+var addAccountFile = fs.readFileSync("views/admin_add.html", "utf-8");
+var supFile = fs.readFileSync("views/add_supervisor.html", "utf-8");
+var racFile = fs.readFileSync("views/add_rac.html", "utf-8");
+var prcFile = fs.readFileSync("views/add_prc.html", "utf-8");
+var dcFile = fs.readFileSync("views/add_dc.html", "utf-8");
+var successFile = fs.readFileSync("views/successPage.html", "utf-8");
 
 con.connect(function(err) {
     if (err)
         throw err;
     console.log("Connected to Database");
     app.post("/studentList", urlencodedParser, function(req, res) {
-        con.query("SELECT * FROM student WHERE registration_phase='4'", function(err, result, fields) {
+        var qry = "SELECT * FROM student WHERE registration_phase='4'";
+        con.query(qry, function(err, result, fields) {
             if (err)
                 throw err;
             var sendRes = "";
@@ -57,7 +60,8 @@ con.connect(function(err) {
     app.get("/studentDetails.html", function(req, res) {
         var id = req.query.stud_id;
         console.log(id);
-        con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function(err, result, fields) {
+        var qry = `SELECT * FROM student WHERE stud_id="${id}"`;
+        con.query(qry, function(err, result, fields) {
             if (err)
                 throw err;
             var sendRes = "";
@@ -89,7 +93,8 @@ con.connect(function(err) {
         else
             f_status = "N";
         console.log(req.body);
-        con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function(err, result, fields) {
+        var qry = `SELECT * FROM student WHERE stud_id="${id}"`;
+        con.query(qry, function(err, result, fields) {
             if (err)
                 throw err;
             var regUpdate = `UPDATE student SET registration_phase='5',payment_received='${f_status}' WHERE stud_id="${id}";`;
@@ -98,8 +103,8 @@ con.connect(function(err) {
                     throw err;
                 var enrAdd = `UPDATE student set enrollment_id = "${req.body.enroll_id}" where stud_id="${id}";`;
                 con.query(enrAdd, (err, results, field) => {
-                    //res.send("<h1><a href='/studentList' method='post'>Approved Successfully</a><h1>");
-                    res.send(racFile);
+                    res.send("<h1><a href='/studentList' method='post'>Approved Successfully</a><h1>");
+                    //res.send(racFile);
                 });
             });
         });
@@ -108,7 +113,8 @@ con.connect(function(err) {
     app.post('/reject', urlencodedParser, function(req, res) {
         var id = req.body.stud_id;
         console.log(req.body);
-        con.query(`SELECT * FROM student WHERE stud_id="${id}"`, function(err, result, fields) {
+        var qry = `SELECT * FROM student WHERE stud_id="${id}"`;
+        con.query(qry, function(err, result, fields) {
             if (err)
                 throw err;
             var regUpdate = `UPDATE student SET registration_phase='0' WHERE stud_id="${id}";`;

@@ -31,9 +31,9 @@ const supervisorPage = (req, res) => {
                     var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
                     // var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
                     var listString = listString + `<div class="det1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
+                    var listString = listString + `<div class="det1"><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></div>`;
                     //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
                     var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
-
                 }
                 htmlFile = htmlFile.replace("{%list%}", listString);
             }
@@ -42,6 +42,45 @@ const supervisorPage = (req, res) => {
     });
 
 };
+
+const assignRAC = (req, res) => {
+    var htmlFile = fs.readFileSync("views/assignRAC.html", "utf-8");
+    var sess = req.session;
+    var studentID = req.query.stud_id;
+    var qrys = "select prof_name from professor where prof_id = '" + sess.userid + "';";
+    con.query(qrys, (err, ress, field) => {
+        htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
+        htmlFile = htmlFile.replace("{%student_id%}", studentID);
+        var deptqry = `SELECT dept_id FROM student WHERE stud_id='${studentID}'`;
+        con.query(deptqry, (err, result, field) => {
+            var qry = `SELECT * FROM professor WHERE prof_dept='${result[0].dept_id}'`;
+            con.query(qry, (err, results, field) => {
+                var listString = "";
+                console.log(results.length);
+                for(var i=0; i<results.length; i++) {
+                    listString += "<label for='" + i + "'>";
+                    listString += "<input type='checkbox' id='" + results[i].prof_id +"' name='" + results[i].prof_name +"'/>" + results[i].prof_name + "</label>";
+                }
+                htmlFile = htmlFile.replace("{%list%}", listString);
+                res.send(htmlFile);
+            });
+        });
+    });
+}
+
+const racSubmit = (req, res) => {
+    var racMembers = req.body.racProf;
+    var stud_id = req.body.stud_id;
+    for(var i=0; i<racMembers.length; i++) {
+        var qry = `INSERT INTO rac_members (rac_id, prof_id) VALUES (${stud_id}, ${racMembers[i]})`;
+        con.query(qry, (err, results, field) => {
+            res.send("Successful");
+        });
+    }
+}
+
 module.exports = {
-    supervisorPage
+    supervisorPage,
+    assignRAC,
+    racSubmit
 }

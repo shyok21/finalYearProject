@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/supervisor.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var expanded = false;
+        function showCheckboxes() {
+            var checkboxes = document.getElementById("checkboxes");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
+        }
+
+        // Pass the checkbox name to the function
+        function getCheckedBoxes(chkboxName) {
+            var div = document.getElementById(chkboxName);
+            var checkboxes = div.getElementsByTagName('input');
+            var len = checkboxes.length;
+            let checkboxesChecked = [];
+            for (var i = 0; i < len; i++) {
+                if (checkboxes[i].type === 'checkbox' && checkboxes[i].checked) {
+                    checkboxesChecked.push(checkboxes[i].name);
+                }
+            } 
+            console.log(checkboxesChecked);
+            // Return the array if it is non-empty, or null
+            return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+        }
+
+        function getProfID(chkboxName) {
+            var div = document.getElementById(chkboxName);
+            var checkboxes = div.getElementsByTagName('input');
+            var len = checkboxes.length;
+            let checkboxesChecked = [];
+            for (var i = 0; i < len; i++) {
+                if (checkboxes[i].type === 'checkbox' && checkboxes[i].checked) {
+                    checkboxesChecked.push(checkboxes[i].id);
+                }
+            } 
+            //console.log(checkboxesChecked);
+            // Return the array if it is non-empty, or null
+            return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+        }
+
+        function showCheckedBoxes() {
+            console.log("hi");
+            document.getElementById("checkedBox").innerHTML = "Profs selected for RAC: " + getCheckedBoxes("checkboxes");
+        }
+
+        function myFunction() {
+            var racProf = getProfID("checkboxes");
+            document.getElementsByName("racProf").value = racProf;
+            console.log(document.getElementsByName("racProf").value);
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="intro">Hello {%name%}.</div>
+    <div class="container">
+        <div class="det3" style="margin-left: auto;">
+            <form>
+                <div class="multiselect">
+                    Select professors as member of RAC for {%student_id%}:
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select id="checkboxList">
+                            <option>Choose professors</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                        {%list%}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="det3" style="margin-top: 25px;">
+            <br>
+            <button type="button" id="checkedList" onclick='showCheckedBoxes()'>Selected Profs</button>
+            <form action="/racSubmit" style="align-items: center;" onsubmit="myFunction()" method="POST">
+                <p name="racmembers" id="checkedBox"></p>
+                <input type="submit" value="Approve" class="Approve" style="width: fit-content;">
+                <input type="hidden" name="racProf">
+                <input type="hidden" name="stud_id" value={%student_id%}>
+            </form>
+        </div>
+    </div>
+    <!-- <form class="list" name="lists" action="/supervisorApproval" method="POST"> 
+    <form class="list" name="lists" action="/{%action%}" method="POST">
+    </form>-->
+</body>
+
+</html>

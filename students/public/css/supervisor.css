@@ -15,6 +15,36 @@ body {
     background-color: #fefefe;
 }
 
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+    font-size: small;
+}
+  
+#checkboxes label {
+    display: block;
+}
+  
+#checkboxes label:hover {
+    background-color: #1e90ff;
+}
+
+#checkedBox {
+    font-size: medium;
+}
+
+#checkedList {
+    width: 120px;
+    height: 30px;
+    background-color: lightgray;
+    font-size: medium;
+}
+
+#checkboxList {
+    overflow-y :scroll; 
+    position:absolute;
+}
+
 .intro {
     flex: 2;
     flex-wrap: wrap;
@@ -24,6 +54,7 @@ body {
     display: flex;
     align-self: center;
     justify-self: center;
+    height: 50px;
 }
 
 .list {
@@ -46,6 +77,11 @@ body {
 .approve {
     color: lightgreen;
     background-color: green;
+}
+
+.container {
+    width: 100%;
+    margin:auto;
 }
 
 .det1 {
@@ -72,6 +108,12 @@ body {
     margin: 2px;
 }
 
+.det3 {
+    height: 40%;
+    width: 50%;
+    float:left;
+}
+
 .discard {
     color: lightcoral;
     background-color: darkred;
@@ -86,6 +128,29 @@ input {
     width: 10%;
 }
 
+.multiselect {
+    width: 250px;
+    height: 40px;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+  
+.selectBox {
+    position: relative;
+}
+  
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
 .special {
     flex: 1.3;
 }
+  
