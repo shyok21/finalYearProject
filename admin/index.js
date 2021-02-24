@@ -27,7 +27,6 @@ var html = fs.readFileSync("views/studentList.html", "utf-8");
 var htmlStudentDetails = fs.readFileSync("views/studentDetails.html", "utf-8");
 var addAccountFile = fs.readFileSync("views/admin_add.html", "utf-8");
 var supFile = fs.readFileSync("views/add_supervisor.html", "utf-8");
-var racFile = fs.readFileSync("views/add_rac.html", "utf-8");
 var prcFile = fs.readFileSync("views/add_prc.html", "utf-8");
 var dcFile = fs.readFileSync("views/add_dc.html", "utf-8");
 var successFile = fs.readFileSync("views/successPage.html", "utf-8");
@@ -166,10 +165,8 @@ con.connect(function(err) {
         if (type == "supervisor") {
             var supFileTemp = supFile.replace("{%error%}", "");
             res.send(supFileTemp);
-        } else if (type == "rac") {
-            var racFileTemp = racFile.replace("{%error%}", "");
-            res.send(racFileTemp);
-        } else if (type == "prc") {
+        } 
+        else if (type == "prc") {
             var prcFileTemp = prcFile.replace("{%error%}", "");
             res.send(prcFileTemp);
         } else if (type == "dc") {
@@ -200,10 +197,11 @@ con.connect(function(err) {
                     }
                     id = "sup" + (result[0].cnt + 1);
                     var type = 'sup'
+                    var special_user = "N"
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
-                        var stmt2 = `INSERT INTO professor(prof_id,prof_name,prof_dept) VALUES("${id}","${name}","${dept_id}");`;
-                        var stmt = stmt1 + stmt2;
+                        var stmt1 = `INSERT INTO login(id,email,password,type,special_user) VALUES("${id}","${email}","${encrypt(psw)}","${type}","${special_user}");`;
+                        
+                        var stmt = stmt1;
                         con.query(stmt, (err, result, fields) => {
                             if (err)
                                 throw err;
@@ -222,47 +220,6 @@ con.connect(function(err) {
         });
     });
 
-    app.post('/addRAC', urlencodedParser, (req, res) => {
-        var email = req.body.email;
-        var psw = req.body.psw;
-        var repeat_psw = req.body.repeat_psw;
-        var stud_id = req.body.stud_id;
-        var id;
-        var q = `select count(*) as cnt from login where email = "${email}"`;
-        con.query(q, (err, result, fields) => {
-            if (err) {
-                throw err;
-            }
-            count = result[0].cnt;
-            if (count == 0) {
-                var q1 = "Select count(*) as cnt from rac;"
-                con.query(q1, (err, result, fields) => {
-                    if (err) {
-                        throw err;
-                    }
-                    id = "rac" + (result[0].cnt + 1);
-                    var type = 'rac';
-                    if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
-                        var stmt2 = `INSERT INTO rac(rac_id,stud_id) VALUES("${id}","${stud_id}");`;
-                        var stmt = stmt1 + stmt2;
-                        con.query(stmt, (err, result, fields) => {
-                            if (err)
-                                throw err;
-                            sendEmail(email, id, psw, "RAC");
-                            res.send(successFile);
-                        });
-                    } else {
-                        var racFileEmail = racFile.replace("{%error%}", "Password and Repeat Password does not match");
-                        res.send(racFileEmail);
-                    }
-                });
-            } else {
-                var racFileEmail = racFile.replace("{%error%}", "Email Already Registered")
-                res.send(racFileEmail);
-            }
-        });
-    });
 
     app.post('/addPRC', urlencodedParser, (req, res) => {
         var email = req.body.email;
@@ -285,15 +242,21 @@ con.connect(function(err) {
                     }
                     id = "prc" + (result[0].cnt + 1);
                     var type = 'prc';
+                    var special_user = "N";
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
+                        var stmt1 = `INSERT INTO login(id,email,password,type,special_user) VALUES("${id}","${email}","${encrypt(psw)}","${type}","${special_user}");`;
                         var stmt2 = `INSERT INTO prc(prc_id,dept_id) VALUES("${id}","${dept_id}");`;
                         var stmt = stmt1 + stmt2;
-                        con.query(stmt, (err, result, fields) => {
+                        con.query(stmt1, (err, result, fields) => {
                             if (err)
                                 throw err;
-                            sendEmail(email, id, psw, "PRC");
-                            res.send(successFile);
+                            con.query(stmt2,(err, result, fields)=>{
+                                if (err)
+                                    throw err;
+                                sendEmail(email, id, psw, "PRC");
+                                res.send(successFile);
+                            })
+                            
                         });
                     } else {
                         var prcFileEmail = prcFile.replace("{%error%}", "Password and Repeat Password does not match");
@@ -328,15 +291,20 @@ con.connect(function(err) {
                         throw err;
                     }
                     id = "dc" + (result[0].cnt + 1);
+                    var special_user = "N"
                     if (psw == repeat_psw) {
-                        var stmt1 = `INSERT INTO login(id,email,password,type) VALUES("${id}","${email}","${encrypt(psw)}","${type}");`;
+                        var stmt1 = `INSERT INTO login(id,email,password,type,special_user) VALUES("${id}","${email}","${encrypt(psw)}","${type}","${special_user}");`;
                         var stmt2 = `INSERT INTO doctorate_committe(dc_id,fac_id) VALUES("${id}","${fac_id}");`;
                         var stmt = stmt1 + stmt2;
-                        con.query(stmt, (err, result, fields) => {
+                        con.query(stmt1, (err, result, fields) => {
                             if (err)
                                 throw err;
-                            sendEmail(email, id, psw, "Doctorate Committe");
-                            res.send(successFile);
+                            con.query(stmt2,(err, result, fields)=>{
+                                if (err)
+                                    throw err;
+                                sendEmail(email, id, psw, "DC");
+                                res.send(successFile);
+                            })
                         });
                     } else {
                         var dcFileEmail = dcFile.replace("{%error%}", "Password and Repeat Password does not match");
