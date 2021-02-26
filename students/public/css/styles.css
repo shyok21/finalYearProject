@@ -45,6 +45,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10rem;
+    height: 73%;
 }
 
 .main-details-about {
@@ -107,6 +109,17 @@ li {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#login {
+    height: 15%;
+    width: 84%;
+    font-size: 1.1em;
+    margin: 5px;
+    background-color: #dcdcdc;
+    border-radius: 10px;
+    border-style: none;
+    padding-left: 10px;
 }
 
 #login-form {

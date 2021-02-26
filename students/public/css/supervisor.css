@@ -15,16 +15,20 @@ body {
     background-color: #fefefe;
 }
 
+.main-content {
+    margin-top: 10rem;
+}
+
 #checkboxes {
     display: none;
     border: 1px #dadada solid;
     font-size: small;
 }
-  
+
 #checkboxes label {
     display: block;
 }
-  
+
 #checkboxes label:hover {
     background-color: #1e90ff;
 }
@@ -43,8 +47,8 @@ body {
 }
 
 #checkboxList {
-    overflow-y :scroll; 
-    position:absolute;
+    overflow-y: scroll;
+    position: absolute;
 }
 
 .intro {
@@ -60,7 +64,7 @@ body {
 }
 
 .list {
-    flex: 13;
+    height: 80%;
     display: flex;
     flex-wrap: wrap;
     overflow-x: hidden;
@@ -83,7 +87,7 @@ body {
 
 .container {
     width: 100%;
-    margin:auto;
+    margin: auto;
 }
 
 .det1 {
@@ -113,7 +117,7 @@ body {
 .det3 {
     height: 35%;
     width: 40%;
-    float:left;
+    float: left;
 }
 
 .discard {
@@ -126,8 +130,9 @@ body {
 }
 
 input {
-    height: 70%;
+    height: 100%;
     width: 10%;
+    background-color: #ffc3a0;
 }
 
 .multiselect {
@@ -152,17 +157,16 @@ input {
     color: lightgreen;
     border-radius: 4px;
 }
-  
+
 .selectBox {
     position: relative;
 }
-  
+
 .selectBox select {
     width: 100%;
     font-weight: bold;
 }
 
 .special {
-    flex: 1.3;
+    height: 10%;
 }
-  

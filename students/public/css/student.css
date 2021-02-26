@@ -12,6 +12,10 @@ body {
     flex-direction: column;
 }
 
+.main-content {
+    margin-top: 10rem;
+}
+
 .main {
     flex: 7;
     display: flex;
@@ -36,7 +40,8 @@ body {
 }
 
 .main-track-accepted {
-    flex: 1;
+    width: 7rem;
+    height: 7rem;
     margin: 10px;
     background-color: #2e8b57;
     color: #97c5ab;
@@ -54,9 +59,9 @@ body {
 }
 
 .main-track-process {
-    flex: 1;
+    width: 7rem;
+    height: 7rem;
     margin: 10px;
-    height: 100px;
     background-color: #a5a5a5;
     color: white;
     border-radius: 50%;
@@ -66,7 +71,8 @@ body {
 }
 
 .main-track-rejected {
-    flex: 1;
+    width: 7rem;
+    height: 7rem;
     margin: 10px;
     background-color: red;
     color: white;

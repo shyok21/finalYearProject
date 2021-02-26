@@ -6,46 +6,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(function() {
-            $("#header").load("header.html");
-        });
-    </script>
 </head>
 
 <body>
-    <div id="header"></div>
-    <div class="logout">
-        <a href="./logout">Logout</a>
-    </div>
-    <div class="main">
-        <div class="main-message">
-            Hello {%StudentName%}, {%studentMessage%}
-            <!-- your registration is in Under Process. We will notify you once your Registration gets Complete. You can track your Registration Phase here. -->
+    <img src="images/header.png" style="width:100%;height:auto;position:fixed">
+    <div class="main-content">
+        <div class="logout">
+            <a href="./logout">Logout</a>
         </div>
-        <div class="main-track">
-            <!--
+        <div class="main">
+            <div class="main-message">
+                Hello {%StudentName%}, {%studentMessage%}
+                <!-- your registration is in Under Process. We will notify you once your Registration gets Complete. You can track your Registration Phase here. -->
+            </div>
+            <div class="main-track">
+                <!--
                 main-track-accepted
                 main-track-process
                 main-track-rejected
             -->
-            <div class="main-track-accepted">
-                <div class="main-track-text">Form Submission</div>
+                <div class="main-track-accepted">
+                    <div class="main-track-text">Form Submission</div>
+                </div>
+                <div class="{%trackClass%}">
+                    <div class="main-track-text">Supervisor Approval</div>
+                </div>
+                <div class="{%trackClass%}">
+                    <div class="main-track-text">PRC Approval</div>
+                </div>
+                <div class="{%trackClass%}">
+                    <div class="main-track-text">DC Approval</div>
+                </div>
+                <div class="{%trackClass%}">
+                    <div class="main-track-text">Registration Completed</div>
+                </div>
             </div>
-            <div class="{%trackClass%}">
-                <div class="main-track-text">Supervisor Approval</div>
-            </div>
-            <div class="{%trackClass%}">
-                <div class="main-track-text">PRC Approval</div>
-            </div>
-            <div class="{%trackClass%}">
-                <div class="main-track-text">DC Approval</div>
-            </div>
-            <div class="{%trackClass%}">
-                <div class="main-track-text">Registration Completed</div>
-            </div>
+            <div class="main-empty"></div>
         </div>
-        <div class="main-empty"></div>
     </div>
 </body>
 
