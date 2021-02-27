@@ -16,7 +16,7 @@ body {
 }
 
 .main-content {
-    margin-top: 10rem;
+    margin-top: 6rem;
 }
 
 #checkboxes {
@@ -168,5 +168,6 @@ input {
 }
 
 .special {
-    height: 10%;
+    height: 6%;
+    margin-bottom: 1%;
 }

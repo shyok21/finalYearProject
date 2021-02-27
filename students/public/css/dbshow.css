@@ -29,12 +29,12 @@ body {
 }
 
 .display-class {
-    margin-top: 4%;
+    margin-top: 10rem;
     flex: 7;
-    max-height: 90%;
+    max-height: 47rem;
     height: auto;
     overflow-y: scroll;
-    background-color: #fefefe;
+    /* background-color: #fefefe; */
     display: flex;
     flex-wrap: wrap;
     overflow-x: hidden;
@@ -52,7 +52,7 @@ body {
     align-items: center;
     justify-content: center;
     position: fixed;
-    margin-top: -3.5%;
+    margin-top: -3.6rem;
 }
 
 .dets {
