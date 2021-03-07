@@ -12,6 +12,9 @@ form {
     /* overflow: hidden; */
 }
 
+.main-content {
+    margin-top: 6rem;
+}
 .container {
     margin: auto;
     display: flex;

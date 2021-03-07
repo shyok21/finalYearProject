@@ -102,7 +102,7 @@ con.connect(function(err) {
                     throw err;
                 var enrAdd = `UPDATE student set enrollment_id = "${req.body.enroll_id}" where stud_id="${id}";`;
                 con.query(enrAdd, (err, results, field) => {
-                    res.send("<h1><a href='/studentList' method='post'>Approved Successfully</a><h1>");
+                    res.send("<form action='/studentList' method='post'><button type='submit'>Approved successfully</button></form>");
                     //res.send(racFile);
                 });
             });
@@ -141,7 +141,7 @@ con.connect(function(err) {
     function sendEmail(email, id, password, type) {
         var mailOptions = {
             from: 'ju.phdms2021@gmail.com',
-            to: email,
+            to: 'notifyserver123@gmail.com', // REMEMBER TO CHANGE THIS LATER
             subject: 'Account Details from ju phdms',
             text: `Hello ${email}, Your Account ID is "${id}", Password is "${password}" and Access type is "${type}". Please dont share the password with anyone.`
         };
@@ -155,7 +155,7 @@ con.connect(function(err) {
         });
     }
 
-    app.get('/addAccount', (req, res) => {
+    app.post('/addAccount', (req, res) => {
         res.send(addAccountFile);
     });
     app.post('/addSelectedType', urlencodedParser, (req, res) => {

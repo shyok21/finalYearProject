@@ -12,6 +12,10 @@
     padding: 2%;
 }
 
+.main-content {
+    margin-top: 6rem;
+}
+
 .registration-form {
     display: flex;
     flex-direction: column;

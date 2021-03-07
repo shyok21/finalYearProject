@@ -9,261 +9,263 @@
 </head>
 
 <body>
-    <%- include('components/header'); %>
-    <div class="logout">
-        <a href="./logout">Logout</a>
-    </div>
-    <div class="main">
-            <div class="stepper">
-                <span class="step">
-                    <div class="step-circle">1</div>
-                </span>
-                <span class="step">
-                    <div class="step-line"></div>
-                    <div class="step-circle">2</div>
-                </span>
-                <span class="step">
-                    <div class="step-line"></div>
-                    <div class="step-circle">3</div>
-                </span>
-                <span class="step">
-                    <div class="step-line"></div>
-                    <div class="step-circle">4</div>
-                </span>
-            </div>
-            <form method="POST" action="/applicationFormSubmit" class="registration-form" id="registration-form" enctype="multipart/form-data">
-                
-                <!-- Page 1 of the form -->
-                <div class="tab">
-                    <p>I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
-                    PHILOSOPHY IN 
-                    <span>
-                        <select id="faculty" name="faculty" class="text-ip" required>
-                            <option value="">---Select----</option>
-                        </select>
+    <img src="images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
+    <div class="main-content">
+        <div class="logout">
+            <a href="./logout">Logout</a>
+        </div>
+        <div class="main">
+                <div class="stepper">
+                    <span class="step">
+                        <div class="step-circle">1</div>
                     </span>
-                    OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF 
-                    <span>
-                        <select id="department" name="dep_id" class="text-ip" required>
-                            <option></option>
-                        </select>
+                    <span class="step">
+                        <div class="step-line"></div>
+                        <div class="step-circle">2</div>
                     </span>
-                    AND SUBMIT BELOW THE REQUISITE DETAILS, IF ACCEPTED I SHALL ABIDE 
-                    BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
-                    </p><br>
+                    <span class="step">
+                        <div class="step-line"></div>
+                        <div class="step-circle">3</div>
+                    </span>
+                    <span class="step">
+                        <div class="step-line"></div>
+                        <div class="step-circle">4</div>
+                    </span>
+                </div>
+                <form method="POST" action="/applicationFormSubmit" class="registration-form" id="registration-form" enctype="multipart/form-data">
                     
-                    <label for="student_photo">UPLOAD PASSPORT SIZE PHOTO</label>
-                    <input type="file" name="student_photo" class="text-ip type-1" required>   
-                    
-                    <br><br>
-                    <ol start="1">
-                    <li>
-                        <label for="student_name">NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE)</label>
-                        <input type="text" name="student_name" class="text-ip type-1" required>   
-                    </li>
-                    <li>
-                        <div class="form-row">
-                            <div class="form-field">
-                                <label for="dob">DATE OF BIRTH</label><br>
-                                <input type="date" name="dob" class="text-ip type-1" required><br> 
+                    <!-- Page 1 of the form -->
+                    <div class="tab">
+                        <p>I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
+                        PHILOSOPHY IN 
+                        <span>
+                            <select id="faculty" name="faculty" class="text-ip" required>
+                                <option value="">---Select----</option>
+                            </select>
+                        </span>
+                        OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF 
+                        <span>
+                            <select id="department" name="dep_id" class="text-ip" required>
+                                <option></option>
+                            </select>
+                        </span>
+                        AND SUBMIT BELOW THE REQUISITE DETAILS, IF ACCEPTED I SHALL ABIDE 
+                        BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
+                        </p><br>
+                        
+                        <label for="student_photo">UPLOAD PASSPORT SIZE PHOTO</label>
+                        <input type="file" name="student_photo" class="text-ip type-1" required>   
+                        
+                        <br><br>
+                        <ol start="1">
+                        <li>
+                            <label for="student_name">NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE)</label>
+                            <input type="text" name="student_name" class="text-ip type-1" required>   
+                        </li>
+                        <li>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="dob">DATE OF BIRTH</label><br>
+                                    <input type="date" name="dob" class="text-ip type-1" required><br> 
+                                </div>
+                                <div class="form-field">
+                                    <label for="sex">SEX</label><br>
+                                    <select name="sex" class="text-ip type-1">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="others">Others</option>
+                                    </select><br>
+                                </div>
+                                <div class="form-field">
+                                    <label for="marital_status">MARITAL STATUS</label><br>
+                                    <select name="marital_status" class="text-ip type-1">
+                                        <option value="unmarried">Unmarried</option>
+                                        <option value="married">Married</option>
+                                        <option value="divorced">Divorced</option>
+                                        <option value="widowed">Widowed</option>
+                                    </select><br>
+                                </div>
                             </div>
-                            <div class="form-field">
-                                <label for="sex">SEX</label><br>
-                                <select name="sex" class="text-ip type-1">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="others">Others</option>
-                                </select><br>
+                        </li>
+                        <li>
+                            <label for="parent_name">FATHER'S NAME/MOTHER'S NAME</label>
+                            <input type="text" name="parent_name" class="text-ip type-1" required>
+                        </li>
+                        <li>
+                            <label for="category">CATEGORY</label>
+                            <select name="category" class="text-ip type-1">
+                                <option value="general">General</option>
+                                <option value="sc">SC</option>
+                                <option value="st">ST</option>
+                                <option value="obc">OBC</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="nationality">NATIONALITY</label>
+                            <select id="nationality" name="nationality" class="text-ip type-1" required>
+                                <option value="">---Select----</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="address1">PERMANENT ADDRESS</label><br>
+                            <input type="text" name="address1" class="text-ip type-1" required>
+                        </li>
+                        <li>
+                            <label for="address2">ADDRESS FOR COMMUNICATION</label><br>
+                            <input type="text" name="address2" class="text-ip type-1" required><br>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="mobile_no">MOBILE NUMBER</label>
+                                    <input type="text" name="mobile_no" class="text-ip type-1" required><br>
+                                </div>
+                                <div class="form-field">
+                                    <label for="phone_no">PHONE NUMBER</label>
+                                    <input type="text" name="phone_no" class="text-ip type-1"><br>
+                                </div>  
+                                <div class="form-field">
+                                    <label for="student_email">EMAIL</label>
+                                    <input type="email" name="student_email" class="text-ip type-1" value="<%= email %>" readonly>
+                                </div>
                             </div>
-                            <div class="form-field">
-                                <label for="marital_status">MARITAL STATUS</label><br>
-                                <select name="marital_status" class="text-ip type-1">
-                                    <option value="unmarried">Unmarried</option>
-                                    <option value="married">Married</option>
-                                    <option value="divorced">Divorced</option>
-                                    <option value="widowed">Widowed</option>
-                                </select><br>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <label for="parent_name">FATHER'S NAME/MOTHER'S NAME</label>
-                        <input type="text" name="parent_name" class="text-ip type-1" required>
-                    </li>
-                    <li>
-                        <label for="category">CATEGORY</label>
-                        <select name="category" class="text-ip type-1">
-                            <option value="general">General</option>
-                            <option value="sc">SC</option>
-                            <option value="st">ST</option>
-                            <option value="obc">OBC</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="nationality">NATIONALITY</label>
-                        <select id="nationality" name="nationality" class="text-ip type-1" required>
-                            <option value="">---Select----</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="address1">PERMANENT ADDRESS</label><br>
-                        <input type="text" name="address1" class="text-ip type-1" required>
-                    </li>
-                    <li>
-                        <label for="address2">ADDRESS FOR COMMUNICATION</label><br>
-                        <input type="text" name="address2" class="text-ip type-1" required><br>
-                        <div class="form-row">
-                            <div class="form-field">
-                                <label for="mobile_no">MOBILE NUMBER</label>
-                                <input type="text" name="mobile_no" class="text-ip type-1" required><br>
-                            </div>
-                            <div class="form-field">
-                                <label for="phone_no">PHONE NUMBER</label>
-                                <input type="text" name="phone_no" class="text-ip type-1"><br>
-                            </div>  
-                            <div class="form-field">
-                                <label for="student_email">EMAIL</label>
-                                <input type="email" name="student_email" class="text-ip type-1" value="<%= email %>" readonly>
-                            </div>
-                        </div>
-                    </li>
-                    </ol>
-                </div>
-                <!-- Page 2 of the form -->
-                <div class="tab">
-                    <ol start="8">
-                    <li>
-                        <p>PARTICULARS OF ACADEMIC CAREER</p>
-                        <table>
-                            <tr class="header-row">
-                                <th>Name of the Examination</th>
-                                <th>Examination passed</th>
-                                <th>Name of Institution/University</th>
-                                <th>Major discipline</th>
-                                <th>Year of passing</th>
-                                <th>Total marks obtained</th>
-                                <th>%(Marks/CGPA)</th>
-                            </tr>
-                            
-                            <tr class="table-row">
-                                <td><label>Madhyamik or Equivalent</label></td>
-                                <td><input type="text" class="text-ip type-1" name="acad00" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad01" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad02" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad03" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad04" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad05" required></td>
-                            </tr>
-                            
-                            <tr class="table-row">
-                                <td><label>Higher secondary or Equivalent</label></td>
-                                <td><input type="text" class="text-ip type-1" name="acad10" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad11" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad12" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad13" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad14" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad15" required></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td><label>Bachelor degree</label></td>
-                                <td><input type="text" class="text-ip type-1" name="acad20" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad21" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad22" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad23" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad24" required></td>
-                                <td><input type="text" class="text-ip type-1" name="acad25" required></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td><label>Master degree</label></td>
-                                <td><input type="text" class="text-ip type-1" name="acad30"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad31"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad32"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad33"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad34"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad35"></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td><label>Post master degree</label></td>
-                                <td><input type="text" class="text-ip type-1" name="acad40"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad41"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad42"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad43"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad44"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad45"></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td><label>M.Phil(Two year regular course)</label></td>
-                                <td><input type="text" class="text-ip type-1" name="acad50"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad51"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad52"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad53"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad54"></td>
-                                <td><input type="text" class="text-ip type-1" name="acad55"></td>
-                            </tr>    
-                        </table>
-                        <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES</label>
-                        <input type="file" name="marksheets" class="text-ip type-1" multiple>
-                    </li>
-                    <li>
-                        <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION</label>
-                        <input type="text" name="qualified" class="text-ip type-1"><br>
-                        <label for="qualified">RELEVANT DOCUMENTS</label>
-                        <input type="file" name="qualified-docs" class="text-ip type-1" multiple>   
-                    </li>
-                    <li>
-                        <p>PRESENT EMPLOYMENT</p>
-                        <label for="org_name">(A) NAME OF ORGANISATION:</label></br>
-                        <input type="text" name="org_name" class="text-ip type-1"><br>
-                        <label for="nature_of_work">(B) NATURE OF WORK:</label></br>
-                        <input type="text" name="nature_of_work" class="text-ip type-1"><br>
-                    </li>
-                    </ol>
-                </div>
+                        </li>
+                        </ol>
+                    </div>
+                    <!-- Page 2 of the form -->
+                    <div class="tab">
+                        <ol start="8">
+                        <li>
+                            <p>PARTICULARS OF ACADEMIC CAREER</p>
+                            <table>
+                                <tr class="header-row">
+                                    <th>Name of the Examination</th>
+                                    <th>Examination passed</th>
+                                    <th>Name of Institution/University</th>
+                                    <th>Major discipline</th>
+                                    <th>Year of passing</th>
+                                    <th>Total marks obtained</th>
+                                    <th>%(Marks/CGPA)</th>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td><label>Madhyamik or Equivalent</label></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad00" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad01" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad02" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad03" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad04" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad05" required></td>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td><label>Higher secondary or Equivalent</label></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad10" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad11" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad12" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad13" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad14" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad15" required></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td><label>Bachelor degree</label></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad20" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad21" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad22" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad23" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad24" required></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad25" required></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td><label>Master degree</label></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad30"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad31"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad32"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad33"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad34"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad35"></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td><label>Post master degree</label></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad40"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad41"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad42"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad43"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad44"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad45"></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td><label>M.Phil(Two year regular course)</label></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad50"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad51"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad52"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad53"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad54"></td>
+                                    <td><input type="text" class="text-ip type-1" name="acad55"></td>
+                                </tr>    
+                            </table>
+                            <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES</label>
+                            <input type="file" name="marksheets" class="text-ip type-1" multiple>
+                        </li>
+                        <li>
+                            <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION</label>
+                            <input type="text" name="qualified" class="text-ip type-1"><br>
+                            <label for="qualified">RELEVANT DOCUMENTS</label>
+                            <input type="file" name="qualified-docs" class="text-ip type-1" multiple>   
+                        </li>
+                        <li>
+                            <p>PRESENT EMPLOYMENT</p>
+                            <label for="org_name">(A) NAME OF ORGANISATION:</label></br>
+                            <input type="text" name="org_name" class="text-ip type-1"><br>
+                            <label for="nature_of_work">(B) NATURE OF WORK:</label></br>
+                            <input type="text" name="nature_of_work" class="text-ip type-1"><br>
+                        </li>
+                        </ol>
+                    </div>
 
-                <!-- Page 3 of the form -->
-                <div class="tab">
-                    <ol start="11">
-                    <li>
-                        <p>PROPOSED RESEARCH WORK</p>
-                        <label for="title">(A) PROPOSED AREA/THEME OF RESEARCH:</label></br>
-                        <input type="text" name="title" class="text-ip type-1" required><br>
-                        <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS):</label></br>
-                        <input type="file" name="sop" class="text-ip type-1" required><br>
-                        <label for="proposed_institute">(C) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS</label></br>
-                        <input type="text" name="proposed_institute" class="text-ip type-1" required><br>
-                    </li>
-                    </ol>
-                </div>
+                    <!-- Page 3 of the form -->
+                    <div class="tab">
+                        <ol start="11">
+                        <li>
+                            <p>PROPOSED RESEARCH WORK</p>
+                            <label for="title">(A) PROPOSED AREA/THEME OF RESEARCH:</label></br>
+                            <input type="text" name="title" class="text-ip type-1" required><br>
+                            <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS):</label></br>
+                            <input type="file" name="sop" class="text-ip type-1" required><br>
+                            <label for="proposed_institute">(C) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS</label></br>
+                            <input type="text" name="proposed_institute" class="text-ip type-1" required><br>
+                        </li>
+                        </ol>
+                    </div>
 
-                <!-- Page 4 of the form -->
-                <div class="tab">
-                    <ol start="12">
-                    <li>
-                        <p>NAME OF SUPERVISORS(RECOMMENDED BY PHD RESEARCH COMMITTEE)</p>
-                        <label for="supervisor_id">(1)NAME:</label>
-                        <select id="supervisor" name="supervisor_id" class="text-ip type-1" required>
-                        </select>
-                        <br>
-                        <label for="supervisor_designation">DESIGNATION:</label>
-                        <input type="text" name="supervisor_designation" class="text-ip type-1"><br>
-                        <label for="co_supervisor_id">(2)NAME:</label>
-                        <input type="text" name="co_supervisor_id" class="text-ip type-1"><br>
-                        <label for="co_supervisor_designation">DESIGNATION:</label>
-                        <input type="text" name="co_supervisor_designation" class="text-ip type-1"><br>
-                    </li>
-                    </ol>
+                    <!-- Page 4 of the form -->
+                    <div class="tab">
+                        <ol start="12">
+                        <li>
+                            <p>NAME OF SUPERVISORS(RECOMMENDED BY PHD RESEARCH COMMITTEE)</p>
+                            <label for="supervisor_id">(1)NAME:</label>
+                            <select id="supervisor" name="supervisor_id" class="text-ip type-1" required>
+                            </select>
+                            <br>
+                            <label for="supervisor_designation">DESIGNATION:</label>
+                            <input type="text" name="supervisor_designation" class="text-ip type-1"><br>
+                            <label for="co_supervisor_id">(2)NAME:</label>
+                            <input type="text" name="co_supervisor_id" class="text-ip type-1"><br>
+                            <label for="co_supervisor_designation">DESIGNATION:</label>
+                            <input type="text" name="co_supervisor_designation" class="text-ip type-1"><br>
+                        </li>
+                        </ol>
+                    </div>
+                    <!-- Hidden attributes-->
+                    <input type="hidden" name="fac_name" id="fac_name">
+                    <input type="hidden" name="dep_name" id="dep_name">
+                    <input type="hidden" name="supervisor_name" id="supervisor_name">
+                </form>
+                <div style="overflow:auto;">
+                    <div style="float:right;">
+                        <button class="submit-btn" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button class="submit-btn" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    </div>
                 </div>
-                <!-- Hidden attributes-->
-                <input type="hidden" name="fac_name" id="fac_name">
-                <input type="hidden" name="dep_name" id="dep_name">
-                <input type="hidden" name="supervisor_name" id="supervisor_name">
-            </form>
-            <div style="overflow:auto;">
-                <div style="float:right;">
-                    <button class="submit-btn" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                    <button class="submit-btn" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                </div>
-            </div>
+        </div>
     </div>
 </body>
 

@@ -7,36 +7,30 @@
   <title>Add Account</title>
 </head>
 <body>
-  <form action="addSelectedType" method="post">
-    <div class="container">
-      <div class="heading">
-        <div id="julogo">
-          <img src="images/ju_logo.png">
-        </div>
-        <div class="headname">
-          <h1 id="headnameeng">Jadavpur University</h1>
-          <h1 id="headnamebeng">যাদবপুর বিশ্ববিদ্যালয়</h1>
-        </div>
-      </div>
-      <div class="formbody">
-        <div class="formhead">
-          <h1>Welcome to Add page!</h1>
-        </div>
-        <div class="formdesc">
-          <h3>Click submit to add selected entity</h3>
-        </div>
-        <div class="dropdown1">
-          <select name="type" id="type">
-            <option value="supervisor">Supervisor</option>
-            <option value="prc">Postgraduate Research Committee</option>
-            <option value="dc">Doctorate Committe</option>
-          </select>
-        </div>
-        <div class="formbtn">
-          <input type="submit" class="btn">
+  <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+  <div class="main-content">
+    <form action="addSelectedType" method="post">
+      <div class="container">
+        <div class="formbody">
+          <div class="formhead">
+            <h1>Welcome to Add page!</h1>
+          </div>
+          <div class="formdesc">
+            <h3>Click submit to add selected entity</h3>
+          </div>
+          <div class="dropdown1">
+            <select name="type" id="type">
+              <option value="supervisor">Supervisor</option>
+              <option value="prc">Postgraduate Research Committee</option>
+              <option value="dc">Doctorate Committe</option>
+            </select>
+          </div>
+          <div class="formbtn">
+            <input type="submit" class="btn">
+          </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </body>
 </html>
