@@ -1,0 +1,218 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../public/css/studentMain.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@700&family=Gloria+Hallelujah&family=Lobster+Two&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <img src="../public/images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
+    <div class="main-content">
+        <div class="student-details">
+            <div class="main-details">
+                <div class="details-1">
+                    <div class="details">
+                        <div class="header-details">
+                            Name:
+                        </div>
+                        <div class="answer-details">
+                            Ritam Guha
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="header-details">
+                            Enrollment Id:
+                        </div>
+                        <div class="answer-details">
+                            001610501006
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="header-details">
+                            Gender:
+                        </div>
+                        <div class="answer-details">
+                            Male
+                        </div>
+                    </div>
+                </div>
+                <div class="details-1">
+                    <div class="details">
+                        <div class="header-details">
+                            Department:
+                        </div>
+                        <div class="answer-details">
+                            Computer Science & Engineering
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="header-details">
+                            Supervisor:
+                        </div>
+                        <div class="answer-details">
+                            Ram Sarkar
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="header-details">
+                            Proposed Theme:
+                        </div>
+                        <div class="answer-details">
+                            Genetic Algorithm
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="image-details">
+                <img src="../public/student_photo/Stud000016" style="width:7rem;height:7rem;border-style:solid;border-radius: 7px;border-color:black;border-width:1.5px;" alt="Couldn't load image">
+                <a href="/logout">Log Out</a>
+            </div>
+        </div>
+        <div class="report-submit2">
+            <div class="report-buttons">
+                <button class="submit-btn-active" onclick="submit_btn()" id="sub_btn">Submit A Report</button>
+                <button class="prev-btn" onclick="prev_btn()" id="pre_btn">View Previous Reports</button>
+            </div>
+            <div class="report-submit" id="report-sbmt-chk">
+                <form method="POST" id="submit-report" action="/submitReport">
+                    <div class="sb1">
+                        Title: &nbsp;<input type="text" id="title" name="title" required>
+                        Semester: &nbsp;<select name="Semester" id="semester">
+                            <option value="">Select Semester</option>
+                            <option value="Semester 1">Semester 1</option>
+                            <option value="Semester 2">Semester 2</option>
+                            <option value="Semester 3">Semester 3</option>
+                            <option value="Semester 4">Semester 4</option>
+                            <option value="Semester 5">Semester 5</option>
+                            <option value="Semester 6">Semester 6</option>
+                            <option value="Semester 7">Semester 7</option>
+                            <option value="Semester 8">Semester 8</option>
+                        </select>
+                    </div>
+                    <div class="sb2">
+                        Description: &nbsp;<input type="text" id="description" name="description">
+                        Upload Report: &nbsp;<input type="file" id="file-upload" name="report"class="custom-file-input" required>
+                    </div>
+                    <div class="sb3">
+                        <input type="submit" name="submit" value="Submit Report">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submit_btn(){
+            var x = document.getElementById("report-sbmt-chk");
+            x.innerHTML = "";
+            x.innerHTML = `<form method="POST" id="submit-report" action="/submitReport">
+                    <div class="sb1">
+                        Title: &nbsp;<input type="text" id="title" name="title" required>
+                        Semester: &nbsp;<select name="Semester" id="semester">
+                            <option value="">Select Semester</option>
+                            <option value="Semester 1">Semester 1</option>
+                            <option value="Semester 2">Semester 2</option>
+                            <option value="Semester 3">Semester 3</option>
+                            <option value="Semester 4">Semester 4</option>
+                            <option value="Semester 5">Semester 5</option>
+                            <option value="Semester 6">Semester 6</option>
+                            <option value="Semester 7">Semester 7</option>
+                            <option value="Semester 8">Semester 8</option>
+                        </select>
+                    </div>
+                    <div class="sb2">
+                        Description: &nbsp;<input type="text" id="description" name="description">
+                        Upload Report: &nbsp;<input type="file" id="file-upload" name="report"class="custom-file-input" required>
+                    </div>
+                    <div class="sb3">
+                        <input type="submit" name="submit" value="Submit Report">
+                    </div>
+                    
+                </form>`;
+                var y = document.getElementById("sub_btn");
+                y.removeAttribute("class");
+                y.setAttribute("class","submit-btn-active");
+                var z = document.getElementById("pre_btn");
+                z.removeAttribute("class");
+                z.setAttribute("class","prev-btn");
+        }
+        function prev_btn(){
+            var x = document.getElementById("report-sbmt-chk");
+            x.innerHTML = "";
+            x.innerHTML = ` <div class="heading">
+                    <p>Semester</p>
+                    <p>Status</p>
+                    <p>Remark</p>
+                    <p>Date of Submission</p>
+                    <p>Report</p>
+                </div>
+                <div class="details-sem12">
+                    <p>Semester 1</p>
+                    <p>Submitted Successfully</p>
+                    <p>DC Apporved</p>
+                    <p>10-Jul-2019</p>
+                    <a href="../public/images/Sample-GATE-certificate.pdf" target="_blank">Click Here to Download</a>
+                </div>
+                <div class="details-sem21">
+                    <p>Semester 2</p>
+                    <p>Submitted Successfully</p>
+                    <p>DC Apporved</p>
+                    <p>15-Jan-2020</p>
+                    <a href="../public/images/Sample-GATE-certificate.pdf" target="_blank">Click Here to Download</a>
+                </div>
+                <div class="details-sem12">
+                    <p>Semester 3</p>
+                    <p>Submitted Successfully</p>
+                    <p>PRC Checking</p>
+                    <p>06-Jul-2020</p>
+                    <a href="../public/images/Sample-GATE-certificate.pdf" target="_blank">Click Here to Download</a>
+                </div>
+                <div class="details-sem21">
+                    <p>Semester 4</p>
+                    <p>Submission Due</p>
+                    <p>Submission Due</p>
+                    <p>Submission Due</p>
+                    <a>Submission Due</a>
+                </div>
+                <div class="details-sem12">
+                    <p>Semester 5</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <a>To be Submitted</a>
+                </div>
+                <div class="details-sem21">
+                    <p>Semester 6</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <a>To be Submitted</a>
+                </div>
+                <div class="details-sem12">
+                    <p>Semester 7</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <a>To be Submitted</a>
+                </div>
+                <div class="details-sem21">
+                    <p>Semester 8</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <p>To be Submitted</p>
+                    <a>To be Submitted</a>
+                </div>`;
+                var y = document.getElementById("sub_btn");
+                y.removeAttribute("class");
+                y.setAttribute("class","submit-btn");
+                var z = document.getElementById("pre_btn");
+                z.removeAttribute("class");
+                z.setAttribute("class","prev-btn-active");
+        }
+    </script>
+</body>
+
+</html>

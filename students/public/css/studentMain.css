@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Slab', serif;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
+}
+.main-content{
+    width:100%;
+    height:100%;
+    margin-top:6rem;
+    display:flex;
+    flex-direction: column;
+}
+.student-details{
+    flex:1;
+    display:flex;
+    flex-direction: row;
+    
+    /* background-color:#eaeaea; */
+}
+.main-details{
+    flex:4;
+    display:flex;
+    flex-direction:row;
+}
+.details-1{
+    margin-left:10px;
+    flex:1;
+    display:flex;
+    flex-direction: column;
+}
+.details{
+    flex:1;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header-details{
+    flex:2;
+    font-size: 1.1em;
+    font-weight:bold;
+}
+.answer-details{
+    flex:5;
+    font-size:1.13em;
+}
+.image-details{
+    flex:1;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+}
+.report-submit2{
+    margin-top:10px;
+    flex:3.5;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+}
+.report-buttons{
+    flex:1;
+    display:flex;
+    flex-direction:row;
+}
+.submit-btn-active{
+    flex:1;
+    background-image: linear-gradient(to right, #fdfbfb,  #f4f4f5);
+    border:none;
+    font-weight: bold;
+    font-size:1.1em;
+}
+.submit-btn{
+    flex:1;
+    background-color:#fefefe;
+    border:none;
+    
+    font-size:1.1em;
+}
+.submit-btn:hover{
+    cursor: pointer;
+    background-image: linear-gradient(to right, #dbd9d9,  #d2d2d3);
+}
+.prev-btn:hover{
+    cursor:pointer;
+    background-image: linear-gradient(to right,#d2d2d3,#c9cbcc);
+}
+.prev-btn-active{
+    flex:1;
+    background-image: linear-gradient(to right,#f4f4f5,#ebedee);
+    border:none;
+    font-weight: bold;
+    font-size:1.1em;
+}
+.prev-btn{
+    flex:1;
+    background-color:#fefefe;
+    border:none;
+    
+    font-size:1.1em;
+}
+.report-submit{
+    flex:8;
+    background-image:linear-gradient(to right,#fbfbfb,#ebedee);
+    display:flex;
+    flex-direction:column;
+}
+.image-details>a{
+    margin-left:15%;
+    text-decoration: none;
+    height:25%;
+    width:25%;
+    border-radius:5px;
+    color:#2193b0;
+    font-size:1.1em;
+}
+#file-upload{
+    padding: 6px 12px;
+    cursor: pointer;
+}
+#submit-report{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+}
+.sb1{
+    flex:1;
+    display:flex;
+    font-size:1.5em;
+    flex-direction:row;
+    align-items: center;
+    margin:10px;
+}
+.sb1>input[type='text']{
+    flex:3;
+    height:40%;
+    margin-right:5%;
+}
+#semester{
+    flex:1;
+    height:40%;
+}
+.sb2{
+    flex:2;
+    display:flex;
+    flex-direction: row;
+    font-size:1.5em;
+    align-items: center;
+    margin:10px;
+    width:100%;
+}
+.sb2>input[type='text']{
+    flex:2;
+    height:60%;
+    margin-right:5%;
+}
+.sb2>input[type='file']{
+    flex:1;
+    height:40%;
+    /* background-color:#999; */
+}
+.sb3{
+    flex:1;
+    display:flex;
+    font-size:1.5em;
+    align-items: center;
+    justify-content: center;
+}
+input[type='submit']{
+    height:50%;
+    width:20%;
+    background-image:linear-gradient(to right,#2193b0,#6dd5ed);
+    border-radius:10px;
+    border:none;
+    font-size:0.8em;
+}
+input[type='submit']:hover{
+    background-image:linear-gradient(to left,#2193b0,#6dd5ed);
+    cursor: pointer;
+}
+.heading{
+    width:90%;
+    height:15%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: center;
+    background-image:linear-gradient(to right,#667eea , #764ba2);
+    margin-left:5%;
+    margin-right:5%;
+}
+p{
+    flex:1;
+    text-align: center;
+}
+a{
+    flex:1;
+    text-align:center;
+}
+.details-sem12{
+    width:90%;
+    height:12%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: center;
+    background-image:linear-gradient(to right,#f5f7fa , #c3cfe2);
+    margin-left:5%;
+    margin-right:5%;
+}
+.details-sem21{
+    width:90%;
+    height:12%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: center;
+    background-image:linear-gradient(to left,#f5f7fa , #c3cfe2);
+    margin-left:5%;
+    margin-right:5%;
+}
