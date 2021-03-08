@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../public/css/studentMain.css">
+    <link rel="stylesheet" href="css/studentMain.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <img src="../public/images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
+    <img src="images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
         <div class="student-details">
             <div class="main-details">
@@ -19,7 +19,7 @@
                             Name:
                         </div>
                         <div class="answer-details">
-                            Ritam Guha
+                            {%name%}
                         </div>
                     </div>
                     <div class="details">
@@ -27,7 +27,7 @@
                             Enrollment Id:
                         </div>
                         <div class="answer-details">
-                            001610501006
+                            {%enrollment%}
                         </div>
                     </div>
                     <div class="details">
@@ -35,7 +35,7 @@
                             Gender:
                         </div>
                         <div class="answer-details">
-                            Male
+                            {%gender%}
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             Department:
                         </div>
                         <div class="answer-details">
-                            Computer Science & Engineering
+                            {%department%}
                         </div>
                     </div>
                     <div class="details">
@@ -53,7 +53,7 @@
                             Supervisor:
                         </div>
                         <div class="answer-details">
-                            Ram Sarkar
+                            {%supervisor%}
                         </div>
                     </div>
                     <div class="details">
@@ -61,13 +61,13 @@
                             Proposed Theme:
                         </div>
                         <div class="answer-details">
-                            Genetic Algorithm
+                            {%theme%}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="image-details">
-                <img src="../public/student_photo/Stud000016" style="width:7rem;height:7rem;border-style:solid;border-radius: 7px;border-color:black;border-width:1.5px;" alt="Couldn't load image">
+                <img src="student_photo/{%studentPhoto%}" style="width:7rem;height:7rem;border-style:solid;border-radius: 7px;border-color:black;border-width:1.5px;" alt="Couldn't load image">
                 <a href="/logout">Log Out</a>
             </div>
         </div>

@@ -7,7 +7,7 @@ const studentPage = (req, res) => {
     if (sess.email) {
         const userid = sess.userid;
         var studentFile = fs.readFileSync("views/student.html", "utf-8");
-        var qrys = util.format("select name,registration_phase,enrollment_id from student where stud_id='%s'", userid);
+        var qrys = util.format("select name,registration_phase,enrollment_id,supervisor_id,proposed_theme,sex,dept_id from student where stud_id='%s'", userid);
         con.query(qrys, (err, results, fields) => {
             try {
                 var studentName = results[0].name;
@@ -20,7 +20,31 @@ const studentPage = (req, res) => {
                         htmlNewFile = htmlNewFile.replace("{%trackClass%}", "main-track-rejected")
                     res.send(htmlNewFile);
                 } else if (studentPhase == 5) {
-                    res.send("<h1>Congratulations, your registration is completed</h1><h2>Your Enrollment ID:" + results[0].enrollment_id + "</h2>");
+                    var photo = userid;
+                    var enrollment = results[0].enrollment_id;
+                    var name = results[0].name;
+                    var gender = results[0].sex;
+                    var supervisor_id = results[0].supervisor_id;
+                    var dept_id = results[0].dept_id;
+                    var theme = results[0].proposed_theme;
+                    var qry1 = `select prof_name from professor where prof_id = '${supervisor_id}'`;
+                    con.query(qry1,(err,result1,field1) => {
+                        var supervisor = result1[0].prof_name;
+                        var qry2 = `select dept_name,fac_id from department where dept_id = "${dept_id}"`;
+                        con.query(qry2,(err,result2,field2) => {
+                            var department = result2[0].dept_name + " / " + result2[0].fac_id;
+                            var studentMain = fs.readFileSync("views/studentMain.html","utf-8");
+                            var studentMain = studentMain.replace("{%name%}",name);
+                            var studentMain = studentMain.replace("{%enrollment%}",enrollment);
+                            var studentMain = studentMain.replace("{%gender%}",gender);
+                            var studentMain = studentMain.replace("{%department%}",department);
+                            var studentMain = studentMain.replace("{%supervisor%}",supervisor);
+                            var studentMain = studentMain.replace("{%theme%}",theme);
+                            var studentMain = studentMain.replace("{%studentPhoto%}",photo);
+                            res.send(studentMain);
+                        });
+                    });
+                    //res.send("<h1>Congratulations, your registration is completed</h1><h2>Your Enrollment ID:" + results[0].enrollment_id + "</h2>");
                 } else {
                     var htmlNewFile = studentFile.replace("{%StudentName%}", studentName);
                     var htmlNewFile = htmlNewFile.replace("{%studentMessage%}", "your registration is in Under Process. We will notify you once your Registration gets Complete. You can track your Registration Phase here.");
