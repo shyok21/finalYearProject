@@ -3,7 +3,7 @@ const router = express.Router()
 const { homePage, login, logout } = require('./controllers/loginController');
 const { registerPage, validate, verify } = require('./controllers/registerController');
 const { applicationFormPage, applicationFormSubmit, downloadPDF } = require('./controllers/applicationFormController');
-const { studentPage } = require('./controllers/studentController');
+const { studentPage, submitReport } = require('./controllers/studentController');
 const { supervisorPage, assignRAC, racSubmit } = require('./controllers/supervisorController');
 const { supervisorApprovalController } = require('./controllers/supervisorApprovalController');
 const { prcPage, prcApprovalController } = require('./controllers/prcController');
@@ -34,6 +34,7 @@ router.get("/dcPage", dcPage);
 router.post("/dcApproval", dcApprovalController);
 router.post("/specialDB", specialPage);
 router.post("/searchDB", specialSearchPage);
+router.post("/submitReport", submitReport);
 router.get("/api/faculties", getFaculties);
 router.get("/api/departments", getDepartments);
 router.get("/api/professors", getProfessors);

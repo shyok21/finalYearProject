@@ -3,7 +3,7 @@ const con = require('./../../db.js');
 const createPDF = require('./../../services/createPDF');
 const merge = require('easy-pdf-merge');
 const util = require('util');
-var multer  = require('multer')
+const multer  = require('multer');
 
 const applicationFormPage = (req, res) => {
     var sess = req.session;

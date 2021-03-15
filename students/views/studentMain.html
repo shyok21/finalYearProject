@@ -77,19 +77,19 @@
                 <button class="prev-btn" onclick="prev_btn()" id="pre_btn">View Previous Reports</button>
             </div>
             <div class="report-submit" id="report-sbmt-chk">
-                <form method="POST" id="submit-report" action="/submitReport">
+                <form method="POST" id="submit-report" action="/submitReport" enctype="multipart/form-data">
                     <div class="sb1">
                         Title: &nbsp;<input type="text" id="title" name="title" required>
-                        Semester: &nbsp;<select name="Semester" id="semester">
+                        Semester: &nbsp;<select name="semester" id="semester">
                             <option value="">Select Semester</option>
-                            <option value="Semester 1">Semester 1</option>
-                            <option value="Semester 2">Semester 2</option>
-                            <option value="Semester 3">Semester 3</option>
-                            <option value="Semester 4">Semester 4</option>
-                            <option value="Semester 5">Semester 5</option>
-                            <option value="Semester 6">Semester 6</option>
-                            <option value="Semester 7">Semester 7</option>
-                            <option value="Semester 8">Semester 8</option>
+                            <option value="Semester1">Semester 1</option>
+                            <option value="Semester2">Semester 2</option>
+                            <option value="Semester3">Semester 3</option>
+                            <option value="Semester4">Semester 4</option>
+                            <option value="Semester5">Semester 5</option>
+                            <option value="Semester6">Semester 6</option>
+                            <option value="Semester7">Semester 7</option>
+                            <option value="Semester8">Semester 8</option>
                         </select>
                     </div>
                     <div class="sb2">
@@ -108,24 +108,24 @@
         function submit_btn(){
             var x = document.getElementById("report-sbmt-chk");
             x.innerHTML = "";
-            x.innerHTML = `<form method="POST" id="submit-report" action="/submitReport">
+            x.innerHTML = `<form method="POST" id="submit-report" action="/submitReport" enctype="multipart/form-data">
                     <div class="sb1">
                         Title: &nbsp;<input type="text" id="title" name="title" required>
-                        Semester: &nbsp;<select name="Semester" id="semester">
+                        Semester: &nbsp;<select name="semester" id="semester">
                             <option value="">Select Semester</option>
-                            <option value="Semester 1">Semester 1</option>
-                            <option value="Semester 2">Semester 2</option>
-                            <option value="Semester 3">Semester 3</option>
-                            <option value="Semester 4">Semester 4</option>
-                            <option value="Semester 5">Semester 5</option>
-                            <option value="Semester 6">Semester 6</option>
-                            <option value="Semester 7">Semester 7</option>
-                            <option value="Semester 8">Semester 8</option>
+                            <option value="Semester1">Semester 1</option>
+                            <option value="Semester2">Semester 2</option>
+                            <option value="Semester3">Semester 3</option>
+                            <option value="Semester4">Semester 4</option>
+                            <option value="Semester5">Semester 5</option>
+                            <option value="Semester6">Semester 6</option>
+                            <option value="Semester7">Semester 7</option>
+                            <option value="Semester8">Semester 8</option>
                         </select>
                     </div>
                     <div class="sb2">
                         Description: &nbsp;<input type="text" id="description" name="description">
-                        Upload Report: &nbsp;<input type="file" id="file-upload" name="report"class="custom-file-input" required>
+                        Upload Report: &nbsp;<input type="file" id="file-upload" name="report" class="custom-file-input" required>
                     </div>
                     <div class="sb3">
                         <input type="submit" name="submit" value="Submit Report">

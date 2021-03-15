@@ -1,6 +1,7 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
+const multer  = require('multer');
 
 const studentPage = (req, res) => {
     var sess = req.session;
@@ -65,6 +66,62 @@ const studentPage = (req, res) => {
     }
 }
 
+const submitReport = (req, res) => {
+    var sess = req.session;
+
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, 'uploads/' + file.fieldname)
+        },
+        filename: function (req, file, cb) {
+          cb(null, sess.userid + '-' + req.body.semester);
+        }
+    });
+
+    var upload = multer({ storage }).fields(
+        [{ 
+            name: 'report', maxCount: 1 
+        }]
+    );
+
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else {
+            var qry = util.format(
+                `insert into six_monthly_report (stud_id, date_time, file_name)
+                values ('%s', '%s', '%s')`,
+                sess.userid, new Date(), sess.userid + '-' + req.body.semester
+            );
+            con.query(qry, (err, result, fields) => {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                }
+                else {
+                    console.log("Report submitted successfully");
+                    res.send('<h1>Report submission successful</h1><a href="/studentPage">Go to main page</a>');
+                }    
+            })
+        }
+    });
+}
+
+const downloadReport = (req, res) => {
+    const stud_id = req.query.stud_id;
+    const semester = req.query.semester;
+    const path = "uploads/report/" + stud_id + "-" + semester;
+    res.download(path, function (err) {
+        if (err) {
+            console.log("Error");
+            console.log(err);
+        } else {
+            console.log("Success");
+        }
+    });
+}
 module.exports = {
-    studentPage
+    studentPage,
+    submitReport
 }
