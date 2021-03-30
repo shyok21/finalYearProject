@@ -5,6 +5,11 @@ const util = require('util');
 const prcPage = (req, res) => {
     var htmlFile = fs.readFileSync("views/supervisor.html", "utf-8");
     var sess = req.session;
+    htmlFile = htmlFile.replace("{%prcDcTag%}",`<div style="height:12rem;width:100rem;z-index:-1;position:fixed;background-color:#efefef;"></div>`);
+    htmlFile = htmlFile.replace("{%prcDcButton%}",`<div class="button-class">
+    <a href="/prcPage" class="active">Registration Approval</a>
+    <a href="/prcPageReport" class="nactive">Report Submit Approval</a>
+</div>`);
     htmlFile = htmlFile.replace("{%name%}", sess.userid);
     htmlFile = htmlFile.replace("{%action%}", "prcApproval");
     var qry = "select * from student s left join prc p on s.dept_id = p.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
@@ -30,6 +35,14 @@ const prcPage = (req, res) => {
         res.send(htmlFile);
     });
 };
+const prcReportApproval = (req,res) => {
+    var htmlFile = fs.readFileSync("views/reportView.html", "utf-8");
+    var sess = req.session;
+    htmlFile = htmlFile.replace("{%name%}", sess.userid);
+    for(var i=0;i<3;i++)
+        htmlFile = htmlFile.replace("{%prcodc%}","prc");
+    res.send(htmlFile);
+};
 const prcApprovalController = (req, res) => {
     var str = Object.keys(req.body)[0];
     var n = str.indexOf("_");
@@ -54,5 +67,6 @@ const prcApprovalController = (req, res) => {
 };
 module.exports = {
     prcPage,
-    prcApprovalController
+    prcApprovalController,
+    prcReportApproval
 }

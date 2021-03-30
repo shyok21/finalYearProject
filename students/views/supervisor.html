@@ -15,12 +15,18 @@
 
 <body>
     <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <!-- <div style="height:12rem;width:100rem;z-index:-1;position:fixed;background-color:#efefef;"></div> -->
+    {%prcDcTag%}
     <div class="main-content">
         <div class="intro">
             <p>Hello {%name%}. Here are the list of students.</p>
             <a href="/logOut">Log Out</a>
         </div>
-        <!-- <form class="list" name="lists" action="/supervisorApproval" method="POST"> -->
+        <!-- <div class="button-class">
+            <a href="/prcPage" class="active">Registration Approval</a>
+            <a href="/prcPageReport" class="nactive">Report Submit Approval</a>
+        </div> -->
+        {%prcDcButton%}
         <form class="list" name="lists" action="/{%action%}" method="POST">
             {%list%}
         </form>

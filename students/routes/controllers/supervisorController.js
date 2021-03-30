@@ -4,6 +4,8 @@ const util = require('util');
 
 const supervisorPage = (req, res) => {
     var htmlFile = fs.readFileSync("views/supervisor.html", "utf-8");
+    htmlFile = htmlFile.replace("{%prcDcTag%}","");
+    htmlFile = htmlFile.replace("{%prcDcButton%}","");
     var sess = req.session;
     var qrys = "select prof_name from professor where prof_id = '" + sess.userid + "';";
     con.query(qrys, (err, ress, field) => {

@@ -3,6 +3,7 @@ const con = require('./../../db.js');
 const util = require('util');
 const { compare } = require('./../../services/encrypt.js');
 const createPDF = require('./../../services/createPDF');
+const { url } = require('inspector');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 
 
@@ -64,11 +65,12 @@ const login = (req, res) => {
                     sess.userid = dc_id;
                     res.redirect('/dcPage');
                 } else {
-                    var prc_id = result[0].id;
-                    var sess = req.session;
-                    sess.email = usr;
-                    sess.userid = prc_id;
-                    res.redirect('/prcPage');
+                            
+                        var prc_id = result[0].id;
+                        var sess = req.session;
+                        sess.email = usr;
+                        sess.userid = prc_id;
+                        res.redirect('/prcPage');
                 }
             }
         });

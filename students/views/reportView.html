@@ -10,15 +10,17 @@
 
 <body>
     <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <div style="height:12rem;width:100rem;z-index:-1;position:fixed;background-color:#efefef;"></div>
     <div class="main-content">
         <div class="intro">
             <p>Hello {%name%}. Here are the list of students.</p>
             <a href="/logOut">Log Out</a>
         </div>
-        <!-- <form class="list" name="lists" action="/supervisorApproval" method="POST"> -->
-        <a href="#">Registration Approval</a>
-        <a href="#">Report Submit Approval</a>
-        <form class="list" name="lists" action="/{%action%}" method="POST">
+        <div class="button-class">
+            <a href="/{%prcodc%}Page" class="nactive">Registration Approval</a>
+            <a href="/{%prcodc%}PageReport" class="active">Report Submit Approval</a>
+        </div>
+        <form class="list" name="lists" action="/{%prcodc%}ReportSubmit" method="POST">
             {%list%}
         </form>
     </div>

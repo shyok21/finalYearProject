@@ -5,6 +5,11 @@ const util = require('util');
 const dcPage = (req, res) => {
     var htmlFile = fs.readFileSync("views/supervisor.html", "utf-8");
     var sess = req.session;
+    htmlFile = htmlFile.replace("{%prcDcTag%}",`<div style="height:12rem;width:100rem;z-index:-1;position:fixed;background-color:#efefef;"></div>`);
+    htmlFile = htmlFile.replace("{%prcDcButton%}",`<div class="button-class">
+    <a href="/dcPage" class="active">Registration Approval</a>
+    <a href="/dcPageReport" class="nactive">Report Submit Approval</a>
+</div>`);
     htmlFile = htmlFile.replace("{%name%}", sess.userid);
     htmlFile = htmlFile.replace("{%action%}", "dcApproval");
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and registration_phase = 3";
@@ -30,6 +35,14 @@ const dcPage = (req, res) => {
         res.send(htmlFile);
     });
 };
+const dcReportApproval = (req,res) => {
+    var htmlFile = fs.readFileSync("views/reportView.html", "utf-8");
+    var sess = req.session;
+    htmlFile = htmlFile.replace("{%name%}", sess.userid);
+    for(var i=0;i<3;i++)
+        htmlFile = htmlFile.replace("{%prcodc%}","dc");
+    res.send(htmlFile);
+};
 const dcApprovalController = (req, res) => {
     var str = Object.keys(req.body)[0];
     var n = str.indexOf("_");
@@ -54,5 +67,6 @@ const dcApprovalController = (req, res) => {
 };
 module.exports = {
     dcPage,
-    dcApprovalController
+    dcApprovalController,
+    dcReportApproval
 }
