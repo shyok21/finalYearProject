@@ -90,9 +90,9 @@ const submitReport = (req, res) => {
             res.send(err);
         } else {
             var qry = util.format(
-                `insert into six_monthly_report (stud_id, date_time, file_name)
-                values ('%s', '%s', '%s')`,
-                sess.userid, new Date(), sess.userid + '-' + req.body.semester
+                `insert into six_monthly_report (stud_id, date_time, file_name, semester, approval_phase)
+                values ('%s', '%s', '%s', '%s', '%d')`,
+                sess.userid, new Date(), sess.userid + '-' + req.body.semester, req.body.semester, 1
             );
             con.query(qry, (err, result, fields) => {
                 if (err) {
@@ -123,5 +123,6 @@ const downloadReport = (req, res) => {
 }
 module.exports = {
     studentPage,
-    submitReport
+    submitReport,
+    downloadReport
 }

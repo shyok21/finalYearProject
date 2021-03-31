@@ -41,7 +41,27 @@ const dcReportApproval = (req,res) => {
     htmlFile = htmlFile.replace("{%name%}", sess.userid);
     for(var i=0;i<3;i++)
         htmlFile = htmlFile.replace("{%prcodc%}","dc");
-    res.send(htmlFile);
+        var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id left join six_monthly_report r on s.stud_id = r.stud_id where dc.dc_id = '" + sess.userid + "' and approval_phase = '2'";
+        con.query(qry, (err, results, fields) => {
+            if (results.length == 0)
+                htmlFile = htmlFile.replace("{%list%}", "No Approval List");
+            else {
+                var listString = "";
+                
+                for (var i = 0; i < results.length; i++) {
+                    var listString = listString + "<div class='list1'>";
+                    var listString = listString + "<div class='det1'>" + results[i].name + "</div>";
+                    var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
+                    var listString = listString + "<div class='det1'>" + results[i].semester + "</div>";
+                    var listString = listString + `<div class="det1"><a href='/downloadReport?stud_id=${results[i].stud_id}&semester=${results[i].semester}'>View Report</a></div>`;
+                    //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
+                    var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].file_name + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
+    
+                }
+                htmlFile = htmlFile.replace("{%list%}", listString);
+            }
+            res.send(htmlFile);
+        });
 };
 const dcApprovalController = (req, res) => {
     var str = Object.keys(req.body)[0];
@@ -65,8 +85,33 @@ const dcApprovalController = (req, res) => {
         res.send("<h1><a href='/prcPage'>" + status_id + "</a><h1>");
     });
 };
+
+const dcReportApprovalSubmit = (req, res) => {
+    var str = Object.keys(req.body)[0];
+    var n = str.indexOf("_");
+    var file_name = str.substring(0, n);
+    var status = str.substring(n + 1, str.length);
+    // console.log(n);
+    // console.log(stud_id);
+    // console.log(status);
+    //res.send("Hello");
+    var qry;
+    var status_id;
+    if (status === "reject") {
+        qry = "UPDATE six_monthly_report SET approval_phase = 0 WHERE file_name = '" + file_name + "';";
+        status_id = "Successfully Discarded";
+    } else {
+        qry = "UPDATE six_monthly_report SET approval_phase = 3 WHERE file_name = '" + file_name + "';";
+        status_id = "Successfully Approved";
+    }
+    con.query(qry, (err, results, fields) => {
+        res.send("<h1><a href='/prcPage'>" + status_id + "</a><h1>");
+    });
+};
+
 module.exports = {
     dcPage,
     dcApprovalController,
-    dcReportApproval
+    dcReportApproval,
+    dcReportApprovalSubmit
 }
