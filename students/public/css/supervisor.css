@@ -72,8 +72,9 @@ body {
     width:10%;
 }
 .list {
-    height: 90%;
+    height: 30rem;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     overflow-x: hidden;
     overflow-y: scroll;

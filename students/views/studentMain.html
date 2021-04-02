@@ -82,14 +82,8 @@
                         Title: &nbsp;<input type="text" id="title" name="title" required>
                         Semester: &nbsp;<select name="semester" id="semester">
                             <option value="">Select Semester</option>
-                            <option value="Semester1">Semester 1</option>
-                            <option value="Semester2">Semester 2</option>
-                            <option value="Semester3">Semester 3</option>
-                            <option value="Semester4">Semester 4</option>
-                            <option value="Semester5">Semester 5</option>
-                            <option value="Semester6">Semester 6</option>
-                            <option value="Semester7">Semester 7</option>
-                            <option value="Semester8">Semester 8</option>
+                           
+                            {%semesterSelect%}
                         </select>
                     </div>
                     <div class="sb2">
@@ -113,14 +107,8 @@
                         Title: &nbsp;<input type="text" id="title" name="title" required>
                         Semester: &nbsp;<select name="semester" id="semester">
                             <option value="">Select Semester</option>
-                            <option value="Semester1">Semester 1</option>
-                            <option value="Semester2">Semester 2</option>
-                            <option value="Semester3">Semester 3</option>
-                            <option value="Semester4">Semester 4</option>
-                            <option value="Semester5">Semester 5</option>
-                            <option value="Semester6">Semester 6</option>
-                            <option value="Semester7">Semester 7</option>
-                            <option value="Semester8">Semester 8</option>
+                            
+                            {%semesterSelect%}
                         </select>
                     </div>
                     <div class="sb2">
@@ -142,69 +130,8 @@
         function prev_btn(){
             var x = document.getElementById("report-sbmt-chk");
             x.innerHTML = "";
-            x.innerHTML = ` <div class="heading">
-                    <p>Semester</p>
-                    <p>Status</p>
-                    <p>Remark</p>
-                    <p>Date of Submission</p>
-                    <p>Report</p>
-                </div>
-                <div class="details-sem12">
-                    <p>Semester 1</p>
-                    <p>Submitted Successfully</p>
-                    <p>DC Apporved</p>
-                    <p>10-Jul-2019</p>
-                    <a href="../public/images/Sample-GATE-certificate.pdf" target="_blank">Click Here to Download</a>
-                </div>
-                <div class="details-sem21">
-                    <p>Semester 2</p>
-                    <p>Submitted Successfully</p>
-                    <p>DC Apporved</p>
-                    <p>15-Jan-2020</p>
-                    <a href="../public/images/Sample-GATE-certificate.pdf" target="_blank">Click Here to Download</a>
-                </div>
-                <div class="details-sem12">
-                    <p>Semester 3</p>
-                    <p>Submitted Successfully</p>
-                    <p>PRC Checking</p>
-                    <p>06-Jul-2020</p>
-                    <a href="../public/images/Sample-GATE-certificate.pdf" target="_blank">Click Here to Download</a>
-                </div>
-                <div class="details-sem21">
-                    <p>Semester 4</p>
-                    <p>Submission Due</p>
-                    <p>Submission Due</p>
-                    <p>Submission Due</p>
-                    <a>Submission Due</a>
-                </div>
-                <div class="details-sem12">
-                    <p>Semester 5</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <a>To be Submitted</a>
-                </div>
-                <div class="details-sem21">
-                    <p>Semester 6</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <a>To be Submitted</a>
-                </div>
-                <div class="details-sem12">
-                    <p>Semester 7</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <a>To be Submitted</a>
-                </div>
-                <div class="details-sem21">
-                    <p>Semester 8</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <p>To be Submitted</p>
-                    <a>To be Submitted</a>
-                </div>`;
+            x.innerHTML = `{%prevReport%}`;
+           
                 var y = document.getElementById("sub_btn");
                 y.removeAttribute("class");
                 y.setAttribute("class","submit-btn");

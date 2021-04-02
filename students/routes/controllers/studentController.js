@@ -42,7 +42,75 @@ const studentPage = (req, res) => {
                             var studentMain = studentMain.replace("{%supervisor%}",supervisor);
                             var studentMain = studentMain.replace("{%theme%}",theme);
                             var studentMain = studentMain.replace("{%studentPhoto%}",photo);
-                            res.send(studentMain);
+                            var qry2 = `select * from six_monthly_report where stud_id = '${userid}' order by semester;`;
+                            con.query(qry2,(err,result3,field3) => {
+                               //  try{
+                                    var rem_sems = [];
+                                    var sems = [];
+                                    for(var i=0;i<result3.length;i++)
+                                        sems.push(result3[i].semester);
+                                    for(var i=1;i<=8;i++)
+                                    {
+                                        var s = util.format("Semester%d",i);
+                                        if(sems.includes(s) == false)
+                                            rem_sems.push(i);
+                                    }
+                                    var options = "";
+                                    for(i=0;i<rem_sems.length;i++)
+                                        options = options + `<option value="Semester ${rem_sems[i]}">Semester ${rem_sems[i]}</option>\n`;
+                                   
+                                    studentMain = studentMain.replace("{%semesterSelect%}",options);
+                                    studentMain = studentMain.replace("{%semesterSelect%}",options);
+                                    var prev_reports = `<div class="heading">
+                                    <p>Semester</p>
+                                    <p>Status</p>
+                                    <p>Remark</p>
+                                    <p>Date of Submission</p>
+                                    <p>Report</p></div>`;
+                                    for(var i=0;i<result3.length;i++)
+                                    {
+                                        if(i%2==0)
+                                            var prev = `<div class="details-sem12">\n`;
+                                        else
+                                            var prev = `<div class="details-sem21">\n`;
+                                        prev += ` <p>${result3[i].semester}</p>\n`;
+                                        if(result3[i].approval_phase == 0)
+                                            prev += `<p style = "color:red;">&#x2716; Rejected</p>\n`;
+                                        else if(result3[i].approval_phase == 3)
+                                            prev += `<p style = "color:green;">&#x2714; Submitted</p>\n`;
+                                        else
+                                            prev += `<p style = "color:orange;">&#x26A0; In Progress</p>\n`;
+                                        if(result3[i].approval_phase == 1)
+                                            prev += `<p>&#x2780; On PRC Approval</p>`;
+                                        else if(result3[i].approval_phase == 2)
+                                            prev += `<p>&#x2781; On DC Approval</p>`;
+                                        else
+                                            prev += `<p>&#x2782; DC Approved</p>`;
+                                        var d = result3[i].date_time.toString();
+                                        console.log(d);
+                                        var dd = d.split(" ");
+                                        prev += `<p>${util.format("%s %s %s",dd[2],dd[1],dd[3])}</p>`;
+                                        if(result3[i].approval_phase == 0)
+                                            prev += `<a href="/removeReport?sid=${userid}&sem=${result[i].semester}&file=${result[i].file_name}" target="_blank">Click Here to Re-Upload</a>`;
+                                        else
+                                            prev += `<a href="uploads/report/${result3[i].file_name}" target="_blank">Click Here to Download</a>`;
+                                        prev += "</div>";
+                                        prev_reports += prev;
+                                    }
+                                    studentMain = studentMain.replace("{%prevReport%}",prev_reports);
+                                    res.send(studentMain);
+                               // }
+                                // catch(e){
+                                //     var options = "";
+                                //     var rem_sems = [1,2,3,4,5,6,7,8];
+                                //     for(i=0;i<rem_sems.length;i++)
+                                //         options = options + `<option value="Semester ${rem_sems[i]}">Semester ${rem_sems[i]}</option>\n`;
+                                   
+                                //     studentMain = studentMain.replace("{%semesterSelect%}",options);
+                                //     studentMain = studentMain.replace("{%semesterSelect%}",options);
+                                //     res.send(studentMain);
+                                // }
+                            });
                         });
                     });
                     //res.send("<h1>Congratulations, your registration is completed</h1><h2>Your Enrollment ID:" + results[0].enrollment_id + "</h2>");
@@ -121,8 +189,21 @@ const downloadReport = (req, res) => {
         }
     });
 }
+
+const removeReport = (req,res) => {
+    const stud_id = req.query.sid;
+    const sem = req.query.sem;
+    const file = req.query.file;
+   // fs.unlinkSync(`uploads/report/${file}`);
+    var qry = `delete from six_monthly_report where stud_id = "${stud_id}" and semester = "${sem}";`;
+    con.qry(qry,(err,result,field) => {
+        console.log("hello");
+        res.send(`<h1>Successfully Removed the File</h1></a href="/logOut">Log Out</a>`);
+    });
+}
 module.exports = {
     studentPage,
     submitReport,
-    downloadReport
+    downloadReport,
+    removeReport
 }

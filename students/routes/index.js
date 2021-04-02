@@ -3,7 +3,7 @@ const router = express.Router()
 const { homePage, login, logout } = require('./controllers/loginController');
 const { registerPage, validate, verify } = require('./controllers/registerController');
 const { applicationFormPage, applicationFormSubmit, downloadPDF } = require('./controllers/applicationFormController');
-const { studentPage, submitReport, downloadReport } = require('./controllers/studentController');
+const { studentPage, submitReport, downloadReport, removeReport } = require('./controllers/studentController');
 const { supervisorPage, assignRAC, racSubmit } = require('./controllers/supervisorController');
 const { supervisorApprovalController } = require('./controllers/supervisorApprovalController');
 const { prcPage, prcApprovalController,prcReportApproval, prcReportApprovalSubmit } = require('./controllers/prcController');
@@ -18,6 +18,7 @@ router.get("/", homePage);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/registerPage", registerPage);
+router.get("/removeReport",removeReport);
 router.post("/validate", validate);
 router.post("/verify", verify);
 router.get("/applicationFormPage", applicationFormPage);
