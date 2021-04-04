@@ -55,7 +55,7 @@ const dcReportApproval = (req,res) => {
                     var listString = listString + "<div class='det1'>" + results[i].semester + "</div>";
                     var listString = listString + `<div class="det1"><a href='/downloadReport?stud_id=${results[i].stud_id}&semester=${results[i].semester}'>View Report</a></div>`;
                     //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
-                    var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].file_name + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
+                    var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].file_name + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].file_name + "_reject' value='Discard' class='discard'></div></div>";
     
                 }
                 htmlFile = htmlFile.replace("{%list%}", listString);
@@ -98,14 +98,14 @@ const dcReportApprovalSubmit = (req, res) => {
     var qry;
     var status_id;
     if (status === "reject") {
-        qry = "UPDATE six_monthly_report SET approval_phase = 0 WHERE file_name = '" + file_name + "';";
+        qry = "UPDATE six_monthly_report SET approval_phase = '0' WHERE file_name = '" + file_name + "';";
         status_id = "Successfully Discarded";
     } else {
-        qry = "UPDATE six_monthly_report SET approval_phase = 3 WHERE file_name = '" + file_name + "';";
+        qry = "UPDATE six_monthly_report SET approval_phase = '3' WHERE file_name = '" + file_name + "';";
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/prcPage'>" + status_id + "</a><h1>");
+        res.send("<h1><a href='/dcPageReport'>" + status_id + "</a><h1>");
     });
 };
 

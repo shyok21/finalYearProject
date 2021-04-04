@@ -57,7 +57,7 @@ const studentPage = (req, res) => {
                                     }
                                     var options = "";
                                     for(i=0;i<rem_sems.length;i++)
-                                        options = options + `<option value="Semester ${rem_sems[i]}">Semester ${rem_sems[i]}</option>\n`;
+                                        options = options + `<option value="Semester${rem_sems[i]}">Semester ${rem_sems[i]}</option>\n`;
                                    
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
@@ -91,7 +91,7 @@ const studentPage = (req, res) => {
                                         var dd = d.split(" ");
                                         prev += `<p>${util.format("%s %s %s",dd[2],dd[1],dd[3])}</p>`;
                                         if(result3[i].approval_phase == 0)
-                                            prev += `<a href="/removeReport?sid=${userid}&sem=${result[i].semester}&file=${result[i].file_name}" target="_blank">Click Here to Re-Upload</a>`;
+                                            prev += `<a href="/removeReport?sid=${userid}&sem=${result3[i].semester}&file=${result3[i].file_name}" target="_blank">Click Here to Re-Upload</a>`;
                                         else
                                             prev += `<a href="uploads/report/${result3[i].file_name}" target="_blank">Click Here to Download</a>`;
                                         prev += "</div>";

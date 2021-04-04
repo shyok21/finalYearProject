@@ -4,7 +4,8 @@ const con = mysql.createConnection({
     host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
     user: "admin",
     password: "A987yuBU",
-	database: "phd_management"
+    database: "phd_management",
+    multipleStatements: true
 });
 
 con.connect(function(err) {
