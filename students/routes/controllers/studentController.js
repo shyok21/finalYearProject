@@ -42,8 +42,8 @@ const studentPage = (req, res) => {
                             var studentMain = studentMain.replace("{%supervisor%}",supervisor);
                             var studentMain = studentMain.replace("{%theme%}",theme);
                             var studentMain = studentMain.replace("{%studentPhoto%}",photo);
-                            var qry2 = `select * from six_monthly_report where stud_id = '${userid}' order by semester;`;
-                            con.query(qry2,(err,result3,field3) => {
+                            var qry3 = `select * from six_monthly_report where stud_id = '${userid}' order by semester;`;
+                            con.query(qry3,(err,result3,field3) => {
                                //  try{
                                     var rem_sems = [];
                                     var sems = [];
@@ -196,9 +196,8 @@ const removeReport = (req,res) => {
     const file = req.query.file;
    // fs.unlinkSync(`uploads/report/${file}`);
     var qry = `delete from six_monthly_report where stud_id = "${stud_id}" and semester = "${sem}";`;
-    con.qry(qry,(err,result,field) => {
-        console.log("hello");
-        res.send(`<h1>Successfully Removed the File</h1></a href="/logOut">Log Out</a>`);
+    con.query(qry,(err,result,field) => {
+        res.send(`<h1>Successfully Removed the File</h1><a href="/logOut">Log Out</a>`);
     });
 }
 module.exports = {
