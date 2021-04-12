@@ -10,6 +10,7 @@ const dcPage = (req, res) => {
     <a href="/dcPage" class="active">Registration Approval</a>
     <a href="/dcPageReport" class="nactive">Report Submit Approval</a>
 </div>`);
+    htmlFile = htmlFile.replace("{%supTag%}","");
     htmlFile = htmlFile.replace("{%name%}", sess.userid);
     htmlFile = htmlFile.replace("{%action%}", "dcApproval");
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and registration_phase = 3";

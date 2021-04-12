@@ -10,6 +10,7 @@ const prcPage = (req, res) => {
     <a href="/prcPage" class="active">Registration Approval</a>
     <a href="/prcPageReport" class="nactive">Report Submit Approval</a>
 </div>`);
+    htmlFile = htmlFile.replace("{%supTag%}","");
     htmlFile = htmlFile.replace("{%name%}", sess.userid);
     htmlFile = htmlFile.replace("{%action%}", "prcApproval");
     var qry = "select * from student s left join prc p on s.dept_id = p.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
