@@ -13,9 +13,10 @@
 <body>
     <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
-        <h1>Select Examiners:</h1>
+        <h1>Select Examiners for {%studId%}</h1>
+       
         <form action="/addedExaminer" method="POST" class="form-class">
-        <input type="hidden" value="{%studId%}" name="student">
+            <input type="hidden" value="{%studId%}" name="student">
             <div class="set">
                 <div class="head-set">
                     <p> </p>
@@ -68,7 +69,7 @@
                                 <p style="text-align:center;">State:</p>
                             </div>
                             <div class="set-input">
-                                <input type="text" name="state3" id="state3" value="West Bengal" style="width:90%;" readonly>
+                                <input type="text" name="state1" id="state1" value="West Bengal" style="width:90%;" readonly>
                             </div>
                         </div>
                         <div class="set-space1">
@@ -121,7 +122,7 @@
                                 <p style="text-align:center;">State:</p>
                             </div>
                             <div class="set-input">
-                                <input type="text" name="state3" id="state3" value="West Bengal" style="width:90%;" readonly>
+                                <input type="text" name="state2" id="state2" value="West Bengal" style="width:90%;" readonly>
                             </div>
                         </div>
                         <div class="set-space1">

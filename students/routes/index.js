@@ -13,7 +13,7 @@ const getFaculties = require('./apis/getFaculties.js');
 const getDepartments = require('./apis/getDepartments.js');
 const getProfessors = require('./apis/getProfessors.js');
 const getProfessorDesignation = require('./apis/getProfessorDesignation.js');
-const { examinerPage,addExaminer } = require('./controllers/examinerController');
+const { examinerPage,addExaminer,addExam } = require('./controllers/examinerController');
 
 router.get("/", homePage);
 router.post("/login", login);
@@ -40,6 +40,7 @@ router.get("/dcPageReport",dcReportApproval);
 router.post("/dcReportApprovalSubmit",dcReportApprovalSubmit);
 router.get("/myStudents",examinerPage);
 router.post("/selectExaminer",addExaminer);
+router.post("/addedExaminer",addExam);
 router.post("/specialDB", specialPage);
 router.post("/searchDB", specialSearchPage);
 router.post("/submitReport", submitReport);

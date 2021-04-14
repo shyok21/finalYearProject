@@ -70,9 +70,16 @@ const examinerPage = (req,res) => {
 };
 const addExaminer = (req,res) => {
     var studentId = Object.keys(req.body)[0];
-    res.send(studentId);
+    var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
+    htmlFile = htmlFile.replace("{%studId%}",studentId);
+    htmlFile = htmlFile.replace("{%studId%}",studentId);
+    res.send(htmlFile);
+}
+const addExam = (req,res) => {
+    res.send(req.body);
 }
 module.exports = {
     examinerPage,
-    addExaminer
+    addExaminer,
+    addExam
 }
