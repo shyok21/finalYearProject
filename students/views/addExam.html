@@ -482,17 +482,18 @@
         </form>
     </div>
     <script>
-        var data = [
-            ['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262'],
-            ['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458'],
-            ['shubhamgoel@gmail.com','Shubham Goel','Intern','Kolkata','West Bengal','438963476'],
-            ['roopkathasamantha@gmail.com','roopkata Samantha','Intern','Kolkata','West Bengal','8932552325'],
-            ['susvicky393@gmail.com','Sushant Shaw','Intern','Kolkata','West Bengal','3046346730'],
-            ['souvikkapri1998@gmail.com','Souvik Kapri','Intern','Durgapur','West Bengal','9832586240'],
-            ['dddeepak888@gmail.com','Deepak Kumar','Student','Bangalore','Karnataka','7382446369'],
-            ['aman19fist@gmail.com','Aman Saini','Student','Vadodara','Gujarat','983252532'],
-            ['priyanshutirkey@gmail.com','Priyanshu Tirkey','SDE','Ranchi','Jharkhand','890024762']
-        ];
+        // var data = [
+        //     ['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262'],
+        //     ['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458'],
+        //     ['shubhamgoel@gmail.com','Shubham Goel','Intern','Kolkata','West Bengal','438963476'],
+        //     ['roopkathasamantha@gmail.com','roopkata Samantha','Intern','Kolkata','West Bengal','8932552325'],
+        //     ['susvicky393@gmail.com','Sushant Shaw','Intern','Kolkata','West Bengal','3046346730'],
+        //     ['souvikkapri1998@gmail.com','Souvik Kapri','Intern','Durgapur','West Bengal','9832586240'],
+        //     ['dddeepak888@gmail.com','Deepak Kumar','Student','Bangalore','Karnataka','7382446369'],
+        //     ['aman19fist@gmail.com','Aman Saini','Student','Vadodara','Gujarat','983252532'],
+        //     ['priyanshutirkey@gmail.com','Priyanshu Tirkey','SDE','Ranchi','Jharkhand','890024762']
+        // ];
+        {%data%}
         function getData(x,id){
             var retData = [];
             var y = parseInt(id);
@@ -504,7 +505,7 @@
                 }
                 return retData;
             }
-            else if(y > 4 && y < 7){
+            else if(y >= 4 && y < 7){
                 for(var i=0;i<data.length;i++)
                 {
                     if(data[i][0].includes(x) && data[i][4] != 'West Bengal')
@@ -542,6 +543,7 @@
         }
         function checkEmail(id){
             //console.log(xyz);
+            document.getElementById("space"+id).innerHTML = "";
             try{
             var del = document.getElementById("selecttemp"+id);
             del.remove();
@@ -580,9 +582,12 @@
                     del.remove();
                     var del2 = document.getElementById("buttontemp"+id);
                     del2.remove();
+                    
                 }
                 catch(e){
                 }
+                document.getElementById("space"+id).innerHTML = "Email not found in Database! Add new Examiner!";
+                document.getElementById("space"+id).setAttribute('style','margin-left:5%;color:red;font-size:0.9em;');
             }
         }
     </script>

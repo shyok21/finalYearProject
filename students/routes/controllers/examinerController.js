@@ -71,12 +71,47 @@ const examinerPage = (req,res) => {
 const addExaminer = (req,res) => {
     var studentId = Object.keys(req.body)[0];
     var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
-    htmlFile = htmlFile.replace("{%studId%}",studentId);
-    htmlFile = htmlFile.replace("{%studId%}",studentId);
-    res.send(htmlFile);
+    con.query(`select* from External`,(err,result,field) => {
+        var script = "var data = [";
+        for(var i=0;i<result.length;i++)
+        {
+            if(result[i].Student_ID == studentId)
+            {
+                res.send("<h1 style='color:red;'>Examiner already selected for this Student</h1>");
+                return;
+            }
+            script += `['${result[i].Email}','${result[i].Name}','${result[i].Designation}','${result[i].Address}','${result[i].State}','${result[i].Mobile}']`;
+            if(i != result.length-1)
+                script += ',';
+        }
+        script += `];`;
+
+        htmlFile = htmlFile.replace("{%studId%}",studentId);
+        htmlFile = htmlFile.replace("{%studId%}",studentId);
+        htmlFile = htmlFile.replace("{%data%}",script);
+        res.send(htmlFile);
+    });
 }
 const addExam = (req,res) => {
-    res.send(req.body);
+    var x = req.body;
+    var studentId = x.student;
+    var qry = `insert into External (Name,Designation,Address,Email,Mobile,Student_ID,Type,State,Country) values`;
+    qry += `("${x.name1}","${x.designation1}","${x.address1}","${x.email1}","${x.mobile1}","${studentId}",1,"West Bengal","INDIA"),`;
+    qry += `("${x.name2}","${x.designation2}","${x.address2}","${x.email2}","${x.mobile2}","${studentId}",1,"West Bengal","INDIA"),`;
+    qry += `("${x.name3}","${x.designation3}","${x.address3}","${x.email3}","${x.mobile3}","${studentId}",1,"West Bengal","INDIA"),`;
+    qry += `("${x.name4}","${x.designation4}","${x.address4}","${x.email4}","${x.mobile4}","${studentId}",2,"${x.state4}","INDIA"),`;
+    qry += `("${x.name5}","${x.designation5}","${x.address5}","${x.email5}","${x.mobile5}","${studentId}",2,"${x.state5}","INDIA"),`;
+    qry += `("${x.name6}","${x.designation6}","${x.address6}","${x.email6}","${x.mobile6}","${studentId}",2,"${x.state6}","INDIA"),`;
+    qry += `("${x.name7}","${x.designation7}","${x.address7}","${x.email7}","${x.mobile7}","${studentId}",3,"${x.state7}","INDIA"),`;
+    qry += `("${x.name8}","${x.designation8}","${x.address8}","${x.email8}","${x.mobile8}","${studentId}",3,"${x.state8}","INDIA");`;
+    con.query(qry,(err,result,field) => {
+        if (err)
+        {
+            res.send("<h1 style='color:red;'>Examiner already selected for this Student</h1>");
+            throw err;
+        }
+        res.send("<h1 style='color:green;'>Examiner Added Successfully</h1>");
+    });
 }
 module.exports = {
     examinerPage,
