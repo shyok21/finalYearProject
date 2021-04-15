@@ -63,14 +63,13 @@ const login = (req, res) => {
                     var sess = req.session;
                     sess.email = usr;
                     sess.userid = dc_id;
-                    res.redirect('/dcPage');
-                } else {
-                            
-                        var prc_id = result[0].id;
-                        var sess = req.session;
-                        sess.email = usr;
-                        sess.userid = prc_id;
-                        res.redirect('/prcPage');
+                    res.redirect('/dcRegistrationApproval');
+                } else { 
+                    var prc_id = result[0].id;
+                    var sess = req.session;
+                    sess.email = usr;
+                    sess.userid = prc_id;
+                    res.redirect('/prcRegistrationApproval');
                 }
             }
         });

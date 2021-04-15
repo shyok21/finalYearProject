@@ -49,6 +49,7 @@ const validate = (req, res) => {
                 res.send(sendAccFile);
             } else {
                 verify_code = randomstring.generate(8);
+                console.log('Verification code: ' + verify_code);
                 var transporter = nodemailer.createTransport({
                     service: 'gmail',
                     port: 587,

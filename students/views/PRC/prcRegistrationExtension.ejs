@@ -11,15 +11,15 @@
 <body>
     <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
-        <div class="intro">
-            <p>Hello {%name%}. Here are the list of students.</p>
-            <a href="/logOut">Log Out</a>
-        </div>
-        <!-- <form class="list" name="lists" action="/supervisorApproval" method="POST"> -->
-        <a href="#">Registration Approval</a>
-        <a href="#">Report Submit Approval</a>
-        <form class="list" name="lists" action="/{%action%}" method="POST">
-            {%list%}
+        <%- include('prcCommon.ejs', {name: name}) %>
+        <form method="POST" action="/prcRegistrationExtensionSubmit">
+            <label for="stud_id">Student Name</label><br>
+            <select name="stud_id" >
+                <% results.forEach(function(result) { %>
+                <option value = <%= result.stud_id %> ><%= result.name %></option>
+                <% }); %>
+            </select><br>
+            <input type="submit" name="submit" value="Submit request">
         </form>
     </div>
 </body>

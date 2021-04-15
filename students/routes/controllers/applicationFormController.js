@@ -73,13 +73,15 @@ const applicationFormSubmit = (req, res) => {
                         
                             
                             const registration_phase = 1;
+                            const date_of_admission = new Date();
+                            const passout_date = new Date(new Date().setFullYear(new Date().getFullYear() + 3));
                             var query = util.format(
                                 `insert into student 
-                                (stud_id, name, nationality, dob, sex, marritial_status, parent_name, perm_address, addr_for_communication, mobile_no, category, present_emp_org, present_org_work, proposed_theme, proposed_statement_of_purpose, proposed_institute, registration_phase, supervisor_id, dept_id )
-                                values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s', '%d','%s','%s');`, 
+                                (stud_id, name, nationality, dob, sex, marritial_status, parent_name, perm_address, addr_for_communication, mobile_no, category, present_emp_org, present_org_work, proposed_theme, proposed_statement_of_purpose, proposed_institute, registration_phase, supervisor_id, dept_id, date_of_admission, passout_date )
+                                values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s', '%d','%s','%s', '%s', '%s');`, 
                                 sess.userid, student_name, nationality, dob, sex, marital_status, parent_name, 
                                 address1, address2, mobile_no, category, org_name, nature_of_work, title, sop, 
-                                proposed_institute, registration_phase, supervisor_id, dep_id
+                                proposed_institute, registration_phase, supervisor_id, dep_id, date_of_admission, passout_date
                             );
                             con.query(query, (err, results, fields) => {
                                 if(err) {

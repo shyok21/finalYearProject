@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/supervisor.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <div class="main-content">
+        <%- include('prcCommon.ejs', {name: name}) %>
+        <% if(results.length == 0) { %>
+            <p>No Approval list</p>
+        <% } else { %>
+            <form class="list" name="lists" action="/prcRegistrationApprovalSubmit" method="POST">
+            <% results.forEach(function(result) { %>
+                    <div class='list1'>
+                        <div class='det1'><%= result.name %></div>
+                        <div class='det1'><%= result.nationality %></div>
+                        <div class='det1'><%= result.dob %></div>
+                        <div class='det1'><%= result.sex %></div>
+                        <div class='det1'><%= result.proposed_theme %></div>
+                        <div class='det1'><a href='/downloadPDF?stud_id=' + <%=result.stud_id%> >Check Form</a></div>
+                        <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard' class='discard'></div>    
+                    </div>
+            <%  }); %>
+                </form>
+        <% } %>
+    </div>
+</body>
+
+</html>

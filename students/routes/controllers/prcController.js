@@ -1,70 +1,17 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
+const multer  = require('multer');
 
-const prcPage = (req, res) => {
-    var htmlFile = fs.readFileSync("views/supervisor.html", "utf-8");
+const prcRegistrationApproval = (req, res) => {
     var sess = req.session;
-    htmlFile = htmlFile.replace("{%prcDcTag%}",`<div style="height:12rem;width:100rem;z-index:-1;position:fixed;background-color:#efefef;"></div>`);
-    htmlFile = htmlFile.replace("{%prcDcButton%}",`<div class="button-class">
-    <a href="/prcPage" class="active">Registration Approval</a>
-    <a href="/prcPageReport" class="nactive">Report Submit Approval</a>
-</div>`);
-    htmlFile = htmlFile.replace("{%supTag%}","");
-    htmlFile = htmlFile.replace("{%name%}", sess.userid);
-    htmlFile = htmlFile.replace("{%action%}", "prcApproval");
     var qry = "select * from student s left join prc p on s.dept_id = p.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
     con.query(qry, (err, results, fields) => {
-        if (results.length == 0)
-            htmlFile = htmlFile.replace("{%list%}", "No Approval List");
-        else {
-            var listString = "";
-            for (var i = 0; i < results.length; i++) {
-                var listString = listString + "<div class='list1'>";
-                var listString = listString + "<div class='det1'>" + results[i].name + "</div>";
-                var listString = listString + "<div class='det1'>" + results[i].nationality + "</div>";
-                var listString = listString + "<div class='det1'>" + results[i].dob + "</div>";
-                var listString = listString + "<div class='det1'>" + results[i].sex + "</div>";
-                var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
-                var listString = listString + `<div class="det1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
-                //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
-                var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
-
-            }
-            htmlFile = htmlFile.replace("{%list%}", listString);
-        }
-        res.send(htmlFile);
+        res.render('PRC/prcRegistrationApproval', {name: sess.userid, results: results});
     });
 };
-const prcReportApproval = (req,res) => {
-    var htmlFile = fs.readFileSync("views/reportView.html", "utf-8");
-    var sess = req.session;
-    htmlFile = htmlFile.replace("{%name%}", sess.userid);
-    for(var i=0;i<3;i++)
-        htmlFile = htmlFile.replace("{%prcodc%}","prc");
-    var qry = "select * from student s join six_monthly_report r join prc p on s.stud_id = r.stud_id and p.dept_id = s.dept_id where approval_phase='1' and prc_id='" + sess.userid + "'";
-    con.query(qry, (err, results, fields) => {
-        if (results.length == 0)
-            htmlFile = htmlFile.replace("{%list%}", "No Approval List");
-        else {
-            var listString = "";
-            
-            for (var i = 0; i < results.length; i++) {
-                var listString = listString + "<div class='list1'>";
-                var listString = listString + "<div class='det1'>" + results[i].name + "</div>";
-                var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
-                var listString = listString + "<div class='det1'>" + results[i].semester + "</div>";
-                var listString = listString + `<div class="det1"><a href='/downloadReport?stud_id=${results[i].stud_id}&semester=${results[i].semester}'>View Report</a></div>`;
-                //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
-                var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].file_name + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].file_name + "_reject' value='Discard' class='discard'></div></div>";
 
-            }
-            htmlFile = htmlFile.replace("{%list%}", listString);
-        }
-        res.send(htmlFile);
-    });
-};
-const prcApprovalController = (req, res) => {
+const prcRegistrationApprovalSubmit = (req, res) => {
     var str = Object.keys(req.body)[0];
     var n = str.indexOf("_");
     var stud_id = str.substring(0, n);
@@ -83,7 +30,15 @@ const prcApprovalController = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/prcPage'>" + status_id + "</a><h1>");
+        res.send("<h1><a href='/prcRegistrationApproval'>" + status_id + "</a><h1>");
+    });
+};
+
+const prcReportApproval = (req,res) => {
+    var sess = req.session;
+    var qry = "select * from student s join six_monthly_report r join prc p on s.stud_id = r.stud_id and p.dept_id = s.dept_id where approval_phase='1' and prc_id='" + sess.userid + "'";
+    con.query(qry, (err, results, fields) => {
+        res.render('PRC/prcReportApproval', {name: sess.userid, results: results});
     });
 };
 
@@ -106,13 +61,134 @@ const prcReportApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/prcPageReport'>" + status_id + "</a><h1>");
+        res.send("<h1><a href='/prcReportApproval'>" + status_id + "</a><h1>");
     });
 };
 
+const prcVivaReport = (req,res) => {
+    var sess = req.session;
+    var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
+    con.query(qry, (err, results, fields) => {
+        res.render('PRC/prcVivaReport', {name: sess.userid, results: results});
+    });
+};
+
+const prcVivaReportSubmit = (req,res) => {
+    var sess = req.session;
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, 'uploads/' + file.fieldname)
+        },
+        filename: function (req, file, cb) {
+          cb(null, Date.now() + '.pdf');
+        }
+    });
+
+    var upload = multer({ storage }).fields(
+        [{ 
+            name: 'viva_report', maxCount: 1 
+        }]
+    );
+
+    upload(req, res, function (err) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        } else {
+            const filename = req.files['viva_report'][0].filename;
+            var qry = util.format(
+                `update student set viva_report_filename = "%s" where stud_id = "%s"`,
+                filename, req.body.stud_id
+            );
+            con.query(qry, (err, result, fields) => {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                }
+                else {
+                    console.log("Report submitted successfully");
+                    res.send('<h1>Report submission successful</h1><a href="/prcVivaReport">Go to main page</a>');
+                }    
+            })
+        }
+    });
+};
+
+const downloadVivaReport = (req,res) => {
+    const filename = req.query.filename;
+    const path = "uploads/viva_report/" + filename;
+
+    res.download(path, function (err) {
+        if (err) {
+            console.log("Error");
+            console.log(err);
+        } else {
+            console.log("Success");
+        }
+    });
+}
+const prcTitleChange = (req,res) => {
+    var sess = req.session;
+    var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
+    con.query(qry, (err, results, fields) => {
+        res.render('PRC/prcTitleChange', {name: sess.userid, results: results});
+    });
+};
+
+const prcTitleChangeSubmit = (req,res) => {
+    var sess = req.session;
+    var qry = util.format(
+        `update student set new_title = '%s' where stud_id = "%s"`,
+        req.body.new_title, req.body.stud_id
+    );
+    con.query(qry, (err, result, fields) => {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        else {
+            console.log("Title change request submitted successfully");
+            res.send('<h1>Title change request submitted successfully</h1><a href="/prcTitleChange">Go to main page</a>');
+        }    
+    })
+};
+
+const prcRegistrationExtension = (req,res) => {
+    var sess = req.session;
+    var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
+    con.query(qry, (err, results, fields) => {
+        res.render('PRC/prcRegistrationExtension', {name: sess.userid, results: results});
+    });
+};
+
+const prcRegistrationExtensionSubmit = (req,res) => {
+    var sess = req.session;
+    var qry = util.format(
+        `update student set extension_requested = 'Y' where stud_id = "%s"`,
+        req.body.stud_id
+    );
+    con.query(qry, (err, result, fields) => {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        else {
+            console.log("Extension request submitted successfully");
+            res.send('<h1>Extension request submitted successfully</h1><a href="/prcRegistrationExtension">Go to main page</a>');
+        }    
+    })
+};
+
 module.exports = {
-    prcPage,
-    prcApprovalController,
+    prcRegistrationApproval,
+    prcRegistrationApprovalSubmit,
     prcReportApproval,
-    prcReportApprovalSubmit
+    prcReportApprovalSubmit,
+    prcVivaReport,
+    prcVivaReportSubmit,
+    downloadVivaReport,
+    prcTitleChange,
+    prcTitleChangeSubmit,
+    prcRegistrationExtension,
+    prcRegistrationExtensionSubmit
 }
