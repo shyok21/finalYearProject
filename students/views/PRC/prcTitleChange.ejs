@@ -14,16 +14,22 @@
         <%- include('../commons/header.ejs', {name: name}) %>
         <div class="menu-class">
         <%- include('prcMenu.ejs', {active: 4}) %>
-        <form method="POST" action="/prcTitleChangeSubmit">
-            <label for="stud_id">Student Name</label><br>
-            <select name="stud_id" >
-                <% results.forEach(function(result) { %>
-                <option value = <%= result.stud_id %> ><%= result.name %></option>
-                <% }); %>
-            </select><br>
-            <label for="new_title">Enter new title:</label></br>
-            <input name="new_title" required><br>
-            <input type="submit" name="submit" value="Submit Title">
+        <form method="POST" action="/prcTitleChangeSubmit" class="form-class">
+            <div class="dets1">
+                <label for="stud_id">Student Name:</label>
+                <select name="stud_id" >
+                    <% results.forEach(function(result) { %>
+                    <option value = <%= result.stud_id %> ><%= result.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="dets1">
+                <label for="new_title">Enter new title:</label>
+                <input name="new_title" required>
+            </div>
+            <div class="dets2">
+                <input type="submit" name="submit" value="Submit Title">
+            </div>
         </form>
         </div>
     </div>

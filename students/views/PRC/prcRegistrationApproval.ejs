@@ -15,7 +15,7 @@
         <div class="menu-class">
         <%- include('prcMenu.ejs', {active: 1}) %>
         <% if(results.length == 0) { %>
-            <p>No Approval list</p>
+            <p style="text-align:center;width:80%;">No Approval list</p>
         <% } else { %>
             <form class="list" name="lists" action="/prcRegistrationApprovalSubmit" method="POST">
             <% results.forEach(function(result,index) { %>
@@ -26,7 +26,7 @@
                     <div class='det1'><%= result.sex %></div>
                     <div class='det1'><%= result.proposed_theme %></div>
                     <div class='det1'><a href='/downloadPDF?stud_id=' + <%=result.stud_id%> >Check Form</a></div>
-                    <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard' class='discard'></div>    
+                    <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard &#x2716;' class='discard'></div>    
                 </div>
             <%  }); %>
             </form>
