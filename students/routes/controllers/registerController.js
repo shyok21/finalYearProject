@@ -56,13 +56,13 @@ const validate = (req, res) => {
                     secure: false,
                     requireTLS: true,
                     auth: {
-                        user: 'notifyserver123@gmail.com',
-                        pass: 'categorized123'
+                        user: 'ju.phdms2021@gmail.com',
+                        pass: 'Ju.phdms2021@'
                     }
                 });
                 var mailOptions = {
-                    from: 'notifyserver123@gmail.com',
-                    to: 'ju.phdms2021@gmail.com', // REMEMBER TO CHANGE THIS LATER!!!!!!
+                    from: 'ju.phdms2021@gmail.com',
+                    to: 'notifyserver123@gmail.com', // REMEMBER TO CHANGE THIS LATER!!!!!!
                     subject: 'Verification Code: Admins Of Jadavpur University',
                     html: '<p>Hello,</p><p>Your Verification Code is:<h3>' + verify_code + '</h3></p><p>Please Dont send this to anyone</p>'
                 };
