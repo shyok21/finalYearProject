@@ -1,0 +1,102 @@
+* {box-sizing: border-box}
+
+
+html,body,form{
+  height: 100%;
+  padding:0px;
+  margin:0px;
+}
+
+.container{
+  
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-content {
+  margin-top: 6rem;
+}
+
+.formbody{
+  flex:14;
+  margin: 50px;
+  border: solid 4px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.error h6{
+  color: red;
+  font-size:18px;
+}
+
+.formbody div{
+  text-align: center;
+}
+
+.formbody h1{
+  margin:0px;
+  color:blue;
+  font-size: 50px;
+}
+
+.formbody label{
+  font-size: 20px;
+}
+
+.formbody p{
+  color: red;
+  font-size: 18px;
+}
+
+.formbody form{
+  padding: 30px;
+}
+
+input[type=text], input[type=password] ,input[type=email] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+a {
+  color: dodgerblue;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}

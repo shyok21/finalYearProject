@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box
+}
+
+html,
+body,
+form {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    /* overflow: hidden; */
+}
+
+.main-content {
+    margin-top: 6rem;
+}
+.container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.heading {
+    display: flex;
+    background-color: orange;
+    height: 100%;
+    height: 15%;
+    justify-content: center;
+    align-items: center;
+}
+
+#julogo {
+    width: 5rem;
+    height: 5rem;
+}
+
+#julogo img {
+    width: 90%;
+    height: 90%;
+}
+
+#headnameeng {
+    margin-left: 2%;
+    font-size: 2em;
+}
+
+#headnamebeng {
+    margin-left: 2%;
+    font-size: 1.5em;
+}
+
+.headname {
+    flex: 10;
+}
+
+.formbody {
+    height: 100%;
+    height: 85%;
+    margin: 1%;
+    border: solid;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.formbody div {
+    text-align: center;
+}
+
+.formhead {
+    flex: 1;
+}
+
+.formhead h1 {
+    font-size: 4em;
+    color: #5375e2;
+}
+
+.formdesc {
+    height: 10%;
+    flex: 8;
+}
+
+.formdesc h3 {
+    margin-top: 0%;
+    color: red;
+    font-size: 2em;
+}
+
+.dropdown1 {
+    flex: 5;
+}
+
+.dropdown1 select {
+    padding: 7px;
+    width: 30%;
+    background-color: aqua;
+    border: solid 5px;
+    border-radius: 16px;
+    font-size: 1.5em;
+}
+
+.dropdown1 option {
+    font-size: 0.9em;
+    background-color: aqua;
+}
+
+.formbtn {
+    height: 10%;
+    flex: 15;
+    margin-top: 5%;
+}
+
+.btn {
+    height: 24%;
+    width: 10%;
+    margin: 1%;
+    border-radius: 10px;
+    border-style: none;
+    background-color: #5375e2;
+    color: #fefefe;
+    font-size: 1.1em;
+}
