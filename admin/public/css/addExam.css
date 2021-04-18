@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Slab', serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    overflow-y:scroll;
+    overflow-x:hidden; 
+}
+.main-content{
+    width:100%;
+    height:100%;
+    margin-top:6rem;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+}
+.list{
+    width:20%;
+    height:60%;
+    margin:2%;
+    background-image:linear-gradient(to top,#26D0CE,#1A2980);
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+.list>img{
+    width:105px;
+    height:135px;
+    border-color:white;
+    border-width:2px;
+    border-style:solid;
+}
+.g1{
+    height:10%;
+    font-weight:bold;
+    font-size:1.3em;
+    margin:1%;
+    color:#9ae2e3;
+}
+.g2{
+    height:7%;
+    font-weight:bold;
+    font-size:0.9em;
+    margin:1%;
+    color:#072a60;
+}
+.g3{
+    height:5%;
+    font-weight:bold;
+    font-size:0.7em;
+    color:#1A2980;
+    margin:1%;
+}
+.list>input{
+    height:10%;
+    width:50%;
+    margin:1%;
+    border:none;
+    background-image:linear-gradient(to left,#348F50,#56B4D3);
+    border-radius:4px;
+}
+.list>input:hover{
+    background-image:linear-gradient(to right,#348F50,#56B4D3);
+    cursor:pointer;
+}

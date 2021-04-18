@@ -317,7 +317,24 @@ con.connect(function(err) {
             }
         });
     });
-
+    app.post('/addExaminer',(req,res) => {
+        con.query('select * from student s left join department d on s.dept_id = d.dept_id left join faculty f on f.fac_id = d.fac_id where s.stud_id in (select distinct Student_ID from External);',(err,result,field) => {
+            var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
+            var formText = "";
+            for(var i=0;i<result.length;i++)
+            {
+                formText += `<form class="list" method='POST' action='/selectExams'>`;
+                formText += `<img src="./student_photo/${result[i].stud_id}" alt="Couldn't Load Image" >`;
+                formText += `<div class="g1">${result[i].name}</div>`;
+                formText += `<div class="g2">${result[i].dept_name}</div>`;
+                formText += `<div class="g3">${result[i].fac_name}</div>`;
+                formText += `<input type="Submit" name="${result[i].stud_id}" value="Select Examiners">`;
+                formText += `</form>`;
+            }
+            htmlFile = htmlFile.replace("{%forms%}",formText);
+            res.send(htmlFile);
+        });
+    });
     app.listen(port, () => {
         console.log("Server Created!");
         console.log("http://localhost:" + port + "/");
