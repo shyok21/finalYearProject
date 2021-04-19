@@ -317,7 +317,7 @@ con.connect(function(err) {
             }
         });
     });
-    app.post('/addExaminer',(req,res) => {
+    app.post('/addExaminer',urlencodedParser,(req,res) => {
         con.query('select * from student s left join department d on s.dept_id = d.dept_id left join faculty f on f.fac_id = d.fac_id where s.stud_id in (select distinct Student_ID from External);',(err,result,field) => {
             var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
             var formText = "";
@@ -334,6 +334,26 @@ con.connect(function(err) {
             htmlFile = htmlFile.replace("{%forms%}",formText);
             res.send(htmlFile);
         });
+    });
+    app.post('/selectExams',urlencodedParser,(req,res) => {
+        var stud_id = Object.keys(req.body)[0];
+        var qry = `select * from External where Student_ID = '${stud_id}' order by Type;`;
+        var htmlFile = fs.readFileSync('views/selectExam.html','utf-8');
+        con.query(qry,(err,result,fields)=>{
+            for(var i=1;i<9;i++)
+            {
+                var r = result[i-1];
+                htmlFile = htmlFile.replace(`{%name${i}%}`,r.Name);
+                htmlFile = htmlFile.replace(`{%designation${i}%}`,r.Designation);
+                htmlFile = htmlFile.replace(`{%email${i}%}`,r.Email);
+                htmlFile = htmlFile.replace(`{%email${i}%}`,r.Email);
+                htmlFile = htmlFile.replace(`{%state${i}%}`,r.State);
+            }
+            res.send(htmlFile);
+        });
+    });
+    app.post('/examSelected',urlencodedParser,(req,res) => {
+        res.send(req.body);
     });
     app.listen(port, () => {
         console.log("Server Created!");
