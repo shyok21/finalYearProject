@@ -15,7 +15,7 @@
         <div class="menu-class">
         <%- include('dcMenu.ejs', {active: 5}) %>
         <% if(results.length == 0) { %>
-            <p>No Approval list</p>
+            <p style="text-align:center;width:80%;">No Approval list</p>
         <% } else { %>
             <form class="list" name="lists" action="/dcRegistrationExtensionSubmit" method="POST">
             <% results.forEach(function(result, index) { %>

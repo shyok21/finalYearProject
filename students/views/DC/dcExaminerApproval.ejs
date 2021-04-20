@@ -10,23 +10,19 @@
 
 <body>
     <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
-    <div class="main-content">        
+    <div class="main-content">
         <%- include('../commons/header.ejs', {name: name}) %>
         <div class="menu-class">
-        <%- include('prcMenu.ejs', {active: 1}) %>
+        <%- include('dcMenu.ejs', {active: 6}) %>
         <% if(results.length == 0) { %>
             <p style="text-align:center;width:80%;">No Approval list</p>
         <% } else { %>
-            <form class="list" name="lists" action="/prcRegistrationApprovalSubmit" method="POST">
-            <% results.forEach(function(result,index) { %>
+            <form class="list" name="lists">
+            <% results.forEach(function(result, index) { %>
                 <div class=<%= index%2 ? 'list1' : 'list2' %>>
                     <div class='det1'><%= result.name %></div>
-                    <div class='det1'><%= result.nationality %></div>
-                    <div class='det1'><%= result.dob %></div>
-                    <div class='det1'><%= result.sex %></div>
                     <div class='det1'><%= result.proposed_theme %></div>
-                    <div class='det1'><a href= <%='/downloadPDF?stud_id=' + result.stud_id%> >Check Form</a></div>
-                    <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard &#x2716;' class='discard'></div>    
+                    <div class='det1'><a href=<%='/dcExaminersList?stud_id=' + result.stud_id%> >View examiners list</a></div>
                 </div>
             <%  }); %>
             </form>

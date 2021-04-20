@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/prcs.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <div class="main-content">
+        <%- include('../commons/header.ejs', {name: name}) %>
+        <div class="menu-class">
+        <%- include('dcMenu.ejs', {active: 6}) %>
+        <% if(results.length == 0) { %>
+            <p style="text-align:center;width:80%;">No Approval list</p>
+        <% } else { %>
+            <form class="list" name="lists"  action="/dcExaminerApprovalSubmit" method="POST">
+                <% results.forEach(function(result, index) { %>
+                    <% if(index == 0) { %>
+                        <h2>In state examiners</h2>
+                    <% } else if(index == 3) { %>
+                        <h2>Out of state examiners</h2>
+                    <% } else if(index == 6) { %> 
+                        <h2>Viva examiners</h2>  
+                    <% } %> 
+                    <div class=<%= index%2 ? 'list1' : 'list2' %>>
+                        <div class='det1'><%= result.Name %></div>
+                        <div class='det1'><%= result.Designation %></div>
+                        <div class='det1'><%= result.Email %></div>
+                        <div class='det1'><%= result.Mobile %></div>
+                        <div class='det1'><%= result.State %></div>
+                    </div>
+                <%  }); %>
+                <div class='det2'><input type='submit' name=<%= results[0].Student_ID + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= results[0].Student_ID + '_reject' %> value='Discard' class='discard'></div>
+            </form>
+        <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

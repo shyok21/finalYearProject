@@ -7,7 +7,7 @@ const { studentPage, submitReport, downloadReport, removeReport } = require('./c
 const { supervisorPage, assignRAC, racSubmit } = require('./controllers/supervisorController');
 const { supervisorApprovalController } = require('./controllers/supervisorApprovalController');
 const { prcRegistrationApproval, prcRegistrationApprovalSubmit, prcReportApproval, prcReportApprovalSubmit, prcVivaReport, prcVivaReportSubmit, downloadVivaReport, prcTitleChange, prcTitleChangeSubmit, prcRegistrationExtension, prcRegistrationExtensionSubmit } = require('./controllers/prcController');
-const { dcRegistrationApproval, dcRegistrationApprovalSubmit,dcReportApproval, dcReportApprovalSubmit, dcVivaReport, dcTitleChange, dcTitleChangeSubmit, dcRegistrationExtension, dcRegistrationExtensionSubmit } = require('./controllers/dcController');
+const { dcRegistrationApproval, dcRegistrationApprovalSubmit,dcReportApproval, dcReportApprovalSubmit, dcVivaReport, dcTitleChange, dcTitleChangeSubmit, dcRegistrationExtension, dcRegistrationExtensionSubmit, dcExaminerApproval, dcExaminersList, dcExaminerApprovalSubmit } = require('./controllers/dcController');
 const { specialPage, specialSearchPage } = require('./controllers/specialController');
 const getFaculties = require('./apis/getFaculties.js');
 const getDepartments = require('./apis/getDepartments.js');
@@ -50,6 +50,9 @@ router.get("/dcTitleChange",dcTitleChange);
 router.post("/dcTitleChangeSubmit",dcTitleChangeSubmit);
 router.get("/dcRegistrationExtension",dcRegistrationExtension);
 router.post("/dcRegistrationExtensionSubmit",dcRegistrationExtensionSubmit);
+router.get("/dcExaminerApproval",dcExaminerApproval);
+router.post("/dcExaminerApprovalSubmit",dcExaminerApprovalSubmit);
+router.get("/dcExaminersList",dcExaminersList);
 router.get("/myStudents",examinerPage);
 router.post("/selectExaminer",addExaminer);
 router.post("/addedExaminer",addExam);

@@ -122,6 +122,43 @@ const dcRegistrationExtensionSubmit = (req, res) => {
     });
 };
 
+const dcExaminerApproval = (req,res) => {
+    var sess = req.session;
+    var qry = "SELECT * FROM student s where examiner_phase = '1'";
+    con.query(qry, (err, results, fields) => {
+        res.render('DC/dcExaminerApproval', {name: sess.userid, results: results});
+    });
+};
+
+const dcExaminersList = (req,res) => {
+    var sess = req.session;
+    var stud_id = req.query.stud_id;
+    var qry = "SELECT * FROM External where Student_ID ='" + stud_id + "'";
+    con.query(qry, (err, results, fields) => {
+        res.render('DC/dcExaminersList', {name: sess.userid, results: results});
+    });
+};
+
+const dcExaminerApprovalSubmit = (req, res) => {
+    var str = Object.keys(req.body)[0];
+    var n = str.indexOf("_");
+    var stud_id = str.substring(0, n);
+    var status = str.substring(n + 1, str.length);
+    
+    var qry;
+    var status_id;
+    if (status === "reject") {
+        qry = "UPDATE student SET examiner_phase = '0' WHERE stud_id = '" + stud_id + "'; DELETE from External where Student_ID = '" + stud_id + "';";
+        status_id = "Successfully Discarded";
+    } else {
+        qry = "UPDATE student SET examiner_phase = '2' WHERE stud_id = '" + stud_id + "';";
+        status_id = "Successfully Approved";
+    }
+    con.query(qry, (err, results, fields) => {
+        res.send("<h1><a href='/dcExaminerApproval'>" + status_id + "</a><h1>");
+    });
+};
+
 module.exports = {
     dcRegistrationApproval,
     dcRegistrationApprovalSubmit,
@@ -131,5 +168,8 @@ module.exports = {
     dcTitleChange,
     dcTitleChangeSubmit,
     dcRegistrationExtension,
-    dcRegistrationExtensionSubmit
+    dcRegistrationExtensionSubmit,
+    dcExaminerApproval,
+    dcExaminersList,
+    dcExaminerApprovalSubmit
 }
