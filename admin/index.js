@@ -353,7 +353,15 @@ con.connect(function(err) {
         });
     });
     app.post('/examSelected',urlencodedParser,(req,res) => {
-        res.send(req.body);
+        var email1 = req.body.instate;
+        var email2 = req.body.outstate;
+        var email3;
+        if(req.body.viva == 'null')
+            email3 = req.body.Email;
+        else
+            email3 = req.body.viva;
+        
+        res.send('Emails Sent Successfully');
     });
     app.listen(port, () => {
         console.log("Server Created!");
