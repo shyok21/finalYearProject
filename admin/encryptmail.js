@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
+var emailChecker;
+var passChecker;
 var randomstring = require("randomstring");
 const mysql = require('mysql');
 const fs = require('fs');
@@ -24,8 +26,22 @@ app.get('/examAccepted',(req,res)=>{
         'iv':req.query.iv,
         'content':req.query.content
     }
-    const text = decrypt(x);
-    res.send(text);
+    var text = decrypt(x);
+    emailChecker = text.split(" ")[0];
+    passChecker = text.split(" ")[1];
+    var html = `
+    	<form action='/examCheck' method="POST">
+    	<input type="hidden" value="AC" name="type">
+    	<input type="text" name="email">
+    	<input type="password" name="pass">
+    	<input type="submit">
+    	</form>
+    `;
+    res.send(html);
+});
+app.post('/examCheck',urlencodedParser,(req,res)=>{
+	var x = `${req.body.}\n${emailChecker} ${passChecker}`;
+	res.send(x);
 });
 const port = 9000;
 app.listen(port, () => {

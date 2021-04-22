@@ -2,6 +2,7 @@ const fs = require('fs');
 const util = require('util');
 const path = require('path');
 const express = require('express');
+var randomstring = require("randomstring");
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -9,7 +10,9 @@ var nodemailer = require('nodemailer');
 var location = require('location-href');
 const url = require('url');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const { encrypt } = require('./services/encrypt')
+//const { encrypt } = require('./services/encrypt')
+
+const { encrypt, decrypt } = require('./crypto');
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
@@ -360,9 +363,102 @@ con.connect(function(err) {
             email3 = req.body.Email;
         else
             email3 = req.body.viva;
-        
+        var email = [email1,email2,email3];
+        for(var i=0;i<email.length;i++)	{
+        	
+    		var htmlFile = fs.readFileSync('main.html','utf-8');
+			const { encrypt, decrypt } = require('./crypto');
+			
+    		var pass = randomstring.generate(10);
+    		var url = `${email[i]} ${pass}`;
+    		const hash = encrypt(url);
+    		htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+    		htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+    		htmlFile = htmlFile.replace('{%username%}',email[i]);
+    		htmlFile = htmlFile.replace('{%password%}',pass);
+        	var transporter = nodemailer.createTransport({
+				service: 'gmail',
+				port: 587,
+				secure: false,
+				requireTLS: true,
+				auth: {
+					user: 'notifyserver123@gmail.com',
+					pass: 'categorized123'
+				}
+			});
+			var mailOptions = {
+				from: 'notifyserver123@gmail.com',
+				to: email[i], 
+				subject: 'Invitation for Examiner',
+				html: htmlFile
+			};
+			transporter.sendMail(mailOptions, function(error, info) {
+				if (error) {
+					console.log(error);
+				} else {
+					console.log('Email sent: ' + info.response);
+				}
+			});
+		}
         res.send('Emails Sent Successfully');
     });
+    app.get('/examAccepted',(req,res)=>{
+    	const x = {
+        	'iv':req.query.iv,
+        	'content':req.query.content
+    	}
+    	console.log(x);
+    	var text = decrypt(x);
+    	//emailChecker = text.split(" ")[0];
+    	//passChecker = text.split(" ")[1];
+    	var html = fs.readFileSync('validate.html','utf-8');
+    	html = html.replace("{%iv%}",req.query.iv);
+    	html = html.replace("{%content%}",req.query.content);
+    	html = html.replace('{%type%}','AC');
+    	res.send(html);
+	});
+	app.get('/examRejected',(req,res)=>{
+    	const x = {
+        	'iv':req.query.iv,
+        	'content':req.query.content
+    	}
+    	var text = decrypt(x);
+    	//emailChecker = text.split(" ")[0];
+    	//passChecker = text.split(" ")[1];
+    	var html = fs.readFileSync('validate.html','utf-8');
+    	html = html.replace("{%iv%}",req.query.iv);
+    	html = html.replace("{%content%}",req.query.content);
+    	html = html.replace('{%type%}','WA');
+    	res.send(html);
+	});
+	app.post('/examCheck',urlencodedParser,(req,res)=>{
+		const x = {
+        	'iv':req.body.iv,
+        	'content':req.body.content
+    	}
+    	console.log(x);
+    	var text = decrypt(x);
+    	var emailChecker = text.split(" ")[0];
+    	var passChecker = text.split(" ")[1];
+		if(req.body.user == emailChecker && req.body.pass == passChecker)
+		{
+			if(req.body.type == 'AC'){
+				var qry = `update External set phase = 3 where email = '${emailChecker}'`;
+				con.query(qry,(err,result,fields)=>{
+					res.send('<h1 style="color:green;">Successfully Accepted</h1>');
+				});
+			}
+			else{
+				var qry = `update External set phase = -1 where email = '${emailChecker}'`;
+				con.query(qry,(err,result,fields)=>{
+					res.send('<h1 style="color:green;">Successfully Accepted</h1>');
+				});
+			}
+		}
+		else{
+			res.send('<h1 style="color:red">Failed!! Try Again</h1>');
+		}
+	});
     app.listen(port, () => {
         console.log("Server Created!");
         console.log("http://localhost:" + port + "/");
