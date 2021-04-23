@@ -75,6 +75,7 @@ const applicationFormSubmit = (req, res) => {
                             const registration_phase = 1;
                             const date_of_admission = new Date();
                             const passout_date = new Date(new Date().setFullYear(new Date().getFullYear() + 3));
+                            console.log(date_of_admission, passout_date);
                             var query = util.format(
                                 `insert into student 
                                 (stud_id, name, nationality, dob, sex, marritial_status, parent_name, perm_address, addr_for_communication, mobile_no, category, present_emp_org, present_org_work, proposed_theme, proposed_statement_of_purpose, proposed_institute, registration_phase, supervisor_id, dept_id, date_of_admission, passout_date )
