@@ -40,7 +40,7 @@ app.get('/examAccepted',(req,res)=>{
     res.send(html);
 });
 app.post('/examCheck',urlencodedParser,(req,res)=>{
-	var x = `${req.body.}\n${emailChecker} ${passChecker}`;
+	if(req.body.)
 	res.send(x);
 });
 const port = 9000;
