@@ -12,9 +12,6 @@ const examinerPage = (req,res) => {
     // console.log(qry);
     con.query(qry,(err,result,fields)=>{
         // res.send(result);
-        var x = result[0].date_of_admission;
-        var y = new Date();
-        var z = monthDiff(x,y);
         console.log(z);
         try{
             var formText = "";
@@ -40,19 +37,36 @@ const examinerPage = (req,res) => {
                 formText += `</div>`;
                 formText += `<div class="data2">`;
                 formText += `<div class="rest-heading">Current Year:</div>`;
-                var z = monthDiff(result[i].date_of_admission,new Date());
+                try{
+                    var z = monthDiff(result[i].date_of_admission,new Date());
+                }
+                catch(e){
+                    var z = 35;
+                }
                 var year = Math.ceil(z/12);
                 var sem = (z%12) > 6 ? "2nd" : "1st";
                 formText += `<div class="rest-ans">${year} Year ${sem} Semester</div>`;
                 formText += `</div>`;
                 formText += `<div class="data1">`;
                 formText += `<div class="rest-heading">Date of Admission:</div>`;
-                var x = result[i].date_of_admission.toISOString().replace(/T/, ' ').split(" ")[0];
+                try{
+                    var x = result[i].date_of_admission.toISOString().replace(/T/, ' ').split(" ")[0];
+                }
+                catch(e)
+                {
+                    var x = "Unknown";
+                }
                 formText += `<div class="rest-ans">${x}</div>`;
                 formText += `</div>`;
                 formText += `<div class="data2">`;
                 formText += `<div class="rest-heading">Date of Passout (Expected):</div>`;
+                try{
                 var y = result[i].passout_date.toISOString().replace(/T/, ' ').split(" ")[0];
+                }
+                catch(e)
+                {
+                    var y = "Unknown";
+                }
                 formText += `<div class="rest-ans">${y}</div>`;
                 formText += `</div>`;
                 formText += `</div>`;

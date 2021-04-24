@@ -20,7 +20,7 @@ const supervisorApprovalController = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/supervisorPage'" + status_id + "</a><h1>");
+        res.send("<h1><a href='/supervisorPage'>" + status_id + "</a><h1>");
     });
 };
 module.exports = {

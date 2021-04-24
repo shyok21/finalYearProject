@@ -56,13 +56,13 @@ const validate = (req, res) => {
                     secure: false,
                     requireTLS: true,
                     auth: {
-                        user: 'ju.phdms2021@gmail.com',
-                        pass: 'Ju.phdms2021@'
+                        user: 'notifyserver123@gmail.com',
+                        pass: 'categorized123'
                     }
                 });
                 var mailOptions = {
-                    from: 'ju.phdms2021@gmail.com',
-                    to: 'notifyserver123@gmail.com', // REMEMBER TO CHANGE THIS LATER!!!!!!
+                    from: 'notifyserver123@gmail.com',
+                    to: m_email, // REMEMBER TO CHANGE THIS LATER!!!!!!
                     subject: 'Verification Code: Admins Of Jadavpur University',
                     html: '<p>Hello,</p><p>Your Verification Code is:<h3>' + verify_code + '</h3></p><p>Please Dont send this to anyone</p>'
                 };
@@ -120,7 +120,7 @@ const verify = (req, res) => {
             con.query(qry, (err, results, fields) => {
                 console.log("Student Added to Login Database");
                 console.log(results);
-                res.send("<h1>Thank You! Your Account has Been Created!</h1>");
+                res.send("<h1>Thank You! Your Account has Been Created!</h1><a href='/'>Log In</a>");
                 con.query("select* from login where type='stud'", (err, res, fil) => {
                     console.log(res);
                 });
