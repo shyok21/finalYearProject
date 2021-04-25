@@ -19,7 +19,7 @@
         <% } else { %>
             <form class="list" name="lists" action="/dcRegistrationApprovalSubmit" method="POST">
             <% results.forEach(function(result, index) { %>
-                <div class=<%= index%2 ? '.list1' : 'list2' %>>
+                <div class=<%= index%2 ? 'list1' : 'list2' %>>
                     <div class='det1'><%= result.name %></div>
                     <div class='det1'><%= result.nationality %></div>
                     <div class='det1'><%= result.dob %></div>
