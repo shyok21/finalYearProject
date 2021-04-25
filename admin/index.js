@@ -17,10 +17,11 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 const con = mysql.createConnection({
-    host: "fypdatabase.c3lhoz340eat.us-east-1.rds.amazonaws.com",
-    user: "admin",
-    password: "A987yuBU",
-	database: "phd_management"
+    host: "sql6.freesqldatabase.com",
+    user: "sql6407671",
+    password: "SfxDSFUXhK",
+    database: "sql6407671",
+    multipleStatements: true
 });
 
 var port = 8020;
