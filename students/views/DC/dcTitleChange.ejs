@@ -21,7 +21,7 @@
             <% results.forEach(function(result, index) { %>
                 <div class=<%= index%2 ? 'list1' : 'list2' %>>
                     <div class='det1'><%= result.name %></div>
-                    <div class='det1'><%= result.proposed_theme %></div>
+                    <div class='det1'><%= result.thesis_title %></div>
                     <div class='det1'><%= result.new_title %></div>
                     <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard' class='discard'></div>    
                 </div>

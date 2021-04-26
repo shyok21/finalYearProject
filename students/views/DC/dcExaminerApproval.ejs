@@ -21,7 +21,7 @@
             <% results.forEach(function(result, index) { %>
                 <div class=<%= index%2 ? 'list1' : 'list2' %>>
                     <div class='det1'><%= result.name %></div>
-                    <div class='det1'><%= result.proposed_theme %></div>
+                    <div class='det1'><%= result.thesis_title %></div>
                     <div class='det1'><a href=<%='/dcExaminersList?stud_id=' + result.stud_id%> >View examiners list</a></div>
                 </div>
             <%  }); %>

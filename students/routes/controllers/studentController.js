@@ -8,7 +8,7 @@ const studentPage = (req, res) => {
     if (sess.email) {
         const userid = sess.userid;
         var studentFile = fs.readFileSync("views/student.html", "utf-8");
-        var qrys = util.format("select name,registration_phase,enrollment_id,supervisor_id,proposed_theme,sex,dept_id from student where stud_id='%s'", userid);
+        var qrys = util.format("select * from student where stud_id='%s'", userid);
         con.query(qrys, (err, results, fields) => {
             try {
                 var studentName = results[0].name;
@@ -21,13 +21,14 @@ const studentPage = (req, res) => {
                         htmlNewFile = htmlNewFile.replace("{%trackClass%}", "main-track-rejected")
                     res.send(htmlNewFile);
                 } else if (studentPhase == 5) {
-                    var photo = userid;
+                    var photo = results[0].photo_filename;
+                    console.log("Photo" + photo);
                     var enrollment = results[0].enrollment_id;
                     var name = results[0].name;
                     var gender = results[0].sex;
                     var supervisor_id = results[0].supervisor_id;
                     var dept_id = results[0].dept_id;
-                    var theme = results[0].proposed_theme;
+                    var theme = results[0].thesis_title;
                     var qry1 = `select prof_name from professor where prof_id = '${supervisor_id}'`;
                     con.query(qry1,(err,result1,field1) => {
                         var supervisor = result1[0].prof_name;
@@ -93,7 +94,7 @@ const studentPage = (req, res) => {
                                         if(result3[i].approval_phase == 0)
                                             prev += `<a href="/removeReport?sid=${userid}&sem=${result3[i].semester}&file=${result3[i].file_name}" target="_blank">Click Here to Re-Upload</a>`;
                                         else
-                                            prev += `<a href="uploads/report/${result3[i].file_name}" target="_blank">Click Here to Download</a>`;
+                                            prev += `<a href="/downloadReport?stud_id=${result3[i].stud_id}&semester=${result3[i].semester}" target="_blank">Click Here to Download</a>`;
                                         prev += "</div>";
                                         prev_reports += prev;
                                     }
@@ -200,6 +201,7 @@ const removeReport = (req,res) => {
         res.send(`<h1>Successfully Removed the File</h1><a href="/logOut">Log Out</a>`);
     });
 }
+
 module.exports = {
     studentPage,
     submitReport,

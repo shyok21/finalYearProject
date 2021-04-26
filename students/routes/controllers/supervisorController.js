@@ -31,8 +31,8 @@ const supervisorPage = (req, res) => {
                     var listString = listString + "<div class='det1'>" + results[i].nationality + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].dob + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].sex + "</div>";
-                    var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
-                    // var listString = listString + "<div class='det1'>" + results[i].proposed_theme + "</div>";
+                    var listString = listString + "<div class='det1'>" + results[i].thesis_title + "</div>";
+                    // var listString = listString + "<div class='det1'>" + results[i].thesis_title + "</div>";
                     var listString = listString + `<div class="det1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
                     var listString = listString + `<div class="det1"><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></div>`;
                     //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";

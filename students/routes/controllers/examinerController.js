@@ -8,8 +8,7 @@ function monthDiff(dateFrom, dateTo) {
 const examinerPage = (req,res) => {
     var htmlFile = fs.readFileSync('views/examiner.html','utf-8');
     var sess = req.session;
-    var qry = `select* from student where supervisor_id = '${sess.userid}';`;
-    // console.log(qry);
+    var qry = `select * from student where supervisor_id = '${sess.userid}' and examiner_phase = '0';`;
     con.query(qry,(err,result,fields)=>{
         // res.send(result);
         console.log(z);
@@ -20,7 +19,7 @@ const examinerPage = (req,res) => {
                 formText += `<form action="/selectExaminer" method="POST" class="form-class">`;
                 formText += `<div class="details">`;
                 formText += `<div class="image-content">`;
-                formText += `<img src="student_photo/${result[i].stud_id}" alt="Image Not Available">`;
+                formText += `<img src="student_photo/${result[i].photo_filename}" alt="Image Not Available">`;
                 formText += `</div>`;
                 formText += `<div class="rest-content">`;
                 formText += `<div class="data1">`;
@@ -33,7 +32,7 @@ const examinerPage = (req,res) => {
                 formText += `</div>`;
                 formText += `<div class="data1">`;
                 formText += `<div class="rest-heading">Proposed Theme:</div>`;
-                formText += `<div class="rest-ans">${result[i].proposed_theme}</div>`;
+                formText += `<div class="rest-ans">${result[i].thesis_title}</div>`;
                 formText += `</div>`;
                 formText += `<div class="data2">`;
                 formText += `<div class="rest-heading">Current Year:</div>`;
@@ -119,6 +118,7 @@ const addExam = (req,res) => {
     qry += `("${x.name6}","${x.designation6}","${x.address6}","${x.email6}","${x.mobile6}","${studentId}",2,"${x.state6}","INDIA"),`;
     qry += `("${x.name7}","${x.designation7}","${x.address7}","${x.email7}","${x.mobile7}","${studentId}",3,"${x.state7}","INDIA"),`;
     qry += `("${x.name8}","${x.designation8}","${x.address8}","${x.email8}","${x.mobile8}","${studentId}",3,"${x.state8}","INDIA");`;
+    qry += `update student set examiner_phase = '1' WHERE stud_id = "${studentId}";`;
     con.query(qry,(err,result,field) => {
         if (err)
         {

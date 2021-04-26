@@ -86,7 +86,7 @@ const dcTitleChangeSubmit = (req, res) => {
         qry = "UPDATE student SET new_title = NULL WHERE stud_id = '" + stud_id + "';";
         status_id = "Successfully Discared";
     } else {
-        qry = "UPDATE student SET proposed_theme = new_title, new_title = NULL WHERE stud_id = '" + stud_id + "';";
+        qry = "UPDATE student SET thesis_title = new_title, new_title = NULL WHERE stud_id = '" + stud_id + "';";
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {

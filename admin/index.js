@@ -79,7 +79,7 @@ con.connect(function(err) {
                 //sendRes += "<td>" + result[i].email + "</td>";
                 sendRes += "<br>Address: " + result[i].perm_address.toUpperCase();
                 sendRes += "<br>Thesis title: " + result[i].thesis_title;
-                sendRes += "<br>Proposed Theme: " + result[i].proposed_theme.toUpperCase();
+                sendRes += "<br>Proposed Theme: " + result[i].thesis_title.toUpperCase();
             }
             var newHtml = htmlStudentDetails.replace("{%listContent%}", sendRes);
             newHtml = newHtml.replace("{%student_value%}", id);
@@ -322,17 +322,22 @@ con.connect(function(err) {
         });
     });
     app.post('/addExaminer',urlencodedParser,(req,res) => {
-        con.query('select * from student s left join department d on s.dept_id = d.dept_id left join faculty f on f.fac_id = d.fac_id where s.stud_id in (select distinct Student_ID from External);',(err,result,field) => {
+        con.query('select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where s.examiner_phase = "2";',(err,results,field) => {
+            if(err) {
+                res.send('error' + err);
+            }
+            
             var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
             var formText = "";
-            for(var i=0;i<result.length;i++)
+            console.log(results);
+            for(var i=0;i<results.length;i++)
             {
                 formText += `<form class="list" method='POST' action='/selectExams'>`;
-                formText += `<img src="./student_photo/${result[i].stud_id}" alt="Couldn't Load Image" >`;
-                formText += `<div class="g1">${result[i].name}</div>`;
-                formText += `<div class="g2">${result[i].dept_name}</div>`;
-                formText += `<div class="g3">${result[i].fac_name}</div>`;
-                formText += `<input type="Submit" name="${result[i].stud_id}" value="Select Examiners">`;
+                formText += `<img src="./student_photo/${results[i].stud_id}" alt="Couldn't Load Image" >`;
+                formText += `<div class="g1">${results[i].name}</div>`;
+                formText += `<div class="g2">${results[i].dept_name}</div>`;
+                formText += `<div class="g3">${results[i].fac_name}</div>`;
+                formText += `<input type="Submit" name="${results[i].stud_id}" value="Select Examiners">`;
                 formText += `</form>`;
             }
             htmlFile = htmlFile.replace("{%forms%}",formText);
@@ -353,55 +358,61 @@ con.connect(function(err) {
                 htmlFile = htmlFile.replace(`{%email${i}%}`,r.Email);
                 htmlFile = htmlFile.replace(`{%state${i}%}`,r.State);
             }
+            htmlFile = htmlFile.replace(`{%stud_id%}`, stud_id);
             res.send(htmlFile);
         });
     });
     app.post('/examSelected',urlencodedParser,(req,res) => {
-        var email1 = req.body.instate;
-        var email2 = req.body.outstate;
-        var email3;
-        if(req.body.viva == 'null')
-            email3 = req.body.Email;
-        else
-            email3 = req.body.viva;
-        var email = [email1,email2,email3];
-        for(var i=0;i<email.length;i++)	{
-        	
-    		var htmlFile = fs.readFileSync('main.html','utf-8');
-			const { encrypt, decrypt } = require('./crypto');
-			
-    		var pass = randomstring.generate(10);
-    		var url = `${email[i]} ${pass}`;
-    		const hash = encrypt(url);
-    		htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
-    		htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
-    		htmlFile = htmlFile.replace('{%username%}',email[i]);
-    		htmlFile = htmlFile.replace('{%password%}',pass);
-        	var transporter = nodemailer.createTransport({
-				service: 'gmail',
-				port: 587,
-				secure: false,
-				requireTLS: true,
-				auth: {
-					user: 'notifyserver123@gmail.com',
-					pass: 'categorized123'
-				}
-			});
-			var mailOptions = {
-				from: 'notifyserver123@gmail.com',
-				to: email[i], 
-				subject: 'Invitation for Examiner',
-				html: htmlFile
-			};
-			transporter.sendMail(mailOptions, function(error, info) {
-				if (error) {
-					console.log(error);
-				} else {
-					console.log('Email sent: ' + info.response);
-				}
-			});
-		}
-        res.send('Emails Sent Successfully');
+        var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
+        con.query(qry,(err,results,fields)=>{
+            
+            var email1 = req.body.instate;
+            var email2 = req.body.outstate;
+            var email3;
+            if(req.body.viva == 'null')
+                email3 = req.body.Email;
+            else
+                email3 = req.body.viva;
+            var email = [email1,email2,email3];
+            for(var i=0;i<email.length;i++)	{
+                
+                var htmlFile = fs.readFileSync('main.html','utf-8');
+                const { encrypt, decrypt } = require('./crypto');
+                
+                var pass = randomstring.generate(10);
+                var url = `${email[i]} ${pass}`;
+                const hash = encrypt(url);
+                htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+                htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+                htmlFile = htmlFile.replace('{%username%}',email[i]);
+                htmlFile = htmlFile.replace('{%password%}',pass);
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    port: 587,
+                    secure: false,
+                    requireTLS: true,
+                    auth: {
+                        user: 'notifyserver123@gmail.com',
+                        pass: 'categorized123'
+                    }
+                });
+                var mailOptions = {
+                    from: 'notifyserver123@gmail.com',
+                    to: 'ju.phdms2021@gmail.com', 
+                    subject: 'Invitation for Examiner',
+                    html: htmlFile
+                };
+                transporter.sendMail(mailOptions, function(error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                });
+            }
+            res.send('Emails Sent Successfully');
+        });
+        
     });
     app.get('/examAccepted',(req,res)=>{
     	const x = {
