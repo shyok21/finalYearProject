@@ -14,8 +14,15 @@ const getDepartments = require('./apis/getDepartments.js');
 const getProfessors = require('./apis/getProfessors.js');
 const getProfessorDesignation = require('./apis/getProfessorDesignation.js');
 const { examinerPage,addExaminer,addExam } = require('./controllers/examinerController');
+const { addExaminerVC, selectExams, examSelected, examAccepted, examRejected, examCheck} = require('./controllers/vcController');
 
 router.get("/", homePage);
+router.get("/vcPage",addExaminerVC);
+router.post("/selectExams",selectExams);
+router.post("/examSelected",examSelected);
+router.get("/examAccepted",examAccepted);
+router.get("/examRejected",examRejected);
+router.post("/examCheck",examCheck);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/registerPage", registerPage);

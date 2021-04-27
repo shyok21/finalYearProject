@@ -56,8 +56,8 @@ const login = (req, res) => {
                     sess.userid = sup_id;
                     sess.special = result[0].special_user;
                     res.redirect('/supervisorPage');
-                } else if (log === 'RAC') {
-                    res.send("Hello RAC " + result.name);
+                } else if (log === 'VC') {
+                    res.redirect('/VCPage');
                 } else if (log === 'DC') {
                     var dc_id = result[0].id;
                     var sess = req.session;
