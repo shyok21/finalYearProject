@@ -1,2 +1,2 @@
 cd admin
-sudo npm start
+npm start

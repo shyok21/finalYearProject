@@ -6,7 +6,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/uploads'));
 app.set('view engine', 'ejs');
-
+const cron = require('node-cron');
+const con = require('./db');
 // Session management setup
 app.use(
     session({
@@ -19,6 +20,8 @@ app.use(
 // Database setup
 require('./db');
 
+//Background Job Setup
+
 // Routes setup
 app.use('/', require('./routes/index.js'));
 
@@ -28,3 +31,8 @@ app.listen(port, () => {
     console.log("Server Created!");
     console.log("http://localhost:" + port + "/");
 });
+
+
+//6 month report report to student
+//1 month examiner cheching
+//3 years remainder

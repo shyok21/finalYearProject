@@ -1,2 +1,2 @@
 cd students
-sudo npm start
+npm start
