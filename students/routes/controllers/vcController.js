@@ -1,8 +1,36 @@
 const fs = require('fs');
 const con = require('./../../db.js');
+var randomstring = require("randomstring");
+const nodemailer = require("nodemailer");
+// const { encrypt, decrypt } = require('crypto');
+const crypto = require('crypto');
 
+const algorithm = 'aes-256-ctr';
+const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3';
+const iv = crypto.randomBytes(16);
+
+const encrypt = (text) => {
+
+    const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+
+    const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
+
+    return {
+        iv: iv.toString('hex'),
+        content: encrypted.toString('hex')
+    };
+};
+
+const decrypt = (hash) => {
+
+    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+
+    const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+
+    return decrpyted.toString();
+};
 const addExaminerVC = (req,res) => {
-    con.query('select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where s.examiner_phase = "2";',(err,results,field) => {
+    con.query('select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id;',(err,results,field) => {
         if(err) {
             res.send('error' + err);
         }
@@ -45,7 +73,8 @@ const selectExams = (req, res) => {
 }
 
 const examSelected = (req, res) => {
-    var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
+    var today_date = new Date();
+    var qry = `update student set phase='1', last_email_sent_date=${today_date} where stud_id='${req.body.stud_id}';`;
         con.query(qry,(err,results,fields)=>{
             
             var email1 = req.body.instate;
@@ -58,8 +87,7 @@ const examSelected = (req, res) => {
             var email = [email1,email2,email3];
             for(var i=0;i<email.length;i++)	{
                 
-                var htmlFile = fs.readFileSync('main.html','utf-8');
-                const { encrypt, decrypt } = require('./crypto');
+                var htmlFile = fs.readFileSync('mailService/main.html','utf-8');
                 
                 var pass = randomstring.generate(10);
                 var url = `${email[i]} ${pass}`;
@@ -105,7 +133,7 @@ const examAccepted = (req,res) => {
     var text = decrypt(x);
     //emailChecker = text.split(" ")[0];
     //passChecker = text.split(" ")[1];
-    var html = fs.readFileSync('validate.html','utf-8');
+    var html = fs.readFileSync('mailService/validate.html','utf-8');
     html = html.replace("{%iv%}",req.query.iv);
     html = html.replace("{%content%}",req.query.content);
     html = html.replace('{%type%}','AC');
@@ -120,7 +148,7 @@ const examRejected = (req,res) => {
     var text = decrypt(x);
     //emailChecker = text.split(" ")[0];
     //passChecker = text.split(" ")[1];
-    var html = fs.readFileSync('validate.html','utf-8');
+    var html = fs.readFileSync('mailService/validate.html','utf-8');
     html = html.replace("{%iv%}",req.query.iv);
     html = html.replace("{%content%}",req.query.content);
     html = html.replace('{%type%}','WA');

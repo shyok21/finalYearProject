@@ -57,7 +57,7 @@ const login = (req, res) => {
                     sess.special = result[0].special_user;
                     res.redirect('/supervisorPage');
                 } else if (log === 'VC') {
-                    res.redirect('/VCPage');
+                    res.redirect('/vcPage');
                 } else if (log === 'DC') {
                     var dc_id = result[0].id;
                     var sess = req.session;

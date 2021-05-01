@@ -11,14 +11,34 @@ getNextDate = (date,month) => {
     return newDate;
 }
 cron.schedule("* * * * *", () => {
+
+    //Background Job for 6 Month Remainder
     con.query('select * from student;',(err,result,f)=> {
         var today_date = new Date();
-    
-        var report_date = result[0].date_of_admission;
-        var next_date1 = getNextDate(report_date,6);
-        var next_date2 = getNextDate(report_date,7);
+        result.forEach(results => {
+            var admission_date = results.date_of_admission;
+            var passout_date = results.passout_date;
+            // var next_date1 = getNextDate(report_date,6);
+            // var next_date2 = getNextDate(report_date,7);
+            var next_date1 = [];
+            var next_date2 = [];
+            var i=1;
+            while(1){
+                var date1 = getNextDate(admission_date,6*i);
+                var date2 = getNextDate(admission_date,6*i+1);
+                if(date1.getTime() > passout_date)
+                    break;
+                next_date1.push(date1);
+                next_date2.push(date2);
+                i+=1;
+            }
+            for(var k=0;k<next_date1.length;k++){
+                if(today_date.getTime() >= next_date1[k] && today_date.getTime() <= next_date2[k])
+                    console.log(`Send Mail to ${results.name}`)    //send mail here
+                else
+                    console.log(`OK for ${results.name}`);
+            }
+        });
         
-        console.log(report_date);
-        console.log(next_date1,next_date2);
     });
 });

@@ -1,0 +1,106 @@
+<html>
+<head>
+	<title>Student List</title>
+	<link rel="stylesheet" href="css/selectExam.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+<body>
+	<img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+
+	<div class="main-content">
+    <h1 style="width:100%;color:#5375e2;text-align:center;">Select Examiners:</h1>
+    <form class="list" method="POST" action="/examSelected">
+        <div class='list1'>
+            <h2 style="width:100%;background-color:#1A2980;color:#7A96E7 ;font-family: 'Zen Dots', cursive;">&nbsp; &#x2780; &nbsp; I n &nbsp;&nbsp; S t a t e</h2>
+            <div class="list2">
+                <input type="radio" name="instate" id="I1" value="{%email1%}">
+                <label for="I1">
+                    <p>{%name1%}</p>
+                    <p>{%designation1%}</p>
+                    <p>{%email1%}</p>
+                    <p>{%state1%}</p>
+                </label>
+            </div>
+            <div class="list2">
+                <input type="radio" name="instate" id="I2" value="{%email2%}">
+                <label for="I2">
+                    <p>{%name2%}</p>
+                    <p>{%designation2%}</p>
+                    <p>{%email2%}</p>
+                    <p>{%state2%}</p>
+                </label>
+            </div>
+            <div class="list2">
+                <input type="radio" name="instate" id="I3" value="{%email3%}">
+                <label for="I3">
+                    <p>{%name3%}</p>
+                    <p>{%designation3%}</p>
+                    <p>{%email3%}</p>
+                    <p>{%state3%}</p>
+                </label>
+            </div>
+        </div>
+        <div class='list1'>
+            <h2 style="width:100%;background-color:#000000;color:#7A96E7 ;font-family: 'Zen Dots', cursive;">&nbsp; &#x2781; &nbsp; o u t &nbsp;&nbsp; S t a t e</h2>
+            <div class="list2">
+                <input type="radio" name="outstate" id="O1" value="{%email4%}">
+                <label for="O1">
+                    <p>{%name4%}</p>
+                    <p>{%designation4%}</p>
+                    <p>{%email4%}</p>
+                    <p>{%state4%}</p>
+                </label>
+            </div>
+            <div class="list2">
+                <input type="radio" name="outstate" id="O2" value="{%email5%}">
+                <label for="O2">
+                    <p>{%name5%}</p>
+                    <p>{%designation5%}</p>
+                    <p>{%email5%}</p>
+                    <p>{%state5%}</p>
+                </label>
+            </div>
+            <div class="list2">
+                <input type="radio" name="outstate" id="O3" value="{%email6%}">
+                <label for="O3">
+                    <p>{%name6%}</p>
+                    <p>{%designation6%}</p>
+                    <p>{%email6%}</p>
+                    <p>{%state6%}</p>
+                </label>
+            </div>
+        </div>
+        <div class='list1'>
+            <h2 style="width:100%;background-color:#1A2980;color:#7A96E7 ;font-family: 'Zen Dots', cursive;">&nbsp; &#x2782; &nbsp; V i v a &nbsp;&nbsp;</h2>
+            <div class="list2">
+                <input type="radio" name="viva" id="V1" value="{%email7%}">
+                <label for="V1">
+                    <p>{%name7%}</p>
+                    <p>{%designation7%}</p>
+                    <p>{%email7%}</p>
+                    <p>{%state7%}</p>
+                </label>
+            </div>
+            <div class="list2">
+                <input type="radio" name="viva" id="V2" value="{%email8%}">
+                <label for="V2">
+                    <p>{%name8%}</p>
+                    <p>{%designation8%}</p>
+                    <p>{%email8%}</p>
+                    <p>{%state8%}</p>
+                </label>
+            </div>
+            <div class="list2">
+                <input type="radio" name="viva" id="V3" value="null">
+                <label for="V3">
+                    <input type="email" style="width:100%;" placeholder="If Others, Please Specify the Email of the Examiner" name="Email">
+                </label>
+            </div>
+        </div>
+        <input type="hidden" name="stud_id" value="{%stud_id%}">
+        <input type="submit" value="Confirm!" name="select" class="submit-class">
+    </form>

@@ -34,5 +34,5 @@ app.listen(port, () => {
 
 
 //6 month report report to student
-//1 month examiner cheching
+//1 month examiner checking
 //3 years remainder
