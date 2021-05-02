@@ -17,10 +17,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 const con = mysql.createConnection({
-    host: "sql6.freesqldatabase.com",
-    user: "sql6407671",
-    password: "SfxDSFUXhK",
-    database: "sql6407671",
+    host: "sql6.freemysqlhosting.net",
+    user: "sql6409379",
+    password: "wIiNIRrYPi",
+    database: "sql6409379",
     multipleStatements: true
 });
 

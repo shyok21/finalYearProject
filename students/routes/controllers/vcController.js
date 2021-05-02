@@ -30,7 +30,7 @@ const decrypt = (hash) => {
     return decrpyted.toString();
 };
 const addExaminerVC = (req,res) => {
-    con.query('select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id;',(err,results,field) => {
+    con.query(`select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where examiner_phase = '2';`,(err,results,field) => {
         if(err) {
             res.send('error' + err);
         }
@@ -74,7 +74,8 @@ const selectExams = (req, res) => {
 
 const examSelected = (req, res) => {
     var today_date = new Date();
-    var qry = `update student set phase='1', last_email_sent_date=${today_date} where stud_id='${req.body.stud_id}';`;
+    var qry = `update student set examiner_phase='3', where stud_id='${req.body.stud_id}';`;
+    console.log(req.body.stud_id);
         con.query(qry,(err,results,fields)=>{
             
             var email1 = req.body.instate;

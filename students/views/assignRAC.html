@@ -64,43 +64,40 @@
 </head>
 
 <body>
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
-    <div class="main-content">
-        <div class="intro">
-            Hello {%name%}.
-            <br>Student ID: {%student_id%}
-        </div>
-        <div class="container">
-            <div class="det3" style="margin-left: 2px;">
-                <form>
-                    <div class="multiselect">
-                        <br>
-                        Select professors for RAC:
-                        <br>
-                        <div class="selectBox" onclick="showCheckedBoxes()">
-                            <select id="checkboxList">
-                                <option>Choose professors</option>
-                            </select>
-                            <div class="overSelect"></div>
-                        </div>
-                        <div id="checkboxes">
-                            {%list%}
-                        </div>
+    <div class="intro">
+        Hello {%name%}.
+        <br>Student ID: {%student_id%}
+    </div>
+    <div class="container">
+        <div class="det3" style="margin-left: 2px;">
+            <form>
+                <div class="multiselect">
+                    <br>
+                    Select professors for RAC:
+                    <br>
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select id="checkboxList">
+                            <option>Choose professors</option>
+                        </select>
+                        <div class="overSelect"></div>
                     </div>
-                </form>
-            </div>
-            <div class="det3" style="margin-top: 25px;">
-                <br>
-                <button type="button" id="checkedList" onclick='showCheckedBoxes()'>Selected Profs</button>
-                <form action="/racSubmit" style="align-items: center;" method="POST">
-                    <p name="racmembers" id="checkedBox"></p>
+                    <div id="checkboxes">
+                        {%list%}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="det3" style="margin-top: 25px;">
+            <br>
+            <button type="button" id="checkedList" onclick='showCheckedBoxes()'>Selected Profs</button>
+            <form action="/racSubmit" style="align-items: center;" method="POST">
+                <p name="racmembers" id="checkedBox"></p>
 
-                    <input type="hidden" name="prof_name" id="prof_name" value="">
-                    <input type="hidden" name="stud_id" value={%student_id%}>
+                <input type="hidden" name="prof_name" id="prof_name" value="">
+                <input type="hidden" name="stud_id" value={%student_id%}>
 
-                    <input type="submit" value="Approve" class="racApprove">
-                </form>
-            </div>
+                <input type="submit" value="Approve" class="racApprove">
+            </form>
         </div>
     </div>
 </body>

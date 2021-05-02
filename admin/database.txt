@@ -1,0 +1,5 @@
+host: sql6.freemysqlhosting.net
+name: sql6409379
+username: sql6409379
+password: wIiNIRrYPi
+port: 3306
