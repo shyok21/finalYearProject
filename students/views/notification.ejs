@@ -18,7 +18,9 @@
             <img class = 'notif-icon' src='images/error.png'>
             <h1 class = 'message error'><%= message %></h1>
         <% } %>
-        <a href = <%= backLink %>><%= backText %></a>
+        <% try { %>
+            <a href = <%= backLink %>><%= backText %></a>
+        <% } catch {} %>
     </div>
 </body>
 

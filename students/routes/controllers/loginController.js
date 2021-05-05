@@ -12,7 +12,6 @@ var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 const homePage = (req, res) => {
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
     res.send(htmlFileSend);
-    
 }
 
 // Handles the event when user logs in

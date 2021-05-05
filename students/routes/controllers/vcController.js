@@ -170,18 +170,18 @@ const examCheck = (req,res) => {
         if(req.body.type == 'AC'){
             var qry = `update External set phase = 3 where email = '${emailChecker}'`;
             con.query(qry,(err,result,fields)=>{
-                res.send('<h1 style="color:green;">Successfully Accepted</h1>');
+                res.render('notification', {message : 'Successfully accepted!', status: 'success'});
             });
         }
         else{
             var qry = `update External set phase = -1 where email = '${emailChecker}'`;
             con.query(qry,(err,result,fields)=>{
-                res.send('<h1 style="color:green;">Successfully Accepted</h1>');
+                res.render('notification', {message : 'Successfully rejected!', status: 'success'});
             });
         }
     }
     else{
-        res.send('<h1 style="color:red">Failed!! Try Again</h1>');
+        res.render('notification', {message : 'Invalid credentials!', status: 'success'});
     }
 }
 

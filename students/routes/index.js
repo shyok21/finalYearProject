@@ -25,14 +25,14 @@ router.get("/logout", logout);
 router.get("/registerPage", registerPage);
 router.post("/validate", validate);
 router.post("/verify", verify);
+router.get("/examAccepted",  examAccepted);
+router.get("/examRejected", examRejected);
+router.post("/examCheck", examCheck);
 
 /* URLs accessible to Vice chancellor only */
 router.get("/vcPage", auth(["VC"]), addExaminerVC);
 router.post("/selectExams", auth(["VC"]), selectExams);
 router.post("/examSelected", auth(["VC"]), examSelected);
-router.get("/examAccepted", auth(["VC"]), examAccepted);
-router.get("/examRejected", auth(["VC"]), examRejected);
-router.post("/examCheck", auth(["VC"]), examCheck);
 
 /* URLs accessible to students only */
 router.get("/applicationFormPage", auth(["stud"]), applicationFormPage);
