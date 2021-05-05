@@ -10,7 +10,7 @@ var nodemailer = require('nodemailer');
 var location = require('location-href');
 const url = require('url');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-//const { encrypt } = require('./services/encrypt')
+// const { encrypt, decrypt } = require('./services/encrypt')
 
 const { encrypt, decrypt } = require('./crypto');
 app.use(express.static(__dirname + '/public'));
@@ -46,13 +46,16 @@ con.connect(function(err) {
                 throw err;
             var sendRes = "";
             for (var i = 0; i < result.length; i++) {
+
+                var crypt_id = encrypt(result[i].stud_id);
+                console.log(crypt_id);
                 sendRes += "<tr>";
                 sendRes += "<td>" + (result[i].stud_id).toUpperCase() + "</td>";
                 sendRes += "<td>" + result[i].name.toUpperCase() + "</td>";
                 //sendRes += "<td>" + result[i].email + "</td>";
                 sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
                 sendRes += "<td>" + result[i].thesis_title + "</td>";
-                sendRes += "<td><a href='studentDetails.html?stud_id=" + result[i].stud_id + "'>View Details</a></td>";
+                sendRes += "<td><a href='studentDetails.html?stud_id=" + crypt_id.iv + "&stud_id_c="+ crypt_id.content +"'>View Details</a></td>";
                 sendRes += "</tr>";
             }
             var newHtml = html.replace("{%sqlContent%}", sendRes);
@@ -61,7 +64,16 @@ con.connect(function(err) {
     });
 
     app.get("/studentDetails.html", function(req, res) {
-        var id = req.query.stud_id;
+        var c_id = {"iv" : req.query.stud_id,
+                    "content" : req.query.stud_id_c
+                };
+        try{
+        var id = decrypt(c_id);
+        }
+        catch(e){
+            res.send(404);
+            return;
+        }
         console.log(id);
         var qry = `SELECT * FROM student WHERE stud_id="${id}"`;
         con.query(qry, function(err, result, fields) {
@@ -83,7 +95,10 @@ con.connect(function(err) {
             }
             var newHtml = htmlStudentDetails.replace("{%listContent%}", sendRes);
             newHtml = newHtml.replace("{%student_value%}", id);
-            res.send(newHtml);
+            if(result.length == 0)
+                res.send(404);
+            else
+                res.send(newHtml);
         });
     });
 

@@ -123,7 +123,7 @@ const examSelected = (req, res) => {
             
         }
         var emails = `('${email1}','${email2}','${email3}')`;
-        var today_date = new Date();
+        var today_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
         var qry2 = `Update External set phase = 1, last_mail_sent_date = '${today_date}' where email in ${emails} and Student_ID='${req.body.stud_id}';`;
         console.log(qry2);
         con.query(qry2,(err,ress,f)=>{

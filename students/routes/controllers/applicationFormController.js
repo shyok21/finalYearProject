@@ -74,7 +74,7 @@ const applicationFormSubmit = (req, res) => {
                             const photo_filename = req.files['student_photo'][0].filename;
                             const registration_phase = 1;
                             const date_of_admission = new Date();
-                            const passout_date = new Date(new Date().setFullYear(new Date().getFullYear() + 3));
+                            const passout_date = new Date(new Date().setFullYear(new Date().getFullYear() + 5));
                             console.log(date_of_admission, passout_date);
                             var query = util.format(
                                 `insert into student 
