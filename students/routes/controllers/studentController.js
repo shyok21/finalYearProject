@@ -23,7 +23,7 @@ const studentPage = (req, res) => {
                 } else if (studentPhase == 5) {
                     var photo = results[0].photo_filename;
                     console.log("Photo" + photo);
-                    var enrollment = results[0].enrollment_id;
+                    var enrollment = results[0].Enrollment_ID;
                     var name = results[0].name;
                     var gender = results[0].sex;
                     var supervisor_id = results[0].supervisor_id;
@@ -170,7 +170,7 @@ const submitReport = (req, res) => {
                 }
                 else {
                     console.log("Report submitted successfully");
-                    res.send('<h1>Report submission successful</h1><a href="/studentPage">Go to main page</a>');
+                    res.render('notification', {message : 'Report submitted successfully!', status: 'success', backLink : "/studentPage", backText: "Back to student portal"});
                 }    
             })
         }
@@ -198,7 +198,7 @@ const removeReport = (req,res) => {
    // fs.unlinkSync(`uploads/report/${file}`);
     var qry = `delete from six_monthly_report where stud_id = "${stud_id}" and semester = "${sem}";`;
     con.query(qry,(err,result,field) => {
-        res.send(`<h1>Successfully Removed the File</h1><a href="/logOut">Log Out</a>`);
+        res.render('notification', {message : 'Successfully removed the file!', status: 'success', backLink : "/studentPage", backText: "Back to student portal"});
     });
 }
 

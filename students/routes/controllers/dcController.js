@@ -26,7 +26,7 @@ const dcRegistrationApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/dcRegistrationApproval'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dcRegistrationApproval", backText: "Back to DC portal"});
     });
 };
 
@@ -54,7 +54,7 @@ const dcReportApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/dcReportApproval'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dcReportApproval", backText: "Back to DC portal"});
     });
 };
 
@@ -90,7 +90,7 @@ const dcTitleChangeSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/dcTitleChange'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dcTitleChange", backText: "Back to DC portal"});
     });
 };
 
@@ -118,7 +118,7 @@ const dcRegistrationExtensionSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/dcRegistrationExtension'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dcRegistrationExtension", backText: "Back to DC portal"});
     });
 };
 
@@ -155,7 +155,7 @@ const dcExaminerApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/dcExaminerApproval'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dcExaminerApproval", backText: "Back to DC portal"});
     });
 };
 

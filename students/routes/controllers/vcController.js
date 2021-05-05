@@ -41,7 +41,7 @@ const addExaminerVC = (req,res) => {
         for(var i=0;i<results.length;i++)
         {
             formText += `<form class="list" method='POST' action='/selectExams'>`;
-            formText += `<img src="./student_photo/${results[i].stud_id}" alt="Couldn't Load Image" >`;
+            formText += `<img src="student_photo/${results[i].photo_filename}" alt="Couldn't Load Image" >`;
             formText += `<div class="g1">${results[i].name}</div>`;
             formText += `<div class="g2">${results[i].dept_name}</div>`;
             formText += `<div class="g3">${results[i].fac_name}</div>`;
@@ -74,7 +74,7 @@ const selectExams = (req, res) => {
 
 const examSelected = (req, res) => {
     var today_date = new Date();
-    var qry = `update student set examiner_phase='3', where stud_id='${req.body.stud_id}';`;
+    var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
     console.log(req.body.stud_id);
         con.query(qry,(err,results,fields)=>{
             
@@ -121,7 +121,7 @@ const examSelected = (req, res) => {
                     }
                 });
             }
-            res.send('Emails Sent Successfully');
+            res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/addExaminerVC", backText: "Back to VC portal"});
         });
 }
 

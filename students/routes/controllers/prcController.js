@@ -30,7 +30,7 @@ const prcRegistrationApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/prcRegistrationApproval'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/prcRegistrationApproval", backText: "Back to PRC portal"});
     });
 };
 
@@ -61,7 +61,7 @@ const prcReportApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
-        res.send("<h1><a href='/prcReportApproval'>" + status_id + "</a><h1>");
+        res.render('notification', {message : status_id, status: 'success', backLink : "/prcReportApproval", backText: "Back to PRC portal"});
     });
 };
 
@@ -107,7 +107,7 @@ const prcVivaReportSubmit = (req,res) => {
                 }
                 else {
                     console.log("Report submitted successfully");
-                    res.send('<h1>Report submission successful</h1><a href="/prcVivaReport">Go to main page</a>');
+                    res.render('notification', {message : 'Report submission successful', status: 'success', backLink : "/prcVivaReport", backText: "Back to PRC portal"});
                 }    
             })
         }
@@ -148,7 +148,7 @@ const prcTitleChangeSubmit = (req,res) => {
         }
         else {
             console.log("Title change request submitted successfully");
-            res.send('<h1>Title change request submitted successfully</h1><a href="/prcTitleChange">Go to main page</a>');
+            res.render('notification', {message : 'Title change request submitted successfully', status: 'success', backLink : "/prcTitleChange", backText: "Back to PRC portal"});
         }    
     })
 };
@@ -174,7 +174,7 @@ const prcRegistrationExtensionSubmit = (req,res) => {
         }
         else {
             console.log("Extension request submitted successfully");
-            res.send('<h1>Extension request submitted successfully</h1><a href="/prcRegistrationExtension">Go to main page</a>');
+            res.render('notification', {message : 'Extension request submitted successfully', status: 'success', backLink : "/prcRegistrationExtension", backText: "Back to DC portal"});
         }    
     })
 };

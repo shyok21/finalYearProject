@@ -22,7 +22,8 @@ const specialPage = (req, res) => {
             res.send(reshtmlFile);
         });
     } else
-        res.send("<h1 style='color:darkred;'>Access Denied!</h1>");
+        res.render('notification', {message : 'Access Denied!', status: 'error', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
+        
 }
 const specialSearchPage = (req, res) => {
     var htmlFile = fs.readFileSync('views/dbshow.html', 'utf-8');

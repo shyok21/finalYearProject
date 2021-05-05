@@ -77,26 +77,26 @@ const validate = (req, res) => {
                 res.send("<form method='post' action='/verify' style='background-color:#fefefe;'><h2 style='color:#5375e2;margin:10px;'>A verification code has been send to your Email Id.</h2><label for='ver_code' style='color:#7791a1;font-size:1.2em;margin:5px;'>Verification Code:</label><input type='text' name='ver_code' style='width:140px;height:40px;background-color:#dcdcdc;font-size:1.5em;border-style:none;border-radius:8px;margin:5px'><input type='submit' style='width:80px;height:35px;background-color:#f3aa92;border-style:none;border-radius:8px;margin:5px;' value='Verify'></form>");
             }
         } else {
-            res.send("<h1>Email Id is Already Registered.</h1>")
+            res.render('notification', {message : 'Email ID is already registered', status: 'error', backLink : "/registerPage", backText: "Back to registration page"});
         }
     });
 
 }
 const format_str = (x) => {
-        if (x < 10)
-            return "00000" + x;
-        else if (x >= 10 && x < 100)
-            return "0000" + x;
-        else if (x >= 100 && x < 1000)
-            return "000" + x;
-        else if (x >= 1000 && x < 10000)
-            return "00" + x;
-        else if (x >= 10000 && x < 100000)
-            return "0" + x;
-        else
-            return "" + x;
-    }
-    // Handles the event when student submits the verification code
+    if (x < 10)
+        return "00000" + x;
+    else if (x >= 10 && x < 100)
+        return "0000" + x;
+    else if (x >= 100 && x < 1000)
+        return "000" + x;
+    else if (x >= 1000 && x < 10000)
+        return "00" + x;
+    else if (x >= 10000 && x < 100000)
+        return "0" + x;
+    else
+        return "" + x;
+}
+// Handles the event when student submits the verification code
 const verify = (req, res) => {
     console.log(req.body.ver_code);
     console.log(verify_code);
@@ -120,7 +120,7 @@ const verify = (req, res) => {
             con.query(qry, (err, results, fields) => {
                 console.log("Student Added to Login Database");
                 console.log(results);
-                res.send("<h1>Thank You! Your Account has Been Created!</h1><a href='/'>Log In</a>");
+                res.render('notification', {message : 'Thank you! Your account has been created!', status: 'success', backLink : "/", backText: "Back to home page"});
                 con.query("select* from login where type='stud'", (err, res, fil) => {
                     console.log(res);
                 });
@@ -128,7 +128,7 @@ const verify = (req, res) => {
         });
 
     } else {
-        res.send("<h1>Sorry, Your Account Could Not been Verified</h1>");
+        res.render('notification', {message : 'Sorry! Your account could not be verified!', status: 'error', backLink : "/", backText: "Back to home page"});
     }
 }
 

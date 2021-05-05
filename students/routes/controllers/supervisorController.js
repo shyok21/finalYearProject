@@ -83,7 +83,7 @@ const racSubmit = (req, res) => {
             console.log(profArray[i]);
         });
     }
-    res.send("<h1><a href='/supervisorPage'>Assigned successfully</a><h1>");
+    res.render('notification', {message : 'RAC assigned successfully!', status: 'success', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
 }
 
 module.exports = {

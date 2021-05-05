@@ -1,5 +1,7 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const auth = require('./../services/authorisation');
+
 const { homePage, login, logout } = require('./controllers/loginController');
 const { registerPage, validate, verify } = require('./controllers/registerController');
 const { applicationFormPage, applicationFormSubmit, downloadPDF } = require('./controllers/applicationFormController');
@@ -16,60 +18,75 @@ const getProfessorDesignation = require('./apis/getProfessorDesignation.js');
 const { examinerPage,addExaminer,addExam } = require('./controllers/examinerController');
 const { addExaminerVC, selectExams, examSelected, examAccepted, examRejected, examCheck} = require('./controllers/vcController');
 
+/* URLs accessible to everyone */
 router.get("/", homePage);
-router.get("/vcPage",addExaminerVC);
-router.post("/selectExams",selectExams);
-router.post("/examSelected",examSelected);
-router.get("/examAccepted",examAccepted);
-router.get("/examRejected",examRejected);
-router.post("/examCheck",examCheck);
 router.post("/login", login);
 router.get("/logout", logout);
 router.get("/registerPage", registerPage);
-router.get("/removeReport",removeReport);
 router.post("/validate", validate);
 router.post("/verify", verify);
-router.get("/applicationFormPage", applicationFormPage);
-router.post("/applicationFormSubmit", applicationFormSubmit);
-router.get("/downloadPDF", downloadPDF);
-router.get("/studentPage", studentPage);
-router.get("/supervisorPage", supervisorPage);
-router.get("/assignRAC.html", assignRAC);
-router.post("/racSubmit", racSubmit);
-router.post("/supervisorApproval", supervisorApprovalController);
-router.get("/prcRegistrationApproval", prcRegistrationApproval);
-router.post("/prcRegistrationApprovalSubmit", prcRegistrationApprovalSubmit);
-router.get("/prcReportApproval",prcReportApproval);
-router.post("/prcReportApprovalSubmit",prcReportApprovalSubmit);
-router.get("/prcVivaReport",prcVivaReport);
-router.post("/prcVivaReportSubmit",prcVivaReportSubmit);
-router.get("/downloadVivaReport",downloadVivaReport);
-router.get("/prcTitleChange",prcTitleChange);
-router.post("/prcTitleChangeSubmit",prcTitleChangeSubmit);
-router.get("/prcRegistrationExtension",prcRegistrationExtension);
-router.post("/prcRegistrationExtensionSubmit",prcRegistrationExtensionSubmit);
-router.get("/dcRegistrationApproval", dcRegistrationApproval);
-router.post("/dcRegistrationApprovalSubmit", dcRegistrationApprovalSubmit);
-router.get("/dcReportApproval",dcReportApproval);
-router.post("/dcReportApprovalSubmit",dcReportApprovalSubmit);
-router.get("/dcVivaReport",dcVivaReport);
-router.get("/dcTitleChange",dcTitleChange);
-router.post("/dcTitleChangeSubmit",dcTitleChangeSubmit);
-router.get("/dcRegistrationExtension",dcRegistrationExtension);
-router.post("/dcRegistrationExtensionSubmit",dcRegistrationExtensionSubmit);
-router.get("/dcExaminerApproval",dcExaminerApproval);
-router.post("/dcExaminerApprovalSubmit",dcExaminerApprovalSubmit);
-router.get("/dcExaminersList",dcExaminersList);
-router.get("/myStudents",examinerPage);
-router.post("/selectExaminer",addExaminer);
-router.post("/addedExaminer",addExam);
-router.post("/specialDB", specialPage);
-router.post("/searchDB", specialSearchPage);
-router.post("/submitReport", submitReport);
+
+/* URLs accessible to Vice chancellor only */
+router.get("/vcPage", auth(["VC"]), addExaminerVC);
+router.post("/selectExams", auth(["VC"]), selectExams);
+router.post("/examSelected", auth(["VC"]), examSelected);
+router.get("/examAccepted", auth(["VC"]), examAccepted);
+router.get("/examRejected", auth(["VC"]), examRejected);
+router.post("/examCheck", auth(["VC"]), examCheck);
+
+/* URLs accessible to students only */
+router.get("/applicationFormPage", auth(["stud"]), applicationFormPage);
+router.post("/applicationFormSubmit", auth(["stud"]), applicationFormSubmit);
+router.get("/studentPage", auth(["stud"]), studentPage);
+router.get("/removeReport", auth(["stud"]), removeReport);
+router.get("/api/faculties", auth(["stud"]), getFaculties);
+router.get("/api/departments", auth(["stud"]), getDepartments);
+router.get("/api/professors", auth(["stud"]), getProfessors);
+router.get("/api/designation", auth(["stud"]), getProfessorDesignation);
+router.post("/submitReport", auth(["stud"]), submitReport);
+
+/* URLs accessible to supervisor only */
+router.get("/supervisorPage", auth(["sup", "hod"]), supervisorPage);
+router.post("/supervisorApproval", auth(["sup", "hod"]), supervisorApprovalController);
+router.get("/assignRAC.html", auth(["sup", "hod"]), assignRAC);
+router.post("/racSubmit", auth(["sup", "hod"]), racSubmit);
+router.get("/myStudents", auth(["sup", "hod"]), examinerPage);
+router.post("/selectExaminer", auth(["sup", "hod"]), addExaminer);
+router.post("/addedExaminer", auth(["sup", "hod"]), addExam);
+
+/* URLs accessible to PRC only */
+router.get("/prcRegistrationApproval", auth(["prc"]), prcRegistrationApproval);
+router.post("/prcRegistrationApprovalSubmit", auth(["prc"]), prcRegistrationApprovalSubmit);
+router.get("/prcReportApproval", auth(["prc"]), prcReportApproval);
+router.post("/prcReportApprovalSubmit", auth(["prc"]), prcReportApprovalSubmit);
+router.get("/prcVivaReport", auth(["prc"]), prcVivaReport);
+router.post("/prcVivaReportSubmit", auth(["prc"]), prcVivaReportSubmit);
+router.get("/prcTitleChange", auth(["prc"]), prcTitleChange);
+router.post("/prcTitleChangeSubmit", auth(["prc"]), prcTitleChangeSubmit);
+router.get("/prcRegistrationExtension", auth(["prc"]), prcRegistrationExtension);
+router.post("/prcRegistrationExtensionSubmit", auth(["prc"]), prcRegistrationExtensionSubmit);
+
+/* URLs accessible to DC only */
+router.get("/dcRegistrationApproval", auth(["dc"]), dcRegistrationApproval);
+router.post("/dcRegistrationApprovalSubmit", auth(["dc"]), dcRegistrationApprovalSubmit);
+router.get("/dcReportApproval", auth(["dc"]), dcReportApproval);
+router.post("/dcReportApprovalSubmit", auth(["dc"]), dcReportApprovalSubmit);
+router.get("/dcVivaReport", auth(["dc"]), dcVivaReport);
+router.get("/dcTitleChange", auth(["dc"]), dcTitleChange);
+router.post("/dcTitleChangeSubmit", auth(["dc"]), dcTitleChangeSubmit);
+router.get("/dcRegistrationExtension", auth(["dc"]), dcRegistrationExtension);
+router.post("/dcRegistrationExtensionSubmit", auth(["dc"]), dcRegistrationExtensionSubmit);
+router.get("/dcExaminerApproval", auth(["dc"]), dcExaminerApproval);
+router.post("/dcExaminerApprovalSubmit",auth(["dc"]), dcExaminerApprovalSubmit);
+router.get("/dcExaminersList", auth(["dc"]), dcExaminersList);
+router.get("/downloadVivaReport", auth(["dc"]), downloadVivaReport);
+
+/* URLs accessible to special supervisors only */
+router.post("/specialDB", auth(["hod"]), specialPage);
+router.post("/searchDB", auth(["hod"]), specialSearchPage);
+
+/* URLs accessible to multiple user types */
 router.get("/downloadReport", downloadReport);
-router.get("/api/faculties", getFaculties);
-router.get("/api/departments", getDepartments);
-router.get("/api/professors", getProfessors);
-router.get("/api/designation", getProfessorDesignation);
+router.get("/downloadPDF", downloadPDF);
 
 module.exports = router;

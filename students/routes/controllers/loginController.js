@@ -4,6 +4,7 @@ const util = require('util');
 const { compare } = require('./../../services/encrypt.js');
 const createPDF = require('./../../services/createPDF');
 const { url } = require('inspector');
+const { setServers } = require('dns');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 
 
@@ -11,6 +12,7 @@ var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 const homePage = (req, res) => {
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
     res.send(htmlFileSend);
+    
 }
 
 // Handles the event when user logs in
@@ -37,38 +39,25 @@ const login = (req, res) => {
                 var htmlNewFile = htmlNewFile.replace("{%error-type%}", "login-cross");
                 res.send(htmlNewFile);
             } else {
+                /* Setting session variables */
+                var sess = req.session;
+                sess.email = usr;
+                sess.userid = result[0].id;
+                sess.special = result[0].special_user;
+                sess.userType = result[0].type;
+                if(sess.special == 'Y') {
+                    sess.userType = 'hod';
+                }
+                console.log("User type: " + sess.userType);
                 if (log === 'STUD') {
-
-                    var stud_id = result[0].id;
-
-                    // Storing student ID and email as session objects
-
-                    var sess = req.session;
-                    sess.email = usr;
-                    sess.userid = stud_id;
                     res.redirect('/studentPage');
-
-                } else if (log === 'SUP') {
-                    var sup_id = result[0].id;
-
-                    var sess = req.session;
-                    sess.email = usr;
-                    sess.userid = sup_id;
-                    sess.special = result[0].special_user;
+                } else if (log === 'SUP') {    
                     res.redirect('/supervisorPage');
                 } else if (log === 'VC') {
                     res.redirect('/vcPage');
                 } else if (log === 'DC') {
-                    var dc_id = result[0].id;
-                    var sess = req.session;
-                    sess.email = usr;
-                    sess.userid = dc_id;
                     res.redirect('/dcRegistrationApproval');
                 } else { 
-                    var prc_id = result[0].id;
-                    var sess = req.session;
-                    sess.email = usr;
-                    sess.userid = prc_id;
                     res.redirect('/prcRegistrationApproval');
                 }
             }

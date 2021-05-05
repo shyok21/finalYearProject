@@ -91,7 +91,7 @@ const addExaminer = (req,res) => {
         {
             if(result[i].Student_ID == studentId)
             {
-                res.send("<h1 style='color:red;'>Examiner already selected for this Student</h1>");
+                res.render('notification', {message : 'Examiner already selected for this Student!', status: 'error', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
                 return;
             }
             script += `['${result[i].Email}','${result[i].Name}','${result[i].Designation}','${result[i].Address}','${result[i].State}','${result[i].Mobile}']`;
@@ -122,10 +122,9 @@ const addExam = (req,res) => {
     con.query(qry,(err,result,field) => {
         if (err)
         {
-            res.send("<h1 style='color:red;'>Examiner already selected for this Student</h1>");
-            throw err;
+            res.render('notification', {message : 'Examiner already selected for this student!', status: 'error', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
         }
-        res.send("<h1 style='color:green;'>Examiner Added Successfully</h1>");
+        res.render('notification', {message : 'Examiner added successfully!', status: 'success', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
     });
 }
 module.exports = {
