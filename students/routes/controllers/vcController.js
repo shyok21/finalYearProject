@@ -76,53 +76,60 @@ const examSelected = (req, res) => {
     var today_date = new Date();
     var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
     console.log(req.body.stud_id);
-        con.query(qry,(err,results,fields)=>{
+    con.query(qry,(err,results,fields)=>{
             
-            var email1 = req.body.instate;
-            var email2 = req.body.outstate;
-            var email3;
-            if(req.body.viva == 'null')
-                email3 = req.body.Email;
-            else
-                email3 = req.body.viva;
-            var email = [email1,email2,email3];
-            for(var i=0;i<email.length;i++)	{
-                
-                var htmlFile = fs.readFileSync('mailService/main.html','utf-8');
-                
-                var pass = randomstring.generate(10);
-                var url = `${email[i]} ${pass}`;
-                const hash = encrypt(url);
-                htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
-                htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
-                htmlFile = htmlFile.replace('{%username%}',email[i]);
-                htmlFile = htmlFile.replace('{%password%}',pass);
-                var transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    port: 587,
-                    secure: false,
-                    requireTLS: true,
-                    auth: {
-                        user: 'notifyserver123@gmail.com',
-                        pass: 'categorized123'
-                    }
-                });
-                var mailOptions = {
-                    from: 'notifyserver123@gmail.com',
-                    to: 'ju.phdms2021@gmail.com', 
-                    subject: 'Invitation for Examiner',
-                    html: htmlFile
-                };
-                transporter.sendMail(mailOptions, function(error, info) {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log('Email sent: ' + info.response);
-                    }
-                });
-            }
-            res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/addExaminerVC", backText: "Back to VC portal"});
+        var email1 = req.body.instate;
+        var email2 = req.body.outstate;
+        var email3;
+        if(req.body.viva == 'null')
+            email3 = req.body.Email;
+        else
+            email3 = req.body.viva;
+        var email = [email1,email2,email3];
+        for(var i=0;i<email.length;i++)	{
+            
+            var htmlFile = fs.readFileSync('mailService/main.html','utf-8');
+            
+            var pass = randomstring.generate(10);
+            var url = `${email[i]} ${pass}`;
+            const hash = encrypt(url);
+            htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+            htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+            htmlFile = htmlFile.replace('{%username%}',email[i]);
+            htmlFile = htmlFile.replace('{%password%}',pass);
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'notifyserver123@gmail.com',
+                    pass: 'categorized123'
+                }
+            });
+            var mailOptions = {
+                from: 'notifyserver123@gmail.com',
+                to: 'ju.phdms2021@gmail.com', 
+                subject: 'Invitation for Examiner',
+                html: htmlFile
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+            
+        }
+        var emails = `('${email1}','${email2}','${email3}')`;
+        var today_date = new Date();
+        var qry2 = `Update External set phase = 1, last_mail_sent_date = '${today_date}' where email in ${emails} and Student_ID='${req.body.stud_id}';`;
+        console.log(qry2);
+        con.query(qry2,(err,ress,f)=>{
+            res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/vcPage", backText: "Back to VC portal"});
         });
+    });
 }
 
 const examAccepted = (req,res) => {

@@ -85,7 +85,8 @@ const examinerPage = (req,res) => {
 const addExaminer = (req,res) => {
     var studentId = Object.keys(req.body)[0];
     var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
-    con.query(`select* from External`,(err,result,field) => {
+    con.query(`select* from External group by Email`,(err,result,field) => {
+        console.log(result);
         var script = "var data = [";
         for(var i=0;i<result.length;i++)
         {

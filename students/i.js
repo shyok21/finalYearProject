@@ -10,8 +10,8 @@ getNextDate = (date,month) => {
     var newDate = new Date(newYear,newMonth,newDay);
     return newDate;
 }
-// cron.schedule("30 6 * * 1",() => {
-cron.schedule("* * * * *", () => {
+cron.schedule("30 6 * * 1",() => {
+// cron.schedule("* * * * *", () => {
 
     //Background Job for 6 Month Remainder
     con.query('select * from student s left join login l on l.id = s.stud_id;',(err,result,f)=> {
