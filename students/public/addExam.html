@@ -7,43 +7,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
-        <h1>Select Examiners:</h1>
+        <h1>Select Examiners for {%studId%}</h1>
         <form action="/addedExaminer" method="POST" class="form-class">
         <input type="hidden" value="{%studId%}" name="student">
+        <div class="full-set">
+            <div class="head-set">Examiners Outside India</div>
+
             <div class="set">
-                <div class="head-set">
-                    <p> </p>
-                    <p>I</p>
-                    <p>n</p>
-                    <p> </p>
-                    <p>S</p>
-                    <p>t</p>
-                    <p>a</p>
-                    <p>t</p>
-                    <p>e</p>
-                </div>
                 <div class="exam-set">
-                    <div class="set-space1" id="email11">
+                    <div class="set-space1" id="email99">
                         <div class="set-heading">
                             <p style="text-align:center;">Email:</p>
                         </div>
                         <div class="set-input">
-                            <input id="email1" type="email" name="email1" style="width:90%;height:60%;" oninput="checkEmail('1')" required>
+                            <input id="email9" type="email" name="email9" style="width:90%;height:60%;" oninput="checkEmail('9')" required>
                         </div>
                     </div>
-                    <div class="set-space3" id="space1"></div>
+                    <div class="set-space3" id="space9"></div>
                     <div class="set-space1">
                         <div class="set-heading">
                             <p style="text-align:center;">Name:</p>
                         </div>
                         <div class="set-input">
-                            <input id="name1" type="text" name="name1" style="width:90%;height:60%;" required>
+                            <input id="name9" type="text" name="name9" style="width:90%;height:60%;" required>
                         </div>
                     </div>
                     <div class="set-space1">
@@ -51,7 +43,7 @@
                             <p style="text-align:center;">Designation:</p>
                         </div>
                         <div class="set-input">
-                            <input id="designation1" type="text" name="designation1" style="width:90%;height:60%;" required>
+                            <input id="designation9" type="text" name="designation9" style="width:90%;height:60%;" required>
                         </div>
                     </div>
                     <div class="set-space2">
@@ -59,16 +51,16 @@
                             <p style="text-align:center;">Address:</p>
                         </div>
                         <div class="set-input">
-                            <textarea rows="5" cols="30" id="address1" name="address1" required></textarea>
+                            <textarea rows="5" cols="30" id="address9" name="address9" required></textarea>
                         </div>
                     </div>
                     <div class="set-space1">
                         <div class="set-space1">
                             <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
+                                <p style="text-align:center;">Country:</p>
                             </div>
                             <div class="set-input">
-                                <input type="text" name="state3" id="state3" value="West Bengal" style="width:90%;" readonly>
+                                <input type="text" name="state9" id="state9" style="width:90%;" required>
                             </div>
                         </div>
                         <div class="set-space1">
@@ -76,459 +68,676 @@
                                 <p style="text-align:center;">Mobile:</p>
                             </div>
                             <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile1" name="mobile1">
+                                <input type="tel" style="width:80%" id="mobile9" name="mobile9">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email22">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email2" type="email" name="email2" style="width:90%;height:60%;" oninput="checkEmail('2')" required>
-                        </div>
+            <div class="exam-set">
+                <div class="set-space1" id="email1010">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
                     </div>
-                    <div class="set-space3" id="space2"></div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="name2" type="text" name="name2" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="designation2" type="text" name="designation2" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address2" name="address2" required></textarea>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state3" id="state3" value="West Bengal" style="width:90%;" readonly>
-                            </div>
-                        </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile2" name="mobile2">
-                            </div>
-                        </div>
+                    <div class="set-input">
+                        <input id="email10" type="email" name="email10" style="width:90%;height:60%;" oninput="checkEmail('10')" required>
                     </div>
                 </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email33">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email3" type="email" name="email3" style="width:90%;height:60%;" oninput="checkEmail('3')" required>
-                        </div>
+                <div class="set-space3" id="space10"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
                     </div>
-                    <div class="set-space3" id="space3"></div>
+                    <div class="set-input">
+                        <input id="name10" type="text" name="name10" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation10" type="text" name="designation10" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address10" name="address10" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
                     <div class="set-space1">
                         <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
+                            <p style="text-align:center;">Country:</p>
                         </div>
                         <div class="set-input">
-                            <input id="name3" type="text" name="name3" style="width:90%;height:60%;" required>
+                            <input type="text" name="state10" id="state10" style="width:90%;" required>
                         </div>
                     </div>
                     <div class="set-space1">
                         <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
+                            <p style="text-align:center;">Mobile:</p>
                         </div>
                         <div class="set-input">
-                            <input id="designation3" type="text" name="designation3" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address3" name="address3" required></textarea>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state3" id="state3" value="West Bengal" style="width:90%;" readonly>
-                            </div>
-                        </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile3" name="mobile3">
-                            </div>
+                            <input type="tel" style="width:80%" id="mobile10" name="mobile10">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="set">
-                <div class="head-set">
-                    <p> </p>
-                    <p>o</p>
-                    <p>u</p>
-                    <p>t</p>
-                    <p> </p>
-                    <p>S</p>
-                    <p>t</p>
-                    <p>a</p>
-                    <p>t</p>
-                    <p>e</p>
-                </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email44">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email4" type="email" name="email4" style="width:90%;height:60%;" oninput="checkEmail('4')" required>
-                        </div>
+            <div class="exam-set">
+                <div class="set-space1" id="email1111">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
                     </div>
-                    <div class="set-space3" id="space4"></div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="name4" type="text" name="name4" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="designation4" type="text" name="designation4" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address4" name="address4" required></textarea>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state4" id="state4" style="width:90%;" required>
-                            </div>
-                        </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile4" name="mobile4">
-                            </div>
-                        </div>
+                    <div class="set-input">
+                        <input id="email11" type="email" name="email11" style="width:90%;height:60%;" oninput="checkEmail('11')" required>
                     </div>
                 </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email55">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email5" type="email" name="email5" style="width:90%;height:60%;" oninput="checkEmail('5')" required>
-                        </div>
+                <div class="set-space3" id="space11"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
                     </div>
-                    <div class="set-space3" id="space5"></div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="name5" type="text" name="name5" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="designation5" type="text" name="designation5" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address5" name="address5" required></textarea>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state5" id="state5" style="width:90%;" required>
-                            </div>
-                        </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile5" name="mobile5">
-                            </div>
-                        </div>
+                    <div class="set-input">
+                        <input id="name11" type="text" name="name11" style="width:90%;height:60%;" required>
                     </div>
                 </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email66">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email6" type="email" name="email6" style="width:90%;height:60%;" oninput="checkEmail('6')" required>
-                        </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
                     </div>
-                    <div class="set-space3" id="space6"></div>
+                    <div class="set-input">
+                        <input id="designation11" type="text" name="designation11" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address11" name="address11" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
                     <div class="set-space1">
                         <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
+                            <p style="text-align:center;">Country:</p>
                         </div>
                         <div class="set-input">
-                            <input id="name6" type="text" name="name6" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="designation6" type="text" name="designation6" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address6" name="address6" required></textarea>
+                            <input type="text" name="state11" id="state11" style="width:90%;" required>
                         </div>
                     </div>
                     <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state6" id="state6" style="width:90%;" required>
-                            </div>
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
                         </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile6" name="mobile6">
-                            </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile11" name="mobile11">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="set">
-                <div class="head-set">
-                    <p> </p>
-                    <p>V</p>
-                    <p>I</p>
-                    <p>V</p>
-                    <p>A</p>
-                </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email77">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email7" type="email" name="email7" style="width:90%;height:60%;" oninput="checkEmail('7')" required>
-                        </div>
-                    </div>
-                    <div class="set-space3" id="space7"></div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="name7" type="text" name="name7" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="designation7" type="text" name="designation7" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address7" name="address7" required></textarea>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state7" id="state7" style="width:90%;" required>
-                            </div>
-                        </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile7" name="mobile7">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="exam-set">
-                    <div class="set-space1" id="email88">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Email:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="email8" type="email" name="email8" style="width:90%;height:60%;" oninput="checkEmail('8')" required>
-                        </div>
-                    </div>
-                    <div class="set-space3" id="space8"></div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Name:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="name8" type="text" name="name8" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Designation:</p>
-                        </div>
-                        <div class="set-input">
-                            <input id="designation8" type="text" name="designation8" style="width:90%;height:60%;" required>
-                        </div>
-                    </div>
-                    <div class="set-space2">
-                        <div class="set-heading">
-                            <p style="text-align:center;">Address:</p>
-                        </div>
-                        <div class="set-input">
-                            <textarea rows="5" cols="30" id="address8" name="address8" required></textarea>
-                        </div>
-                    </div>
-                    <div class="set-space1">
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">State:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="text" name="state8" id="state8" style="width:90%;" required>
-                            </div>
-                        </div>
-                        <div class="set-space1">
-                            <div class="set-heading">
-                                <p style="text-align:center;">Mobile:</p>
-                            </div>
-                            <div class="set-input">
-                                <input type="tel" style="width:80%" id="mobile8" name="mobile8">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input type="submit" name="Submit" value="&#10140;" class="submit-class">
-            </div>
-            <div class="empty"></div>
-        </form>
+        </div>
     </div>
-    <script>
-        var data = [
-            ['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262'],
-            ['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458'],
-            ['shubhamgoel@gmail.com','Shubham Goel','Intern','Kolkata','West Bengal','438963476'],
-            ['roopkathasamantha@gmail.com','roopkata Samantha','Intern','Kolkata','West Bengal','8932552325'],
-            ['susvicky393@gmail.com','Sushant Shaw','Intern','Kolkata','West Bengal','3046346730'],
-            ['souvikkapri1998@gmail.com','Souvik Kapri','Intern','Durgapur','West Bengal','9832586240'],
-            ['dddeepak888@gmail.com','Deepak Kumar','Student','Bangalore','Karnataka','7382446369'],
-            ['aman19fist@gmail.com','Aman Saini','Student','Vadodara','Gujarat','983252532'],
-            ['priyanshutirkey@gmail.com','Priyanshu Tirkey','SDE','Ranchi','Jharkhand','890024762']
-        ];
-        function getData(x,id){
-            var retData = [];
-            var y = parseInt(id);
-            if(y < 4){
-                for(var i=0;i<data.length;i++)
-                {
-                    if(data[i][0].includes(x) && data[i][4] == 'West Bengal')
-                        retData.push(data[i]);
-                }
-                return retData;
+    <div class="full-set">
+        <div class="head-set">Examiners Outside West Bengal</div>
+
+        <div class="set">
+            <div class="exam-set">
+                <div class="set-space1" id="email44">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="email4" type="email" name="email4" style="width:90%;height:60%;" oninput="checkEmail('4')" required>
+                    </div>
+                </div>
+                <div class="set-space3" id="space4"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="name4" type="text" name="name4" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation4" type="text" name="designation4" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address4" name="address4" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">State:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="text" name="state4" id="state4" style="width:90%;" required>
+                        </div>
+                    </div>
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile4" name="mobile4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exam-set">
+                <div class="set-space1" id="email55">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="email5" type="email" name="email5" style="width:90%;height:60%;" oninput="checkEmail('5')" required>
+                    </div>
+                </div>
+                <div class="set-space3" id="space5"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="name5" type="text" name="name5" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation5" type="text" name="designation5" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address5" name="address5" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">State:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="text" name="state5" id="state5" style="width:90%;" required>
+                        </div>
+                    </div>
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile5" name="mobile5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exam-set">
+                <div class="set-space1" id="email66">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="email6" type="email" name="email6" style="width:90%;height:60%;" oninput="checkEmail('6')" required>
+                    </div>
+                </div>
+                <div class="set-space3" id="space6"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="name6" type="text" name="name6" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation6" type="text" name="designation6" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address6" name="address6" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">State:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="text" name="state6" id="state6" style="width:90%;" required>
+                        </div>
+                    </div>
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile6" name="mobile6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="full-set">
+        <div class="head-set">Examiners Inside West Bengal</div>
+        <div class="set">
+            <div class="exam-set">
+                <div class="set-space1" id="email11">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="email1" type="email" name="email1" style="width:90%;height:60%;" oninput="checkEmail('1')" required>
+                    </div>
+                </div>
+                <div class="set-space3" id="space1"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="name1" type="text" name="name1" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation1" type="text" name="designation1" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address1" name="address1" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">State:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="text" name="state1" id="state1" value="West Bengal" style="width:90%;" readonly>
+                        </div>
+                    </div>
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile1" name="mobile1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exam-set">
+                <div class="set-space1" id="email22">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="email2" type="email" name="email2" style="width:90%;height:60%;" oninput="checkEmail('2')" required>
+                    </div>
+                </div>
+                <div class="set-space3" id="space2"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="name2" type="text" name="name2" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation2" type="text" name="designation2" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address2" name="address2" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">State:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="text" name="state2" id="state2" value="West Bengal" style="width:90%;" readonly>
+                        </div>
+                    </div>
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile2" name="mobile2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exam-set">
+                <div class="set-space1" id="email33">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Email:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="email3" type="email" name="email3" style="width:90%;height:60%;" oninput="checkEmail('3')" required>
+                    </div>
+                </div>
+                <div class="set-space3" id="space3"></div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Name:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="name3" type="text" name="name3" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Designation:</p>
+                    </div>
+                    <div class="set-input">
+                        <input id="designation3" type="text" name="designation3" style="width:90%;height:60%;" required>
+                    </div>
+                </div>
+                <div class="set-space2">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Address:</p>
+                    </div>
+                    <div class="set-input">
+                        <textarea rows="5" cols="30" id="address3" name="address3" required></textarea>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">State:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="text" name="state3" id="state3" value="West Bengal" style="width:90%;" readonly>
+                        </div>
+                    </div>
+                    <div class="set-space1">
+                        <div class="set-heading">
+                            <p style="text-align:center;">Mobile:</p>
+                        </div>
+                        <div class="set-input">
+                            <input type="tel" style="width:80%" id="mobile3" name="mobile3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="full-set">
+        <div class="head-set">Examiners for Viva-Voce</div>
+    <div class="set">
+        <div class="exam-set">
+            <div class="set-space1" id="email77">
+                <div class="set-heading">
+                    <p style="text-align:center;">Email:</p>
+                </div>
+                <div class="set-input">
+                    <input id="email7" type="email" name="email7" style="width:90%;height:60%;" oninput="checkEmail('7')" required>
+                </div>
+            </div>
+            <div class="set-space3" id="space7"></div>
+            <div class="set-space1">
+                <div class="set-heading">
+                    <p style="text-align:center;">Name:</p>
+                </div>
+                <div class="set-input">
+                    <input id="name7" type="text" name="name7" style="width:90%;height:60%;" required>
+                </div>
+            </div>
+            <div class="set-space1">
+                <div class="set-heading">
+                    <p style="text-align:center;">Designation:</p>
+                </div>
+                <div class="set-input">
+                    <input id="designation7" type="text" name="designation7" style="width:90%;height:60%;" required>
+                </div>
+            </div>
+            <div class="set-space2">
+                <div class="set-heading">
+                    <p style="text-align:center;">Address:</p>
+                </div>
+                <div class="set-input">
+                    <textarea rows="5" cols="30" id="address7" name="address7" required></textarea>
+                </div>
+            </div>
+            <div class="set-space1">
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">State:</p>
+                    </div>
+                    <div class="set-input">
+                        <input type="text" name="state7" id="state7" style="width:90%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Mobile:</p>
+                    </div>
+                    <div class="set-input">
+                        <input type="tel" style="width:80%" id="mobile7" name="mobile7">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="exam-set">
+            <div class="set-space1" id="email88">
+                <div class="set-heading">
+                    <p style="text-align:center;">Email:</p>
+                </div>
+                <div class="set-input">
+                    <input id="email8" type="email" name="email8" style="width:90%;height:60%;" oninput="checkEmail('8')" required>
+                </div>
+            </div>
+            <div class="set-space3" id="space8"></div>
+            <div class="set-space1">
+                <div class="set-heading">
+                    <p style="text-align:center;">Name:</p>
+                </div>
+                <div class="set-input">
+                    <input id="name8" type="text" name="name8" style="width:90%;height:60%;" required>
+                </div>
+            </div>
+            <div class="set-space1">
+                <div class="set-heading">
+                    <p style="text-align:center;">Designation:</p>
+                </div>
+                <div class="set-input">
+                    <input id="designation8" type="text" name="designation8" style="width:90%;height:60%;" required>
+                </div>
+            </div>
+            <div class="set-space2">
+                <div class="set-heading">
+                    <p style="text-align:center;">Address:</p>
+                </div>
+                <div class="set-input">
+                    <textarea rows="5" cols="30" id="address8" name="address8" required></textarea>
+                </div>
+            </div>
+            <div class="set-space1">
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">State:</p>
+                    </div>
+                    <div class="set-input">
+                        <input type="text" name="state8" id="state8" style="width:90%;" required>
+                    </div>
+                </div>
+                <div class="set-space1">
+                    <div class="set-heading">
+                        <p style="text-align:center;">Mobile:</p>
+                    </div>
+                    <div class="set-input">
+                        <input type="tel" style="width:80%" id="mobile8" name="mobile8">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" name="Submit" value="&#10140;" class="submit-class">
+    </div>
+
+    </div>
+        <div class="empty"></div>
+    </form>
+</div>
+<script>
+    // var data = [
+        
+    //     ['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262'],
+    //     ['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458'],
+    //     ['shubhamgoel@gmail.com','Shubham Goel','Intern','Kolkata','West Bengal','438963476'],
+    //     ['roopkathasamantha@gmail.com','roopkata Samantha','Intern','Kolkata','West Bengal','8932552325'],
+    //     ['susvicky393@gmail.com','Sushant Shaw','Intern','Kolkata','West Bengal','3046346730'],
+    //     ['souvikkapri1998@gmail.com','Souvik Kapri','Intern','Durgapur','West Bengal','9832586240'],
+    //     ['dddeepak888@gmail.com','Deepak Kumar','Student','Bangalore','Karnataka','7382446369'],
+    //     ['aman19fist@gmail.com','Aman Saini','Student','Vadodara','Gujarat','983252532'],
+    //     ['priyanshutirkey@gmail.com','Priyanshu Tirkey','SDE','Ranchi','Jharkhand','890024762']
+    // ];
+    // var forData = [
+    //     ['ritamguha1998@gmail.com','Ritam Guha','Scholar','Chicago','United States','2364743743'],
+    //     ['rockstarsam1234@gmail.com','Soham Mukherjee','SDE','Kuching','Singapore','3523642743'],
+    //     ['sainia18885@gmail.com','Saini Aman','ME','Wuhan','China','352363267237']
+    // ];
+    var data = [];
+    data.push(['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262']);
+    data.push(['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458']);
+    function getData(x,id){
+        var retData = [];
+        var y = parseInt(id);
+        if(y < 4){
+            for(var i=0;i<data.length;i++)
+            {
+                if(data[i][0].includes(x) && data[i][4] == 'West Bengal')
+                    retData.push(data[i]);
             }
-            else if(y > 4 && y < 7){
-                for(var i=0;i<data.length;i++)
-                {
-                    if(data[i][0].includes(x) && data[i][4] != 'West Bengal')
-                        retData.push(data[i]);
-                }
-                return retData;
-            }
-            else{
-                for(var i=0;i<data.length;i++)
-                {
-                    if(data[i][0].includes(x))
-                        retData.push(data[i]);
-                }
-                return retData;
-            }
+            return retData;
         }
-        function selectPerson(id){
-            var email = document.getElementById("selecttemp"+id).value;
-            document.getElementById("email"+id).value = email;
-            var datas = getData(email,id);
-            document.getElementById("name"+id).value = datas[0][1];
-            document.getElementById("designation"+id).value = datas[0][2];
-            document.getElementById("address"+id).value = datas[0][3];
-            document.getElementById("state"+id).value = datas[0][4];
-            document.getElementById("mobile"+id).value = datas[0][5];
+        else if(y >= 4 && y < 7){
+            for(var i=0;i<data.length;i++)
+            {
+                if(data[i][0].includes(x) && data[i][4] != 'West Bengal')
+                    retData.push(data[i]);
+            }
+            return retData;
+        }
+        else if(y>= 9 && y< 12)
+        {
+            for(var i=0;i<forData.length;i++)
+            {
+                if(forData[i][0].includes(x))
+                    retData.push(forData[i]);
+            }
+            return retData;
+        }
+        else{
+            for(var i=0;i<data.length;i++)
+            {
+                if(data[i][0].includes(x))
+                    retData.push(data[i]);
+            }
+            return retData;
+        }
+    }
+    function selectPerson(id){
+        var email = document.getElementById("selecttemp"+id).value;
+        document.getElementById("email"+id).value = email;
+        var datas = getData(email,id);
+        document.getElementById("name"+id).value = datas[0][1];
+        document.getElementById("designation"+id).value = datas[0][2];
+        document.getElementById("address"+id).value = datas[0][3];
+        document.getElementById("state"+id).value = datas[0][4];
+        document.getElementById("mobile"+id).value = datas[0][5];
+        try{
+            var del = document.getElementById("selecttemp"+id);
+            del.remove();
+            var del2 = document.getElementById("buttontemp"+id);
+            del2.remove();
+        }
+        catch(e){
+
+        }
+    }
+    function checkEmail(id){
+        //console.log(xyz);
+        try{
+        var del = document.getElementById("selecttemp"+id);
+        del.remove();
+        var del2 = document.getElementById("buttontemp"+id);
+        del2.remove();
+        }
+        catch(e){
+
+        }
+        var email = document.getElementById("email"+id);
+        var select = document.createElement("select");
+        select.setAttribute("id","selecttemp"+id);
+        select.setAttribute("style","width:60%;margin-left:1%");
+        var button = document.createElement("button");
+        button.innerHTML = "Select!";
+        button.setAttribute("id","buttontemp"+id);
+        button.setAttribute("onclick",`selectPerson("${id}");return false;`);
+        button.setAttribute("style","width:32%;margin-left:4%;");
+        var datas = getData(email.value,id);
+        if(datas.length!=0 && email.value.length!=0)
+        {
+            for(var i=0;i<datas.length;i++)
+            {
+                var option = document.createElement("option");
+                option.setAttribute("value",datas[i][0]);
+                option.innerHTML = datas[i][0];
+                select.appendChild(option);
+            }
+            document.getElementById("space"+id).appendChild(select);
+            document.getElementById("space"+id).appendChild(button);
+        }
+        else
+        {
             try{
                 var del = document.getElementById("selecttemp"+id);
                 del.remove();
@@ -536,53 +745,8 @@
                 del2.remove();
             }
             catch(e){
-
             }
         }
-        function checkEmail(id){
-            //console.log(xyz);
-            try{
-            var del = document.getElementById("selecttemp"+id);
-            del.remove();
-            var del2 = document.getElementById("buttontemp"+id);
-            del2.remove();
-            }
-            catch(e){
-
-            }
-            var email = document.getElementById("email"+id);
-            var select = document.createElement("select");
-            select.setAttribute("id","selecttemp"+id);
-            select.setAttribute("style","width:60%;margin-left:1%");
-            var button = document.createElement("button");
-            button.innerHTML = "Select!";
-            button.setAttribute("id","buttontemp"+id);
-            button.setAttribute("onclick",`selectPerson("${id}");return false;`);
-            button.setAttribute("style","width:32%;margin-left:4%;");
-            var datas = getData(email.value,id);
-            if(datas.length!=0 && email.value.length!=0)
-            {
-                for(var i=0;i<datas.length;i++)
-                {
-                    var option = document.createElement("option");
-                    option.setAttribute("value",datas[i][0]);
-                    option.innerHTML = datas[i][0];
-                    select.appendChild(option);
-                }
-                document.getElementById("space"+id).appendChild(select);
-                document.getElementById("space"+id).appendChild(button);
-            }
-            else
-            {
-                try{
-                    var del = document.getElementById("selecttemp"+id);
-                    del.remove();
-                    var del2 = document.getElementById("buttontemp"+id);
-                    del2.remove();
-                }
-                catch(e){
-                }
-            }
-        }
-    </script>
+    }
+</script>
 </body> 

@@ -20,12 +20,14 @@
             <form class="list" name="lists"  action="/dcExaminerApprovalSubmit" method="POST">
                 <% results.forEach(function(result, index) { %>
                     <% if(index == 0) { %>
-                        <h2>In state examiners</h2>
+                        <h2>Examiners Inside West Bengal</h2>
                     <% } else if(index == 3) { %>
-                        <h2>Out of state examiners</h2>
+                        <h2>Examiners Outside West Bengal</h2>
                     <% } else if(index == 6) { %> 
-                        <h2>Viva examiners</h2>  
-                    <% } %> 
+                        <h2>Examiners for Viva-Voce</h2>  
+                    <% } else if(index == 8) {%> 
+                        <h2>Examiners Outside India</h2>
+                    <% }%>
                     <div class=<%= index%2 ? 'list1' : 'list2' %>>
                         <div class='det1'><%= result.Name %></div>
                         <div class='det1'><%= result.Designation %></div>

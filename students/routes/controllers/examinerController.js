@@ -8,7 +8,7 @@ function monthDiff(dateFrom, dateTo) {
 const examinerPage = (req,res) => {
     var htmlFile = fs.readFileSync('views/examiner.html','utf-8');
     var sess = req.session;
-    var qry = `select * from student where supervisor_id = '${sess.userid}' and examiner_phase = '0';`;
+    var qry = `select * from student where supervisor_id = '${sess.userid}' and examiner_phase = '0' and registration_phase = '5';`;
     con.query(qry,(err,result,fields)=>{
         // res.send(result);
         console.log(z);
@@ -87,7 +87,8 @@ const addExaminer = (req,res) => {
     var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
     con.query(`select* from External group by Email`,(err,result,field) => {
         console.log(result);
-        var script = "var data = [";
+        var script1 = "var data = [];";
+        var script2 = "var forData = [];";
         for(var i=0;i<result.length;i++)
         {
             if(result[i].Student_ID == studentId)
@@ -95,15 +96,16 @@ const addExaminer = (req,res) => {
                 res.render('notification', {message : 'Examiner already selected for this Student!', status: 'error', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
                 return;
             }
-            script += `['${result[i].Email}','${result[i].Name}','${result[i].Designation}','${result[i].Address}','${result[i].State}','${result[i].Mobile}']`;
-            if(i != result.length-1)
-                script += ',';
+            if(result[i].Type == 4)
+                script2 += `\nforData.push(['${result[i].Email}','${result[i].Name}','${result[i].Designation}','${result[i].Address}','${result[i].State}','${result[i].Mobile}']);`;
+            else
+                script1 += `\ndata.push(['${result[i].Email}','${result[i].Name}','${result[i].Designation}','${result[i].Address}','${result[i].State}','${result[i].Mobile}']);`;
         }
-        script += `];`;
 
         htmlFile = htmlFile.replace("{%studId%}",studentId);
         htmlFile = htmlFile.replace("{%studId%}",studentId);
-        htmlFile = htmlFile.replace("{%data%}",script);
+        htmlFile = htmlFile.replace("{%data%}",script1);
+        htmlFile = htmlFile.replace("{%forData%}",script2);
         res.send(htmlFile);
     });
 }
@@ -118,11 +120,16 @@ const addExam = (req,res) => {
     qry += `("${x.name5}","${x.designation5}","${x.address5}","${x.email5}","${x.mobile5}","${studentId}",2,"${x.state5}","INDIA"),`;
     qry += `("${x.name6}","${x.designation6}","${x.address6}","${x.email6}","${x.mobile6}","${studentId}",2,"${x.state6}","INDIA"),`;
     qry += `("${x.name7}","${x.designation7}","${x.address7}","${x.email7}","${x.mobile7}","${studentId}",3,"${x.state7}","INDIA"),`;
-    qry += `("${x.name8}","${x.designation8}","${x.address8}","${x.email8}","${x.mobile8}","${studentId}",3,"${x.state8}","INDIA");`;
+    qry += `("${x.name8}","${x.designation8}","${x.address8}","${x.email8}","${x.mobile8}","${studentId}",3,"${x.state8}","INDIA"),`;
+    qry += `("${x.name9}","${x.designation9}","${x.address9}","${x.email9}","${x.mobile9}","${studentId}",4,"${x.state9}","${x.state9}"),`;
+    qry += `("${x.name10}","${x.designation10}","${x.address10}","${x.email10}","${x.mobile10}","${studentId}",4,"${x.state10}","${x.state10}"),`;
+    qry += `("${x.name11}","${x.designation11}","${x.address11}","${x.email11}","${x.mobile11}","${studentId}",4,"${x.state11}","${x.state11}");`;
     qry += `update student set examiner_phase = '1' WHERE stud_id = "${studentId}";`;
+    //console.log(qry);
     con.query(qry,(err,result,field) => {
         if (err)
         {
+            console.log(err);
             res.render('notification', {message : 'Examiner already selected for this student!', status: 'error', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
         }
         res.render('notification', {message : 'Examiner added successfully!', status: 'success', backLink : "/supervisorPage", backText: "Back to supervisor portal"});

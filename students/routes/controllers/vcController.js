@@ -58,7 +58,7 @@ const selectExams = (req, res) => {
     var qry = `select * from External where Student_ID = '${stud_id}' order by Type;`;
     var htmlFile = fs.readFileSync('views/selectExam.html','utf-8');
     con.query(qry,(err,result,fields)=>{
-        for(var i=1;i<9;i++)
+        for(var i=1;i<12;i++)
         {
             var r = result[i-1];
             htmlFile = htmlFile.replace(`{%name${i}%}`,r.Name);
