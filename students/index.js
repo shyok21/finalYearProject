@@ -8,6 +8,7 @@ app.use(express.static(__dirname + '/uploads'));
 app.set('view engine', 'ejs');
 const cron = require('node-cron');
 const con = require('./db');
+
 // Session management setup
 app.use(
     session({
@@ -21,6 +22,7 @@ app.use(
 require('./db');
 
 //Background Job Setup
+require('./backgroundJobs')();
 
 // Routes setup
 app.use('/', require('./routes/index.js'));
