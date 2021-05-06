@@ -67,4 +67,18 @@ cron.schedule("30 6 * * 1",() => {
             }
         });
     });
+
+    //Background Job for 1 month remainder
+    con.query(`select * from External where phase = 1 and last_mail_sent_date != '0000-00-00'`,(err,result,fields)=>{
+        var today_date = new Date();
+        result.forEach(results => {
+            var lastSeen = results.last_mail_sent_date;
+            var next_date1 = getNextDate(lastSeen,1);
+            var next_date2 = getNextDate(lastSeen,2);
+            if(next_date1>=today_date && next_date2<=today_date)
+                console.log(`Send Mail to ${results.Email} for student ${results.Student_ID}`);
+            else
+                console.log(`OK for ${results.Email} and ${results.Student_ID}`);
+        });
+    });
 });
