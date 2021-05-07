@@ -155,7 +155,7 @@ const prcTitleChangeSubmit = (req,res) => {
 
 const prcRegistrationExtension = (req,res) => {
     var sess = req.session;
-    var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
+    var qry = `select * from student s join prc p on p.dept_id = s.dept_id where prc_id="${sess.userid}" and registration_validity < 5 and extension_requested = "N"`;
     con.query(qry, (err, results, fields) => {
         res.render('PRC/prcRegistrationExtension', {name: sess.userid, results: results});
     });

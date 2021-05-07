@@ -7,7 +7,7 @@ const auth = (userTypes) => {
             next();
         }
         else {
-            res.redirect("/");
+            res.render("notification", {message: 'Unauthorised access', status: 'error', backLink: '/', backText: 'Back to home page'});
         }
     });
 }

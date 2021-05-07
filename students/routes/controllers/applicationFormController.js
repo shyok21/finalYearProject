@@ -74,16 +74,16 @@ const applicationFormSubmit = (req, res) => {
                             const photo_filename = req.files['student_photo'][0].filename;
                             const registration_phase = 1;
                             const date_of_admission = new Date();
-                            const passout_date = new Date(new Date().setFullYear(new Date().getFullYear() + 5));
-                            console.log(date_of_admission, passout_date);
+                            const registration_validity = 5;
+                            console.log(date_of_admission);
                             var query = util.format(
                                 `insert into student 
-                                (stud_id, name, nationality, dob, sex, marritial_status, parent_name, perm_address, addr_for_communication, mobile_no, category, present_emp_org, present_org_work, thesis_title, proposed_institute, registration_phase, supervisor_id, dept_id, date_of_admission, passout_date, photo_filename )
-                                values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s', '%d','%s','%s', '%s', '%s', '%s');`, 
+                                (stud_id, name, nationality, dob, sex, marritial_status, parent_name, perm_address, addr_for_communication, mobile_no, category, present_emp_org, present_org_work, thesis_title, proposed_institute, registration_phase, supervisor_id, dept_id, date_of_admission, registration_validity, photo_filename )
+                                values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s', '%d','%s','%s', '%s', %d, '%s');`, 
                                 sess.userid, student_name, nationality, dob, sex, marital_status, parent_name, 
                                 address1, address2, mobile_no, category, org_name, nature_of_work, title, 
                                 proposed_institute, registration_phase, supervisor_id, dep_id, date_of_admission, 
-                                passout_date, photo_filename
+                                registration_validity, photo_filename
                             );
                             con.query(query, (err, results, fields) => {
                                 if(err) {

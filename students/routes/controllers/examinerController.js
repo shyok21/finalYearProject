@@ -58,15 +58,8 @@ const examinerPage = (req,res) => {
                 formText += `<div class="rest-ans">${x}</div>`;
                 formText += `</div>`;
                 formText += `<div class="data2">`;
-                formText += `<div class="rest-heading">Date of Passout (Expected):</div>`;
-                try{
-                var y = result[i].passout_date.toISOString().replace(/T/, ' ').split(" ")[0];
-                }
-                catch(e)
-                {
-                    var y = "Unknown";
-                }
-                formText += `<div class="rest-ans">${y}</div>`;
+                formText += `<div class="rest-heading">Registration validity</div>`;
+                formText += `<div class="rest-ans">${result[i].registration_validity + ' years'}</div>`;
                 formText += `</div>`;
                 formText += `</div>`;
                 formText += `</div>`;

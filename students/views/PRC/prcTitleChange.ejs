@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="css/prcs.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -17,16 +18,23 @@
         <form method="POST" action="/prcTitleChangeSubmit" class="form-class">
             <div class="dets1">
                 <label for="stud_id">Student Name:</label>
-                <select name="stud_id" >
+                <select name="stud_id" id="student">
                     <% results.forEach(function(result) { %>
-                    <option value = <%= result.stud_id %> ><%= result.name %></option>
+                    <option value = <%= result.stud_id %> data-title = <%= result.thesis_title %> >
+                        <%= result.name + '(' + result.stud_id + ')' %>
+                    </option>
                     <% }); %>
                 </select>
+            </div>
+            <div class="dets1">
+                <label for="thesis_title">Original Title</label>
+                <input name="thesis_title" id="thesis_title" readonly>
             </div>
             <div class="dets1">
                 <label for="new_title">Enter new title:</label>
                 <input name="new_title" required>
             </div>
+            
             <div class="dets2">
                 <input type="submit" name="submit" value="Submit Title">
             </div>
@@ -34,5 +42,13 @@
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function() {
+        $('#thesis_title').val($("#student option:selected").data("title"));
 
+        $('#student').on('change', function() {
+            $('#thesis_title').val($("#student option:selected").data("title"));
+        });
+    });    
+</script>
 </html>

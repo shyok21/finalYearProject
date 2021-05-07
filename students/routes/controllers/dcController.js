@@ -114,7 +114,7 @@ const dcRegistrationExtensionSubmit = (req, res) => {
         qry = "UPDATE student SET extension_requested = NULL WHERE stud_id = '" + stud_id + "';";
         status_id = "Successfully Discared";
     } else {
-        qry = "UPDATE student SET extension_requested = NULL, passout_date = DATE_ADD(passout_date, INTERVAL 1 YEAR) WHERE stud_id = '" + stud_id + "';";
+        qry = "UPDATE student SET extension_requested = NULL, registration_validity = registration_validity + 1 WHERE stud_id = '" + stud_id + "';";
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
