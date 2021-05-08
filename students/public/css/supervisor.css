@@ -80,8 +80,17 @@ body {
     overflow-y: scroll;
 }
 
+.list345{
+    height:25%;
+    background-color:#cbcbcb;
+
+    margin: 10px;
+    border-radius: 20px;
+    display:flex;
+    flex-direction: column;
+}
 .list1 {
-    height: 15%;
+    height: 80%;
     background-color: #cccccc;
     margin: 10px;
     border-radius: 20px;

@@ -26,17 +26,20 @@ const supervisorPage = (req, res) => {
             else {
                 var listString = "";
                 for (var i = 0; i < results.length; i++) {
+                    var listString = listString + `<div class="list345">`
                     var listString = listString + "<div class='list1'>";
                     var listString = listString + "<div class='det1'>" + results[i].name + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].nationality + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].dob + "</div>";
                     var listString = listString + "<div class='det1'>" + results[i].sex + "</div>";
-                    var listString = listString + "<div class='det1'>" + results[i].thesis_title + "</div>";
                     // var listString = listString + "<div class='det1'>" + results[i].thesis_title + "</div>";
                     var listString = listString + `<div class="det1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
                     var listString = listString + `<div class="det1"><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></div>`;
                     //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
                     var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
+                  //  var listString = listString + `</div>`;
+                    var listString = listString + "<div class='det1'><b>Thesis Title: &nbsp;</b>" + results[i].thesis_title + "</div>";
+                    var listString = listString + "</div>";
                 }
                 htmlFile = htmlFile.replace("{%list%}", listString);
             }

@@ -16,11 +16,13 @@ const { encrypt, decrypt } = require('./crypto');
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
+var Db_data_cred = fs.readFileSync('../database.txt','utf-8');
+var data_cred = Db_data_cred.split("\n");
 const con = mysql.createConnection({
-    host: "sql6.freemysqlhosting.net",
-    user: "sql6409379",
-    password: "wIiNIRrYPi",
-    database: "sql6409379",
+    host: data_cred[0].split(": ")[1],
+    user: data_cred[1].split(": ")[1],
+    password: data_cred[3].split(": ")[1],
+    database: data_cred[2].split(": ")[1],
     multipleStatements: true
 });
 
