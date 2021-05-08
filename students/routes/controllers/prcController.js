@@ -5,7 +5,7 @@ const multer  = require('multer');
 
 const prcRegistrationApproval = (req, res) => {
     var sess = req.session;
-    var qry = "select * from student s left join prc p on s.dept_id = p.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
+    var qry = "select * from student s left join prc p on s.dept_id = p.dept_id join department d on s.dept_id = d.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
     con.query(qry, (err, results, fields) => {
         res.render('PRC/prcRegistrationApproval', {name: sess.userid, results: results});
     });
