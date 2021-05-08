@@ -78,9 +78,25 @@ body {
 	margin-top:2%;
 	/*background-color:blue;*/
 }
+.list345{
+	height:25%;
+	width:98%;
+	background-image:linear-gradient(to right, #6190E8, #A7BFE8);
+	border-radius:10px;
+	display:flex;
+	flex-direction:column;
+}
+.list456{
+	height:25%;
+	width:98%;
+	background-image:linear-gradient(to left, #6190E8, #A7BFE8);
+	border-radius:10px;
+	display:flex;
+	flex-direction:column;
+}
 .list1{
-	height:16%;
-	width:95%;
+	height:80%;
+	width:100%;
 	background-image:linear-gradient(to right, #6190E8, #A7BFE8);
 	border-radius:10px;
 	display:flex;
@@ -89,8 +105,8 @@ body {
 	justify-content:center;
 }
 .list2{
-	height:16%;
-	width:95%;
+	height:80%;
+	width:100%;
 	background-image:linear-gradient(to left, #6190E8, #A7BFE8);
 	border-radius:10px;
 	display:flex;

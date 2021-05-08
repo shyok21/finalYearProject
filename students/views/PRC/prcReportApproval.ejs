@@ -19,13 +19,17 @@
         <% } else { %>
             <form class="list" name="lists" action="/prcReportApprovalSubmit" method="POST">
             <% results.forEach(function(result, index) { %>
+                <div class=<%= (index%2) ? 'list345' : 'list456' %>>
                 <div class=<%= (index%2) ? 'list1' : 'list2' %>>
                     <div class='det1'><%= result.name %></div>
-                    <div class='det1'><%= result.thesis_title %></div>
                     <div class='det1'><%= result.semester %></div>
                     <div class='det1'><a href=<%='/downloadReport?stud_id=' + result.stud_id + '&semester=' + result.semester%> >View Six Month Report</a></div>
-                    <div class='det2'><input type='submit' name=<%= result.file_name + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.file_name + '_reject' %> value='Discard &#x2716;' class='discard'></div>    
+                    <div class='det2'><input type='submit' name=<%= result.file_name + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.file_name + '_reject' %> value='Discard &#x2716;' class='discard'></div> 
+
                 </div>
+
+                    <div class='det1'><b>Thesis Title: &nbsp;</b><%= result.thesis_title %></div>
+            </div>
             <%  }); %>
             </form>
         <% } %>
