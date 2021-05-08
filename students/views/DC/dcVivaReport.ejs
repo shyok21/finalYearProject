@@ -19,10 +19,25 @@
         <% } else { %>
             <form class="list" name="lists">
             <% results.forEach(function(result, index) { %>
-                <div class=<%= index%2 ? 'list1' : 'list2' %>>
-                    <div class='det1'><%= result.name %></div>
+                <div class=<%= index%2 ? 'list345' : 'list456' %>>
+                    <!-- <div class='det1'><%= result.name %></div>
                     <div class='det1'><%= result.thesis_title %></div>
-                    <div class='det1'><a href = <%= "/downloadVivaReport?filename=" + result.viva_report_filename %>>Download presubmission viva report</a></div>    
+                    <div class='det1'><a href = <%= "/downloadVivaReport?filename=" + result.viva_report_filename %>>Download presubmission viva report</a></div>   -->  
+                    <img src= <%= 'student_photo/' + result.photo_filename %> class="img-list">
+                    <div class="det1">
+                        <div class="det3">
+                            <p><b>Name: </b><%= result.name %></p>    
+                        </div>
+                        <div class="det3">
+                            <p><b>Department: </b><%= result.dept_name + ' / ' + result.fac_id %></p>
+                        </div>
+                        <div class="det3">
+                            <p><b>Thesis Title:</b><%= result.thesis_title %></p>
+                        </div>
+                        <div class="det3">
+                            <p><a href = <%= "/downloadVivaReport?filename=" + result.viva_report_filename %>>Download presubmission viva report</a></p>
+                        </div>
+                    </div>
                 </div>
             <%  }); %>
             </form>

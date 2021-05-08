@@ -19,11 +19,28 @@
         <% } else { %>
             <form class="list" name="lists" action="/dcTitleChangeSubmit" method="POST">
             <% results.forEach(function(result, index) { %>
-                <div class=<%= index%2 ? 'list1' : 'list2' %>>
-                    <div class='det1'><%= result.name %></div>
+                <div class=<%= index%2 ? 'list345' : 'list456' %>>
+                    <!-- <div class='det1'><%= result.name %></div>
                     <div class='det1'><%= result.thesis_title %></div>
                     <div class='det1'><%= result.new_title %></div>
-                    <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard' class='discard'></div>    
+                    <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard' class='discard'></div> -->    
+                    <img src= <%= 'student_photo/' + result.photo_filename %> class="img-list">
+                    <div class="det1">
+                        <div class="det3">
+                            <p><b>Name: </b><%= result.name %></p>    
+                        </div>
+                        <div class="det3">
+                            <p><b>Department: </b><%= result.dept_name + ' / ' + result.fac_id %></p>
+                        </div>
+                        <div class="det3">
+                            <p><b>Old Thesis Title:</b><%= result.thesis_title %></p>
+                        </div>
+                        <div class="det3">
+                            <p><b>New Thesis Title:</b><%= result.new_title %></p>
+                        </div>
+                    </div>
+                    <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard' class='discard'></div>
+
                 </div>
             <%  }); %>
             </form>
