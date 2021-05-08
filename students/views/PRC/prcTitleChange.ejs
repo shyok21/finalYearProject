@@ -15,30 +15,34 @@
         <%- include('../commons/header.ejs', {name: name}) %>
         <div class="menu-class">
         <%- include('prcMenu.ejs', {active: 4}) %>
-        <form method="POST" action="/prcTitleChangeSubmit" class="form-class">
-            <div class="dets1">
-                <label for="stud_id">Student Name:</label>
-                <select name="stud_id" id="student">
-                    <% results.forEach(function(result) { %>
-                    <option value = <%= result.stud_id %> data-title = <%= result.thesis_title %> >
-                        <%= result.name + '(' + result.stud_id + ')' %>
-                    </option>
-                    <% }); %>
-                </select>
-            </div>
-            <div class="dets1">
-                <label for="thesis_title">Original Title</label>
-                <input name="thesis_title" id="thesis_title" readonly>
-            </div>
-            <div class="dets1">
-                <label for="new_title">Enter new title:</label>
-                <input name="new_title" required>
-            </div>
-            
-            <div class="dets2">
-                <input type="submit" name="submit" value="Submit Title">
-            </div>
-        </form>
+        <% if(results.length == 0) { %>
+            <p style="width:80%;text-align:center;">No students applicable</p>
+        <% } else { %>
+            <form method="POST" action="/prcTitleChangeSubmit" class="form-class">
+                <div class="dets1">
+                    <label for="stud_id">Student Name:</label>
+                    <select name="stud_id" id="student">
+                        <% results.forEach(function(result) { %>
+                        <option value = <%= result.stud_id %> data-title = "<%= result.thesis_title %>" >
+                            <%= result.name + '(' + result.stud_id + ')' %>
+                        </option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="dets1">
+                    <label for="thesis_title">Original Title</label>
+                    <input name="thesis_title" id="thesis_title" readonly>
+                </div>
+                <div class="dets1">
+                    <label for="new_title">Enter new title:</label>
+                    <input name="new_title" required>
+                </div>
+                
+                <div class="dets2">
+                    <input type="submit" name="submit" value="Submit Title">
+                </div>
+            </form>
+        <% } %>
         </div>
     </div>
 </body>

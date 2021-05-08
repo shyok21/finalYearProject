@@ -14,33 +14,37 @@
         <%- include('../commons/header.ejs', {name: name}) %>
         <div class="menu-class">
         <%- include('prcMenu.ejs', {active: 5}) %>
-        <form method="POST" action="/prcRegistrationExtensionSubmit" class="form-class">
-            <div class="dets1">
-                <label for="stud_id">Student Name:</label>
-                <select name="stud_id" id="student">
-                    <% results.forEach(function(result) { %>
-                        <option 
-                            value = <%= result.stud_id %> 
-                            data-doa = <%= result.date_of_admission.toISOString().replace(/T/, ' ').split(" ")[0] %> 
-                            data-validity = <%= result.registration_validity %> 
-                        >
-                            <%= result.name + '(' + result.stud_id + ')' %>
-                        </option>
-                    <% }); %>
-                </select>
-            </div>
-            <div class="dets1">
-                <label for="doa">Date of admission:</label>
-                <input name="doa" id="doa" readonly>
-            </div>
-            <div class="dets1">
-                <label for="validity">Registration validity:</label>
-                <input name="validity" id="validity" readonly>
-            </div>
-            <div class="dets2">
-                <input type="submit" name="submit" value="Submit request">
-            </div>
-        </form>
+        <% if(results.length == 0) { %>
+            <p style="width:80%;text-align:center;">No students applicable</p>
+        <% } else { %>
+            <form method="POST" action="/prcRegistrationExtensionSubmit" class="form-class">
+                <div class="dets1">
+                    <label for="stud_id">Student Name:</label>
+                    <select name="stud_id" id="student">
+                        <% results.forEach(function(result) { %>
+                            <option 
+                                value = <%= result.stud_id %> 
+                                data-doa = <%= result.date_of_admission.toISOString().replace(/T/, ' ').split(" ")[0] %> 
+                                data-validity = "<%= result.registration_validity + ' years' %>"
+                            >
+                                <%= result.name + '(' + result.stud_id + ')' %>
+                            </option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="dets1">
+                    <label for="doa">Date of admission:</label>
+                    <input name="doa" id="doa" readonly>
+                </div>
+                <div class="dets1">
+                    <label for="validity">Registration validity:</label>
+                    <input name="validity" id="validity" readonly>
+                </div>
+                <div class="dets2">
+                    <input type="submit" name="submit" value="Submit request">
+                </div>
+            </form>
+        <% } %>
         </div>
     </div>
 </body>

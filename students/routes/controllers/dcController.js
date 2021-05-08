@@ -111,10 +111,10 @@ const dcRegistrationExtensionSubmit = (req, res) => {
     var qry;
     var status_id;
     if (status === "reject") {
-        qry = "UPDATE student SET extension_requested = NULL WHERE stud_id = '" + stud_id + "';";
+        qry = `UPDATE student SET extension_requested = "N" WHERE stud_id = "${stud_id}";`;
         status_id = "Successfully Discared";
     } else {
-        qry = "UPDATE student SET extension_requested = NULL, registration_validity = registration_validity + 1 WHERE stud_id = '" + stud_id + "';";
+        qry = `UPDATE student SET extension_requested = "N", registration_validity = registration_validity + 1 WHERE stud_id = "${stud_id}";`;
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
