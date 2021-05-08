@@ -19,13 +19,26 @@
         <% } else { %>
             <form class="list" name="lists" action="/dcReportApprovalSubmit" method="POST">
             <% results.forEach(function(result, index) { %>
-                <div class=<%= index%2 ? 'list1' : 'list2' %>>
-                    <div class='det1'><%= result.name %></div>
-                    <div class='det1'><%= result.thesis_title %></div>
-                    <div class='det1'><%= result.semester %></div>
-                    <div class='det1'><a href=<%='/downloadReport?stud_id=' + result.stud_id + '&semester=' + result.semester%> >View Six Month Report</a></div>
-                    <div class='det2'><input type='submit' name=<%= result.file_name + '_accept' %> value='Approve' class='approve'><input type='submit' name=<%= result.file_name + '_reject' %> value='Discard' class='discard'></div>    
+               <div class="list345">
+                <img src= <%= 'student_photo/' + result.photo_filename %> class="img-list">
+                <div class="det1">
+                    <div class="det3">
+                        <p><b>Name: </b> <%= result.name %> </p>
+                    </div>
+                    <div class="det3">
+                        <p><b>Department :</b> <%= result.semester %> </p>
+                    </div>
+                    <div class="det3">
+                        <p><b>Semester :</b> <%= result.semester %> </p>
+                    </div>
+                    <div class="det3">
+                        <p><a href=<%='/downloadReport?stud_id=' + result.stud_id + '&semester=' + result.semester %> >View Six Month Report</a></p>
+                    </div>
                 </div>
+                <div class="det2">
+                    <input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard &#x2716;' class='discard'>
+                </div>
+            </div>
             <%  }); %>
             </form>
         <% } %>
