@@ -36,7 +36,7 @@ const prcRegistrationApprovalSubmit = (req, res) => {
 
 const prcReportApproval = (req,res) => {
     var sess = req.session;
-    var qry = "select * from student s join six_monthly_report r join prc p on s.stud_id = r.stud_id and p.dept_id = s.dept_id where approval_phase='1' and prc_id='" + sess.userid + "'";
+    var qry = "select * from student s join six_monthly_report r on s.stud_id = r.stud_id join prc p on p.dept_id = s.dept_id join department d on s.dept_id = d.dept_id where approval_phase='1' and prc_id='" + sess.userid + "'";
     con.query(qry, (err, results, fields) => {
         res.render('PRC/prcReportApproval', {name: sess.userid, results: results});
     });

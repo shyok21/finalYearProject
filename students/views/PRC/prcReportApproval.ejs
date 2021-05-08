@@ -30,14 +30,14 @@
 
                     <div class='det1'><b>Thesis Title: &nbsp;</b><%= result.thesis_title %></div>
             </div> -->
-            <div class="list345">
+            <div class=<%= index%2 ? 'list345' : 'list456' %>>
                <img src= <%= 'student_photo/' + result.photo_filename %> class="img-list">
                 <div class="det1">
                     <div class="det3">
                         <p><b>Name: </b> <%= result.name %> </p>
                     </div>
                     <div class="det3">
-                        <p><b>Department :</b> <%= result.semester %> </p>
+                        <p><b>Department :</b> <%= result.dept_name + ' / ' + result.fac_id %> </p>
                     </div>
                     <div class="det3">
                         <p><b>Semester :</b> <%= result.semester %> </p>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="det2">
-                    <input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard &#x2716;' class='discard'>
+                    <input type='submit' name=<%= result.file_name + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.file_name + '_reject' %> value='Discard &#x2716;' class='discard'>
                 </div>
             </div>
 
