@@ -124,8 +124,9 @@ const dcRegistrationExtensionSubmit = (req, res) => {
 
 const dcExaminerApproval = (req,res) => {
     var sess = req.session;
-    var qry = "SELECT * FROM student s where examiner_phase = '1'";
+    var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and s.examiner_phase = '1'";
     con.query(qry, (err, results, fields) => {
+        console.log(results);
         res.render('DC/dcExaminerApproval', {name: sess.userid, results: results});
     });
 };
