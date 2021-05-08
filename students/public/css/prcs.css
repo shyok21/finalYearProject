@@ -84,7 +84,7 @@ body {
 	background-image:linear-gradient(to right, #6190E8, #A7BFE8);
 	border-radius:10px;
 	display:flex;
-	flex-direction:column;
+	flex-direction:row;
 }
 .list456{
 	height:25%;
@@ -92,7 +92,13 @@ body {
 	background-image:linear-gradient(to left, #6190E8, #A7BFE8);
 	border-radius:10px;
 	display:flex;
-	flex-direction:column;
+	flex-direction:row;
+}
+.img-list{
+	width:10%;
+	margin:5px;
+	display:flex;
+	border:white solid 2px;
 }
 .list1{
 	height:80%;
@@ -115,9 +121,11 @@ body {
 	justify-content:center;
 }
 .det2{
-	flex:1.5;
+	width:15%;
+	height:60%;
 	display:flex;
 	flex-direction:column;
+	align-self:center;
 }
 .det2 > input{
 	width:90%;
@@ -127,8 +135,18 @@ body {
 	border-radius:5px;
 }
 .det1{
-	flex:2;
-	text-align:center;
+	width:72%;
+	padding:5px;
+	display:flex;
+	flex-direction: column;
+}
+.det3{
+	flex:1;
+	display:flex;
+	flex-direction: row;
+}
+.det3>p{
+	flex:1;
 }
 .approve{
 	background-image:linear-gradient(to right, #000000,#0f9b0f);

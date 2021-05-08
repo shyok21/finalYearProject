@@ -19,8 +19,9 @@
         <% } else { %>
             <form class="list" name="lists" action="/prcRegistrationApprovalSubmit" method="POST">
             <% results.forEach(function(result,index) { %>
-                <div class=<%= index%2 ? 'list345' : 'list456' %>>
+                <!-- <div class=<%= index%2 ? 'list345' : 'list456' %>>
                 <div class=<%= index%2 ? 'list1' : 'list2' %>>
+
                     <div class='det1'><%= result.name %></div>
                     <div class='det1'><%= result.nationality %></div>
                     <div class='det1'><%= result.dob %></div>
@@ -30,6 +31,25 @@
                     <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard &#x2716;' class='discard'></div>    
                 </div>
                 <div class='det1'><b>Thesis Title: &nbsp;</b><%= result.thesis_title %></div>
+            </div> -->
+            <div class="list345">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/The_President%2C_Shri_Pranab_Mukherjee_presenting_the_Padma_Shri_Award_to_Shri_Virat_Kohli%2C_at_a_Civil_Investiture_Ceremony%2C_at_Rashtrapati_Bhavan%2C_in_New_Delhi_on_March_30%2C_2017_%28cropped%29.jpg/260px-thumbnail.jpg" class="img-list">
+                <div class="det1">
+                    <div class="det3">
+                        <p><b>Name: </b><%= result.name %></p>
+                        
+                    </div>
+                    <div class="det3">
+                        <p><b>Department: </b><%= result.nationality %></p>
+                    </div>
+                    <div class="det3">
+                        <p><b>Thesis Title:</b><%= result.thesis_title %></p>
+                    </div>
+                    <div class="det3">
+                        <p><a href= <%='/downloadPDF?stud_id=' + result.stud_id%> >Check Form</a></p>
+                    </div>
+                </div>
+                <div class='det2'><input type='submit' name=<%= result.stud_id + '_accept' %> value='Approve &#x2714;' class='approve'><input type='submit' name=<%= result.stud_id + '_reject' %> value='Discard &#x2716;' class='discard'></div> 
             </div>
 
             <%  }); %>
