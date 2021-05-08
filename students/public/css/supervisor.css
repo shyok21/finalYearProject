@@ -71,32 +71,6 @@ body {
 .intro>a{
     width:10%;
 }
-.list {
-    height: 30rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-
-.list345{
-    height:25%;
-    background-color:#cbcbcb;
-
-    margin: 10px;
-    border-radius: 20px;
-    display:flex;
-    flex-direction: column;
-}
-.list1 {
-    height: 80%;
-    background-color: #cccccc;
-    margin: 10px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-}
 
 .approve {
     color: lightgreen;
@@ -108,35 +82,6 @@ body {
     margin: auto;
 }
 
-.det1 {
-    flex: 1;
-    margin: 2px;
-    height: auto;
-    align-self: center;
-    text-align: center;
-}
-
-.det2 {
-    flex: 1;
-    margin: 2px;
-    display: flex;
-    flex-direction: column;
-}
-
-.det2>input {
-    flex: 1;
-    width: 80%;
-    height: 40%;
-    border: none;
-    border-radius: 10px;
-    margin: 2px;
-}
-
-.det3 {
-    height: 35%;
-    width: 40%;
-    float: left;
-}
 
 .discard {
     color: lightcoral;
@@ -220,4 +165,54 @@ input {
 input[type = 'checkbox']{
     width:15px;
     height:15px;
+}
+.list345{
+    height:25%;
+    width:98%;
+    background-image:linear-gradient(to right, #6190E8, #A7BFE8);
+    border-radius:10px;
+    display:flex;
+    flex-direction:row;
+}
+.list456{
+    height:25%;
+    width:98%;
+    background-image:linear-gradient(to left, #6190E8, #A7BFE8);
+    border-radius:10px;
+    display:flex;
+    flex-direction:row;
+}
+.img-list{
+    width:6%;
+    margin:5px;
+    display:flex;
+    border:white solid 2px;
+}
+.det2{
+    width:10%;
+    height:60%;
+    display:flex;
+    flex-direction:column;
+    align-self:center;
+}
+.det2 > input{
+    width:90%;
+    font-size:0.98em;
+    margin:3px;
+    height:70%;
+    border-radius:5px;
+}
+.det1{
+    width:85%;
+    padding:5px;
+    display:flex;
+    flex-direction: column;
+}
+.det3{
+    flex:1;
+    display:flex;
+    flex-direction: row;
+}
+.det3>p{
+    flex:1;
 }
