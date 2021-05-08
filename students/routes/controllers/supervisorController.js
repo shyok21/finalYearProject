@@ -34,35 +34,35 @@ const supervisorPage = (req, res) => {
                     else
                         listString += `<div class="list456">`;
                     listString += `<img src='student_photo/${results[i].photo_filename}' class="img-list">`;
-                    listString += `<div class="det1">`;
-                    listString += `<div class="det3">`;
+                    listString += `<div class="ted1">`;
+                    listString += `<div class="ted3">`;
                     listString += `<p><b>Name: </b> ${results[i].name} </p>`;
                     listString += `</div>`;
-                    listString += `<div class="det3">`;
+                    listString += `<div class="ted3">`;
                     listString += `<p><b>Department: </b> ${results[i].dept_name} / ${results[i].fac_id}</p>`;
                     listString += `</div>`;
-                    listString += `<div class="det3">`;
-                    listString += `<p><b>Thesis Title:</b> ${results[i].thesis_title} %></p>`;
+                    listString += `<div class="ted3">`;
+                    listString += `<p><b>Thesis Title:</b> ${results[i].thesis_title} </p>`;
                     listString += `</div>`;
-                    listString += `<div class="det3"><p><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></p></div>`;
-                    listString += `<div class="det3"><p><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></p></div>`;
+                    listString += `<div class="ted3"><p><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></p></div>`;
+                    listString += `<div class="ted3"><p><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></p></div>`;
                     listString += "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'>";
                     listString += `</div></div>`;
-                    listString += "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div>";
+                    listString += "<div class='ted2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div>";
 
                     
                   //   var listString = listString + "<div class='list1'>";
-                  //   var listString = listString + "<div class='det1'>" + results[i].name + "</div>";
-                  //   var listString = listString + "<div class='det1'>" + results[i].nationality + "</div>";
-                  //   var listString = listString + "<div class='det1'>" + results[i].dob + "</div>";
-                  //   var listString = listString + "<div class='det1'>" + results[i].sex + "</div>";
-                  //   // var listString = listString + "<div class='det1'>" + results[i].thesis_title + "</div>";
-                  //   var listString = listString + `<div class="det1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
-                  //   var listString = listString + `<div class="det1"><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></div>`;
+                  //   var listString = listString + "<div class='ted1'>" + results[i].name + "</div>";
+                  //   var listString = listString + "<div class='ted1'>" + results[i].nationality + "</div>";
+                  //   var listString = listString + "<div class='ted1'>" + results[i].dob + "</div>";
+                  //   var listString = listString + "<div class='ted1'>" + results[i].sex + "</div>";
+                  //   // var listString = listString + "<div class='ted1'>" + results[i].thesis_title + "</div>";
+                  //   var listString = listString + `<div class="ted1"><a href='/downloadPDF?stud_id=${results[i].stud_id}'>Check Form</a></div>`;
+                  //   var listString = listString + `<div class="ted1"><a href='assignRAC.html?stud_id=${results[i].stud_id}'>Assign RAC</a></div>`;
                   //   //var listString = listString + "<div class='hide'><input type='hidden' name = 'studVal' value='" + results[i].stud_id + "'";
-                  //   var listString = listString + "<div class='det2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
+                  //   var listString = listString + "<div class='ted2'><input type='submit' name='" + results[i].stud_id + "_accept' value='Approve' class='approve'><input type='submit' name='" + results[i].stud_id + "_reject' value='Discard' class='discard'></div></div>";
                   // //  var listString = listString + `</div>`;
-                  //   var listString = listString + "<div class='det1'><b>Thesis Title: &nbsp;</b>" + results[i].thesis_title + "</div>";
+                  //   var listString = listString + "<div class='ted1'><b>Thesis Title: &nbsp;</b>" + results[i].thesis_title + "</div>";
                     listString = listString + "</div>";
                 }
                 htmlFile = htmlFile.replace("{%list%}", listString);
