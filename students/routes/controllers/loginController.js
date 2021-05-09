@@ -31,7 +31,8 @@ const login = (req, res) => {
         var qry = util.format("select * from login where email='%s' and type='%s'", usr, log);
         con.query(qry, (err, result, fields) => {
             if (err) {
-                throw err;
+                //throw err;
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
             }
             if (result.length == 0 || !compare(psw, result[0].password)) {
                 var htmlNewFile = htmlFile.replace("{%Login Error%}", "&#9746; Invalid Username or Password!");
@@ -71,6 +72,7 @@ const logout = (req, res) => {
     sess.destroy(err => {
         if (err) {
             console.log(err);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
         } else {
             res.redirect('/');
         }

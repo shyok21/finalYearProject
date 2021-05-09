@@ -6,6 +6,11 @@ const dcRegistrationApproval = (req, res) => {
     var sess = req.session;
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and registration_phase = 3";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('DC/dcRegistrationApproval', {name: sess.userid, results: results});
     });
 };
@@ -26,6 +31,11 @@ const dcRegistrationApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/dcRegistrationApproval", backText: "Back to DC portal"});
     });
 };
@@ -34,6 +44,11 @@ const dcReportApproval = (req,res) => {
     var sess = req.session;
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id left join six_monthly_report r on s.stud_id = r.stud_id where dc.dc_id = '" + sess.userid + "' and approval_phase = '2'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('DC/dcReportApproval', {name: sess.userid, results: results});
     });
 };
@@ -54,6 +69,11 @@ const dcReportApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/dcReportApproval", backText: "Back to DC portal"});
     });
 };
@@ -62,6 +82,11 @@ const dcVivaReport = (req,res) => {
     var sess = req.session;
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and s.viva_report_filename is not null";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('DC/dcVivaReport', {name: sess.userid, results: results});
     });
 };
@@ -70,6 +95,11 @@ const dcTitleChange = (req,res) => {
     var sess = req.session;
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and s.new_title is not null";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('DC/dcTitleChange', {name: sess.userid, results: results});
     });
 };
@@ -90,6 +120,10 @@ const dcTitleChangeSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/dcTitleChange", backText: "Back to DC portal"});
     });
 };
@@ -98,6 +132,11 @@ const dcRegistrationExtension = (req,res) => {
     var sess = req.session;
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and s.extension_requested = 'Y'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('DC/dcRegistrationExtension', {name: sess.userid, results: results});
     });
 };
@@ -118,6 +157,11 @@ const dcRegistrationExtensionSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/dcRegistrationExtension", backText: "Back to DC portal"});
     });
 };
@@ -126,6 +170,11 @@ const dcExaminerApproval = (req,res) => {
     var sess = req.session;
     var qry = "SELECT * FROM student s left join department d on s.dept_id = d.dept_id left join doctorate_committe dc on dc.fac_id = d.fac_id where dc.dc_id = '" + sess.userid + "' and s.examiner_phase = '1'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         console.log(results);
         res.render('DC/dcExaminerApproval', {name: sess.userid, results: results});
     });
@@ -136,6 +185,11 @@ const dcExaminersList = (req,res) => {
     var stud_id = req.query.stud_id;
     var qry = "SELECT * FROM External where Student_ID ='" + stud_id + "'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('DC/dcExaminersList', {name: sess.userid, results: results});
     });
 };
@@ -156,6 +210,11 @@ const dcExaminerApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/dcExaminerApproval", backText: "Back to DC portal"});
     });
 };

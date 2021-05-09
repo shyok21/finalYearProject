@@ -8,6 +8,7 @@ const getDepartments = (req, res) => {
         if(err) {
             console.log(err);
             res.json(null);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
         }
         else {
             res.json(result);    

@@ -154,19 +154,22 @@ const submitReport = (req, res) => {
     );
 
     upload(req, res, function (err) {
-        if (err) {
-            console.log(err);
-            res.send(err);
-        } else {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
+         else {
             var qry = util.format(
                 `insert into six_monthly_report (stud_id, date_time, file_name, semester, approval_phase)
                 values ('%s', '%s', '%s', '%s', '%d')`,
                 sess.userid, new Date(), sess.userid + '-' + req.body.semester, req.body.semester, 1
             );
             con.query(qry, (err, result, fields) => {
-                if (err) {
-                    console.log(err);
-                    res.send(err);
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
                 }
                 else {
                     console.log("Report submitted successfully");
@@ -185,6 +188,7 @@ const downloadReport = (req, res) => {
         if (err) {
             console.log("Error");
             console.log(err);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
         } else {
             console.log("Success");
         }
@@ -198,6 +202,11 @@ const removeReport = (req,res) => {
    // fs.unlinkSync(`uploads/report/${file}`);
     var qry = `delete from six_monthly_report where stud_id = "${stud_id}" and semester = "${sem}";`;
     con.query(qry,(err,result,field) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : 'Successfully removed the file!', status: 'success', backLink : "/studentPage", backText: "Back to student portal"});
     });
 }

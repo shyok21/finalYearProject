@@ -20,6 +20,11 @@ const supervisorApprovalController = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
     });
 };

@@ -10,6 +10,11 @@ const examinerPage = (req,res) => {
     var sess = req.session;
     var qry = `select * from student s left join professor p on s.supervisor_id = p.prof_id where s.supervisor_id = '${sess.userid}' and s.examiner_phase = '0' and registration_phase = '5';`;
     con.query(qry,(err,result,fields)=>{
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         // res.send(result);
         console.log(z);
         try{
@@ -80,6 +85,11 @@ const addExaminer = (req,res) => {
     var studentId = Object.keys(req.body)[0];
     var htmlFile = fs.readFileSync('views/addExam.html','utf-8');
     con.query(`select* from External group by Email`,(err,result,field) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         console.log(result);
         var script1 = "var data = [];";
         var script2 = "var forData = [];";

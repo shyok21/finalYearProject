@@ -31,6 +31,11 @@ const validate = (req, res) => {
     m_email = req.body.email_id;
     var qry = "select count(*) as count from login where email='" + m_email + "';";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         console.log(results[0].count);
         if (results[0].count == 0) {
             if (m_pass != c_pass) {
@@ -103,6 +108,11 @@ const verify = (req, res) => {
     if (verify_code === req.body.ver_code) {
         var qrys = "select id from login where type='STUD' order by id desc;";
         con.query(qrys, (err, result, field) => {
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             var s_id = "";
             try {
                 var id = result[0].id;
@@ -118,6 +128,11 @@ const verify = (req, res) => {
             var qry = util.format("insert into login values('%s','%s','%s','stud','N');", s_id, m_email, enc_pass);
             //console.log(qry);
             con.query(qry, (err, results, fields) => {
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
                 console.log("Student Added to Login Database");
                 console.log(results);
                 res.render('notification', {message : 'Thank you! Your account has been created!', status: 'success', backLink : "/", backText: "Back to home page"});

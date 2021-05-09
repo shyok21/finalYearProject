@@ -32,7 +32,9 @@ const decrypt = (hash) => {
 const addExaminerVC = (req,res) => {
     con.query(`select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where examiner_phase = '2';`,(err,results,field) => {
         if(err) {
-            res.send('error' + err);
+            //res.send('error' + err);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
+            return
         }
         
         var htmlFile = fs.readFileSync('views/addExamVC.html','utf-8');
@@ -58,6 +60,11 @@ const selectExams = (req, res) => {
     var qry = `select * from External where Student_ID = '${stud_id}' order by Type;`;
     var htmlFile = fs.readFileSync('views/selectExam.html','utf-8');
     con.query(qry,(err,result,fields)=>{
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         for(var i=1;i<12;i++)
         {
             var r = result[i-1];
@@ -77,6 +84,11 @@ const examSelected = (req, res) => {
     var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
     console.log(req.body.stud_id);
     con.query(qry,(err,results,fields)=>{
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
             
         var email1 = req.body.instate;
         var email2 = req.body.outstate;
@@ -127,6 +139,11 @@ const examSelected = (req, res) => {
         var qry2 = `Update External set phase = 1, last_mail_sent_date = '${today_date}' where email in ${emails} and Student_ID='${req.body.stud_id}';`;
         console.log(qry2);
         con.query(qry2,(err,ress,f)=>{
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/vcPage", backText: "Back to VC portal"});
         });
     });
@@ -177,12 +194,22 @@ const examCheck = (req,res) => {
         if(req.body.type == 'AC'){
             var qry = `update External set phase = 3 where email = '${emailChecker}'`;
             con.query(qry,(err,result,fields)=>{
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
                 res.render('notification', {message : 'Successfully accepted!', status: 'success'});
             });
         }
         else{
             var qry = `update External set phase = -1 where email = '${emailChecker}'`;
             con.query(qry,(err,result,fields)=>{
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
                 res.render('notification', {message : 'Successfully rejected!', status: 'success'});
             });
         }

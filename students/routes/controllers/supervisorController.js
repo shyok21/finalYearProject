@@ -10,6 +10,11 @@ const supervisorPage = (req, res) => {
     var sess = req.session;
     var qrys = "select prof_name from professor where prof_id = '" + sess.userid + "';";
     con.query(qrys, (err, ress, field) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
         htmlFile = htmlFile.replace("{%action%}", "supervisorApproval");
         if (sess.special == 'Y') {
@@ -22,7 +27,11 @@ const supervisorPage = (req, res) => {
         var qry = "select * from student s left join department d on s.dept_id = d.dept_id where supervisor_id = '" + sess.userid + "' and registration_phase = 1";
         console.log(qry);
         con.query(qry, (err, results, fields) => {
-            console.log(results);
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             if (results.length == 0){
                 htmlFile = htmlFile.replace("{%list%}", "No Approval List");
             }
@@ -79,13 +88,28 @@ const assignRAC = (req, res) => {
     var studentID = req.query.stud_id;
     var qrys = "select prof_name from professor where prof_id = '" + sess.userid + "';";
     con.query(qrys, (err, ress, field) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
         htmlFile = htmlFile.replace("{%student_id%}", studentID);
         htmlFile = htmlFile.replace("{%student_id%}", studentID);
         var deptqry = `SELECT dept_id FROM student WHERE stud_id='${studentID}'`;
         con.query(deptqry, (err, result, field) => {
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             var qry = `SELECT * FROM professor WHERE prof_dept='${result[0].dept_id}'`;
             con.query(qry, (err, results, field) => {
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
                 var listString = "";
                 console.log(results.length);
                 for (var i = 0; i < results.length; i++) {
@@ -107,6 +131,11 @@ const racSubmit = (req, res) => {
     for (var i = 0; i < profArray.length - 1; i++) {
         var qry = `INSERT INTO rac_members (rac_id, member_id) VALUES ('${studentID}', '${profArray[i]}')`;
         con.query(qry, (err, results, field) => {
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             console.log(profArray[i]);
         });
     }

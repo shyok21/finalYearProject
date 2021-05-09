@@ -7,6 +7,11 @@ const specialPage = (req, res) => {
         var htmlFile = fs.readFileSync('views/dbshow.html', 'utf-8');
         var qry = "select * from student s left join professor p on s.supervisor_id = p.prof_id left join department d on d.dept_id = s.dept_id where registration_phase = '5';";
         con.query(qry, (err, result, fil) => {
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             var listField = "";
 
             for (var i = 0; i < result.length; i++) {
@@ -31,6 +36,11 @@ const specialSearchPage = (req, res) => {
         var htmlFile = fs.readFileSync('views/dbshow.html', 'utf-8');
         var qry = "select * from student s left join professor p on s.supervisor_id = p.prof_id left join department d on d.dept_id = s.dept_id where registration_phase = '5';";
         con.query(qry, (err, result, fil) => {
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
             var listField = "";
 
             for (var i = 0; i < result.length; i++) {
@@ -49,6 +59,11 @@ const specialSearchPage = (req, res) => {
         if (req.body.department == "") {
             var qry = `select* from student s left join professor p on s.supervisor_id = p.prof_id left join department d on s.dept_id = d.dept_id where registration_phase = '5' and fac_id='${req.body.faculty}'`;
             con.query(qry, (err, result, fil) => {
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
                 var listField = "";
 
                 for (var i = 0; i < result.length; i++) {
@@ -67,6 +82,11 @@ const specialSearchPage = (req, res) => {
         } else {
             var qry = `select * from student s left join professor p on s.supervisor_id = p.prof_id left join department d on s.dept_id = d.dept_id where registration_phase = '5' and s.dept_id='${req.body.department}';`;
             con.query(qry, (err, result, fil) => {
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
                 var listField = "";
                 try {
                     for (var i = 0; i < result.length; i++) {

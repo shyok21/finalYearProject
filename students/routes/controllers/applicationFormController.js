@@ -42,7 +42,7 @@ const applicationFormSubmit = (req, res) => {
     upload(req, res, function (err) {
         if (err) {
             console.log(err);
-            res.send(err);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
         } else {
             
             const data  = req.body;
@@ -54,6 +54,8 @@ const applicationFormSubmit = (req, res) => {
             createPDF(html, data, path, (err, path) => {
                 if(err) {
                     console.log(err);
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
                 } else {
                     const sop = req.files['sop'][0].path;
                     const marksheets = req.files['marksheets'].map(doc => doc.path);
@@ -63,6 +65,7 @@ const applicationFormSubmit = (req, res) => {
                     merge(pdfs, path, function (err) {
                         if (err) {
                             console.log(err);
+                            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                         } else {
                             console.log('Successfully merged pdfs');
                             const { 
@@ -89,7 +92,8 @@ const applicationFormSubmit = (req, res) => {
                                 if(err) {
                                     console.log(err.message);
                                     console.log(results);
-                                    res.redirect("/");
+                                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                                    return
                                 }
                                 else {
                                     console.log("Student Added to Student Database");
@@ -117,6 +121,7 @@ const downloadPDF = (req, res) => {
         if (err) {
             console.log("Error");
             console.log(err);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
         } else {
             console.log("Success");
         }

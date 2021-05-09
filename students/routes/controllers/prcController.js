@@ -7,6 +7,11 @@ const prcRegistrationApproval = (req, res) => {
     var sess = req.session;
     var qry = "select * from student s left join prc p on s.dept_id = p.dept_id join department d on s.dept_id = d.dept_id where prc_id = '" + sess.userid + "' and registration_phase = 2";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('PRC/prcRegistrationApproval', {name: sess.userid, results: results});
     });
 };
@@ -30,6 +35,11 @@ const prcRegistrationApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/prcRegistrationApproval", backText: "Back to PRC portal"});
     });
 };
@@ -38,6 +48,11 @@ const prcReportApproval = (req,res) => {
     var sess = req.session;
     var qry = "select * from student s join six_monthly_report r on s.stud_id = r.stud_id join prc p on p.dept_id = s.dept_id join department d on s.dept_id = d.dept_id where approval_phase='1' and prc_id='" + sess.userid + "'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('PRC/prcReportApproval', {name: sess.userid, results: results});
     });
 };
@@ -61,6 +76,11 @@ const prcReportApprovalSubmit = (req, res) => {
         status_id = "Successfully Approved";
     }
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('notification', {message : status_id, status: 'success', backLink : "/prcReportApproval", backText: "Back to PRC portal"});
     });
 };
@@ -69,6 +89,11 @@ const prcVivaReport = (req,res) => {
     var sess = req.session;
     var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('PRC/prcVivaReport', {name: sess.userid, results: results});
     });
 };
@@ -91,19 +116,22 @@ const prcVivaReportSubmit = (req,res) => {
     );
 
     upload(req, res, function (err) {
-        if (err) {
-            console.log(err);
-            res.send(err);
-        } else {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
+         else {
             const filename = req.files['viva_report'][0].filename;
             var qry = util.format(
                 `update student set viva_report_filename = "%s" where stud_id = "%s"`,
                 filename, req.body.stud_id
             );
             con.query(qry, (err, result, fields) => {
-                if (err) {
-                    console.log(err);
-                    res.send(err);
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
                 }
                 else {
                     console.log("Report submitted successfully");
@@ -119,10 +147,12 @@ const downloadVivaReport = (req,res) => {
     const path = "uploads/viva_report/" + filename;
 
     res.download(path, function (err) {
-        if (err) {
-            console.log("Error");
-            console.log(err);
-        } else {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
+         else {
             console.log("Success");
         }
     });
@@ -131,6 +161,11 @@ const prcTitleChange = (req,res) => {
     var sess = req.session;
     var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('PRC/prcTitleChange', {name: sess.userid, results: results});
     });
 };
@@ -142,9 +177,10 @@ const prcTitleChangeSubmit = (req,res) => {
         req.body.new_title, req.body.stud_id
     );
     con.query(qry, (err, result, fields) => {
-        if (err) {
-            console.log(err);
-            res.send(err);
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
         }
         else {
             console.log("Title change request submitted successfully");
@@ -157,6 +193,11 @@ const prcRegistrationExtension = (req,res) => {
     var sess = req.session;
     var qry = `select * from student s join prc p on p.dept_id = s.dept_id where prc_id="${sess.userid}" and registration_validity <= 7 and extension_requested = "N"`;
     con.query(qry, (err, results, fields) => {
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+        }
         res.render('PRC/prcRegistrationExtension', {name: sess.userid, results: results});
     });
 };
@@ -168,9 +209,10 @@ const prcRegistrationExtensionSubmit = (req,res) => {
         req.body.stud_id
     );
     con.query(qry, (err, result, fields) => {
-        if (err) {
-            console.log(err);
-            res.send(err);
+        if(err)
+        {
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
         }
         else {
             console.log("Extension request submitted successfully");
