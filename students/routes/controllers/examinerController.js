@@ -8,7 +8,7 @@ function monthDiff(dateFrom, dateTo) {
 const examinerPage = (req,res) => {
     var htmlFile = fs.readFileSync('views/examiner.html','utf-8');
     var sess = req.session;
-    var qry = `select * from student where supervisor_id = '${sess.userid}' and examiner_phase = '0' and registration_phase = '5';`;
+    var qry = `select * from student s left join professor p on s.supervisor_id = p.prof_id where s.supervisor_id = '${sess.userid}' and s.examiner_phase = '0' and registration_phase = '5';`;
     con.query(qry,(err,result,fields)=>{
         // res.send(result);
         console.log(z);
@@ -67,6 +67,7 @@ const examinerPage = (req,res) => {
                 formText += `</form>`;
             }
             htmlFile = htmlFile.replace("{%forms%}",formText);
+            htmlFile = htmlFile.replace("{%name%}",result[0].prof_name.toUpperCase());
             res.send(htmlFile);
         }
         catch(e){

@@ -10,6 +10,30 @@ body {
     background-color: #fefefe;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.all-content{
+
+    width:100vw;
+    height:100vh;
+    margin-top:7rem;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+}
+.intro{
+    height:10rem;
+    font-size: 1.3em;
+    /*background-color:red;*/
+    display:flex;
+    flex-direction:row;
+}
+.intro>p{
+    width:90%;
+}
+.intro>a{
+    width:10%;
 }
 .details{
     height:85%;
@@ -18,9 +42,7 @@ body {
     flex-direction:row;
 }
 .main-content{
-    width:100vw;
-    height:100vh;
-    margin-top:6rem;
+    height:86rem;
     display:flex;
     flex-wrap:wrap;
     overflow-y:scroll;
@@ -44,6 +66,9 @@ body {
     align-items:center;
     justify-content:center;
     border-radius:20px;
+    border-color:black;
+    border-style:solid;
+    border-width:1.5px;
 }
 img{
     width:77px;
@@ -54,13 +79,17 @@ img{
     border-radius:6px;
 }
 .form-class >input{
-    background-image:linear-gradient(to right,#2193b0,#6dd5ed);
+    /*background-image:linear-gradient(to right,#2193b0,#6dd5ed);*/
+    background-color:#2193b0;
+    color:white;
     border:none;
     padding:5px;
     border-radius:5px;
 }
 .form-class >input:hover{
-    background-image:linear-gradient(to left,#2193b0,#6dd5ed);
+    /*background-image:linear-gradient(to left,#2193b0,#6dd5ed);*/
+    background-color:#6dd5ed;
+    color:black;
     cursor:pointer;
 }
 .rest-content{
@@ -73,14 +102,16 @@ img{
     display:flex;
     flex-direction:row;
     flex:1;
-    background-image:linear-gradient(to left,#bababa,#999999);
+    /*background-color:#a0a0a0;*/
+    /*background-image:linear-gradient(to left,#bababa,#999999);*/
 }
 .data2{
     width:96%;
     display:flex;
     flex-direction:row;
     flex:1;
-    background-image:linear-gradient(to right,#bababa,#999999);
+    background-color:#a0a0a0;
+    /*background-image:linear-gradient(to right,#bababa,#999999);*/
 }
 .rest-heading{
     width:40%;

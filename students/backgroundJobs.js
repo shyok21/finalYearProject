@@ -17,7 +17,7 @@ const backgroundJobs = () => {
     }
     
     cron.schedule("30 6 * * 1",() => {
-    // cron.schedule("* * * * *", () => {
+    // cron.schedule("* * * * * *", () => {
     
         //Background Job for 6 Month Remainder
         con.query('select * from student s left join login l on l.id = s.stud_id;',(err,result,f)=> {

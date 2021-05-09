@@ -6,7 +6,7 @@ const supervisorPage = (req, res) => {
     var htmlFile = fs.readFileSync("views/supervisor.html", "utf-8");
     htmlFile = htmlFile.replace("{%prcDcTag%}","");
     htmlFile = htmlFile.replace("{%prcDcButton%}","");
-    htmlFile = htmlFile.replace("{%supTag%}",`<a href="/myStudents" style="text-decoration:none;color:white;background-color:#ff9900;height:2rem;width:7rem;margin-right:3rem;font-weight:normal;border-color:red;border-style:solid;border-radius:6px;text-align:center;border-width:2px;">Students</a>`);
+    htmlFile = htmlFile.replace("{%supTag%}",`<a href="/myStudents" style="text-decoration:none;color:black;background-color:#6dd5ed;height:2rem;width:20rem;margin-right:3rem;font-weight:normal;border-color:#2193b0;border-style:solid;border-radius:6px;text-align:center;border-width:2px;">Assign Examiner</a>`);
     var sess = req.session;
     var qrys = "select prof_name from professor where prof_id = '" + sess.userid + "';";
     con.query(qrys, (err, ress, field) => {

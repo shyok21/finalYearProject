@@ -176,7 +176,7 @@ input[type = 'checkbox']{
 .list345{
     height:25%;
     width:90%;
-    background-image:linear-gradient(to right, #6190E8, #A7BFE8);
+    background-color: #bcbcbc;
     border-radius:10px;
     display:flex;
     flex-direction:row;
@@ -184,7 +184,7 @@ input[type = 'checkbox']{
 .list456{
     height:25%;
     width:90%;
-    background-image:linear-gradient(to left, #6190E8, #A7BFE8);
+    background-color:#ababab;
     border-radius:10px;
     display:flex;
     flex-direction:row;
