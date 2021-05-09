@@ -33,6 +33,7 @@ const login = (req, res) => {
             if (err) {
                 //throw err;
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
+                return
             }
             if (result.length == 0 || !compare(psw, result[0].password)) {
                 var htmlNewFile = htmlFile.replace("{%Login Error%}", "&#9746; Invalid Username or Password!");
@@ -73,6 +74,7 @@ const logout = (req, res) => {
         if (err) {
             console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
+            return
         } else {
             res.redirect('/');
         }

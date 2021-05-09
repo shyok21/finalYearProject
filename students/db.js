@@ -11,11 +11,30 @@ const con = mysql.createConnection({
     multipleStatements: true
 });
 
-con.connect(function(err) {
-    if (err)
-        console.log("Database error");
-    else
-        console.log("Connected to Database");
-});
+// con.connect(function(err) {
+//     if (err)
+//         console.log("Database error");
+//     else
+//         console.log("Connected to Database");
+// });
+
+
+
+var connectWithRetry = function(attempt) {
+    con.connect(function(err) {
+        if (err)
+        {
+            console.log("Database error");
+            if(attempt>0)
+            {
+                setTimeout(()=>{connectWithRetry(attempt-1)},2000);
+            }
+        }
+        else
+            console.log("Connected to Database");
+    });
+  };
+connectWithRetry(10);
+
 
 module.exports = con;
