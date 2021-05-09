@@ -33,7 +33,9 @@ body {
 #checkboxes label:hover {
     background-color: #1e90ff;
 }
-
+.contentRac{
+    margin-top:7rem;
+}
 #checkedBox {
     font-size: medium;
     margin-top: 5px;
@@ -43,6 +45,7 @@ body {
 #checkedList {
     width: 120px;
     height: 30px;
+    margin-left:30%;
     background-color: lightgray;
     font-size: medium;
 }
