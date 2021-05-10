@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/prcs.css">
+    <link rel="stylesheet" href="/css/prcs.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
         <%- include('../commons/header.ejs', {name: name}) %>
         <div class="menu-class">
@@ -20,10 +20,7 @@
             <form class="list" name="lists">
             <% results.forEach(function(result, index) { %>
                 <div class=<%= index%2 ? 'list345' : 'list456' %>>
-                    <!-- <div class='det1'><%= result.name %></div>
-                    <div class='det1'><%= result.thesis_title %></div>
-                    <div class='det1'><a href = <%= "/downloadVivaReport?filename=" + result.viva_report_filename %>>Download presubmission viva report</a></div>   -->  
-                    <img src= <%= 'student_photo/' + result.photo_filename %> class="img-list">
+                    <img src= <%= '/student_photo/' + result.photo_filename %> class="img-list">
                     <div class="det1">
                         <div class="det3">
                             <p><b>Name: </b><%= result.name %></p>    
@@ -35,7 +32,7 @@
                             <p><b>Thesis Title:</b><%= result.thesis_title %></p>
                         </div>
                         <div class="det3">
-                            <p><a href = <%= "/downloadVivaReport?filename=" + result.viva_report_filename %>>Download presubmission viva report</a></p>
+                            <p><a href = <%= "/dc/downloadVivaReport?filename=" + result.viva_report_filename %>>Download presubmission viva report</a></p>
                         </div>
                     </div>
                 </div>

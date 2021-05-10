@@ -36,7 +36,7 @@ const dcRegistrationApprovalSubmit = (req, res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/dcRegistrationApproval", backText: "Back to DC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dc/registrationApproval", backText: "Back to DC portal"});
     });
 };
 
@@ -74,7 +74,7 @@ const dcReportApprovalSubmit = (req, res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/dcReportApproval", backText: "Back to DC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dc/reportApproval", backText: "Back to DC portal"});
     });
 };
 
@@ -124,7 +124,7 @@ const dcTitleChangeSubmit = (req, res) => {
         {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/dcTitleChange", backText: "Back to DC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dc/titleChange", backText: "Back to DC portal"});
     });
 };
 
@@ -162,7 +162,7 @@ const dcRegistrationExtensionSubmit = (req, res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/dcRegistrationExtension", backText: "Back to DC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dc/registrationExtension", backText: "Back to DC portal"});
     });
 };
 
@@ -215,7 +215,7 @@ const dcExaminerApprovalSubmit = (req, res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/dcExaminerApproval", backText: "Back to DC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/dc/examinerApproval", backText: "Back to DC portal"});
     });
 };
 

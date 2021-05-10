@@ -7,7 +7,7 @@ const studentPage = (req, res) => {
     var sess = req.session;
     if (sess.email) {
         const userid = sess.userid;
-        var studentFile = fs.readFileSync("views/student.html", "utf-8");
+        var studentFile = fs.readFileSync("views/student/student.html", "utf-8");
         var qrys = util.format("select * from student where stud_id='%s'", userid);
         con.query(qrys, (err, results, fields) => {
             try {
@@ -35,7 +35,7 @@ const studentPage = (req, res) => {
                         var qry2 = `select dept_name,fac_id from department where dept_id = "${dept_id}"`;
                         con.query(qry2,(err,result2,field2) => {
                             var department = result2[0].dept_name + " / " + result2[0].fac_id;
-                            var studentMain = fs.readFileSync("views/studentMain.html","utf-8");
+                            var studentMain = fs.readFileSync("views/student/studentMain.html","utf-8");
                             var studentMain = studentMain.replace("{%name%}",name);
                             var studentMain = studentMain.replace("{%enrollment%}",enrollment);
                             var studentMain = studentMain.replace("{%gender%}",gender);
@@ -92,7 +92,7 @@ const studentPage = (req, res) => {
                                         var dd = d.split(" ");
                                         prev += `<p>${util.format("%s %s %s",dd[2],dd[1],dd[3])}</p>`;
                                         if(result3[i].approval_phase == 0)
-                                            prev += `<a href="/removeReport?sid=${userid}&sem=${result3[i].semester}&file=${result3[i].file_name}" target="_blank">Click Here to Re-Upload</a>`;
+                                            prev += `<a href="student/report/remove?sid=${userid}&sem=${result3[i].semester}&file=${result3[i].file_name}" target="_blank">Click Here to Re-Upload</a>`;
                                         else
                                             prev += `<a href="/downloadReport?stud_id=${result3[i].stud_id}&semester=${result3[i].semester}" target="_blank">Click Here to Download</a>`;
                                         prev += "</div>";
@@ -127,7 +127,7 @@ const studentPage = (req, res) => {
                     res.send(htmlNewFile);
                 }
             } catch (e) {
-                res.redirect('/applicationFormPage');
+                res.redirect('/student/applicationForm');
             }
         });
     } else {
@@ -173,7 +173,7 @@ const submitReport = (req, res) => {
                 }
                 else {
                     console.log("Report submitted successfully");
-                    res.render('notification', {message : 'Report submitted successfully!', status: 'success', backLink : "/studentPage", backText: "Back to student portal"});
+                    res.render('notification', {message : 'Report submitted successfully!', status: 'success', backLink : "/student", backText: "Back to student portal"});
                 }    
             })
         }
@@ -207,7 +207,7 @@ const removeReport = (req,res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : 'Successfully removed the file!', status: 'success', backLink : "/studentPage", backText: "Back to student portal"});
+        res.render('notification', {message : 'Successfully removed the file!', status: 'success', backLink : "/student", backText: "Back to student portal"});
     });
 }
 

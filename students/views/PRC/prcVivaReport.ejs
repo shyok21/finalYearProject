@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/prcs.css">
+    <link rel="stylesheet" href="/css/prcs.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
         <%- include('../commons/header.ejs', {name: name}) %>
         <div class="menu-class">
@@ -17,7 +17,7 @@
         <% if(results.length == 0) { %>
             <p style="width:80%;text-align:center;">No students applicable</p>
         <% } else { %>
-            <form method="POST" action="/prcVivaReportSubmit" enctype="multipart/form-data" class="form-class">
+            <form method="POST" action="/prc/vivaReport/submit" enctype="multipart/form-data" class="form-class">
                 <div class="dets1">
                     <label for="stud_id">Student Name:</label>
                     <select name='stud_id' >

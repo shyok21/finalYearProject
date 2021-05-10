@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/supervisor.css">
+    <link rel="stylesheet" href="/css/supervisor.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -14,8 +14,7 @@
 </head>
 
 <body>
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
-      {%prcDcTag%}
+    <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
         <div class="intro">
             <p>Hello {%name%}. Here are the list of students.</p>
@@ -24,8 +23,7 @@
             <a href="/logOut">Log Out</a>
 
         </div>
-        {%prcDcButton%}
-        <form class="list" name="lists" action="/{%action%}" method="POST">
+        <form class="list" name="lists" action="/supervisor/approval/submit" method="POST">
             {%list%}
         </form>
     </div>

@@ -4,7 +4,7 @@ const util = require('util');
 const specialPage = (req, res) => {
     if (req.body.check == 'Y') {
 
-        var htmlFile = fs.readFileSync('views/dbshow.html', 'utf-8');
+        var htmlFile = fs.readFileSync('views/supervisor/dbshow.html', 'utf-8');
         var qry = "select * from student s left join professor p on s.supervisor_id = p.prof_id left join department d on d.dept_id = s.dept_id where registration_phase = '5';";
         con.query(qry, (err, result, fil) => {
             if(err)
@@ -27,13 +27,13 @@ const specialPage = (req, res) => {
             res.send(reshtmlFile);
         });
     } else
-        res.render('notification', {message : 'Access Denied!', status: 'error', backLink : "/supervisorPage", backText: "Back to supervisor portal"});
+        res.render('notification', {message : 'Access Denied!', status: 'error', backLink : "/supervisor", backText: "Back to supervisor portal"});
         
 }
 const specialSearchPage = (req, res) => {
-    var htmlFile = fs.readFileSync('views/dbshow.html', 'utf-8');
+    var htmlFile = fs.readFileSync('views/supervisor/dbshow.html', 'utf-8');
     if (req.body.faculty == "") {
-        var htmlFile = fs.readFileSync('views/dbshow.html', 'utf-8');
+        var htmlFile = fs.readFileSync('views/supervisor/dbshow.html', 'utf-8');
         var qry = "select * from student s left join professor p on s.supervisor_id = p.prof_id left join department d on d.dept_id = s.dept_id where registration_phase = '5';";
         con.query(qry, (err, result, fil) => {
             if(err)

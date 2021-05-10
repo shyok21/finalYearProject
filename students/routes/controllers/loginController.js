@@ -51,15 +51,15 @@ const login = (req, res) => {
                 }
                 console.log("User type: " + sess.userType);
                 if (log === 'STUD') {
-                    res.redirect('/studentPage');
+                    res.redirect('/student');
                 } else if (log === 'SUP') {    
-                    res.redirect('/supervisorPage');
+                    res.redirect('/supervisor');
                 } else if (log === 'VC') {
-                    res.redirect('/vcPage');
+                    res.redirect('/vc');
                 } else if (log === 'DC') {
-                    res.redirect('/dcRegistrationApproval');
+                    res.redirect('/dc/registrationApproval');
                 } else { 
-                    res.redirect('/prcRegistrationApproval');
+                    res.redirect('/prc/registrationApproval');
                 }
             }
         });

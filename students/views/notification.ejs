@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet" href="/css/notification.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
+    <img src="/images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
     <div class = 'notif'>
         <% if(status == 'success') { %>
-            <img class = 'notif-icon' src='images/success.png'>
+            <img class = 'notif-icon' src='/images/success.png'>
             <h1 class = 'message success'><%= message %></h1>
         <% } else { %>
-            <img class = 'notif-icon' src='images/error.png'>
+            <img class = 'notif-icon' src='/images/error.png'>
             <h1 class = 'message error'><%= message %></h1>
         <% } %>
         <% try { %>

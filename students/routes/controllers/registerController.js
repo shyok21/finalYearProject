@@ -8,6 +8,7 @@ var m_pass, c_pass, m_cap, m_email;
 var verify_code;
 var captcha;
 var newAccFile = fs.readFileSync("views/newAccount.html", "utf-8");
+const sendEmail = require('./../../services/sendEmail');
 
 // Renders the register page where new student registers
 const registerPage = (req, res) => {
@@ -55,31 +56,24 @@ const validate = (req, res) => {
             } else {
                 verify_code = randomstring.generate(8);
                 console.log('Verification code: ' + verify_code);
-                var transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    port: 587,
-                    secure: false,
-                    requireTLS: true,
-                    auth: {
-                        user: 'notifyserver123@gmail.com',
-                        pass: 'categorized123'
-                    }
-                });
-                var mailOptions = {
-                    from: 'notifyserver123@gmail.com',
-                    to: m_email, // REMEMBER TO CHANGE THIS LATER!!!!!!
+
+                mailData = {
+                    to: m_email, 
                     subject: 'Verification Code: Admins Of Jadavpur University',
                     html: '<p>Hello,</p><p>Your Verification Code is:<h3>' + verify_code + '</h3></p><p>Please Dont send this to anyone</p>'
-                };
+                }
 
-                transporter.sendMail(mailOptions, function(error, info) {
+                sendEmail(mailData, function(error, info) {
                     if (error) {
                         console.log(error);
+                        res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                        return
                     } else {
                         console.log('Email sent: ' + info.response);
+                        res.send("<form method='post' action='/verify' style='background-color:#fefefe;'><h2 style='color:#5375e2;margin:10px;'>A verification code has been send to your Email Id.</h2><label for='ver_code' style='color:#7791a1;font-size:1.2em;margin:5px;'>Verification Code:</label><input type='text' name='ver_code' style='width:140px;height:40px;background-color:#dcdcdc;font-size:1.5em;border-style:none;border-radius:8px;margin:5px'><input type='submit' style='width:80px;height:35px;background-color:#f3aa92;border-style:none;border-radius:8px;margin:5px;' value='Verify'></form>");
                     }
                 });
-                res.send("<form method='post' action='/verify' style='background-color:#fefefe;'><h2 style='color:#5375e2;margin:10px;'>A verification code has been send to your Email Id.</h2><label for='ver_code' style='color:#7791a1;font-size:1.2em;margin:5px;'>Verification Code:</label><input type='text' name='ver_code' style='width:140px;height:40px;background-color:#dcdcdc;font-size:1.5em;border-style:none;border-radius:8px;margin:5px'><input type='submit' style='width:80px;height:35px;background-color:#f3aa92;border-style:none;border-radius:8px;margin:5px;' value='Verify'></form>");
+                
             }
         } else {
             res.render('notification', {message : 'Email ID is already registered', status: 'error', backLink : "/registerPage", backText: "Back to registration page"});

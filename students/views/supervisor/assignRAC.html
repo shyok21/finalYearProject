@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/supervisor.css">
+    <link rel="stylesheet" href="/css/supervisor.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -64,7 +64,7 @@
 </head>
 
 <body style="overflow-x: hidden;overflow-y: scroll;">
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="contentRac">
     <div class="intro">
         Hello {%name%}.
@@ -92,7 +92,7 @@
         <div class="det3" style="margin-top: 25px;">
             <br>
             <button type="button" id="checkedList" onclick='showCheckedBoxes()'>Selected Profs</button>
-            <form action="/racSubmit" style="align-items: center;margin-left:30%" method="POST">
+            <form action="/supervisor/assignRAC/submit" style="align-items: center;margin-left:30%" method="POST">
                 <p name="racmembers" id="checkedBox"></p>
 
                 <input type="hidden" name="prof_name" id="prof_name" value="">

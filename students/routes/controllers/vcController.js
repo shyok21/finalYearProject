@@ -2,48 +2,23 @@ const fs = require('fs');
 const con = require('./../../db.js');
 var randomstring = require("randomstring");
 const nodemailer = require("nodemailer");
-// const { encrypt, decrypt } = require('crypto');
-const crypto = require('crypto');
+const { encrypt } = require('./../../services/emailEncrypt');
+const sendEmail = require('./../../services/sendEmail');
 
-const algorithm = 'aes-256-ctr';
-const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3';
-const iv = crypto.randomBytes(16);
-
-const encrypt = (text) => {
-
-    const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-
-    const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
-
-    return {
-        iv: iv.toString('hex'),
-        content: encrypted.toString('hex')
-    };
-};
-
-const decrypt = (hash) => {
-
-    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
-
-    const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
-
-    return decrpyted.toString();
-};
-const addExaminerVC = (req,res) => {
+const vcPage = (req,res) => {
     con.query(`select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where examiner_phase = '2';`,(err,results,field) => {
         if(err) {
-            //res.send('error' + err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
             return
         }
         
-        var htmlFile = fs.readFileSync('views/addExamVC.html','utf-8');
+        var htmlFile = fs.readFileSync('views/VC/addExamVC.html','utf-8');
         var formText = "";
         console.log(results);
         for(var i=0;i<results.length;i++)
         {
-            formText += `<form class="list" method='POST' action='/selectExams'>`;
-            formText += `<img src="student_photo/${results[i].photo_filename}" alt="Couldn't Load Image" >`;
+            formText += `<form class="list" method='POST' action='/vc/selectExaminer'>`;
+            formText += `<img src="/student_photo/${results[i].photo_filename}" alt="Couldn't Load Image" >`;
             formText += `<div class="g1">${results[i].name}</div>`;
             formText += `<div class="g2">${results[i].dept_name}</div>`;
             formText += `<div class="g3">${results[i].fac_name}</div>`;
@@ -55,10 +30,10 @@ const addExaminerVC = (req,res) => {
     });
 }
 
-const selectExams = (req, res) => {
+const vcSelectExaminer = (req, res) => {
     var stud_id = Object.keys(req.body)[0];
     var qry = `select * from External where Student_ID = '${stud_id}' order by Type;`;
-    var htmlFile = fs.readFileSync('views/selectExam.html','utf-8');
+    var htmlFile = fs.readFileSync('views/VC/selectExam.html','utf-8');
     con.query(qry,(err,result,fields)=>{
         if(err)
         {
@@ -79,7 +54,7 @@ const selectExams = (req, res) => {
     });
 }
 
-const examSelected = (req, res) => {
+const vcSelectExaminerSubmit = (req, res) => {
     var today_date = new Date();
     var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
     console.log(req.body.stud_id);
@@ -100,7 +75,7 @@ const examSelected = (req, res) => {
         var email = [email1,email2,email3];
         for(var i=0;i<email.length;i++)	{
             
-            var htmlFile = fs.readFileSync('mailService/main.html','utf-8');
+            var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
             
             var pass = randomstring.generate(10);
             var url = `${email[i]} ${pass}`;
@@ -109,25 +84,18 @@ const examSelected = (req, res) => {
             htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
             htmlFile = htmlFile.replace('{%username%}',email[i]);
             htmlFile = htmlFile.replace('{%password%}',pass);
-            var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                port: 587,
-                secure: false,
-                requireTLS: true,
-                auth: {
-                    user: 'notifyserver123@gmail.com',
-                    pass: 'categorized123'
-                }
-            });
-            var mailOptions = {
-                from: 'notifyserver123@gmail.com',
-                to: 'ju.phdms2021@gmail.com', 
+            
+            var mailData = {
+                to: email[i], 
                 subject: 'Invitation for Examiner',
                 html: htmlFile
             };
-            transporter.sendMail(mailOptions, function(error, info) {
+            
+            sendEmail(mailData, function(error, info) {
                 if (error) {
                     console.log(error);
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return;
                 } else {
                     console.log('Email sent: ' + info.response);
                 }
@@ -144,86 +112,14 @@ const examSelected = (req, res) => {
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
-            res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/vcPage", backText: "Back to VC portal"});
+            res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/vc", backText: "Back to VC portal"});
         });
     });
 }
 
-const examAccepted = (req,res) => {
-    const x = {
-        'iv':req.query.iv,
-        'content':req.query.content
-    }
-    console.log(x);
-    var text = decrypt(x);
-    //emailChecker = text.split(" ")[0];
-    //passChecker = text.split(" ")[1];
-    var html = fs.readFileSync('mailService/validate.html','utf-8');
-    html = html.replace("{%iv%}",req.query.iv);
-    html = html.replace("{%content%}",req.query.content);
-    html = html.replace('{%type%}','AC');
-    res.send(html);
-}
-
-const examRejected = (req,res) => {
-    const x = {
-        'iv':req.query.iv,
-        'content':req.query.content
-    }
-    var text = decrypt(x);
-    //emailChecker = text.split(" ")[0];
-    //passChecker = text.split(" ")[1];
-    var html = fs.readFileSync('mailService/validate.html','utf-8');
-    html = html.replace("{%iv%}",req.query.iv);
-    html = html.replace("{%content%}",req.query.content);
-    html = html.replace('{%type%}','WA');
-    res.send(html);
-}
-
-const examCheck = (req,res) => {
-    const x = {
-        'iv':req.body.iv,
-        'content':req.body.content
-    }
-    console.log(x);
-    var text = decrypt(x);
-    var emailChecker = text.split(" ")[0];
-    var passChecker = text.split(" ")[1];
-    if(req.body.user == emailChecker && req.body.pass == passChecker)
-    {
-        if(req.body.type == 'AC'){
-            var qry = `update External set phase = 3 where email = '${emailChecker}'`;
-            con.query(qry,(err,result,fields)=>{
-                if(err)
-                {
-                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                    return
-                }
-                res.render('notification', {message : 'Successfully accepted!', status: 'success'});
-            });
-        }
-        else{
-            var qry = `update External set phase = -1 where email = '${emailChecker}'`;
-            con.query(qry,(err,result,fields)=>{
-                if(err)
-                {
-                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                    return
-                }
-                res.render('notification', {message : 'Successfully rejected!', status: 'success'});
-            });
-        }
-    }
-    else{
-        res.render('notification', {message : 'Invalid credentials!', status: 'success'});
-    }
-}
 
 module.exports = {
-    addExaminerVC,
-    selectExams,
-    examSelected,
-    examAccepted,
-    examRejected,
-    examCheck
+    vcPage,
+    vcSelectExaminer,
+    vcSelectExaminerSubmit
 }

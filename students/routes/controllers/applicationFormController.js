@@ -8,7 +8,7 @@ const multer  = require('multer');
 const applicationFormPage = (req, res) => {
     var sess = req.session;
     if(sess.email) {
-        res.render('applicationForm', { email: sess.email });
+        res.render('student/applicationForm', { email: sess.email });
     }
     else {
         res.redirect('/');
@@ -98,7 +98,7 @@ const applicationFormSubmit = (req, res) => {
                                 else {
                                     console.log("Student Added to Student Database");
                                     console.log(results);
-                                    res.redirect("/studentPage");
+                                    res.redirect("/student");
                                 }
                                 
                             });

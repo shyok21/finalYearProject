@@ -6,17 +6,16 @@ const { homePage, login, logout } = require('./controllers/loginController');
 const { registerPage, validate, verify } = require('./controllers/registerController');
 const { applicationFormPage, applicationFormSubmit, downloadPDF } = require('./controllers/applicationFormController');
 const { studentPage, submitReport, downloadReport, removeReport } = require('./controllers/studentController');
-const { supervisorPage, assignRAC, racSubmit } = require('./controllers/supervisorController');
-const { supervisorApprovalController } = require('./controllers/supervisorApprovalController');
+const { supervisorApprovalPage, supervisorApprovalSubmit, assignRAC, racSubmit, supervisorStudentsList, supervisorAddExaminer, supervisorAddExaminerSubmit } = require('./controllers/supervisorController');
 const { prcRegistrationApproval, prcRegistrationApprovalSubmit, prcReportApproval, prcReportApprovalSubmit, prcVivaReport, prcVivaReportSubmit, downloadVivaReport, prcTitleChange, prcTitleChangeSubmit, prcRegistrationExtension, prcRegistrationExtensionSubmit } = require('./controllers/prcController');
 const { dcRegistrationApproval, dcRegistrationApprovalSubmit,dcReportApproval, dcReportApprovalSubmit, dcVivaReport, dcTitleChange, dcTitleChangeSubmit, dcRegistrationExtension, dcRegistrationExtensionSubmit, dcExaminerApproval, dcExaminersList, dcExaminerApprovalSubmit } = require('./controllers/dcController');
+const { vcPage, vcSelectExaminer, vcSelectExaminerSubmit } = require('./controllers/vcController');
+const { examAccepted, examRejected, examCheck } = require('./controllers/examinerController');
 const { specialPage, specialSearchPage } = require('./controllers/specialController');
 const getFaculties = require('./apis/getFaculties.js');
 const getDepartments = require('./apis/getDepartments.js');
 const getProfessors = require('./apis/getProfessors.js');
 const getProfessorDesignation = require('./apis/getProfessorDesignation.js');
-const { examinerPage,addExaminer,addExam } = require('./controllers/examinerController');
-const { addExaminerVC, selectExams, examSelected, examAccepted, examRejected, examCheck} = require('./controllers/vcController');
 
 /* URLs accessible to everyone */
 router.get("/", homePage);
@@ -30,63 +29,69 @@ router.get("/examRejected", examRejected);
 router.post("/examCheck", examCheck);
 
 /* URLs accessible to Vice chancellor only */
-router.get("/vcPage", auth(["VC"]), addExaminerVC);
-router.post("/selectExams", auth(["VC"]), selectExams);
-router.post("/examSelected", auth(["VC"]), examSelected);
+router.use("/vc", auth(["VC"]));
+router.get("/vc", vcPage);
+router.post("/vc/selectExaminer", vcSelectExaminer);
+router.post("/vc/selectExaminer/submit", vcSelectExaminerSubmit);
 
 /* URLs accessible to students only */
-router.get("/applicationFormPage", auth(["stud"]), applicationFormPage);
-router.post("/applicationFormSubmit", auth(["stud"]), applicationFormSubmit);
-router.get("/studentPage", auth(["stud"]), studentPage);
-router.get("/removeReport", auth(["stud"]), removeReport);
-router.get("/api/faculties", auth(["stud"]), getFaculties);
-router.get("/api/departments", auth(["stud"]), getDepartments);
-router.get("/api/professors", auth(["stud"]), getProfessors);
-router.get("/api/designation", auth(["stud"]), getProfessorDesignation);
-router.post("/submitReport", auth(["stud"]), submitReport);
+router.use("/student", auth(["stud"]));
+router.get("/student/applicationForm", applicationFormPage);
+router.post("/student/applicationForm/submit", applicationFormSubmit);
+router.get("/student", studentPage);
+router.get("/student/report/remove", removeReport);
+router.post("/student/report/submit", submitReport);
 
 /* URLs accessible to supervisor only */
-router.get("/supervisorPage", auth(["sup", "hod"]), supervisorPage);
-router.post("/supervisorApproval", auth(["sup", "hod"]), supervisorApprovalController);
-router.get("/assignRAC.html", auth(["sup", "hod"]), assignRAC);
-router.post("/racSubmit", auth(["sup", "hod"]), racSubmit);
-router.get("/myStudents", auth(["sup", "hod"]), examinerPage);
-router.post("/selectExaminer", auth(["sup", "hod"]), addExaminer);
-router.post("/addedExaminer", auth(["sup", "hod"]), addExam);
+router.use("/supervisor", auth(["sup", "hod"]));
+router.get("/supervisor", supervisorApprovalPage);
+router.post("/supervisor/approval/submit", supervisorApprovalSubmit);
+router.get("/supervisor/assignRAC", assignRAC);
+router.post("/supervisor/assignRAC/submit", racSubmit);
+router.get("/supervisor/studentsList", supervisorStudentsList);
+router.post("/supervisor/addExaminer", supervisorAddExaminer);
+router.post("/supervisor/addExaminer/submit", supervisorAddExaminerSubmit);
 
 /* URLs accessible to PRC only */
-router.get("/prcRegistrationApproval", auth(["prc"]), prcRegistrationApproval);
-router.post("/prcRegistrationApprovalSubmit", auth(["prc"]), prcRegistrationApprovalSubmit);
-router.get("/prcReportApproval", auth(["prc"]), prcReportApproval);
-router.post("/prcReportApprovalSubmit", auth(["prc"]), prcReportApprovalSubmit);
-router.get("/prcVivaReport", auth(["prc"]), prcVivaReport);
-router.post("/prcVivaReportSubmit", auth(["prc"]), prcVivaReportSubmit);
-router.get("/prcTitleChange", auth(["prc"]), prcTitleChange);
-router.post("/prcTitleChangeSubmit", auth(["prc"]), prcTitleChangeSubmit);
-router.get("/prcRegistrationExtension", auth(["prc"]), prcRegistrationExtension);
-router.post("/prcRegistrationExtensionSubmit", auth(["prc"]), prcRegistrationExtensionSubmit);
+router.use("/prc", auth(["prc"]));
+router.get("/prc/registrationApproval", prcRegistrationApproval);
+router.post("/prc/registrationApproval/submit", prcRegistrationApprovalSubmit);
+router.get("/prc/reportApproval", prcReportApproval);
+router.post("/prc/reportApproval/submit", prcReportApprovalSubmit);
+router.get("/prc/vivaReport", prcVivaReport);
+router.post("/prc/vivaReport/submit", prcVivaReportSubmit);
+router.get("/prc/titleChange", prcTitleChange);
+router.post("/prc/titleChange/submit", prcTitleChangeSubmit);
+router.get("/prc/registrationExtension", prcRegistrationExtension);
+router.post("/prc/registrationExtension/submit", prcRegistrationExtensionSubmit);
 
 /* URLs accessible to DC only */
-router.get("/dcRegistrationApproval", auth(["dc"]), dcRegistrationApproval);
-router.post("/dcRegistrationApprovalSubmit", auth(["dc"]), dcRegistrationApprovalSubmit);
-router.get("/dcReportApproval", auth(["dc"]), dcReportApproval);
-router.post("/dcReportApprovalSubmit", auth(["dc"]), dcReportApprovalSubmit);
-router.get("/dcVivaReport", auth(["dc"]), dcVivaReport);
-router.get("/dcTitleChange", auth(["dc"]), dcTitleChange);
-router.post("/dcTitleChangeSubmit", auth(["dc"]), dcTitleChangeSubmit);
-router.get("/dcRegistrationExtension", auth(["dc"]), dcRegistrationExtension);
-router.post("/dcRegistrationExtensionSubmit", auth(["dc"]), dcRegistrationExtensionSubmit);
-router.get("/dcExaminerApproval", auth(["dc"]), dcExaminerApproval);
-router.post("/dcExaminerApprovalSubmit",auth(["dc"]), dcExaminerApprovalSubmit);
-router.get("/dcExaminersList", auth(["dc"]), dcExaminersList);
-router.get("/downloadVivaReport", auth(["dc"]), downloadVivaReport);
+router.use("/dc", auth(["dc"]));
+router.get("/dc/registrationApproval", dcRegistrationApproval);
+router.post("/dc/registrationApproval/submit", dcRegistrationApprovalSubmit);
+router.get("/dc/reportApproval", dcReportApproval);
+router.post("/dc/reportApproval/submit", dcReportApprovalSubmit);
+router.get("/dc/vivaReport", dcVivaReport);
+router.get("/dc/titleChange", dcTitleChange);
+router.post("/dc/titleChange/submit", dcTitleChangeSubmit);
+router.get("/dc/registrationExtension", dcRegistrationExtension);
+router.post("/dc/registrationExtension/submit", dcRegistrationExtensionSubmit);
+router.get("/dc/examinerApproval", dcExaminerApproval);
+router.post("/dc/examinerApproval/submit", dcExaminerApprovalSubmit);
+router.get("/dc/examinersList", dcExaminersList);
+router.get("/dc/downloadVivaReport", downloadVivaReport);
 
 /* URLs accessible to special supervisors only */
-router.post("/specialDB", auth(["hod"]), specialPage);
-router.post("/searchDB", auth(["hod"]), specialSearchPage);
+router.use("/hod", auth(["hod"]));
+router.post("/hod/specialDB", specialPage);
+router.post("/hod/searchDB", specialSearchPage);
 
 /* URLs accessible to multiple user types */
 router.get("/downloadReport", downloadReport);
 router.get("/downloadPDF", downloadPDF);
+router.get("/api/faculties", getFaculties);
+router.get("/api/departments", getDepartments);
+router.get("/api/professors", getProfessors);
+router.get("/api/designation", getProfessorDesignation);
 
 module.exports = router;

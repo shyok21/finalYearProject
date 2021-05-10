@@ -1,24 +1,14 @@
 const mysql = require('mysql');
 const fs = require('fs');
-//Change Cred in database.txt
-var Db_data_cred = fs.readFileSync('../database.txt','utf-8');
-var data_cred = Db_data_cred.split("\n");
+const { DB_HOST, DB_USERNAME, DB_NAME, DB_PASSWORD } = require('./config');
+
 const con = mysql.createConnection({
-    host: data_cred[0].split(": ")[1],
-    user: data_cred[1].split(": ")[1],
-    password: data_cred[3].split(": ")[1],
-    database: data_cred[2].split(": ")[1],
+    host: DB_HOST,
+    user: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_NAME,
     multipleStatements: true
 });
-
-// con.connect(function(err) {
-//     if (err)
-//         console.log("Database error");
-//     else
-//         console.log("Connected to Database");
-// });
-
-
 
 var connectWithRetry = function(attempt) {
     con.connect(function(err) {
@@ -33,8 +23,7 @@ var connectWithRetry = function(attempt) {
         else
             console.log("Connected to Database");
     });
-  };
+};
 connectWithRetry(10);
-
 
 module.exports = con;

@@ -40,7 +40,7 @@ const prcRegistrationApprovalSubmit = (req, res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/prcRegistrationApproval", backText: "Back to PRC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/prc/registrationApproval", backText: "Back to PRC portal"});
     });
 };
 
@@ -81,7 +81,7 @@ const prcReportApprovalSubmit = (req, res) => {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
-        res.render('notification', {message : status_id, status: 'success', backLink : "/prcReportApproval", backText: "Back to PRC portal"});
+        res.render('notification', {message : status_id, status: 'success', backLink : "/prc/reportApproval", backText: "Back to PRC portal"});
     });
 };
 
@@ -135,7 +135,7 @@ const prcVivaReportSubmit = (req,res) => {
                 }
                 else {
                     console.log("Report submitted successfully");
-                    res.render('notification', {message : 'Report submission successful', status: 'success', backLink : "/prcVivaReport", backText: "Back to PRC portal"});
+                    res.render('notification', {message : 'Report submission successful', status: 'success', backLink : "/prc/vivaReport", backText: "Back to PRC portal"});
                 }    
             })
         }
@@ -184,7 +184,7 @@ const prcTitleChangeSubmit = (req,res) => {
         }
         else {
             console.log("Title change request submitted successfully");
-            res.render('notification', {message : 'Title change request submitted successfully', status: 'success', backLink : "/prcTitleChange", backText: "Back to PRC portal"});
+            res.render('notification', {message : 'Title change request submitted successfully', status: 'success', backLink : "/prc/titleChange", backText: "Back to PRC portal"});
         }    
     })
 };
@@ -216,7 +216,7 @@ const prcRegistrationExtensionSubmit = (req,res) => {
         }
         else {
             console.log("Extension request submitted successfully");
-            res.render('notification', {message : 'Extension request submitted successfully', status: 'success', backLink : "/prcRegistrationExtension", backText: "Back to DC portal"});
+            res.render('notification', {message : 'Extension request submitted successfully', status: 'success', backLink : "/prc/registrationExtension", backText: "Back to DC portal"});
         }    
     })
 };

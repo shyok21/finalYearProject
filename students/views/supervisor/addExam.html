@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/addExam.css">
+    <link rel="stylesheet" href="/css/addExam.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <img src="images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
         <h1>Select Examiners for {%studId%}</h1>
-        <form action="/addedExaminer" method="POST" class="form-class">
+        <form action="/supervisor/addExaminer/submit" method="POST" class="form-class">
         <input type="hidden" value="{%studId%}" name="student">
         <div class="full-set">
             <div class="head-set">Examiners Outside India</div>
@@ -627,26 +627,25 @@
     </form>
 </div>
 <script>
-    // var data = [
+    /*var data = [
         
-    //     ['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262'],
-    //     ['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458'],
-    //     ['shubhamgoel@gmail.com','Shubham Goel','Intern','Kolkata','West Bengal','438963476'],
-    //     ['roopkathasamantha@gmail.com','roopkata Samantha','Intern','Kolkata','West Bengal','8932552325'],
-    //     ['susvicky393@gmail.com','Sushant Shaw','Intern','Kolkata','West Bengal','3046346730'],
-    //     ['souvikkapri1998@gmail.com','Souvik Kapri','Intern','Durgapur','West Bengal','9832586240'],
-    //     ['dddeepak888@gmail.com','Deepak Kumar','Student','Bangalore','Karnataka','7382446369'],
-    //     ['aman19fist@gmail.com','Aman Saini','Student','Vadodara','Gujarat','983252532'],
-    //     ['priyanshutirkey@gmail.com','Priyanshu Tirkey','SDE','Ranchi','Jharkhand','890024762']
-    // ];
-    // var forData = [
-    //     ['ritamguha1998@gmail.com','Ritam Guha','Scholar','Chicago','United States','2364743743'],
-    //     ['rockstarsam1234@gmail.com','Soham Mukherjee','SDE','Kuching','Singapore','3523642743'],
-    //     ['sainia18885@gmail.com','Saini Aman','ME','Wuhan','China','352363267237']
-    // ];
-    var data = [];
-    data.push(['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262']);
-    data.push(['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458']);
+        ['shyokmutsuddi21@gmail.com','Shyok Mutsuddi','Intern','Kolkata','West Bengal','8240224262'],
+        ['abhishekde@gmail.com','Abhishek De','Intern','Kolkata','West Bengal','843578458'],
+        ['shubhamgoel@gmail.com','Shubham Goel','Intern','Kolkata','West Bengal','438963476'],
+        ['roopkathasamantha@gmail.com','roopkata Samantha','Intern','Kolkata','West Bengal','8932552325'],
+        ['susvicky393@gmail.com','Sushant Shaw','Intern','Kolkata','West Bengal','3046346730'],
+        ['souvikkapri1998@gmail.com','Souvik Kapri','Intern','Durgapur','West Bengal','9832586240'],
+        ['dddeepak888@gmail.com','Deepak Kumar','Student','Bangalore','Karnataka','7382446369'],
+        ['aman19fist@gmail.com','Aman Saini','Student','Vadodara','Gujarat','983252532'],
+        ['priyanshutirkey@gmail.com','Priyanshu Tirkey','SDE','Ranchi','Jharkhand','890024762']
+    ];
+    var forData = [
+        ['ritamguha1998@gmail.com','Ritam Guha','Scholar','Chicago','United States','2364743743'],
+        ['rockstarsam1234@gmail.com','Soham Mukherjee','SDE','Kuching','Singapore','3523642743'],
+        ['sainia18885@gmail.com','Saini Aman','ME','Wuhan','China','352363267237']
+    ];*/
+    {%data%}
+    {%forData%}
     function getData(x,id){
         var retData = [];
         var y = parseInt(id);

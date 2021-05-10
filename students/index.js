@@ -6,8 +6,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/uploads'));
 app.set('view engine', 'ejs');
-const cron = require('node-cron');
-const con = require('./db');
 
 // Session management setup
 app.use(
@@ -28,7 +26,7 @@ require('./backgroundJobs')();
 app.use('/', require('./routes/index.js'));
 
 // Server setup
-var port = 8000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log("Server Created!");
     console.log("http://localhost:" + port + "/");
