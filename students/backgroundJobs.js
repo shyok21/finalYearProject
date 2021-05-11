@@ -47,8 +47,10 @@ const backgroundJobs = () => {
                 }
             });
         });
-        //Background Job for 3 Years Submission Remainder
-        con.query('select * from student s left join professor p on p.prof_id = s.supervisor_id left join login l on l.id = p.prof_id;',(err,result,f)=> {
+        //Background Job for 4.5 Years Submission Reminder
+	//after 54 months to students
+
+       /* con.query('select * from student s left join professor p on p.prof_id = s.supervisor_id left join login l on l.id = p.prof_id;',(err,result,f)=> {
             var today_date = new Date();
             result.forEach(results => {
                 var admission_date = results.date_of_admission;
@@ -72,9 +74,9 @@ const backgroundJobs = () => {
                         console.log(`OK for ${results.name} and ${results.email}`);
                 }
             });
-        });
+        });*/
     
-        //Background Job for 1 month remainder
+        //Background Job for 1 month reminder
         con.query(`select * from External where phase = 1 and last_mail_sent_date != '0000-00-00'`,(err,result,fields)=>{
             var today_date = new Date();
             result.forEach(results => {
