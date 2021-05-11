@@ -40,15 +40,18 @@ var mailOptions = {
 };
 
 con.connect(function(err) {
-    if (err)
-        throw err;
+    if (err) {
+        console.log(err);
+        return;
+    }
     console.log("Connected to Database");
     cron.schedule('* * * */6 *', () => {
         //function to send mail to student
         var query = "Select * from six_monthly_report;";
         con.query(query, (err, result, fields) => {
             if (err) {
-                throw err;
+                console.log(err);
+                return;
             }
             for(var student=0; student<result.length; student++) {
                 if(result[student].date_time) {

@@ -4,6 +4,7 @@ var randomstring = require("randomstring");
 const nodemailer = require("nodemailer");
 const { encrypt } = require('./../../services/emailEncrypt');
 const sendEmail = require('./../../services/sendEmail');
+const { ROOT_URL } = require('./../../config');
 
 const vcPage = (req,res) => {
     con.query(`select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where examiner_phase = '2';`,(err,results,field) => {
@@ -84,6 +85,7 @@ const vcSelectExaminerSubmit = (req, res) => {
             htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
             htmlFile = htmlFile.replace('{%username%}',email[i]);
             htmlFile = htmlFile.replace('{%password%}',pass);
+            htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
             
             var mailData = {
                 to: email[i], 

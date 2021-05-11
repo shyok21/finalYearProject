@@ -1,14 +1,15 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const createPDF = require('./../../services/createPDF');
-const merge = require('easy-pdf-merge');
+const mergePDF = require('./../../services/mergePDF');
 const util = require('util');
 const multer  = require('multer');
+const { ROOT_URL } = require('./../../config');
 
 const applicationFormPage = (req, res) => {
     var sess = req.session;
     if(sess.email) {
-        res.render('student/applicationForm', { email: sess.email });
+        res.render('student/applicationForm', { email: sess.email, ROOT_URL: ROOT_URL });
     }
     else {
         res.redirect('/');
@@ -62,7 +63,7 @@ const applicationFormSubmit = (req, res) => {
                     const qualified_docs = req.files['qualified-docs'].map(doc => doc.path);
                     const pdfs = [path, sop].concat(marksheets).concat(qualified_docs);
                     // Merge pdf with SOP and certificates
-                    merge(pdfs, path, function (err) {
+                    mergePDF(pdfs, path, function (err) {
                         if (err) {
                             console.log(err);
                             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="http://localhost:8000/css/applicationPDF.css">
+        <link rel="stylesheet" href= "<%= data.ROOT_URL + '/css/applicationPDF.css' %>" >
         <title>Student details</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -139,7 +139,7 @@
                     </li>
                     <li>
                         PROPOSED RESEARCH WORK<br>
-                        (A) PROPOSED AREA/THEME OF RESEARCH:</br>
+                        (A) PROPOSED THESIS TITLE:</br>
                         <span><%=data.title || 'NIL'%></span><br>
                         (B) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS:</br>
                         <span><%=data.proposed_institute || 'NIL'%></span>

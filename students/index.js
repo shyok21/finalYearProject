@@ -26,13 +26,8 @@ require('./backgroundJobs')();
 app.use('/', require('./routes/index.js'));
 
 // Server setup
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
+const { PORT, ROOT_URL } = require('./config');
+app.listen(PORT, () => {
     console.log("Server Created!");
-    console.log("http://localhost:" + port + "/");
+    console.log(ROOT_URL);
 });
-
-
-//6 month report report to student
-//1 month examiner checking
-//3 years remainder

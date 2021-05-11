@@ -12,7 +12,7 @@
     <img src="/images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
     <div class="main-content">
         <div class="logout">
-            <a href="./logout">Logout</a>
+            <a href="/logout">Logout</a>
         </div>
         <div class="main">
                 <div class="stepper">
@@ -202,13 +202,13 @@
                                     <td><input type="text" class="text-ip type-1" name="acad55"></td>
                                 </tr>    
                             </table>
-                            <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES</label>
+                            <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES: (MULTIPLE FILES ALLOWED)</label>
                             <input type="file" name="marksheets" class="text-ip type-1" multiple required>
                         </li>
                         <li>
                             <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION</label>
                             <input type="text" name="qualified" class="text-ip type-1"><br>
-                            <label for="qualified">RELEVANT DOCUMENTS</label>
+                            <label for="qualified">RELEVANT DOCUMENTS: (MULTIPLE FILES ALLOWED)</label>
                             <input type="file" name="qualified-docs" class="text-ip type-1" multiple required>   
                         </li>
                         <li>
@@ -226,7 +226,7 @@
                         <ol start="11">
                         <li>
                             <p>PROPOSED RESEARCH WORK</p>
-                            <label for="title">(A) PROPOSED AREA/THEME OF RESEARCH:</label></br>
+                            <label for="title">(A) PROPOSED THESIS TITLE:</label></br>
                             <input type="text" name="title" class="text-ip type-1" required><br>
                             <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS):</label></br>
                             <input type="file" name="sop" class="text-ip type-1" required><br>
@@ -346,7 +346,7 @@
         });
         $.ajax({
             type: "GET",
-            url:"http://localhost:8000/api/faculties",
+            url: "<%= ROOT_URL %>" + "/api/faculties",
             dataType: "json",
             success: function (data) {
                 $.each(data,function(i,data) {
@@ -361,7 +361,7 @@
             const fac_id = this.value;
             $.ajax({
                 type: "GET",
-                url:"http://localhost:8000/api/departments?fac_id=" + fac_id,
+                url: "<%= ROOT_URL %>" + "/api/departments?fac_id=" + fac_id,
                 dataType: "json",
                 success: function (data) {
                     var options = "<option value=''>---Select----</option>";;
@@ -377,7 +377,7 @@
             const dept_id = this.value;
             $.ajax({
                 type: "GET",
-                url:"http://localhost:8000/api/professors?dept_id=" + dept_id,
+                url: "<%= ROOT_URL %>" + "/api/professors?dept_id=" + dept_id,
                 dataType: "json",
                 success: function (data) {
                     var options = "<option value=''>---Select----</option>";
@@ -393,7 +393,7 @@
             const prof_id = this.value;
             $.ajax({
                 type: "GET",
-                url:"http://localhost:8000/api/designation?prof_id=" + prof_id,
+                url: "<%= ROOT_URL %>" + "/api/designation?prof_id=" + prof_id,
                 dataType: "json",
                 success: function (data) {
                     $('input[name=supervisor_designation]').val(data.Designation);

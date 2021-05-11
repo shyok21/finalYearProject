@@ -17,21 +17,17 @@ const homePage = (req, res) => {
 // Handles the event when user logs in
 const login = (req, res) => {
     console.log(req.body);
-    var isEmpty = 0;
     if (req.body.username == '' || req.body.password == '') {
         var htmlNewFile = htmlFile.replace("{%Login Error%}", "&#9888; Username & Password Can't be Empty!");
         var htmlNewFile = htmlNewFile.replace("{%error-type%}", "login-invalid");
-        isEmpty = 1;
         res.send(htmlNewFile);
-    }
-    if (isEmpty == 0) {
+    } else {
         var log = req.body.logintype;
         var usr = req.body.username;
         var psw = req.body.password;
         var qry = util.format("select * from login where email='%s' and type='%s'", usr, log);
         con.query(qry, (err, result, fields) => {
             if (err) {
-                //throw err;
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
                 return
             }

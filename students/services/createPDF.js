@@ -1,11 +1,14 @@
 var pdf = require("html-pdf");
 let ejs = require("ejs");
+const { ROOT_URL } = require('./../config');
 
 const createPDF = (html, data, path, callback) => {
     
     ejs.renderFile(html, { data }, (err, data) => {
         if (err) {
             console.log(err); 
+            if (typeof callback == "function") 
+                callback(err, path); 
         } else {
             let options = {
                 "format": "A3",
@@ -18,14 +21,13 @@ const createPDF = (html, data, path, callback) => {
                 },
                 base: 'file://' + __dirname + './../'
             };
-
+            data.ROOT_URL = ROOT_URL;
             pdf.create(data, options).toFile(path, function (err, data) {
                 if (err) { 
                     if (typeof callback == "function") 
                         callback(err, path); 
                 } else {
                     console.log("PDF created successfully");
-                    console.log(data);
                     if (typeof callback == "function") 
                         callback(null, path); 
                 }

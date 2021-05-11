@@ -23,6 +23,7 @@
     "node-cron": "^3.0.0",
     "nodemailer": "^6.4.17",
     "pdf-creator-node": "^1.4.2",
+    "pdf-merger-js": "^3.1.0",
     "phantomjs-prebuilt": "^2.1.16",
     "random": "^2.2.0",
     "randomstring": "^1.1.5"

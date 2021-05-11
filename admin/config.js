@@ -1,6 +1,6 @@
 const config = {
     PORT: process.env.PORT || 8000,
-    ROOT_URL: process.env.ROOT_URL || 'http://localhost:8000',
+    ROOT_URL: process.env.ROOT_ADMIN_URL || "http://localhost:8020",
     DB_HOST: "sql6.freemysqlhosting.net",
     DB_NAME: "sql6411032",
     DB_USERNAME: "sql6411032",
