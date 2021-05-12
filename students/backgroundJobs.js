@@ -66,7 +66,6 @@ const backgroundJobs = () => {
                 }
             });
         });
-<<<<<<< HEAD
         //Background Job for 4.5 Years Submission Reminder
 	//after 54 months to students
 
@@ -97,10 +96,8 @@ const backgroundJobs = () => {
         });*/
     
         //Background Job for 1 month reminder
-=======
 
         //Background Job for 1 month remainder
->>>>>>> Debugging and organising code
         con.query(`select * from External where phase = 1 and last_mail_sent_date != '0000-00-00'`,(err,result,fields)=>{
             if(err) {
                 console.log("Error: " + err);
