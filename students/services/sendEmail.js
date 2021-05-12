@@ -1,8 +1,8 @@
-const { SENDER_EMAIL, SENDER_PASSWORD, TEST_EMAIL, TEST_MODE } = require('./../config');
+const { SENDER_EMAIL, SENDER_PASSWORD, TEST_EMAIL, TEST_MODE , MAIL_SERVICE } = require('./../config');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: MAIL_SERVICE,
     port: 587,
     secure: false,
     requireTLS: true,

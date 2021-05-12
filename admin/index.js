@@ -9,7 +9,7 @@ const encryption  = require('./services/encrypt')
 const { encrypt, decrypt } = require('./services/emailEncrypt');
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
-const { PORT, ROOT_URL, DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME, SENDER_EMAIL, SENDER_PASSWORD, TEST_EMAIL, TEST_MODE } = require('./config');
+const { PORT, ROOT_URL, DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME, SENDER_EMAIL, SENDER_PASSWORD, TEST_EMAIL, TEST_MODE, MAIL_SERVICE } = require('./config');
 
 const con = mysql.createConnection({
     host: DB_HOST,
@@ -167,7 +167,7 @@ app.get('/', function(req, res) {
 });
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: MAIL_SERVICE,
 
     auth: {
         user: SENDER_EMAIL,
