@@ -2,10 +2,13 @@ const { SENDER_EMAIL, SENDER_PASSWORD, TEST_EMAIL, TEST_MODE , MAIL_SERVICE } = 
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
+    pool: true,
     service: MAIL_SERVICE,
     port: 587,
     secure: false,
-    requireTLS: true,
+    tls: {
+        rejectUnauthorized: false
+    },
     auth: {
         user: SENDER_EMAIL,
         pass: SENDER_PASSWORD
@@ -21,6 +24,7 @@ const sendEmail = (mailData, callback) => {
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
+        console.log(info);
         if (typeof callback == "function")
             callback(error, info);
     });

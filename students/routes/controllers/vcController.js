@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const { encrypt } = require('./../../services/emailEncrypt');
 const sendEmail = require('./../../services/sendEmail');
 const { ROOT_URL } = require('./../../config');
+const async = require("async");
 
 const vcPage = (req,res) => {
     con.query(`select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where examiner_phase = '2';`,(err,results,field) => {
@@ -59,7 +60,7 @@ const vcSelectExaminerSubmit = (req, res) => {
     var today_date = new Date();
     var qry = `update student set examiner_phase='3' where stud_id='${req.body.stud_id}';`;
     console.log(req.body.stud_id);
-    con.query(qry,(err,results,fields)=>{
+    con.query(qry, (err,results,fields)=>{
         if(err)
         {
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
@@ -73,7 +74,8 @@ const vcSelectExaminerSubmit = (req, res) => {
             email3 = req.body.Email;
         else
             email3 = req.body.viva;
-        var email = [email1,email2,email3];
+        var emails = [email1,email2,email3];
+        /*
         for(var i=0;i<email.length;i++)	{
             
             var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
@@ -94,29 +96,69 @@ const vcSelectExaminerSubmit = (req, res) => {
                 html: htmlFile
             };
             
-            sendEmail(mailData, function(error, info) {
-                if (error) {
-                    console.log(error);
-                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                    return;
-                } else {
-                    console.log('Email sent: ' + info.response);
+            try {
+                await sendEmail(mailData);
+                console.log(`Mail sent to ${mailData.to} successully`);
+            }
+            catch(err) {
+                console.log(`Mail sending to ${mailData.to} failed`);
+                res.render('notification', {message : 'Email sending failed due to some error!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            }
+              
+        }*/
+        var htmlFiles = [];
+        emails.forEach(email => {
+            
+        });
+        
+        async.each(emails, function(email, callback){
+            var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
+            
+            var pass = randomstring.generate(10);
+            var url = `${email} ${pass}`;
+            const hash = encrypt(url);
+            htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+            htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
+            htmlFile = htmlFile.replace('{%username%}',email);
+            htmlFile = htmlFile.replace('{%password%}',pass);
+            htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
+            htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
+
+            const mailData = {
+                to: email, 
+                subject: 'Invitation for Examiner',
+                html: htmlFile
+            };
+        
+            sendEmail(mailData, function (err, info) {
+                if (err) { 
+                    console.log('Sending to ' + email + ' failed: ' + err);
+                    callback(err);
+                } else { 
+                    console.log('Sent to ' + email);
+                    callback();
                 }
             });
-            
-        }
-        var emails = `('${email1}','${email2}','${email3}')`;
-        var today_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        var qry2 = `Update External set phase = 1, last_mail_sent_date = '${today_date}' where email in ${emails} and Student_ID='${req.body.stud_id}';`;
-        console.log(qry2);
-        con.query(qry2,(err,ress,f)=>{
-            if(err)
-            {
-                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                return
+        }, function(err){
+            if(err){
+                console.log("Sending to all emails failed:" + err);
+                res.render('notification', {message : 'Email sending failed due to some error!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return;
             }
-            res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/vc", backText: "Back to VC portal"});
-        });
+        
+            var emails = `('${email1}','${email2}','${email3}')`;
+            var today_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            var qry2 = `Update External set phase = 1, last_mail_sent_date = '${today_date}' where email in ${emails} and Student_ID='${req.body.stud_id}';`;
+            console.log(qry2);
+            con.query(qry2,(err,ress,f)=>{
+                if(err)
+                {
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return;
+                }
+                res.render('notification', {message : 'Emails sent successfully', status: 'success', backLink : "/vc", backText: "Back to VC portal"});
+            });
+        });  
     });
 }
 

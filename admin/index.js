@@ -167,8 +167,13 @@ app.get('/', function(req, res) {
 });
 
 var transporter = nodemailer.createTransport({
+    pool: true,
     service: MAIL_SERVICE,
-
+    port: 587,
+    secure: false,
+    tls: {
+        rejectUnauthorized: false
+    },
     auth: {
         user: SENDER_EMAIL,
         pass: SENDER_PASSWORD
