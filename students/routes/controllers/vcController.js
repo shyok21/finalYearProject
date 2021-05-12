@@ -86,6 +86,7 @@ const vcSelectExaminerSubmit = (req, res) => {
             htmlFile = htmlFile.replace('{%username%}',email[i]);
             htmlFile = htmlFile.replace('{%password%}',pass);
             htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
+            htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
             
             var mailData = {
                 to: email[i], 
