@@ -87,7 +87,7 @@ const prcReportApprovalSubmit = (req, res) => {
 
 const prcVivaReport = (req,res) => {
     var sess = req.session;
-    var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
+    var qry = `select * from student s join prc p on p.dept_id = s.dept_id where prc_id="${sess.userid}" and viva_report_filename is null`;
     con.query(qry, (err, results, fields) => {
         if(err)
         {
@@ -159,7 +159,7 @@ const downloadVivaReport = (req,res) => {
 }
 const prcTitleChange = (req,res) => {
     var sess = req.session;
-    var qry = "select * from student s join prc p on p.dept_id = s.dept_id where prc_id='" + sess.userid + "'";
+    var qry = `select * from student s join prc p on p.dept_id = s.dept_id where prc_id="${sess.userid}" and new_title is NULL`;
     con.query(qry, (err, results, fields) => {
         if(err)
         {
@@ -191,7 +191,7 @@ const prcTitleChangeSubmit = (req,res) => {
 
 const prcRegistrationExtension = (req,res) => {
     var sess = req.session;
-    var qry = `select * from student s join prc p on p.dept_id = s.dept_id where prc_id="${sess.userid}" and registration_validity <= 7 and extension_requested = "N"`;
+    var qry = `select * from student s join prc p on p.dept_id = s.dept_id where prc_id="${sess.userid}" and registration_validity < 7 and extension_requested = "N"`;
     con.query(qry, (err, results, fields) => {
         if(err)
         {

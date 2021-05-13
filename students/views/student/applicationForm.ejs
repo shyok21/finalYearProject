@@ -37,13 +37,13 @@
                     <!-- Page 1 of the form -->
                     <div class="tab">
                         <p>I HEREBY APPLY FOR REGISTRATION AS A PH.D STUDENT FOR THE DEGREE OF DOCTOR OF
-                        PHILOSOPHY IN 
+                        PHILOSOPHY IN<span class = "star">*</span> 
                         <span>
                             <select id="faculty" name="faculty" class="text-ip" required>
                                 <option value="">---Select----</option>
                             </select>
                         </span>
-                        OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF 
+                        OF JADAVPUR UNIVERSITY IN THE DEPARTMENT OF<span class = "star">*</span>
                         <span>
                             <select id="department" name="dep_id" class="text-ip" required>
                                 <option></option>
@@ -53,23 +53,23 @@
                         BY THE RULES AND REGULATIONS OF THE UNIVERSITY. PARTICULARS GIVEN BELOW ARE TRUE AND CORRECT TO THE BEST OF MY KNOWLEDGE AND BELIEF.
                         </p><br>
                         
-                        <label for="student_photo">UPLOAD PASSPORT SIZE PHOTO</label>
+                        <label for="student_photo">UPLOAD PASSPORT SIZE PHOTO<span class = "star">*</span></label>
                         <input type="file" name="student_photo" class="text-ip type-1" required>   
                         
                         <br><br>
                         <ol start="1">
                         <li>
-                            <label for="student_name">NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE)</label>
+                            <label for="student_name">NAME(ACCORDING TO SCHOOL LEAVING CERTIFICATE)<span class = "star">*</span></label>
                             <input type="text" name="student_name" class="text-ip type-1" required>   
                         </li>
                         <li>
                             <div class="form-row">
                                 <div class="form-field">
-                                    <label for="dob">DATE OF BIRTH</label><br>
+                                    <label for="dob">DATE OF BIRTH<span class = "star">*</span></label><br>
                                     <input type="date" name="dob" class="text-ip type-1" required><br> 
                                 </div>
                                 <div class="form-field">
-                                    <label for="sex">SEX</label><br>
+                                    <label for="sex">SEX<span class = "star">*</span></label><br>
                                     <select name="sex" class="text-ip type-1">
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -77,7 +77,7 @@
                                     </select><br>
                                 </div>
                                 <div class="form-field">
-                                    <label for="marital_status">MARITAL STATUS</label><br>
+                                    <label for="marital_status">MARITAL STATUS<span class = "star">*</span></label><br>
                                     <select name="marital_status" class="text-ip type-1">
                                         <option value="unmarried">Unmarried</option>
                                         <option value="married">Married</option>
@@ -88,11 +88,11 @@
                             </div>
                         </li>
                         <li>
-                            <label for="parent_name">FATHER'S NAME/MOTHER'S NAME</label>
+                            <label for="parent_name">FATHER'S NAME/MOTHER'S NAME<span class = "star">*</span></label>
                             <input type="text" name="parent_name" class="text-ip type-1" required>
                         </li>
                         <li>
-                            <label for="category">CATEGORY</label>
+                            <label for="category">CATEGORY<span class = "star">*</span></label>
                             <select name="category" class="text-ip type-1">
                                 <option value="general">General</option>
                                 <option value="sc">SC</option>
@@ -101,21 +101,21 @@
                             </select>
                         </li>
                         <li>
-                            <label for="nationality">NATIONALITY</label>
+                            <label for="nationality">NATIONALITY<span class = "star">*</span></label>
                             <select id="nationality" name="nationality" class="text-ip type-1" required>
                                 <option value="">---Select----</option>
                             </select>
                         </li>
                         <li>
-                            <label for="address1">PERMANENT ADDRESS</label><br>
+                            <label for="address1">PERMANENT ADDRESS<span class = "star">*</span></label><br>
                             <input type="text" name="address1" class="text-ip type-1" required>
                         </li>
                         <li>
-                            <label for="address2">ADDRESS FOR COMMUNICATION</label><br>
+                            <label for="address2">ADDRESS FOR COMMUNICATION<span class = "star">*</span></label><br>
                             <input type="text" name="address2" class="text-ip type-1" required><br>
                             <div class="form-row">
                                 <div class="form-field">
-                                    <label for="mobile_no">MOBILE NUMBER</label>
+                                    <label for="mobile_no">MOBILE NUMBER<span class = "star">*</span></label>
                                     <input type="text" name="mobile_no" class="text-ip type-1" required><br>
                                 </div>
                                 <div class="form-field">
@@ -123,7 +123,7 @@
                                     <input type="text" name="phone_no" class="text-ip type-1"><br>
                                 </div>  
                                 <div class="form-field">
-                                    <label for="student_email">EMAIL</label>
+                                    <label for="student_email">EMAIL<span class = "star">*</span></label>
                                     <input type="email" name="student_email" class="text-ip type-1" value="<%= email %>" readonly>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                                 </tr>
                                 
                                 <tr class="table-row">
-                                    <td><label>Madhyamik or Equivalent</label></td>
+                                    <td><label>Madhyamik or Equivalent<span class = "star">*</span></label></td>
                                     <td><input type="text" class="text-ip type-1" name="acad00" required></td>
                                     <td><input type="text" class="text-ip type-1" name="acad01" required></td>
                                     <td><input type="text" class="text-ip type-1" name="acad02" required></td>
@@ -157,7 +157,7 @@
                                 </tr>
                                 
                                 <tr class="table-row">
-                                    <td><label>Higher secondary or Equivalent</label></td>
+                                    <td><label>Higher secondary or Equivalent<span class = "star">*</span></label></td>
                                     <td><input type="text" class="text-ip type-1" name="acad10" required></td>
                                     <td><input type="text" class="text-ip type-1" name="acad11" required></td>
                                     <td><input type="text" class="text-ip type-1" name="acad12" required></td>
@@ -166,7 +166,7 @@
                                     <td><input type="text" class="text-ip type-1" name="acad15" required></td>
                                 </tr>
                                 <tr class="table-row">
-                                    <td><label>Bachelor degree</label></td>
+                                    <td><label>Bachelor degree<span class = "star">*</span></label></td>
                                     <td><input type="text" class="text-ip type-1" name="acad20" required></td>
                                     <td><input type="text" class="text-ip type-1" name="acad21" required></td>
                                     <td><input type="text" class="text-ip type-1" name="acad22" required></td>
@@ -202,13 +202,13 @@
                                     <td><input type="text" class="text-ip type-1" name="acad55"></td>
                                 </tr>    
                             </table>
-                            <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES: (MULTIPLE FILES ALLOWED)</label>
+                            <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES: (MULTIPLE FILES ALLOWED)<span class = "star">*</span></label>
                             <input type="file" name="marksheets" class="text-ip type-1" multiple required>
                         </li>
                         <li>
-                            <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION</label>
-                            <input type="text" name="qualified" class="text-ip type-1"><br>
-                            <label for="qualified">RELEVANT DOCUMENTS: (MULTIPLE FILES ALLOWED)</label>
+                            <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION<span class = "star">*</span></label>
+                            <input type="text" name="qualified" class="text-ip type-1" required><br>
+                            <label for="qualified">RELEVANT DOCUMENTS: (MULTIPLE FILES ALLOWED)<span class = "star">*</span></label>
                             <input type="file" name="qualified-docs" class="text-ip type-1" multiple required>   
                         </li>
                         <li>
@@ -226,11 +226,11 @@
                         <ol start="11">
                         <li>
                             <p>PROPOSED RESEARCH WORK</p>
-                            <label for="title">(A) PROPOSED THESIS TITLE:</label></br>
+                            <label for="title">(A) PROPOSED THESIS TITLE<span class = "star">*</span></label></br>
                             <input type="text" name="title" class="text-ip type-1" required><br>
-                            <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS):</label></br>
+                            <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS)<span class = "star">*</span></label></br>
                             <input type="file" name="sop" class="text-ip type-1" required><br>
-                            <label for="proposed_institute">(C) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS</label></br>
+                            <label for="proposed_institute">(C) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS<span class = "star">*</span></label></br>
                             <input type="text" name="proposed_institute" class="text-ip type-1" required><br>
                         </li>
                         </ol>
@@ -241,11 +241,11 @@
                         <ol start="12">
                         <li>
                             <p>NAME OF SUPERVISORS(RECOMMENDED BY PHD RESEARCH COMMITTEE)</p>
-                            <label for="supervisor_id">(1)NAME:</label>
+                            <label for="supervisor_id">(1)NAME:<span class = "star">*</span></label>
                             <select id="supervisor" name="supervisor_id" class="text-ip type-1" required>
                             </select>
                             <br>
-                            <label for="supervisor_designation">DESIGNATION:</label>
+                            <label for="supervisor_designation">DESIGNATION:<span class = "star">*</span></label>
                             <input type="text" name="supervisor_designation" class="text-ip type-1"><br>
                             <label for="co_supervisor_id">(2)NAME:</label>
                             <input type="text" name="co_supervisor_id" class="text-ip type-1"><br>

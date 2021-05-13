@@ -3,7 +3,7 @@ let ejs = require("ejs");
 const { ROOT_URL } = require('./../config');
 
 const createPDF = (html, data, path, callback) => {
-    
+    data.ROOT_URL = ROOT_URL;
     ejs.renderFile(html, { data }, (err, data) => {
         if (err) {
             console.log(err); 
@@ -21,7 +21,7 @@ const createPDF = (html, data, path, callback) => {
                 },
                 base: 'file://' + __dirname + './../'
             };
-            data.ROOT_URL = ROOT_URL;
+
             pdf.create(data, options).toFile(path, function (err, data) {
                 if (err) { 
                     if (typeof callback == "function") 

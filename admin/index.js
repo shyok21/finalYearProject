@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var nodemailer = require('nodemailer');
 app.use(bodyParser.urlencoded({ extended: true }));
-const encryption  = require('./services/encrypt')
+const encryption  = require('./services/encrypt');
+const sendEmail = require('./services/sendEmail');
 const { encrypt, decrypt } = require('./services/emailEncrypt');
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
@@ -180,21 +181,14 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-function sendEmail(email, id, password, type) {
-    var mailOptions = {
-        from: SENDER_EMAIL,
-        to: TEST_MODE ? TEST_EMAIL : email,
+function getMailData(email, id, password, type) {
+    var mailData = {
+        email: email,
         subject: 'Account Details from ju phdms',
-        text: `Hello ${email}, Your Account ID is "${id}", Password is "${password}" and Access type is "${type}". Please dont share the password with anyone.`
+        html: `Hello ${email}, Your Account ID is "${id}", Password is "${password}" and Access type is "${type}". Please dont share the password with anyone.`
     };
-
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+    
+    return mailData;
 }
 
 app.post('/addAccount', (req, res) => {
@@ -251,8 +245,16 @@ app.post('/addSupervisor', (req, res) => {
                             res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
                             return;
                         }
-                        sendEmail(email, id, psw, "Supervisor");
-                        res.send(successFile);
+                        const mailData = getMailData(email, id, psw, "Supervisor");
+                        sendEmail(mailData, function(err, info){
+                            if(err) {
+                                console.log(err);
+                                res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
+                                return;
+                            }
+                            res.send(successFile);
+                        })
+                        
                     });
                 } else {
                     var supFileEmail = supFile.replace("{%error%}", "Password and Repeat Password does not match");
@@ -305,8 +307,15 @@ app.post('/addPRC', (req, res) => {
                                 res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
                                 return;
                             }
-                            sendEmail(email, id, psw, "PRC");
-                            res.send(successFile);
+                            const mailData = getMailData(email, id, psw, "PRC");
+                            sendEmail(mailData, function(err, info){
+                                if(err) {
+                                    console.log(err);
+                                    res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
+                                    return;
+                                }
+                                res.send(successFile);
+                            })
                         })
                         
                     });
@@ -360,8 +369,15 @@ app.post('/addDC', (req, res) => {
                                 res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
                                 return;
                             }
-                            sendEmail(email, id, psw, "DC");
-                            res.send(successFile);
+                            const mailData = getMailData(email, id, psw, "DC");
+                            sendEmail(mailData, function(err, info){
+                                if(err) {
+                                    console.log(err);
+                                    res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
+                                    return;
+                                }
+                                res.send(successFile);
+                            })
                         })
                     });
                 } else {

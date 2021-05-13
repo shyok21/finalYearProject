@@ -128,3 +128,7 @@ li {
 .step.finish .step-line {
     background-color: #015c1d;
 }
+
+.star {
+    color: red;
+}
