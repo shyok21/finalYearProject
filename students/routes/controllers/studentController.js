@@ -56,9 +56,11 @@ const studentPage = (req, res) => {
                                         if(sems.includes(s) == false)
                                             rem_sems.push(i);
                                     }
+                                    console.log(rem_sems)
                                     var options = "";
-                                    for(i=0;i<rem_sems.length;i++)
-                                        options = options + `<option value="Semester${rem_sems[i]}">Semester ${rem_sems[i]}</option>\n`;
+                                    //for(i=0;i<rem_sems.length;i++)
+                                    if(rem_sems.length > 1)
+                                        options = options + `<option value="Semester${rem_sems[0]}">Semester ${rem_sems[0]}</option>\n`;
                                    
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
