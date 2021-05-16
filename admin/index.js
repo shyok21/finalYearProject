@@ -47,7 +47,7 @@ var dcFile = fs.readFileSync("views/add_dc.html", "utf-8");
 var successFile = fs.readFileSync("views/successPage.html", "utf-8");
 
 app.post("/studentList", function(req, res) {
-    var qry = "SELECT * FROM student WHERE registration_phase='4'";
+    var qry = "SELECT * FROM student s left join professor p on s.supervisor_id = p.prof_id WHERE registration_phase='4'";
     con.query(qry, function(err, result, fields) {
         if (err) {
             res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
@@ -55,14 +55,27 @@ app.post("/studentList", function(req, res) {
         }
         var sendRes = "";
         for (var i = 0; i < result.length; i++) {
-
+            //console.log(result)
             var crypt_id = encrypt(result[i].stud_id);
-            console.log(crypt_id);
+            console.log(result);
             sendRes += "<tr>";
             sendRes += "<td>" + (result[i].stud_id).toUpperCase() + "</td>";
             sendRes += "<td>" + result[i].name.toUpperCase() + "</td>";
             //sendRes += "<td>" + result[i].email + "</td>";
-            sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
+            //sendRes += "<td>" + result[i].perm_address.toUpperCase() + "</td>";
+            // var supervisor_name = "";
+            // var sup_qry = `select * from professor where prof_id = "${result[i].supervisor_id}"`;
+            // con.query(sup_qry, function(err, sup_result, fields) {
+            //     if (err) {
+            //         res.render('notification', {message : 'Error...try again!', status: 'error', backLink : "/", backText: "Back to admin portal"});
+            //         return;
+            //     }
+            //     console.log(sup_result[0].prof_name)
+            //     supervisor_name += sup_result[0].prof_name
+            //     // sendRes += "<td>" + sup_result[0].prof_name + "</td>";
+            // });
+            sendRes += "<td>" + result[i].prof_name + "</td>";
+            //sendRes += "<td>" + result[i].supervisor_id.toUpperCase() + "</td>";
             sendRes += "<td>" + result[i].thesis_title + "</td>";
             sendRes += "<td><a href='studentDetails.html?stud_id=" + crypt_id.iv + "&stud_id_c="+ crypt_id.content +"'>View Details</a></td>";
             sendRes += "</tr>";
