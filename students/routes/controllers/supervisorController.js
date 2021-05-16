@@ -14,12 +14,20 @@ const supervisorApprovalPage = (req, res) => {
             return
         }
         htmlFile = htmlFile.replace("{%name%}", ress[0].prof_name);
+        var specialText = "";
         if (sess.special == 'Y') {
-            htmlFile += "<form class='special' action='/hod/specialDB' method='post'>";
-            htmlFile += "<b>Note:</b>You have the Special Access. Check status of all students."
-            htmlFile += `<input type='hidden' name='check' value='Y'>`;
-            htmlFile += `<input type='submit' value='Check!'>`;
-            htmlFile += `</form>`;
+            specialText += `<form style="height:2.1rem;width:20rem;margin-right:3rem;font-weight:normal;text-align:center;" action='/hod/specialDB' method='post'>`;
+            specialText += `<input type='hidden' name='check' value='Y'>`;
+            specialText += `<input style="text-decoration:none;color:black;background-color:#6dd5ed;height:100%;width:100%;border-color:#2193b0;border-style:solid;font-size:1.1em;border-radius:6px;text-align:center;border-width:2px;" type='submit' value='Special Access!'></form>`;
+            htmlFile = htmlFile.replace("{%specialTag%}",specialText);
+            // htmlFile += "<form class='special' action='/hod/specialDB' method='post'>";
+            // htmlFile += "<b>Note:</b>You have the Special Access. Check status of all students."
+            // htmlFile += `<input type='hidden' name='check' value='Y'>`;
+            // htmlFile += `<input type='submit' value='Check!'>`;
+            // htmlFile += `</form>`;
+        }
+        else{
+            htmlFile = htmlFile.replace("{%specialTag%}","");
         }
         var qry = "select * from student s left join department d on s.dept_id = d.dept_id where supervisor_id = '" + sess.userid + "' and registration_phase = 1";
         console.log(qry);

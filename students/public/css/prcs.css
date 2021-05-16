@@ -103,7 +103,8 @@ body {
 .list1{
 	height:80%;
 	width:100%;
-	background-image:linear-gradient(to right, #6190E8, #A7BFE8);
+	background-color: #bcbcbc;
+	/*background-image:linear-gradient(to right, #6190E8, #A7BFE8);*/
 	border-radius:10px;
 	display:flex;
 	flex-direction:row;
@@ -113,7 +114,8 @@ body {
 .list2{
 	height:80%;
 	width:100%;
-	background-image:linear-gradient(to left, #6190E8, #A7BFE8);
+	background-color:#ababab;
+	/*background-image:linear-gradient(to left, #6190E8, #A7BFE8);*/
 	border-radius:10px;
 	display:flex;
 	flex-direction:row;
