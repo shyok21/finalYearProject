@@ -75,6 +75,12 @@ body {
     height: 4rem;
     
 }
+.intro12345{
+    flex:6;
+}
+.intro23456{
+    flex:1;
+}
 .intro>p{
     width:90%;
 }

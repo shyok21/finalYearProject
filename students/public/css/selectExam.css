@@ -13,6 +13,9 @@ body {
     overflow-y:scroll;
     overflow-x:hidden; 
 }
+.logOutClass{
+    margin-left:90vw;
+}
 .main-content{
     width:100%;
     height:100%;

@@ -16,7 +16,7 @@ body {
 .main-content{
     width:100%;
     height:100%;
-    margin-top:6rem;
+    /*margin-top:6rem;*/
     overflow-y:scroll;
     overflow-x:hidden;
     display:flex;
@@ -78,4 +78,9 @@ body {
     color:#5375e2;
     background-color:white;
     cursor:pointer;
+}
+.logOutClass{
+    margin-top:6rem;
+    margin-left:90vw;
+    font-size:1.2em;
 }
