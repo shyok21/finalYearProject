@@ -13,11 +13,26 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.logOutClass{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top:6rem;
+    width:100%;
+    height:5%;
+}
+.logOutClass>div{
+    width:74%;
+}
+.logOutClass>a{
+    width:15%;
+    text-decoration: none;
+}
 .all-content{
 
     width:100vw;
     height:100vh;
-    margin-top:7rem;
     background-color: #fefefe;
     display: flex;
     flex-direction: column;

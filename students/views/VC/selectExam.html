@@ -7,12 +7,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
-
+    <div class="logOutClass">
+        <div></div>
+        <a href="/changePassword">Change Password &#128273;</a>
+        <a href="/logout">Log Out <span class='fa'>&#xf011;</span></a>
+    </div>
 	<div class="main-content">
-    <a href="/logOut" class="logOutClass">Log Out</a>
     <h1 style="width:100%;color:#5375e2;text-align:center;">Select Examiners:</h1>
     <form class="list" method="POST" action="/vc/selectExaminer/submit">
         <div class='list1'>

@@ -6,16 +6,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <div class="logOutClass">
+        <div></div>
+        <a href="/changePassword">Change Password &#128273;</a>
+        <a href="/logout">Log Out <span class='fa'>&#xf011;</span></a>
+    </div>
     <div class="all-content">
     	<div class="intro">
             <p>Hello {%name%}. Here are the list of students.</p>
             
             <a href="/supervisor" style="text-decoration:none;color:black;background-color:#6dd5ed;height:2rem;width:20rem;margin-right:3rem;font-weight:normal;border-color:#2193b0;border-style:solid;border-radius:6px;text-align:center;border-width:2px;">Registration Approval</a>
-            <a href="/logOut">Log Out</a>
 
         </div>
     	<div class="main-content">

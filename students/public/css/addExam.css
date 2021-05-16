@@ -13,10 +13,25 @@ body {
     overflow-y:scroll;
     overflow-x:hidden; 
 }
+.logOutClass{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top:6rem;
+    width:100%;
+    height:5%;
+}
+.logOutClass>div{
+    width:74%;
+}
+.logOutClass>a{
+    width:15%;
+    text-decoration: none;
+}
 .main-content{
     width:100vw;
     /* height:100vh; */
-    margin-top:6rem;
     /* overflow-y:scroll;
     overflow-x:hidden; */
     display:flex;

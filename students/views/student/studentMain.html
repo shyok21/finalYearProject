@@ -6,10 +6,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@700&family=Gloria+Hallelujah&family=Lobster+Two&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <img src="/images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
+    <div class="logOutClass">
+        <div></div>
+        <a href="/changePassword">Change Password &#128273;</a>
+        <a href="/logout">Log Out <span class='fa'>&#xf011;</span></a>
+    </div>
+
     <div class="main-content">
         <div class="student-details">
             <div class="main-details">
@@ -68,8 +75,6 @@
             </div>
             <div class="image-details">
                 <img src="/student_photo/{%studentPhoto%}" style="width:7rem;height:7rem;border-style:solid;border-radius: 7px;border-color:black;border-width:1.5px;" alt="Couldn't load image">
-                <a href="/changePassword">Change Password</a>
-                <a href="/logout">Log Out</a>
             </div>
         </div>
         <div class="report-submit2">

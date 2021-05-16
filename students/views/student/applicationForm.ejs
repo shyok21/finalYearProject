@@ -284,6 +284,7 @@
         }
         if (n == (x.length - 1)) {
             document.getElementById("nextBtn").innerHTML = "Submit";
+            
         } else {
             document.getElementById("nextBtn").innerHTML = "Next";
         }
@@ -292,9 +293,13 @@
 
     async function nextPrev(n) {
         var x = document.getElementsByClassName("tab");
-        if (n == 1 && !validateForm()) return false;
+        //if (n == 1 && !validateForm()) return false;
         if (currentTab + n >= x.length) {
-            await document.getElementById("registration-form").submit();
+            //await document.getElementById("registration-form").submit();
+            var text = "Anything Cannot be Changed after Clicking OK! Please Verify Your Form!";
+            if (confirm(text)) {
+                await document.getElementById("registration-form").submit();
+            }
             return false;
         }
         x[currentTab].style.display = "none";
