@@ -18,7 +18,7 @@ const supervisorApprovalPage = (req, res) => {
         if (sess.special == 'Y') {
             specialText += `<form style="height:2.1rem;width:20rem;margin-right:3rem;font-weight:normal;text-align:center;" action='/hod/specialDB' method='post'>`;
             specialText += `<input type='hidden' name='check' value='Y'>`;
-            specialText += `<input style="text-decoration:none;color:black;background-color:#6dd5ed;height:100%;width:100%;border-color:#2193b0;border-style:solid;font-size:1.1em;border-radius:6px;text-align:center;border-width:2px;" type='submit' value='Special Access!'></form>`;
+            specialText += `<input style="text-decoration:none;color:black;background-color:#6dd5ed;height:100%;width:100%;border-color:#2193b0;border-style:solid;font-size:1.1em;border-radius:6px;text-align:center;border-width:2px;" type='submit' value='Special Access'></form>`;
             htmlFile = htmlFile.replace("{%specialTag%}",specialText);
             // htmlFile += "<form class='special' action='/hod/specialDB' method='post'>";
             // htmlFile += "<b>Note:</b>You have the Special Access. Check status of all students."

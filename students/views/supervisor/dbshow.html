@@ -7,46 +7,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
-    <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
+    <div class="bar-class">
+        <p></p>
+        <a href="/supervisor" style="text-decoration:none;color:black;background-color:#6dd5ed;height:2rem;width:20rem;margin-right:3rem;font-weight:normal;border-color:#2193b0;border-style:solid;border-radius:6px;text-align:center;border-width:2px;">Registration Approval</a>
+        <a href="/supervisor/studentsList" style="text-decoration:none;color:black;background-color:#6dd5ed;height:2rem;width:20rem;margin-right:3rem;font-weight:normal;border-color:#2193b0;border-style:solid;border-radius:6px;text-align:center;border-width:2px;">Assign Examiner</a>
+        <a href="/logOut" style="width:20rem;height:2rem;">Log Out</a>
+    </div>
+    <div class="body-class">
+        <img src="/images/header.png" style="width:100%;height:auto;position:fixed;top:0; z-index: 0;opacity: 0.9;">
 
-    <form class="form-class" action="/hod/searchDB" method="POST">
-        <div class="form-fac">
-            <select name="faculty" id="fac" onclick="myfunc()">
-                <option value="">Faculty</option>
-                <option value="arts">Faculty of Arts</option>
-                <option value="engg">Faculty of Engineering & Technology</option>
-                <option value="science">Faculty of Science</option>
-            </select>
-        </div>
-        <div class="form-dep">
-            <select name="department" id="dep">
-                <option value="">Department</option>
-            </select>
-        </div>
-        <div class="form-sub">
-            <input type="submit" name="submit" value="Search!">
-        </div>
-    </form>
-    <div class="display-class">
-        <div class="det2">
-            <div class="dets">Enrollment ID</div>
-            <div class="dets">Name</div>
-            <div class="dets">Supervisor Name</div>
+        <form class="form-class" action="/hod/searchDB" method="POST">
+            <div class="form-fac">
+                <select name="faculty" id="fac" onclick="myfunc()">
+                    <option value="">Faculty</option>
+                    <option value="arts">Faculty of Arts</option>
+                    <option value="engg">Faculty of Engineering & Technology</option>
+                    <option value="science">Faculty of Science</option>
+                </select>
+            </div>
+            <div class="form-dep">
+                <select name="department" id="dep">
+                    <option value="">Department</option>
+                </select>
+            </div>
+            <div class="form-sub">
+                <input type="submit" name="submit" value="Search!">
+            </div>
+        </form>
+        <div class="display-class">
+            <div class="det2">
+                <div class="dets">Enrollment ID</div>
+                <div class="dets">Name</div>
+                <div class="dets">Supervisor Name</div>
 
-            <div class="dets">Department</div>
+                <div class="dets">Department</div>
+            </div>
+            <!-- <div class="det1">
+                <div class="dets">001710501027</div>
+                <div class="dets">Abhishek De</div>
+                <div class="dets">Chintal Kumar Mondal</div>
+                <div class="dets">Mahantapas Kundu</div>
+            </div>
+            <div class="det1"></div>
+            <div class="det1"></div>
+            <div class="det1"></div> -->
+            {%studentlist%}
         </div>
-        <!-- <div class="det1">
-            <div class="dets">001710501027</div>
-            <div class="dets">Abhishek De</div>
-            <div class="dets">Chintal Kumar Mondal</div>
-            <div class="dets">Mahantapas Kundu</div>
-        </div>
-        <div class="det1"></div>
-        <div class="det1"></div>
-        <div class="det1"></div> -->
-        {%studentlist%}
     </div>
 </body>
 <script>
