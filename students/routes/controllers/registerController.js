@@ -76,7 +76,7 @@ const validate = (req, res) => {
                 
             }
         } else {
-            res.render('notification', {message : 'Email ID is already registered', status: 'error', backLink : "/registerPage", backText: "Back to registration page"});
+            res.render('notification', {message : 'Email ID is already registered', status: 'error', backLink : "/", backText: "Back to Home page"});
         }
     });
 
