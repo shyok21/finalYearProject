@@ -87,26 +87,34 @@ const sendActivation = (req,res) => {
     activationCode = randomstring.generate(10);
     console.log(activationCode);
     var email = req.body.recover_email;
-    console.log(req.body);
-    var htmlString = `<p>Hello ${email}, your recovery code is <b>${activationCode}</b>`;
-    const mailData = {
-        to: email, 
-        subject: 'Reset Password!',
-        html: htmlString
-    };    
-    sendEmail(mailData, function (err, info) {
-        if (err) { 
-            console.log('Sending to ' + email + ' failed: ' + err);
-            callback(err);
-        } else { 
-            console.log('Sent to ' + email);
-            callback();
+    var qry = `select * from login where email = '${email}';`;
+    con.query(qry,(err,result,f) => {
+        if(result.length == 0)
+        {
+            res.render('notification', {message : 'Email Does Not Exist. Register Yourself', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
         }
+        var htmlString = `<p>Hello ${email}, your recovery code is <b>${activationCode}</b>`;
+        const mailData = {
+            to: email, 
+            subject: 'Reset Password!',
+            html: htmlString
+        };    
+        sendEmail(mailData, function (err, info) {
+            if (err) { 
+                console.log('Sending to ' + email + ' failed: ' + err);
+                callback(err);
+            } else { 
+                console.log('Sent to ' + email);
+                callback();
+            }
+        });
+        var htmlFile = fs.readFileSync('views/activation.html','utf-8');
+        htmlFile = htmlFile.replace("{%email%}",email);
+        htmlFile = htmlFile.replace("{%email%}",email);
+        res.send(htmlFile);
     });
-    var htmlFile = fs.readFileSync('views/activation.html','utf-8');
-    htmlFile = htmlFile.replace("{%email%}",email);
-    htmlFile = htmlFile.replace("{%email%}",email);
-    res.send(htmlFile);
+    
 };
 
 const checkActivation = (req,res) => {
