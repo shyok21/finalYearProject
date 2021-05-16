@@ -1,13 +1,14 @@
 const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
-const { compare } = require('./../../services/encrypt.js');
+const { encrypt,compare } = require('./../../services/encrypt.js');
 const createPDF = require('./../../services/createPDF');
 const { url } = require('inspector');
 const { setServers } = require('dns');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
-
-
+const randomstring = require("randomstring");
+const sendEmail = require('./../../services/sendEmail');
+var activationCode;
 // Renders the homepage from where user can log in
 const homePage = (req, res) => {
     var htmlFileSend = htmlFile.replace("{%Login Error%}", "");
@@ -77,8 +78,75 @@ const logout = (req, res) => {
     });
 }
 
+const forgetPassword = (req,res) => {
+    var html = fs.readFileSync('views/reset.html','utf-8');
+    res.send(html);
+};
+
+const sendActivation = (req,res) => {
+    activationCode = randomstring.generate(10);
+    console.log(activationCode);
+    var email = req.body.recover_email;
+    console.log(req.body);
+    var htmlString = `<p>Hello ${email}, your recovery code is <b>${activationCode}</b>`;
+    const mailData = {
+        to: email, 
+        subject: 'Reset Password!',
+        html: htmlString
+    };    
+    sendEmail(mailData, function (err, info) {
+        if (err) { 
+            console.log('Sending to ' + email + ' failed: ' + err);
+            callback(err);
+        } else { 
+            console.log('Sent to ' + email);
+            callback();
+        }
+    });
+    var htmlFile = fs.readFileSync('views/activation.html','utf-8');
+    htmlFile = htmlFile.replace("{%email%}",email);
+    htmlFile = htmlFile.replace("{%email%}",email);
+    res.send(htmlFile);
+};
+
+const checkActivation = (req,res) => {
+    if(req.body.recover_code === activationCode){
+        var htmlFile = fs.readFileSync('views/resetPassword.html','utf-8');
+        htmlFile = htmlFile.replace("{%email%}",req.body.recover_email);
+        res.send(htmlFile);
+    }
+    else{
+        res.render('notification', {message : 'Recovery Code Wrong. Try Again!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+    }
+};
+
+const checkPassword = (req,res) => {
+    if(req.body.recover_password === req.body.confirm_password){
+        //res.send(encrypt(req.body.recover_password));
+        var qry = `update login set password = '${encrypt(req.body.recover_password)}' where email = '${req.body.recover_email}';`;
+        con.query(qry,(err,result,f)=> {
+            if(err){
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+            }
+            res.render('notification', {message : 'Successfully Changed Password', status: 'success', backLink : "/", backText: "Back to Home page"});
+                return
+        });
+    }
+    else{
+        res.render('notification', {message : 'Password Mismatches. Try Again!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return
+    }
+};
+
 module.exports = {
     homePage,
     login,
-    logout
+    logout,
+    forgetPassword,
+    sendActivation,
+    checkActivation,
+    checkPassword
+
 }
