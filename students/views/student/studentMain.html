@@ -72,18 +72,13 @@
             </div>
         </div>
         <div class="report-submit2">
-            <div class="report-buttons">
-                <button class="submit-btn-active" onclick="submit_btn()" id="sub_btn">Submit A Report</button>
-                <button class="prev-btn" onclick="prev_btn()" id="pre_btn">View Previous Reports</button>
-            </div>
             <div class="report-submit" id="report-sbmt-chk">
                 <form method="POST" id="submit-report" action="/student/report/submit" enctype="multipart/form-data">
                     <div class="sb1">
-                        Title: &nbsp;<input type="text" id="title" name="title" required>
-                          Semester: {%semesterSelect%}
+                          {%semesterSelect%}
+                          {%semesterSelect%}
                     </div>
                     <div class="sb2">
-                        Description: &nbsp;<input type="text" id="description" name="description">
                         Upload Report: &nbsp;<input type="file" id="file-upload" name="report"class="custom-file-input" required>
                     </div>
                     <div class="sb3">
@@ -91,6 +86,8 @@
                     </div>
                     
                 </form>
+                <h3 style="text-align:center;height:10%;">Previous Reports:</h3>
+                {%prevReport%}
             </div>
         </div>
     </div>

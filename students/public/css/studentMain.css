@@ -112,6 +112,8 @@ body {
     background-image:linear-gradient(to right,#fbfbfb,#ebedee);
     display:flex;
     flex-direction:column;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .image-details>a{
     margin-left:15%;
@@ -128,9 +130,12 @@ body {
 }
 #submit-report{
     width:100%;
-    height:100%;
+    height:20%;
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    background-color:#dedede;
 }
 .sb1{
     flex:1;
@@ -139,6 +144,7 @@ body {
     flex-direction:row;
     align-items: center;
     margin:10px;
+    text-align: center;
 }
 .sb1>input[type='text']{
     flex:3;
@@ -150,7 +156,7 @@ body {
     height:40%;
 }
 .sb2{
-    flex:2;
+    flex:1;
     display:flex;
     flex-direction: row;
     font-size:1.5em;
@@ -176,15 +182,17 @@ body {
     justify-content: center;
 }
 input[type='submit']{
-    height:50%;
-    width:20%;
-    background-image:linear-gradient(to right,#2193b0,#6dd5ed);
+    height:2em;
+    width:50%;
+    background:#2193b0;
+    color:white;
     border-radius:10px;
     border:none;
     font-size:0.8em;
 }
 input[type='submit']:hover{
-    background-image:linear-gradient(to left,#2193b0,#6dd5ed);
+    background:#6dd5ed;
+    color:black;
     cursor: pointer;
 }
 .heading{
@@ -194,7 +202,7 @@ input[type='submit']:hover{
     flex-direction:row;
     align-items:center;
     justify-content: center;
-    background-image:linear-gradient(to right,#667eea , #764ba2);
+    background:#667eea;
     margin-left:5%;
     margin-right:5%;
 }
@@ -213,7 +221,7 @@ a{
     flex-direction:row;
     align-items:center;
     justify-content: center;
-    background-image:linear-gradient(to right,#f5f7fa , #c3cfe2);
+    background:#f5f7fa;
     margin-left:5%;
     margin-right:5%;
 }
@@ -224,7 +232,7 @@ a{
     flex-direction:row;
     align-items:center;
     justify-content: center;
-    background-image:linear-gradient(to left,#f5f7fa , #c3cfe2);
+    background: #c3cfe2;
     margin-left:5%;
     margin-right:5%;
 }
