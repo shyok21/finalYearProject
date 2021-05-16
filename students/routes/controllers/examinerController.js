@@ -43,21 +43,40 @@ const examCheck = (req,res) => {
     var text = decrypt(x);
     var emailChecker = text.split(" ")[0];
     var passChecker = text.split(" ")[1];
+    var stud_id = text.split(" ")[2];
+    console.log(stud_id)
     if(req.body.user == emailChecker && req.body.pass == passChecker)
     {
+        console.log(emailChecker)
+        var prev_phase_qry = `select phase from External where email = '${emailChecker}' and Student_ID = '${stud_id}'`;
+        con.query(prev_phase_qry,(err,result_phase,fields)=>{
+            console.log(result_phase)
+            if(err)
+            {
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error'});
+                return
+            }
+            var phase = result_phase[0].phase
+            if(phase == '-1' || phase == '3')
+            {
+                res.render('notification', {message : 'Action already performed', status: 'error'});
+                return
+            }
+        });
         if(req.body.type == 'AC'){
-            var qry = `update External set phase = 3 where email = '${emailChecker}'`;
-            con.query(qry,(err,result,fields)=>{
-                if(err)
-                {
-                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                    return
-                }
-                res.render('notification', {message : 'Successfully accepted!', status: 'success'});
-            });
+                var qry = `update External set phase = 3 where email = '${emailChecker}' and Student_ID = '${stud_id}'`;
+                con.query(qry,(err,result,fields)=>{
+                    if(err)
+                    {
+                        res.render('notification', {message : 'There seems to be a problem!', status: 'error'});
+                        return
+                    }
+                    res.render('notification', {message : 'Successfully accepted!', status: 'success'});
+                });
         }
         else{
-            var qry = `update External set phase = -1 where email = '${emailChecker}'`;
+            console.log(stud_id)
+            var qry = `update External set phase = -1 where email = '${emailChecker}' and Student_ID = '${stud_id}'`;
             con.query(qry,(err,result,fields)=>{
                 if(err)
                 {

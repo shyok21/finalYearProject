@@ -80,9 +80,7 @@
                 <form method="POST" id="submit-report" action="/student/report/submit" enctype="multipart/form-data">
                     <div class="sb1">
                         Title: &nbsp;<input type="text" id="title" name="title" required>
-                        Semester: &nbsp;<select name="semester" id="semester">
-                            {%semesterSelect%}
-                        </select>
+                          Semester: {%semesterSelect%}
                     </div>
                     <div class="sb2">
                         Description: &nbsp;<input type="text" id="description" name="description">

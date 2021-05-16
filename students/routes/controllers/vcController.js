@@ -115,7 +115,8 @@ const vcSelectExaminerSubmit = (req, res) => {
             var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
             
             var pass = randomstring.generate(10);
-            var url = `${email} ${pass}`;
+            var url = `${email} ${pass} ${req.body.stud_id}`;
+            console.log(url)
             const hash = encrypt(url);
             htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
             htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);

@@ -50,7 +50,8 @@ const studentPage = (req, res) => {
                                     var sems = [];
                                     for(var i=0;i<result3.length;i++)
                                         sems.push(result3[i].semester);
-                                    for(var i=1;i<=8;i++)
+                                    var noOfSem = results[0].registration_phase * 2
+                                    for(var i=1;i<=noOfSem;i++)
                                     {
                                         var s = util.format("Semester%d",i);
                                         if(sems.includes(s) == false)
@@ -60,7 +61,7 @@ const studentPage = (req, res) => {
                                     var options = "";
                                     //for(i=0;i<rem_sems.length;i++)
                                     if(rem_sems.length > 1)
-                                        options = options + `<option value="Semester${rem_sems[0]}">Semester ${rem_sems[0]}</option>\n`;
+                                        options = options + `<input value="Semester${rem_sems[0]}" name="Semester${rem_sems[0]}" readonly>\n`;
                                    
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
