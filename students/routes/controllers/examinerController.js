@@ -88,7 +88,7 @@ const examCheck = (req,res) => {
         }
     }
     else{
-        res.render('notification', {message : 'Invalid credentials!', status: 'success'});
+        res.render('notification', {message : 'Invalid credentials!', status: 'error'});
     }
 }
 
