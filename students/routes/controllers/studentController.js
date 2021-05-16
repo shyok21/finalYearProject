@@ -62,9 +62,10 @@ const studentPage = (req, res) => {
                                     var heading = "";
                                     //for(i=0;i<rem_sems.length;i++)
                                     if(rem_sems.length > 1)
-                                    {    options = options + `<input value="Semester${rem_sems[0]}" name="Semester${rem_sems[0]}" readonly>`;
-                                         heading = `Semester ${rem_sems[0]}`;
-                                   }
+                                    {   
+                                        options = options + `<input type="hidden" value="Semester${rem_sems[0]}" name="semester" readonly>`;
+                                        heading = `Semester ${rem_sems[0]}`;
+                                    }
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
                                     studentMain = studentMain.replace("{%semesterSelect%}",heading);
                                     var prev_reports = `<div class="heading">

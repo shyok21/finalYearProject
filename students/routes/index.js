@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('./../services/authorisation');
 
-const { homePage, login, logout, forgetPassword,sendActivation,checkActivation,checkPassword } = require('./controllers/loginController');
+const { homePage, login, logout, forgetPassword,sendActivation,checkActivation,checkPassword, changePassword, changePasswordSubmit } = require('./controllers/loginController');
 const { registerPage, validate, verify } = require('./controllers/registerController');
 const { applicationFormPage, applicationFormSubmit, downloadPDF } = require('./controllers/applicationFormController');
 const { studentPage, submitReport, downloadReport, removeReport } = require('./controllers/studentController');
@@ -31,6 +31,8 @@ router.post("/verify", verify);
 router.get("/examAccepted",  examAccepted);
 router.get("/examRejected", examRejected);
 router.post("/examCheck", examCheck);
+router.get("/changePassword", changePassword);
+router.post("/changePasswordSubmit", changePasswordSubmit);
 
 /* URLs accessible to Vice chancellor only */
 router.use("/vc", auth(["VC"]));

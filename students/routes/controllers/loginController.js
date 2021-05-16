@@ -62,7 +62,6 @@ const login = (req, res) => {
         });
 
     }
-
 }
 
 const logout = (req, res) => {
@@ -103,16 +102,14 @@ const sendActivation = (req,res) => {
         sendEmail(mailData, function (err, info) {
             if (err) { 
                 console.log('Sending to ' + email + ' failed: ' + err);
-                callback(err);
             } else { 
                 console.log('Sent to ' + email);
-                callback();
+                var htmlFile = fs.readFileSync('views/activation.html','utf-8');
+                htmlFile = htmlFile.replace("{%email%}",email);
+                htmlFile = htmlFile.replace("{%email%}",email);
+                res.send(htmlFile);
             }
         });
-        var htmlFile = fs.readFileSync('views/activation.html','utf-8');
-        htmlFile = htmlFile.replace("{%email%}",email);
-        htmlFile = htmlFile.replace("{%email%}",email);
-        res.send(htmlFile);
     });
     
 };
@@ -125,7 +122,7 @@ const checkActivation = (req,res) => {
     }
     else{
         res.render('notification', {message : 'Recovery Code Wrong. Try Again!', status: 'error', backLink : "/", backText: "Back to Home page"});
-            return
+        return;
     }
 };
 
@@ -136,15 +133,64 @@ const checkPassword = (req,res) => {
         con.query(qry,(err,result,f)=> {
             if(err){
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                    return
+                return
             }
             res.render('notification', {message : 'Successfully Changed Password', status: 'success', backLink : "/", backText: "Back to Home page"});
-                return
+            return
         });
     }
     else{
         res.render('notification', {message : 'Password Mismatches. Try Again!', status: 'error', backLink : "/", backText: "Back to Home page"});
-            return
+        return
+    }
+};
+
+const changePassword = (req,res) => {
+    if(req.session.userid){
+        var htmlFile = fs.readFileSync('views/changePassword.html','utf-8');
+        res.send(htmlFile);
+    }
+    else{
+        res.render('notification', {message : 'Unauthorised access', status: 'error', backLink : "/", backText: "Back to Home page"});
+        return;
+    }
+};
+
+const changePasswordSubmit = (req,res) => {
+    if(req.session.userid) {
+        var qry = `select * from login where email = '${req.session.email}';`;
+        con.query(qry,(err,results,f)=> {
+            if(err){
+                res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
+            var password = req.body.previous_password;
+            if(compare(password, results[0].password)) {
+                if(req.body.new_password == req.body.confirm_password) {
+                    var qry2 = `update login set password = '${encrypt(req.body.new_password)}' where email = '${req.session.email}';`;
+                    con.query(qry2,(err,results2,f)=> {
+                        if(err){
+                            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                            return
+                        }
+                        res.render('notification', {message : 'Successfully Changed Password', status: 'success', backLink : "/", backText: "Back to Home page"});
+                        return
+                    });
+                }
+                else {
+                    res.render('notification', {message : 'Password mismatch', status: 'error', backLink : "/", backText: "Back to Home page"});
+                    return
+                }
+            }
+            else {
+                res.render('notification', {message : 'Wrong Password', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return
+            }
+        });    
+    }
+    else {
+        res.render('notification', {message : 'Unauthorised access', status: 'error', backLink : "/", backText: "Back to Home page"});
+        return
     }
 };
 
@@ -155,6 +201,7 @@ module.exports = {
     forgetPassword,
     sendActivation,
     checkActivation,
-    checkPassword
-
+    checkPassword,
+    changePassword,
+    changePasswordSubmit
 }
