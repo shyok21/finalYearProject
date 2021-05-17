@@ -12,10 +12,6 @@ body {
     flex-direction: column;
 }
 
-.main-content {
-    margin-top: 6rem;
-}
-
 .main {
     flex: 7;
     display: flex;
@@ -86,10 +82,19 @@ body {
     flex: 7;
 }
 
-.logout {
-    padding-top: 1%;
-    padding-right: 1%;
-    display: flex;
+.logOutClass{
+    display:flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    margin-top:6rem;
+    width:100%;
+    height:5%;
+}
+.logOutClass>div{
+    width:74%;
+}
+.logOutClass>a{
+    width:15%;
+    text-decoration: none;
 }

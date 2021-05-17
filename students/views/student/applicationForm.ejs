@@ -8,14 +8,17 @@
     <link rel="shortcut icon" type="image/jpg" href="images/ju_logo.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <img src="/images/header.png" style="width:100%;height:auto;position:fixed; top:0; z-index: 0;opacity: 0.9;">
+    <div class="logOutClass">
+        <div></div>
+        <a href="/changePassword">Change Password &#128273;</a>
+        <a href="/logout">Log Out <span class='fa'>&#xf011;</span></a>
+    </div>
     <div class="main-content">
-        <div class="logout">
-            <a href="/logout">Logout</a>
-        </div>
         <div class="main">
                 <div class="stepper">
                     <span class="step">
@@ -56,7 +59,7 @@
                         </p><br>
                         
                         <label for="student_photo">UPLOAD PASSPORT SIZE PHOTO<span class = "star">*</span></label>
-                        <input type="file" name="student_photo" class="text-ip type-1" required>   
+                        <input type="file" name="student_photo" class="text-ip type-1" accept=".jpg, .jpeg, .png" required>   
                         
                         <br><br>
                         <ol start="1">
@@ -205,13 +208,13 @@
                                 </tr>    
                             </table>
                             <label for="qualified">UPLOAD RELEVANT MARKSHEETS/CERTIFICATES: (MULTIPLE FILES ALLOWED)<span class = "star">*</span></label>
-                            <input type="file" name="marksheets" class="text-ip type-1" multiple required>
+                            <input type="file" name="marksheets" class="text-ip type-1" accept=".pdf" multiple required>
                         </li>
                         <li>
                             <label for="qualified">WHETHER QUALIFIED FOR NET/SET/GATE/ANY OTHER EQUIVALENT EXAMINATION<span class = "star">*</span></label>
                             <input type="text" name="qualified" class="text-ip type-1" required><br>
                             <label for="qualified">RELEVANT DOCUMENTS: (MULTIPLE FILES ALLOWED)<span class = "star">*</span></label>
-                            <input type="file" name="qualified-docs" class="text-ip type-1" multiple required>   
+                            <input type="file" name="qualified-docs" class="text-ip type-1" accept=".pdf" multiple required>   
                         </li>
                         <li>
                             <p>PRESENT EMPLOYMENT</p>
@@ -231,7 +234,7 @@
                             <label for="title">(A) PROPOSED THESIS TITLE<span class = "star">*</span></label></br>
                             <input type="text" name="title" class="text-ip type-1" required><br>
                             <label for="sop">(B) STATEMENT OF PURPOSE REGARDING RESEARCH OBJECTIVE(WITHIN 100 WORDS)<span class = "star">*</span></label></br>
-                            <input type="file" name="sop" class="text-ip type-1" required><br>
+                            <input type="file" name="sop" class="text-ip type-1" accept=".pdf" required><br>
                             <label for="proposed_institute">(C) DEPARTMENT/SCHOOL/INSTITUTE WHERE THE PROPOSED RESEARCH WORK IS TO BE CARRIED ON WITH ADDRESS<span class = "star">*</span></label></br>
                             <input type="text" name="proposed_institute" class="text-ip type-1" required><br>
                         </li>
@@ -295,10 +298,9 @@
 
     async function nextPrev(n) {
         var x = document.getElementsByClassName("tab");
-        //if (n == 1 && !validateForm()) return false;
+        if (n == 1 && !validateForm()) return false;
         if (currentTab + n >= x.length) {
-            //await document.getElementById("registration-form").submit();
-            var text = "Anything Cannot be Changed after Clicking OK! Please Verify Your Form!";
+            var text = "Are you sure you want to submit?";
             if (confirm(text)) {
                 await document.getElementById("registration-form").submit();
             }

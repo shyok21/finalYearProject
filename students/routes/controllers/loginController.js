@@ -127,6 +127,10 @@ const checkActivation = (req,res) => {
 };
 
 const checkPassword = (req,res) => {
+    if(req.body.recover_password === '') {
+        res.render('notification', {message : 'Password cannot be empty', status: 'error', backLink : "/", backText: "Back to Home page"});
+        return;
+    }
     if(req.body.recover_password === req.body.confirm_password){
         //res.send(encrypt(req.body.recover_password));
         var qry = `update login set password = '${encrypt(req.body.recover_password)}' where email = '${req.body.recover_email}';`;
@@ -165,27 +169,28 @@ const changePasswordSubmit = (req,res) => {
                 return
             }
             var password = req.body.previous_password;
-            if(compare(password, results[0].password)) {
-                if(req.body.new_password == req.body.confirm_password) {
-                    var qry2 = `update login set password = '${encrypt(req.body.new_password)}' where email = '${req.session.email}';`;
-                    con.query(qry2,(err,results2,f)=> {
-                        if(err){
-                            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                            return
-                        }
-                        res.render('notification', {message : 'Successfully Changed Password', status: 'success', backLink : "/", backText: "Back to Home page"});
-                        return
-                    });
-                }
-                else {
-                    res.render('notification', {message : 'Password mismatch', status: 'error', backLink : "/", backText: "Back to Home page"});
+            if(req.body.new_password === '') {
+                res.render('notification', {message : 'Password cannot be empty', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return;
+            }
+            if(!compare(password, results[0].password)) {
+                res.render('notification', {message : 'Wrong Password', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return;
+            }
+            if(req.body.new_password !== req.body.confirm_password) {
+                res.render('notification', {message : 'Password mismatch', status: 'error', backLink : "/", backText: "Back to Home page"});
+                return;
+            }
+            var qry2 = `update login set password = '${encrypt(req.body.new_password)}' where email = '${req.session.email}';`;
+            con.query(qry2,(err,results2,f)=> {
+                if(err){
+                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }
-            }
-            else {
-                res.render('notification', {message : 'Wrong Password', status: 'error', backLink : "/", backText: "Back to Home page"});
+                res.render('notification', {message : 'Successfully Changed Password', status: 'success', backLink : "/", backText: "Back to Home page"});
                 return
-            }
+            });
+            
         });    
     }
     else {
