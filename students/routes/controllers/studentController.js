@@ -43,7 +43,7 @@ const studentPage = (req, res) => {
                             var studentMain = studentMain.replace("{%supervisor%}",supervisor);
                             var studentMain = studentMain.replace("{%theme%}",theme);
                             var studentMain = studentMain.replace("{%studentPhoto%}",photo);
-                            var qry3 = `select * from six_monthly_report where stud_id = '${userid}' order by semester;`;
+                            var qry3 = `select * from six_monthly_report where stud_id = '${userid}' order by date_time DESC;`;
                             con.query(qry3,(err,result3,field3) => {
                                //  try{
                                     var rem_sems = [];
@@ -64,7 +64,7 @@ const studentPage = (req, res) => {
                                     var options = "";
                                     var heading = "";
                                     //for(i=0;i<rem_sems.length;i++)
-                                    if(rem_sems.length > 1)
+                                    if(rem_sems.length > 0)
                                     {   
                                         options = options + `<input type="hidden" value="Semester${rem_sems[0]}" name="semester" readonly>`;
                                         heading = `Semester ${rem_sems[0]}`;
