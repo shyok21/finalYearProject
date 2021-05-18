@@ -69,6 +69,11 @@ const studentPage = (req, res) => {
                                         options = options + `<input type="hidden" value="Semester${rem_sems[0]}" name="semester" readonly>`;
                                         heading = `Semester ${rem_sems[0]}`;
                                     }
+                                    else
+                                    {
+                                        options = options + `<input type="hidden" value="empty" name="semester" readonly>`;
+                                        heading = `Semester ${rem_sems[0]}`;
+                                    }
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
                                     studentMain = studentMain.replace("{%semesterSelect%}",heading);
                                     var prev_reports = `<div class="heading">
@@ -145,6 +150,12 @@ const studentPage = (req, res) => {
 }
 
 const submitReport = (req, res) => {
+    console.log(req.body);
+    if(req.body.semester == 'empty')
+    {
+        res.render('notification', {message : 'No semesters left for you!', status: 'error', backLink : "/student", backText: "Back to Student page"});
+        return;
+    }
     var sess = req.session;
 
     var storage = multer.diskStorage({
