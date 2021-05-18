@@ -2,12 +2,11 @@ const fs = require('fs');
 const con = require('./../../db.js');
 const util = require('util');
 const { encrypt,compare } = require('./../../services/encrypt.js');
-const createPDF = require('./../../services/createPDF');
-const { url } = require('inspector');
-const { setServers } = require('dns');
 var htmlFile = fs.readFileSync("views/index.html", "utf-8");
 const randomstring = require("randomstring");
 const sendEmail = require('./../../services/sendEmail');
+const { MIN_PASSWORD_LENGTH } = require('./../../config');
+
 var activationCode;
 // Renders the homepage from where user can log in
 const homePage = (req, res) => {
@@ -118,6 +117,7 @@ const checkActivation = (req,res) => {
     if(req.body.recover_code === activationCode){
         var htmlFile = fs.readFileSync('views/resetPassword.html','utf-8');
         htmlFile = htmlFile.replace("{%email%}",req.body.recover_email);
+        htmlFile = htmlFile.replace("{%error%}","");
         res.send(htmlFile);
     }
     else{
@@ -127,8 +127,11 @@ const checkActivation = (req,res) => {
 };
 
 const checkPassword = (req,res) => {
-    if(req.body.recover_password === '') {
-        res.render('notification', {message : 'Password cannot be empty', status: 'error', backLink : "/", backText: "Back to Home page"});
+    if(req.body.recover_password.length < MIN_PASSWORD_LENGTH) {
+        var htmlFile = fs.readFileSync('views/resetPassword.html','utf-8');
+        htmlFile = htmlFile.replace("{%email%}",req.body.recover_email);
+        htmlFile = htmlFile.replace("{%error%}", `Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
+        res.send(htmlFile);
         return;
     }
     if(req.body.recover_password === req.body.confirm_password){
@@ -144,14 +147,18 @@ const checkPassword = (req,res) => {
         });
     }
     else{
-        res.render('notification', {message : 'Password Mismatches. Try Again!', status: 'error', backLink : "/", backText: "Back to Home page"});
-        return
+        var htmlFile = fs.readFileSync('views/resetPassword.html','utf-8');
+        htmlFile = htmlFile.replace("{%email%}",req.body.recover_email);
+        htmlFile = htmlFile.replace("{%error%}","Password mismatch");
+        res.send(htmlFile);
+        return;
     }
 };
 
 const changePassword = (req,res) => {
     if(req.session.userid){
         var htmlFile = fs.readFileSync('views/changePassword.html','utf-8');
+        htmlFile = htmlFile.replace("{%error%}","");
         res.send(htmlFile);
     }
     else{
@@ -169,16 +176,22 @@ const changePasswordSubmit = (req,res) => {
                 return
             }
             var password = req.body.previous_password;
-            if(req.body.new_password === '') {
-                res.render('notification', {message : 'Password cannot be empty', status: 'error', backLink : "/", backText: "Back to Home page"});
+            if(req.body.new_password < MIN_PASSWORD_LENGTH) {
+                var htmlFile = fs.readFileSync('views/changePassword.html','utf-8');
+                htmlFile = htmlFile.replace("{%error%}",`Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
+                res.send(htmlFile);
                 return;
             }
             if(!compare(password, results[0].password)) {
-                res.render('notification', {message : 'Wrong Password', status: 'error', backLink : "/", backText: "Back to Home page"});
+                var htmlFile = fs.readFileSync('views/changePassword.html','utf-8');
+                htmlFile = htmlFile.replace("{%error%}","Wrong password!");
+                res.send(htmlFile);
                 return;
             }
             if(req.body.new_password !== req.body.confirm_password) {
-                res.render('notification', {message : 'Password mismatch', status: 'error', backLink : "/", backText: "Back to Home page"});
+                var htmlFile = fs.readFileSync('views/changePassword.html','utf-8');
+                htmlFile = htmlFile.replace("{%error%}","Password mismatch");
+                res.send(htmlFile);
                 return;
             }
             var qry2 = `update login set password = '${encrypt(req.body.new_password)}' where email = '${req.session.email}';`;
