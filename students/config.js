@@ -6,7 +6,7 @@ const config = {
     DB_USERNAME: "sql6412590",
     DB_PASSWORD: "66yiY9aMqn",
     DB_PORT: "3306",
-    MIN_PASSWORD_LENGTH: 1,
+    MIN_PASSWORD_LENGTH: 5,
     SENDER_EMAIL: 'ju.notifyserver@gmail.com',
     TEST_EMAIL: "ju.phdms2021@gmail.com",
     TEST_MODE: true,

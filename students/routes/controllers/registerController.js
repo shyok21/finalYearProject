@@ -9,6 +9,7 @@ var verify_code;
 var captcha;
 var newAccFile = fs.readFileSync("views/newAccount.html", "utf-8");
 const sendEmail = require('./../../services/sendEmail');
+const { MIN_PASSWORD_LENGTH } = require('./../../config');
 
 // Renders the register page where new student registers
 const registerPage = (req, res) => {
@@ -39,7 +40,14 @@ const validate = (req, res) => {
         }
         console.log(results[0].count);
         if (results[0].count == 0) {
-            if (m_pass != c_pass) {
+            if(m_pass.length < MIN_PASSWORD_LENGTH) {
+                var sendAccFile = newAccFile.replace("{%error%}", `&#9746; Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
+                captcha = randomstring.generate(6);
+                for (var i = 0; i < captcha.length; i++) {
+                    sendAccFile = sendAccFile.replace("{%captcha%}", captcha[i]);
+                }
+                res.send(sendAccFile);
+            } else if (m_pass != c_pass) {
                 var sendAccFile = newAccFile.replace("{%error%}", "&#9746; Password Mismatched");
                 captcha = randomstring.generate(6);
                 for (var i = 0; i < captcha.length; i++) {
