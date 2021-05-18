@@ -72,7 +72,7 @@ const studentPage = (req, res) => {
                                     else
                                     {
                                         options = options + `<input type="hidden" value="empty" name="semester" readonly>`;
-                                        heading = `Semester ${rem_sems[0]}`;
+                                        heading = `Report Upto Date`;
                                     }
                                     studentMain = studentMain.replace("{%semesterSelect%}",options);
                                     studentMain = studentMain.replace("{%semesterSelect%}",heading);
@@ -150,12 +150,7 @@ const studentPage = (req, res) => {
 }
 
 const submitReport = (req, res) => {
-    console.log(req.body);
-    if(req.body.semester == 'empty')
-    {
-        res.render('notification', {message : 'No semesters left for you!', status: 'error', backLink : "/student", backText: "Back to Student page"});
-        return;
-    }
+    
     var sess = req.session;
 
     var storage = multer.diskStorage({
@@ -172,7 +167,7 @@ const submitReport = (req, res) => {
             name: 'report', maxCount: 1 
         }]
     );
-
+    
     upload(req, res, function (err) {
         if(err)
         {
@@ -185,6 +180,12 @@ const submitReport = (req, res) => {
                 values ('%s', '%s', '%s', '%s', '%d')`,
                 sess.userid, new Date(), sess.userid + '-' + req.body.semester, req.body.semester, 1
             );
+            console.log(`Semester Console: ${req.body.semester}`);
+            if(req.body.semester == 'empty')
+            {
+                res.render('notification', {message : 'No semesters left for you!', status: 'error', backLink : "/student", backText: "Back to Student page"});
+                return;
+            }
             con.query(qry, (err, result, fields) => {
                 if(err)
                 {

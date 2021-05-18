@@ -11,7 +11,8 @@
         background-color: #fefefe;
         display: flex;
         flex-direction: column;
-        overflow:hidden;
+        overflow-x:hidden;
+        overflow-y: scroll;
     }
     h3{
         font-size:1.5em;
@@ -267,7 +268,8 @@
         background-color: #fefefe;
         display: flex;
         flex-direction: column;
-        overflow:hidden;
+       overflow-x:hidden;
+        overflow-y: scroll; 
     }
     .main-content{
         width:100%;
