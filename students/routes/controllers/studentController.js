@@ -50,14 +50,17 @@ const studentPage = (req, res) => {
                                     var sems = [];
                                     for(var i=0;i<result3.length;i++)
                                         sems.push(result3[i].semester);
-                                    var noOfSem = results[0].registration_phase * 2
+                                    console.log('sems:'+sems);
+                                    var noOfSem = results[0].registration_validity * 2
+                                    console.log('registration_phase:'+ results[0].registration_validity)
+                                    console.log('noOfSem:'+noOfSem)
                                     for(var i=1;i<=noOfSem;i++)
                                     {
                                         var s = util.format("Semester%d",i);
                                         if(sems.includes(s) == false)
                                             rem_sems.push(i);
                                     }
-                                    console.log(rem_sems)
+                                    console.log('rem_sems:'+rem_sems)
                                     var options = "";
                                     var heading = "";
                                     //for(i=0;i<rem_sems.length;i++)
