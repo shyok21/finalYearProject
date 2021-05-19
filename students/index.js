@@ -15,6 +15,7 @@ app.use(
     resave: false
     })
 );
+var ip = require("ip");
 
 // Database setup
 require('./db');
@@ -31,3 +32,5 @@ app.listen(PORT, () => {
     console.log("Server Created!");
     console.log(ROOT_URL);
 });
+console.log('Other Device: http://'+ip.address()+':'+PORT);
+
