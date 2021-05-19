@@ -110,14 +110,14 @@
         flex:0.4;
     }
     .submit-class{
-        font-size:10em;
-        width:15%;
+        font-size:11em;
+        width:32%;
         height:100%;
         align-self:center;
         color:#008304;
         background-color:#5AB15C;
         border:solid 1px;
-        margin-left:15%;
+        /*margin-left:15%;*/
     }
     .submit-class:hover{
         background-color:#008304;
@@ -236,14 +236,14 @@
         flex:0.4;
     }
     .submit-class{
-        font-size:10em;
-        width:15%;
+        font-size:11em;
+        width:32%;
         height:100%;
         align-self:center;
         color:#008304;
         background-color:#5AB15C;
         border:solid 1px;
-        margin-left:15%;
+        /*margin-left:15%;*/
     }
     .submit-class:hover{
         background-color:#008304;
