@@ -172,11 +172,12 @@ const changePasswordSubmit = (req,res) => {
         var qry = `select * from login where email = '${req.session.email}';`;
         con.query(qry,(err,results,f)=> {
             if(err){
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
             var password = req.body.previous_password;
-            if(req.body.new_password < MIN_PASSWORD_LENGTH) {
+            if(req.body.new_password.length < MIN_PASSWORD_LENGTH) {
                 var htmlFile = fs.readFileSync('views/changePassword.html','utf-8');
                 htmlFile = htmlFile.replace("{%error%}",`Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
                 res.send(htmlFile);
@@ -197,6 +198,7 @@ const changePasswordSubmit = (req,res) => {
             var qry2 = `update login set password = '${encrypt(req.body.new_password)}' where email = '${req.session.email}';`;
             con.query(qry2,(err,results2,f)=> {
                 if(err){
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }
