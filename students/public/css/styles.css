@@ -157,6 +157,9 @@
         /* display: flex; */
         /* justify-self: center; */
     }
+    .reg-ip>a{
+        height:auto;
+    }
 
     .btn-ip {
         height: 90%;
@@ -176,11 +179,15 @@
 
     .login-invalid {
         background-color: yellow;
+        height:auto;
+        padding:2px;
     }
 
     .login-cross {
         background-color: red;
         color: white;
+        height:auto;
+        padding:auto;
     }
 
 }
@@ -324,6 +331,9 @@
         align-items: center;
         justify-content: center;
     }
+    .reg-ip>a{
+        height:auto;
+    }
 
     .btn-ip {
         height: 90%;
@@ -343,10 +353,14 @@
 
     .login-invalid {
         background-color: yellow;
+        height:auto;
+        padding:5px;
     }
 
     .login-cross {
         background-color: red;
         color: white;
+        height:auto;
+        padding:5px;
     }
 }
