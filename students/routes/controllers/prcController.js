@@ -9,6 +9,7 @@ const prcRegistrationApproval = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -37,6 +38,7 @@ const prcRegistrationApprovalSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -50,6 +52,7 @@ const prcReportApproval = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -78,6 +81,7 @@ const prcReportApprovalSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -91,6 +95,7 @@ const prcVivaReport = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -151,6 +156,7 @@ const downloadVivaReport = (req,res) => {
     res.download(path, function (err) {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -165,6 +171,7 @@ const prcTitleChange = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -181,6 +188,7 @@ const prcTitleChangeSubmit = (req,res) => {
     con.query(qry, (err, result, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -197,6 +205,7 @@ const prcRegistrationExtension = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -213,6 +222,7 @@ const prcRegistrationExtensionSubmit = (req,res) => {
     con.query(qry, (err, result, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
