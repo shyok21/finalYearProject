@@ -1,7 +1,12 @@
 const cron = require('node-cron');
 const con = require('./db');
 const fs = require('fs');
+var randomstring = require("randomstring");
 const sendEmail = require('./services/sendEmail');
+const { encrypt } = require('./services/emailEncrypt');
+const { ROOT_URL } = require('./config');
+const async = require("async");
+
 
 const backgroundJobs = () => {
 
@@ -18,7 +23,7 @@ const backgroundJobs = () => {
         return newDate;
     }
     
-    cron.schedule("* * * * *",() => {
+    cron.schedule("30 6 * * 1",() => {
     // cron.schedule("* * * * * *", () => {
         // console.log('Background 1');
         //Background Job for 6 Month Remainder
@@ -90,7 +95,7 @@ const backgroundJobs = () => {
                     var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
                     console.log('Valid');
                     var pass = randomstring.generate(10);
-                    var url = `${results.Email} ${pass} ${req.body.stud_id}`;
+                    var url = `${results.Email} ${pass} ${results.Student_ID}`;
                     console.log(url)
                     const hash = encrypt(url);
                     htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
