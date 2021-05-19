@@ -17,9 +17,9 @@ const backgroundJobs = () => {
         return newDate;
     }
     
-    cron.schedule("30 6 * * 1",() => {
+    cron.schedule("* * * * *",() => {
     // cron.schedule("* * * * * *", () => {
-    
+        // console.log('Background 1');
         //Background Job for 6 Month Remainder
         con.query('select * from student s left join login l on l.id = s.stud_id;',(err,result,f)=> {
             if(err) {
@@ -56,13 +56,14 @@ const backgroundJobs = () => {
                             if(error) {
                                 console.log(`Email sending to ${results.email} failed!`);
                             } else {
-                                console.log(`Successfully sent mail to ${results.email}!`);
+                                console.log(`Successfully sent mail to ${results.email} for Report!`);
                             }
                         });
                          
                     }
-                    else
-                        console.log(`OK for ${results.name}`);
+                    else{
+                        //
+                    }
                 }
             });
         });
@@ -118,12 +119,12 @@ const backgroundJobs = () => {
                         if(error) {
                             console.log(`Email sending to ${results.Email} failed!`);
                         } else {
-                            console.log(`Successfully sent mail to ${results.Email} for ${results.Student_ID}!`);
+                            console.log(`Successfully sent mail to ${results.Email} for ${results.Student_ID}! for Examiner`);
                         }
                     });
                 }
                 else
-                    console.log(`OK for ${results.Email} and ${results.Student_ID}`);
+                    console.log(`Examiner OK for ${results.Email} and ${results.Student_ID}`);
             });
         });
     });
