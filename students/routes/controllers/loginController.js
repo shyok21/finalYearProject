@@ -139,6 +139,7 @@ const checkPassword = (req,res) => {
         var qry = `update login set password = '${encrypt(req.body.recover_password)}' where email = '${req.body.recover_email}';`;
         con.query(qry,(err,result,f)=> {
             if(err){
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }

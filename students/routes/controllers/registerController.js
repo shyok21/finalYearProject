@@ -35,6 +35,7 @@ const validate = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -112,6 +113,7 @@ const verify = (req, res) => {
         con.query(qrys, (err, result, field) => {
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
@@ -132,6 +134,7 @@ const verify = (req, res) => {
             con.query(qry, (err, results, fields) => {
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }

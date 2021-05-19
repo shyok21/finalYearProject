@@ -9,6 +9,7 @@ const specialPage = (req, res) => {
         con.query(qry, (err, result, fil) => {
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
@@ -38,6 +39,7 @@ const specialSearchPage = (req, res) => {
         con.query(qry, (err, result, fil) => {
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
@@ -61,6 +63,7 @@ const specialSearchPage = (req, res) => {
             con.query(qry, (err, result, fil) => {
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }
@@ -84,6 +87,7 @@ const specialSearchPage = (req, res) => {
             con.query(qry, (err, result, fil) => {
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }

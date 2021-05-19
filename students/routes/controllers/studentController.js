@@ -171,6 +171,7 @@ const submitReport = (req, res) => {
     upload(req, res, function (err) {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -189,6 +190,7 @@ const submitReport = (req, res) => {
             con.query(qry, (err, result, fields) => {
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }
@@ -225,6 +227,7 @@ const removeReport = (req,res) => {
     con.query(qry,(err,result,field) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }

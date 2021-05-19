@@ -8,6 +8,7 @@ const dcRegistrationApproval = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -33,6 +34,7 @@ const dcRegistrationApprovalSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -46,6 +48,7 @@ const dcReportApproval = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -71,6 +74,7 @@ const dcReportApprovalSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -84,6 +88,7 @@ const dcVivaReport = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -97,6 +102,7 @@ const dcTitleChange = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -122,6 +128,7 @@ const dcTitleChangeSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
         }
         res.render('notification', {message : status_id, status: 'success', backLink : "/dc/titleChange", backText: "Back to DC portal"});
@@ -134,6 +141,7 @@ const dcRegistrationExtension = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -159,6 +167,7 @@ const dcRegistrationExtensionSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -172,6 +181,7 @@ const dcExaminerApproval = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -187,6 +197,7 @@ const dcExaminersList = (req,res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -212,6 +223,7 @@ const dcExaminerApprovalSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }

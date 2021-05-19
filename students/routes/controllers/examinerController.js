@@ -53,6 +53,7 @@ const examCheck = (req,res) => {
             console.log(result_phase)
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error'});
                 return
             }
@@ -68,6 +69,7 @@ const examCheck = (req,res) => {
                 con.query(qry,(err,result,fields)=>{
                     if(err)
                     {
+                        console.log(err);
                         res.render('notification', {message : 'There seems to be a problem!', status: 'error'});
                         return
                     }
@@ -80,6 +82,7 @@ const examCheck = (req,res) => {
             con.query(qry,(err,result,fields)=>{
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }

@@ -10,6 +10,7 @@ const async = require("async");
 const vcPage = (req,res) => {
     con.query(`select * from student s join department d on s.dept_id = d.dept_id join faculty f on f.fac_id = d.fac_id where examiner_phase = '2';`,(err,results,field) => {
         if(err) {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to student portal"});
             return
         }
@@ -39,6 +40,7 @@ const vcSelectExaminer = (req, res) => {
     con.query(qry,(err,result,fields)=>{
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -63,6 +65,7 @@ const vcSelectExaminerSubmit = (req, res) => {
     con.query(qry, (err,results,fields)=>{
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -154,6 +157,7 @@ const vcSelectExaminerSubmit = (req, res) => {
             con.query(qry2,(err,ress,f)=>{
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return;
                 }

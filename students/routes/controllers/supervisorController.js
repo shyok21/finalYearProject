@@ -10,6 +10,7 @@ const supervisorApprovalPage = (req, res) => {
     con.query(qrys, (err, ress, field) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -34,6 +35,7 @@ const supervisorApprovalPage = (req, res) => {
         con.query(qry, (err, results, fields) => {
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
@@ -107,6 +109,7 @@ const supervisorApprovalSubmit = (req, res) => {
     con.query(qry, (err, results, fields) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -122,6 +125,7 @@ const assignRAC = (req, res) => {
     con.query(qrys, (err, ress, field) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -132,6 +136,7 @@ const assignRAC = (req, res) => {
         con.query(deptqry, (err, result, field) => {
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
@@ -139,6 +144,7 @@ const assignRAC = (req, res) => {
             con.query(qry, (err, results, field) => {
                 if(err)
                 {
+                    console.log(err);
                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                     return
                 }
@@ -165,6 +171,7 @@ const racSubmit = (req, res) => {
         con.query(qry, (err, results, field) => {
             if(err)
             {
+                console.log(err);
                 res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                 return
             }
@@ -185,6 +192,7 @@ const supervisorStudentsList = (req,res) => {
     con.query(qry,(err,result,fields)=>{
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }
@@ -260,6 +268,7 @@ const supervisorAddExaminer = (req,res) => {
     con.query(`select* from External group by Email`,(err,result,field) => {
         if(err)
         {
+            console.log(err);
             res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
             return
         }

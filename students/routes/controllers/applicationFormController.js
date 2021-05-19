@@ -91,8 +91,7 @@ const applicationFormSubmit = (req, res) => {
                             );
                             con.query(query, (err, results, fields) => {
                                 if(err) {
-                                    console.log(err.message);
-                                    console.log(results);
+                                    console.log(err);
                                     res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
                                     return
                                 }
