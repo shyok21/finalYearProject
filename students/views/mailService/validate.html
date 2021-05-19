@@ -3,41 +3,81 @@
 
 <head>
 	<style type="text/css">
-		body{
-			height:100vh;
-			width:100vw;
-			display:flex;
-			justify-content:center;
-			align-items:center;
+		@media only screen and (max-width:1100px){
+			body{
+				height:100vh;
+				width:100vw;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+			.form-class{
+				width: 90%;
+				height: 18%;
+				background-color:#ababab;
+				border-radius:10px;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				align-items:center;
+			}
+			.ip{
+				height: 25%;
+				width: 80%;
+				margin:10px;
+				background-color:#dedede;
+				border:none;
+			}
+			.sb{
+				margin:10px;
+				height: 15%;
+				width: 25%;
+				background-color:#bcbcbc;
+				border:none;
+			}
+			.sb:hover{
+				background-color:#a0a0a0;
+				cursor:pointer;
+				color:#fefefe;
+			}
 		}
-		.form-class{
-			width:40%;
-			height:40%;
-			background-color:#ababab;
-			border-radius:10px;
-			display:flex;
-			flex-direction:column;
-			justify-content:center;
-			align-items:center;
-		}
-		.ip{
-			height:10%;
-			width:50%;
-			margin:10px;
-			background-color:#dedede;
-			border:none;
-		}
-		.sb{
-			margin:10px;
-			height:10%;
-			width:20%;
-			background-color:#bcbcbc;
-			border:none;
-		}
-		.sb:hover{
-			background-color:#a0a0a0;
-			cursor:pointer;
-			color:#fefefe;
+		@media only screen and (min-width:1100px){
+			body{
+				height:100vh;
+				width:100vw;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+			.form-class{
+				width:40%;
+				height:40%;
+				background-color:#ababab;
+				border-radius:10px;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				align-items:center;
+			}
+			.ip{
+				height:10%;
+				width:50%;
+				margin:10px;
+				background-color:#dedede;
+				border:none;
+			}
+			.sb{
+				margin:10px;
+				height:10%;
+				width:20%;
+				background-color:#bcbcbc;
+				border:none;
+			}
+			.sb:hover{
+				background-color:#a0a0a0;
+				cursor:pointer;
+				color:#fefefe;
+			}
 		}
 	</style>
 </head>
