@@ -114,12 +114,6 @@ const backgroundJobs = () => {
                         }
                     });
                 }
-<<<<<<< HEAD
-                else
-                    console.log(`Examiner OK for ${results.Email} and ${results.Student_ID}`);
-=======
-                
->>>>>>> Debug
             });
         });
     });
