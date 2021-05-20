@@ -196,7 +196,7 @@ var transporter = nodemailer.createTransport({
 
 function getMailData(email, id, password, type) {
     var mailData = {
-        email: email,
+        to: email,
         subject: 'Account Details from ju phdms',
         html: `Hello ${email}, Your Account ID is "${id}", Password is "${password}" and Access type is "${type}". Please dont share the password with anyone.`
     };

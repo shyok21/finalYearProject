@@ -37,7 +37,7 @@ const sendEmail = async (mailData, callback) => {
         const transporter = await getTransporter();
         var mailOptions = {
             from: SENDER_EMAIL,
-            to: TEST_MODE ? TEST_EMAIL : mailData.email,
+            to: TEST_MODE ? TEST_EMAIL : mailData.to,
             subject: mailData.subject,
             html: mailData.html
         };
