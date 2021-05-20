@@ -199,6 +199,23 @@ const supervisorStudentsList = (req,res) => {
         // res.send(result);
         console.log(z);
         try{
+            if(result.length == 0)
+            {
+                var qry1 = `select * from professor where prof_id = '${sess.userid}'`
+                con.query(qry1,(err,result1,fields1)=>{
+                    if(err)
+                    {
+                        console.log(err);
+                        res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                        return;
+                    }
+                    htmlFile = htmlFile.replace("{%name%}",result1[0].prof_name);
+                    htmlFile = htmlFile.replace("{%forms%}","No Students Available");
+                    res.send(htmlFile);
+                    return;
+                })
+                return;
+            }
             var formText = "";
             for(var i=0;i<result.length;i++)
             {
@@ -257,8 +274,7 @@ const supervisorStudentsList = (req,res) => {
             res.send(htmlFile);
         }
         catch(e){
-            htmlFile = htmlFile.replace("{%forms%}","No Students Available");
-            res.send(htmlFile);
+            console.log(e);
         }
     });
 };
