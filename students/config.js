@@ -14,7 +14,7 @@ const config = {
     CLIENT_ID : '284672905667-s38jh6jcjp5sepf9rtbs1hfghtuut1di.apps.googleusercontent.com',
     CLIENT_SECRET : 'cTb991ifri5Ss2B65NyPBWCJ',
     REDIRECT_URI : 'https://developers.google.com/oauthplayground',
-    REFRESH_TOKEN : '1//041xKSK58C07iCgYIARAAGAQSNwF-L9Ir5otJkKajS4LgZMBAmFj87E5yW31HW3Fd9XxEHpqBYMDt6MQPmEwz8hFGA6iK7GW7zUQ'
+    REFRESH_TOKEN : '1//04jHrY6JZwVYOCgYIARAAGAQSNwF-L9Iri6OUeov7gUKhL_QCuxVMR1WzAnpKDKkUfmz-B0Z_42P9ifTNKD7xs3sDLoDkhmjcqkA'
 };
 
 module.exports = config;

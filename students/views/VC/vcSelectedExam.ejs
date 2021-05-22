@@ -39,7 +39,7 @@
                         <div class="list-dets3"><%= results[j].last_mail_sent_date.toISOString().replace(/T/, ' ').split(" ")[0] %></div>
                         <% if(results[j].phase == 1) { %>
                             <div class="list-dets3 pending">&#9888; Pending</div>
-                        <% } else if (results[j].phase == 2) {%>
+                        <% } else if (results[j].phase == 3) {%>
                             <div class="list-dets3 accepted">&#10003; Accepted</div>
                         <% } else {%>
                             <div class="list-dets3 rejected">&#10006; Rejected</div>
