@@ -78,42 +78,7 @@ const vcSelectExaminerSubmit = (req, res) => {
         else
             email3 = req.body.viva;
         var emails = [email1,email2,email3];
-        /*
-        for(var i=0;i<email.length;i++)	{
-            
-            var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
-            
-            var pass = randomstring.generate(10);
-            var url = `${email[i]} ${pass}`;
-            const hash = encrypt(url);
-            htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
-            htmlFile = htmlFile.replace('{%query%}',`iv=${hash.iv}&content=${hash.content}`);
-            htmlFile = htmlFile.replace('{%username%}',email[i]);
-            htmlFile = htmlFile.replace('{%password%}',pass);
-            htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
-            htmlFile = htmlFile.replace('{%ROOT_URL%}',ROOT_URL);
-            
-            var mailData = {
-                to: email[i], 
-                subject: 'Invitation for Examiner',
-                html: htmlFile
-            };
-            
-            try {
-                await sendEmail(mailData);
-                console.log(`Mail sent to ${mailData.to} successully`);
-            }
-            catch(err) {
-                console.log(`Mail sending to ${mailData.to} failed`);
-                res.render('notification', {message : 'Email sending failed due to some error!', status: 'error', backLink : "/", backText: "Back to Home page"});
-            }
-              
-        }*/
-        var htmlFiles = [];
-        emails.forEach(email => {
-            
-        });
-        
+
         async.each(emails, function(email, callback){
             var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
             
@@ -167,9 +132,21 @@ const vcSelectExaminerSubmit = (req, res) => {
     });
 }
 
+const vcExaminerStatus = (req, res) => {
+    const qry = `select * from External where phase != '0' order by Student_ID, Type;`;
+    con.query(qry, (err, results, fields) => {
+        if(err) {
+            console.log(err);
+            res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+            return;
+        }
+        res.render('VC/vcSelectedExam', {results: results});
+    })
+}
 
 module.exports = {
     vcPage,
     vcSelectExaminer,
-    vcSelectExaminerSubmit
+    vcSelectExaminerSubmit,
+    vcExaminerStatus
 }

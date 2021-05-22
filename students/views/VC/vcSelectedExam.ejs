@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Student List</title>
+	<link rel="stylesheet" href="/css/vcSelectedExam.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<title>JU PHDMS Add examiner</title>
+    <link rel="shortcut icon" type="image/jpg" href="images/ju_logo.png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<img src="/images/header.png" style="width:100%;height:auto;opacity: 0.9;">
+ 	<div class="logOutClass">
+        <div></div>
+        <a href="/changePassword">Change Password &#128273;</a>
+        <a href="/logout">Log Out <span class='fa'>&#xf011;</span></a>
+    </div>
+    <div class="nav-content">
+    	<div></div>
+    	<a href="/vc" class='btn'>Select Examiners</a>
+    </div>
+	<div class="main-content">
+	    <h1 style="width:100%;color:#5375e2;text-align:center;">Examiners Status:</h1>
+        <% for(var i = 0; i < results.length; i = i+3) { %>
+            <form class='list' action='/vc/selectExaminer' method='post'>
+                <div class="list-head"><%= results[i].Student_ID %></div>
+                <% for(var j = i; j < i+3; j++) { %>
+                    <div class="list-dets">
+                        <div class="list-dets1">
+                            <% if(results[j].Type == 1 || results[j].Type == 4) { %>
+                                Examiner outside West Bengal
+                            <% } else if (results[j].Type == 2) { %>
+                                Examiner within West Bengal
+                            <% } else { %>
+                                Examiner for Viva-Voce
+                            <% } %>
+                        </div>
+                        <div class="list-dets2"><%= results[j].Name %></div>
+                        <div class="list-dets3"><%= results[j].last_mail_sent_date.toISOString().replace(/T/, ' ').split(" ")[0] %></div>
+                        <% if(results[j].phase == 1) { %>
+                            <div class="list-dets3 pending">&#9888; Pending</div>
+                        <% } else if (results[j].phase == 2) {%>
+                            <div class="list-dets3 accepted">&#10003; Accepted</div>
+                        <% } else {%>
+                            <div class="list-dets3 rejected">&#10006; Rejected</div>
+                        <% } %>
+                    </div>
+                <% } %>
+                <input type="submit" name="<%=results[i].Student_ID %>" value="Re-select Examiners">
+            </form>
+        <% } %>
+    </div>
+</body>

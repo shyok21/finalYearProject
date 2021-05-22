@@ -9,7 +9,7 @@ const { studentPage, submitReport, downloadReport, removeReport } = require('./c
 const { supervisorApprovalPage, supervisorApprovalSubmit, assignRAC, racSubmit, supervisorStudentsList, supervisorAddExaminer, supervisorAddExaminerSubmit } = require('./controllers/supervisorController');
 const { prcRegistrationApproval, prcRegistrationApprovalSubmit, prcReportApproval, prcReportApprovalSubmit, prcVivaReport, prcVivaReportSubmit, downloadVivaReport, prcTitleChange, prcTitleChangeSubmit, prcRegistrationExtension, prcRegistrationExtensionSubmit } = require('./controllers/prcController');
 const { dcRegistrationApproval, dcRegistrationApprovalSubmit,dcReportApproval, dcReportApprovalSubmit, dcVivaReport, dcTitleChange, dcTitleChangeSubmit, dcRegistrationExtension, dcRegistrationExtensionSubmit, dcExaminerApproval, dcExaminersList, dcExaminerApprovalSubmit } = require('./controllers/dcController');
-const { vcPage, vcSelectExaminer, vcSelectExaminerSubmit } = require('./controllers/vcController');
+const { vcPage, vcSelectExaminer, vcSelectExaminerSubmit, vcExaminerStatus } = require('./controllers/vcController');
 const { examAccepted, examRejected, examCheck } = require('./controllers/examinerController');
 const { specialPage, specialSearchPage } = require('./controllers/specialController');
 const getFaculties = require('./apis/getFaculties.js');
@@ -39,6 +39,7 @@ router.use("/vc", auth(["VC"]));
 router.get("/vc", vcPage);
 router.post("/vc/selectExaminer", vcSelectExaminer);
 router.post("/vc/selectExaminer/submit", vcSelectExaminerSubmit);
+router.get("/vc/examinerStatus", vcExaminerStatus);
 
 /* URLs accessible to students only */
 router.use("/student", auth(["stud"]));
