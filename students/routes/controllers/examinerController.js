@@ -63,8 +63,7 @@ const examCheck = (req,res) => {
                 res.render('notification', {message : 'Action already performed', status: 'error'});
                 return
             }
-        });
-        if(req.body.type == 'AC'){
+            if(req.body.type == 'AC'){
                 var qry = `update External set phase = 3 where email = '${emailChecker}' and Student_ID = '${stud_id}'`;
                 con.query(qry,(err,result,fields)=>{
                     if(err)
@@ -75,20 +74,21 @@ const examCheck = (req,res) => {
                     }
                     res.render('notification', {message : 'Successfully accepted!', status: 'success'});
                 });
-        }
-        else{
-            console.log(stud_id)
-            var qry = `update External set phase = -1 where email = '${emailChecker}' and Student_ID = '${stud_id}'`;
-            con.query(qry,(err,result,fields)=>{
-                if(err)
-                {
-                    console.log(err);
-                    res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
-                    return
-                }
-                res.render('notification', {message : 'Successfully rejected!', status: 'success'});
-            });
-        }
+            }
+            else{
+                console.log(stud_id)
+                var qry = `update External set phase = -1 where email = '${emailChecker}' and Student_ID = '${stud_id}'`;
+                con.query(qry,(err,result,fields)=>{
+                    if(err)
+                    {
+                        console.log(err);
+                        res.render('notification', {message : 'There seems to be a problem!', status: 'error', backLink : "/", backText: "Back to Home page"});
+                        return
+                    }
+                    res.render('notification', {message : 'Successfully rejected!', status: 'success'});
+                });
+            }
+        });
     }
     else{
         res.render('notification', {message : 'Invalid credentials!', status: 'error'});
