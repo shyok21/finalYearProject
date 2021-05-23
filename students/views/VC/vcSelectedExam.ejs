@@ -21,33 +21,40 @@
     </div>
 	<div class="main-content">
 	    <h1 style="width:100%;color:#5375e2;text-align:center;">Examiners Status:</h1>
-        <% for(var i = 0; i < results.length; i = i+3) { %>
-            <form class='list' action='/vc/selectExaminer' method='post'>
-                <div class="list-head"><%= results[i].Student_ID %></div>
-                <% for(var j = i; j < i+3; j++) { %>
-                    <div class="list-dets">
-                        <div class="list-dets1">
-                            <% if(results[j].Type == 1 || results[j].Type == 4) { %>
-                                Examiner outside West Bengal
-                            <% } else if (results[j].Type == 2) { %>
-                                Examiner within West Bengal
-                            <% } else { %>
-                                Examiner for Viva-Voce
+        <% if(results.length == 0) { %>
+            No students
+        <% } else { %>
+            <% for(var i = 0; i < results.length; ) { %>
+                <form class='list' action='/vc/selectExaminer' method='post'>
+                    <div class="list-head"><%= results[i].Student_ID %></div>
+
+                    <% for(var j = i; j < results.length && results[j].Student_ID === results[i].Student_ID; j++) { %>
+                        <div class="list-dets">
+                            <div class="list-dets1">
+                                <% if(results[j].Type == 1 || results[j].Type == 4) { %>
+                                    Examiner outside West Bengal
+                                <% } else if (results[j].Type == 2) { %>
+                                    Examiner within West Bengal
+                                <% } else { %>
+                                    Examiner for Viva-Voce
+                                <% } %>
+                            </div>
+                            <div class="list-dets2"><%= results[j].Name %></div>
+                            <div class="list-dets3"><%= results[j].last_mail_sent_date.toISOString().replace(/T/, ' ').split(" ")[0] %></div>
+                            <% if(results[j].phase == 1) { %>
+                                <div class="list-dets3 pending">&#9888; Pending</div>
+                            <% } else if (results[j].phase == 3) {%>
+                                <div class="list-dets3 accepted">&#10003; Accepted</div>
+                            <% } else {%>
+                                <div class="list-dets3 rejected">&#10006; Rejected</div>
                             <% } %>
                         </div>
-                        <div class="list-dets2"><%= results[j].Name %></div>
-                        <div class="list-dets3"><%= results[j].last_mail_sent_date.toISOString().replace(/T/, ' ').split(" ")[0] %></div>
-                        <% if(results[j].phase == 1) { %>
-                            <div class="list-dets3 pending">&#9888; Pending</div>
-                        <% } else if (results[j].phase == 3) {%>
-                            <div class="list-dets3 accepted">&#10003; Accepted</div>
-                        <% } else {%>
-                            <div class="list-dets3 rejected">&#10006; Rejected</div>
-                        <% } %>
-                    </div>
-                <% } %>
-                <input type="submit" name="<%=results[i].Student_ID %>" value="Re-select Examiners">
-            </form>
+                    
+                    <% } %>
+                    <% i = j %>
+                    <input type="submit" name="<%= results[i-1].Student_ID %>" value="Re-select Examiners">
+                </form>
+            <% } %>
         <% } %>
     </div>
 </body>
