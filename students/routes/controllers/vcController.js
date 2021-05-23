@@ -77,7 +77,17 @@ const vcSelectExaminerSubmit = (req, res) => {
             email3 = req.body.Email;
         else
             email3 = req.body.viva;
-        var emails = [email1,email2,email3];
+        var emails = [];
+        if(email1 != undefined){
+            emails.push(email1);
+        }
+        if(email2 != undefined){
+            emails.push(email2);
+        }
+        if(email3 != undefined){
+            emails.push(email3);
+        }
+        // var emails = [email1,email2,email3];
 
         async.each(emails, function(email, callback){
             var htmlFile = fs.readFileSync('views/mailService/main.html','utf-8');
