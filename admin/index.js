@@ -113,9 +113,8 @@ app.get("/studentDetails.html", function(req, res) {
             sendRes += "<br>DOB: " + result[i].dob;
             sendRes += "<br>Mobile No.: " + result[i].mobile_no;
             //sendRes += "<td>" + result[i].email + "</td>";
-            sendRes += "<br>Address: " + result[i].perm_address.toUpperCase();
+            sendRes += "<br>Address: " + result[i].perm_address;
             sendRes += "<br>Thesis title: " + result[i].thesis_title;
-            sendRes += "<br>Proposed Theme: " + result[i].thesis_title.toUpperCase();
         }
         var newHtml = htmlStudentDetails.replace("{%listContent%}", sendRes);
         newHtml = newHtml.replace("{%student_value%}", id);
